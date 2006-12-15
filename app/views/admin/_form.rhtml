@@ -1,0 +1,31 @@
+<%= error_messages_for 'encounter' %>
+
+<!--[form:encounter]-->
+<p><label for="encounter_encounter_date">Encounter date</label><br/>
+<%= datetime_select 'encounter', 'encounter_date'  %></p>
+
+<p><label for="encounter_indication">Indication</label><br/>
+<%= text_area 'encounter', 'indication'  %></p>
+
+<p><label for="encounter_findings">Findings</label><br/>
+<%= text_area 'encounter', 'findings'  %></p>
+
+<p><label for="encounter_impression">Impression</label><br/>
+<%= text_area 'encounter', 'impression'  %></p>
+
+<p><label for="encounter_invoice">Invoice</label><br/>
+<%= text_field 'encounter', 'invoice'  %></p>
+
+<p><label for="encounter_user_created">User created</label><br/>
+<%= text_field 'encounter', 'user_created'  %></p>
+
+<p><label for="encounter_date_created">Date created</label><br/>
+<%= datetime_select 'encounter', 'date_created'  %></p>
+
+<p><label for="encounter_user_modified">User modified</label><br/>
+<%= text_field 'encounter', 'user_modified'  %></p>
+
+<p><label for="encounter_date_modified">Date modified</label><br/>
+<%= datetime_select 'encounter', 'date_modified'  %></p>
+<!--[eoform:encounter]-->
+

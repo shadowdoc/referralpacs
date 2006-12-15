@@ -1,0 +1,25 @@
+<%= error_messages_for 'refusers' %>
+
+<!--[form:refusers]-->
+<p><label for="refusers_username">Username</label><br/>
+<%= text_area 'refusers', 'username'  %></p>
+
+<p><label for="refusers_password">Password</label><br/>
+<%= text_area 'refusers', 'password'  %></p>
+
+<p><label for="refusers_email">Email</label><br/>
+<%= text_area 'refusers', 'email'  %></p>
+
+<p><label for="refusers_user_created">User created</label><br/>
+<%= text_field 'refusers', 'user_created'  %></p>
+
+<p><label for="refusers_date_created">Date created</label><br/>
+<%= datetime_select 'refusers', 'date_created'  %></p>
+
+<p><label for="refusers_user_modified">User modified</label><br/>
+<%= text_field 'refusers', 'user_modified'  %></p>
+
+<p><label for="refusers_date_modified">Date modified</label><br/>
+<%= datetime_select 'refusers', 'date_modified'  %></p>
+<!--[eoform:refusers]-->
+
