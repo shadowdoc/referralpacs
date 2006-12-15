@@ -1,6 +1,5 @@
 /* Create.sql for ReferralonRails
  * Marc Kohli
- * 12/6/06
  */
 
 drop table if exists encounters;
@@ -42,8 +41,8 @@ drop table if exists users;
 
 create table users (
     id             int         not null auto_increment,
-    username       text        not null,
-    password       text        not null,
+    name           text,
+    hashedpassword text        not null,
     email          text        not null,
     access_id      int         not null,
     provider_id    int         not null,

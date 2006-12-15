@@ -48,4 +48,5 @@ class AdminController < ApplicationController
     Encounter.find(params[:id]).destroy
     redirect_to :action => 'list'
   end
+   
 end
