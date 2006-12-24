@@ -3,8 +3,14 @@
 class ApplicationController < ActionController::Base
 
   def redirect_to_encounters
-    flash[:notice] = msg if msg
     redirect_to(:controller => 'admin', :action => 'list')
+  end
+  
+  def authorize
+    unless session[:user_id] 
+      flash[:notice] = "Please log in."
+      redirect_to(:controller => "login", :action => "login")
+    end
   end
 
 end

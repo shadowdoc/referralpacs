@@ -1,2 +1,18 @@
-<h1>Login#login</h1>
-<p>Find me in app/views/login/login.rhtml</p>
+<% @page_title = "Login" -%>
+<%= error_messages_for  'user' %>
+<%= form_tag %>
+<table>
+    <tr>
+        <td>E-mail: </td> 
+        <td><%= text_field("user", "email") %></td>
+    </tr>
+    <tr>
+        <td>Password: </td>
+        <td><%= password_field("user", "password") %></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td><input type="submit" value=" LOGIN " /></td>
+    </tr>
+</table>
+<%= end_form_tag %>

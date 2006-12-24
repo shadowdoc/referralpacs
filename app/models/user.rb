@@ -9,13 +9,23 @@ class User < ActiveRecord::Base
   validates_presence_of :email, :password
   
   def before_create
-    self.hashedpassword = User.hash_password(self.password)
+    self.hashed_password = User.hash_password(self.password)
   end
   
   def after_create
-    @password = nil
+    self.password = nil
   end
-
+  
+  def self.login(email, password)
+    hashed_password = hash_password(password || "")
+    find(:first,
+         :conditions => ["email = ? and hashed_password = ?", email, hashed_password])
+  end
+  
+  def try_to_login()
+    User.login(self.email, self.password)
+  end
+  
   private
   def self.hash_password(password)
     Digest::MD5.hexdigest(password)

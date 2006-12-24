@@ -1,4 +1,7 @@
 class AdminController < ApplicationController
+
+  before_filter :authorize
+
   def index
     list
     render :action => 'list'
