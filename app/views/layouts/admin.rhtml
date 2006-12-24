@@ -1,13 +1,27 @@
 <html>
 <head>
-  <title>Admin: <%= controller.action_name %></title>
-  <%= stylesheet_link_tag 'scaffold' %>
+  <title>ReferralPACS Admin: <%= controller.action_name %></title>
+  <%= stylesheet_link_tag "scaffold", "ref" %>
 </head>
 <body>
-
-<p style="color: green"><%= flash[:notice] %></p>
-
-<%= yield  %>
-
+    <div id="banner">
+        ReferralPACS : <%= @page_title %>
+    </div>
+    <div id="columns">
+    <div id="side">
+        <% if session[:user_id] -%>
+            <%= link_to("Add user", :controller => "login", :action => "add_user") %><br />
+            <%= link_to("List users", :controller => "login", :action => "list_users") %><br />
+            <hr/>
+            <%= link_to("Log out", :controller => "login", :action => "logout") %>
+        <% end -%>
+        </div>
+        <div id="main">
+            <% if flash[:notice] -%>
+                <div id="notice"><%= flash[:notice] %></div>
+            <% end -%>
+            <%= @content_for_layout %>
+        </div>
+    </div>
 </body>
 </html>

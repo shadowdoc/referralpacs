@@ -40,16 +40,16 @@ create table patients (
 drop table if exists users;
 
 create table users (
-    id             int         not null auto_increment,
-    name           text,
+    id              int         not null auto_increment,
+    name            text,
     hashed_password text        not null,
-    email          text        not null,
-    access_id      int,
-    provider_id    int,
-	user_created   int,
-	date_created   datetime,
-	user_modified  int,
-	date_modified  timestamp,
+    email           text        not null,
+    access_level_id int,
+    provider_id     int,
+	user_created    int,
+	date_created    datetime,
+	user_modified   int,
+	date_modified   timestamp,
 	primary key (id)
-);	
+);
     

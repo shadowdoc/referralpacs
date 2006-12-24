@@ -1,9 +1,14 @@
 <% @page_title = "User List" -%>
 <table>
-  <% for user in @all_users -%>
-    <tr>
+  <% odd_or_even = 0
+     for user in @all_users 
+       odd_or_even = 1 - odd_or_even
+  %>
+    <tr valign="top" class="ListLine<%= odd_or_even %>">
       <td><%= user.email %></td>
-      <td><%= link_to("(delete)", :action => :delete_user, :id => user.id) %></td>
+      <td><%= link_to(" edit ", :action => :edit_user, :id => user.id)%> <%= link_to(" delete ", :action => :delete_user, :id => user.id) %></td>
     </tr>
+    
   <% end -%>
 </table>
+<%= link_to("Add user", :action => "add_user") %>

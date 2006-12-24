@@ -1,0 +1,20 @@
+<% @page_title = "Edit User" -%>
+<%= error_messages_for  'user' %>
+<%= form_tag %>
+<table>
+    <tr>
+        <td>E-mail: </td> 
+        <td><%= text_field("user", "email") %></td>
+    </tr>
+    <tr>
+        <td>Name: </td>
+        <td><%= text_field("user", "name") %></td>
+    </tr>
+    <tr>
+        <td>
+    <tr>
+        <td></td>
+        <td><input type="submit" value=" SAVE " /></td>
+    </tr>
+</table>
+<%= end_form_tag %>

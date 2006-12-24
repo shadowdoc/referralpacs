@@ -1,7 +1,12 @@
 class LoginController < ApplicationController
 
   before_filter :authorize, :except => "login"
+  layout "admin"
+  scaffold :user
   
+  # If the requst is of the GET type, return the add_user
+  # form.  Otherwise, we have a POST request, attempt to add the
+  # new user and return to the user list.
   def add_user
     if request.get?
       @user = User.new
@@ -9,14 +14,14 @@ class LoginController < ApplicationController
       @user = User.new(params[:user])
       if @user.save
         flash[:notice] = "User #{@user.email} created."
-        redirect_to_encounters()
+        redirect_to(:action => "list_users")
       end
     end
   end
 
   # Delete the user with the given ID from the database.
   # The model raises an exception if we attempt to delete
-  # the last user.
+  # the special user.
   def delete_user
     id = params[:id]
     if id && user = User.find(id)
@@ -33,7 +38,12 @@ class LoginController < ApplicationController
   def list_users
     @all_users = User.find(:all)
   end
-
+  
+  def edit_user
+    id = params[:id]
+    @user = User.find(id)
+  end
+  
   def login
     if request.get?
       session[:user_id] = nil
@@ -50,6 +60,9 @@ class LoginController < ApplicationController
     end
   end
 
-  def logoff
+  def logout
+    session[:user_id] = nil
+    redirect_to(:action => "login")
   end
+  
 end
