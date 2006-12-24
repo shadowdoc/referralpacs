@@ -16,6 +16,8 @@ class User < ActiveRecord::Base
     self.password = nil
   end
   
+  before_destroy :dont_destroy_marc
+  
   def self.login(email, password)
     hashed_password = hash_password(password || "")
     find(:first,
@@ -29,6 +31,10 @@ class User < ActiveRecord::Base
   private
   def self.hash_password(password)
     Digest::MD5.hexdigest(password)
+  end
+  
+  def dont_destroy_marc
+    raise "Can't destroy mkohli@iupui.edu" if self.email == 'mkohli@iupui.edu'
   end
   
 end
