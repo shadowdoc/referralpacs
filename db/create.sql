@@ -42,14 +42,14 @@ drop table if exists users;
 create table users (
     id             int         not null auto_increment,
     name           text,
-    hashedpassword text        not null,
+    hashed_password text        not null,
     email          text        not null,
-    access_id      int         not null,
-    provider_id    int         not null,
-	user_created   int         not null,
-	date_created   datetime    not null,
-	user_modified  int         not null,
-	date_modified  datetime    not null,
+    access_id      int,
+    provider_id    int,
+	user_created   int,
+	date_created   datetime,
+	user_modified  int,
+	date_modified  timestamp,
 	primary key (id)
 );	
     
