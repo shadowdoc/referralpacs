@@ -56,4 +56,9 @@ class PatientController < ApplicationController
     Patient.find(params[:id]).destroy
     redirect_to :action => 'list_short'
   end
+  
+  def encounters
+    @patients = Patient.find(params[:id])
+    @encounters = Encounter.find(:all, :conditions => ["patient_id = ?", params[:id]])
+  end
 end
