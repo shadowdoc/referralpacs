@@ -1,4 +1,4 @@
-class AdminController < ApplicationController
+class EncounterController < ApplicationController
 
   before_filter :authorize
   layout "admin"
@@ -13,7 +13,12 @@ class AdminController < ApplicationController
          :redirect_to => { :action => :list }
 
   def list
-    @encounter_pages, @encounters = paginate :encounters, :per_page => 10
+    if params[:id]
+      @patient = Patient.find(params[:id])
+      @encounter_pages, @encounters = paginate :encounters, :conditions => ["patient_id = ?", params[:id]], :per_page => 10
+    else
+      @encounter_pages, @encounters = paginate :encounters, :per_page => 10      
+    end
   end
 
   def show
