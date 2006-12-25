@@ -1,6 +1,6 @@
 class LoginController < ApplicationController
 
-  before_filter :authorize, :except => "login"
+  # before_filter :authorize, :except => "login"
   layout "admin"
   scaffold :user
   

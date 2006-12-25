@@ -19,9 +19,9 @@ create table encounters (
 	xray_id        int         not null,
 	invoice        int         not null,
 	created_by     int         not null,
-	created_on     datetime    not null,
+	created_at     datetime    not null,
 	updated_by     int         not null,
-	updated_on     datetime    not null,
+	updated_at     datetime    not null,
 	primary key (id)
 );
 drop table if exists users;
@@ -34,9 +34,9 @@ create table users (
     access_level_id int,
     provider_id     int,
 	created_by      int,
-	created_on      datetime,
+	created_at      datetime,
 	updated_by      int,
-	updated_on      datetime,
+	updated_at      datetime,
 	primary key (id)
 );
 
@@ -81,9 +81,9 @@ create table patients (
     death_date              datetime,
     cause_of_death          time,
     created_by              int,
-    created_on              datetime,
+    created_at              datetime,
     updated_by              int,
-    updated_on              timestamp,
+    updated_at              datetime,
     primary key (id)
 );
     

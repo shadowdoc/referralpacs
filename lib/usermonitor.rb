@@ -13,6 +13,7 @@ module ActiveRecord
         def current_user
           Thread.current['user']
         end
+        
       end
     end
 
@@ -22,7 +23,6 @@ module ActiveRecord
         self[:created_by] = user.id if respond_to?(:created_by) && created_by.nil?
         self[:updated_by] = user.id if respond_to?(:updated_by)
       end
-      flash[:notice] = "Thanks for creating #{user.email}"
       create_without_user
     end
 
@@ -48,4 +48,5 @@ module ActiveRecord
       end
     end
   end
+
 end
