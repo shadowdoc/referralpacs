@@ -1,7 +1,7 @@
 class Patient < ActiveRecord::Base
 
-  def before_create  
-    self.user_created = params[:id]
+  def created_by(user_id)
+    self.user_created = user_id
   end
-  
+ 
 end

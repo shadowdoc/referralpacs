@@ -1,5 +1,7 @@
 /* Create.sql for ReferralonRails
  * Marc Kohli
+ * For all of the created/modified timestamps, the names have changed to take
+ * advantage of Rails.
  */
 
 drop table if exists encounters;
@@ -17,9 +19,9 @@ create table encounters (
 	xray_id        int         not null,
 	invoice        int         not null,
 	user_created   int         not null,
-	date_created   datetime    not null,
+	created_on     datetime    not null,
 	user_modified  int         not null,
-	date_modified  datetime    not null,
+	modified_on  datetime    not null,
 	primary key (id)
 );
 
@@ -31,9 +33,9 @@ create table patients (
     last_name      varchar(100) not null,
     middle_name    varchar(100) not null,    
 	user_created   int          not null,
-	date_created   datetime     not null,
+	created_on     datetime     not null,
 	user_modified  int          not null,
-	date_modified  datetime     not null,
+	modified_on    datetime     not null,
 	primary key (id)
 );
 
@@ -47,9 +49,9 @@ create table users (
     access_level_id int,
     provider_id     int,
 	user_created    int,
-	date_created    datetime,
+	created_on      datetime,
 	user_modified   int,
-	date_modified   timestamp,
+	modified_on     datetime,
 	primary key (id)
 );
 
@@ -67,7 +69,7 @@ create table patients (
     given_name              varchar(100),
     middle_name             varchar(100),
     family_name             varchar(100),
-/*    last_name_prefix        varchar(50),
+    last_name_prefix        varchar(50),
     gender                  varchar(25),
     race                    varchar(100),
     tribe                   int,
@@ -92,7 +94,7 @@ create table patients (
     degree                  varchar(100),
     health_center           int,
     death_date              datetime,
-    cause_of_death          time, */
+    cause_of_death          time,
     user_created            int,
     date_created            datetime,
     user_modified           int,
