@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email
   validates_presence_of :email, :password
   
+  before_destroy :dont_destroy_marc
+  
   def before_create
     self.hashed_password = User.hash_password(self.password)
   end
@@ -15,8 +17,6 @@ class User < ActiveRecord::Base
   def after_create
     self.password = nil
   end
-  
-  before_destroy :dont_destroy_marc
   
   def self.login(email, password)
     hashed_password = hash_password(password || "")

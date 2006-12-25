@@ -1,0 +1,27 @@
+<h1>Listing patients</h1>
+
+<table>
+  <tr>
+  <% for column in Patient.content_columns %>
+    <th><%= column.human_name %></th>
+  <% end %>
+  </tr>
+  
+<% for patient in @patients %>
+  <tr>
+  <% for column in Patient.content_columns %>
+    <td><%=h patient.send(column.name) %></td>
+  <% end %>
+    <td><%= link_to 'Show', :action => 'show', :id => patient %></td>
+    <td><%= link_to 'Edit', :action => 'edit', :id => patient %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => patient }, :confirm => 'Are you sure?', :post => true %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'Previous page', { :page => @patient_pages.current.previous } if @patient_pages.current.previous %>
+<%= link_to 'Next page', { :page => @patient_pages.current.next } if @patient_pages.current.next %> 
+
+<br />
+
+<%= link_to 'New patient', :action => 'new' %>
