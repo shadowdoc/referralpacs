@@ -2,6 +2,8 @@
 # Likewise, all the methods added will be available for all controllers.
 class ApplicationController < ActionController::Base
 
+  before_filter :set_current_user
+
   def redirect_to_encounters
     redirect_to(:controller => 'admin', :action => 'list')
   end
@@ -12,5 +14,9 @@ class ApplicationController < ActionController::Base
       redirect_to(:controller => "login", :action => "login")
     end
   end
-
+  
+  def set_current_user
+    id = session[:user_id]
+    Thread.current['user'] = User.find(id)
+  end
 end

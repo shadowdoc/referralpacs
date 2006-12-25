@@ -51,3 +51,7 @@ end
 # end
 
 # Include your application configuration below
+require 'usermonitor'
+ActiveRecord::Base.class_eval do
+  include ActiveRecord::UserMonitor
+end

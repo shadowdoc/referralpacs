@@ -1,4 +1,4 @@
-/* Create.sql for ReferralonRails
+/* create.sql for ReferralonRails
  * Marc Kohli
  * For all of the created/modified timestamps, the names have changed to take
  * advantage of Rails.
@@ -18,27 +18,12 @@ create table encounters (
 	radiologist_id int         not null,
 	xray_id        int         not null,
 	invoice        int         not null,
-	user_created   int         not null,
+	created_by     int         not null,
 	created_on     datetime    not null,
-	user_modified  int         not null,
-	modified_on  datetime    not null,
+	updated_by     int         not null,
+	updated_on     datetime    not null,
 	primary key (id)
 );
-
-drop table if exists patients;
-
-create table patients (
-	id             int          not null auto_increment,
-    given_name     varchar(100) not null,
-    last_name      varchar(100) not null,
-    middle_name    varchar(100) not null,    
-	user_created   int          not null,
-	created_on     datetime     not null,
-	user_modified  int          not null,
-	modified_on    datetime     not null,
-	primary key (id)
-);
-
 drop table if exists users;
 
 create table users (
@@ -48,10 +33,10 @@ create table users (
     email           varchar(100)        not null,
     access_level_id int,
     provider_id     int,
-	user_created    int,
+	created_by      int,
 	created_on      datetime,
-	user_modified   int,
-	modified_on     datetime,
+	updated_by      int,
+	updated_on      datetime,
 	primary key (id)
 );
 
@@ -81,7 +66,7 @@ create table patients (
     address_division        varchar(100),
     address_district        varchar(100),
     address_state_province  varchar(100),
-    adddres_country         varchar(100),
+    address_country         varchar(100),
     address_zipcode         varchar(100),
     addressLongitude        float,
     addressLattitude        float,
@@ -95,10 +80,10 @@ create table patients (
     health_center           int,
     death_date              datetime,
     cause_of_death          time,
-    user_created            int,
-    date_created            datetime,
-    user_modified           int,
-    date_modified           timestamp,
+    created_by              int,
+    created_on              datetime,
+    updated_by              int,
+    updated_on              timestamp,
     primary key (id)
 );
     

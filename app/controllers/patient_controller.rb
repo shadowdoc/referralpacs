@@ -1,4 +1,8 @@
 class PatientController < ApplicationController
+
+  before_filter :authorize
+  layout "admin"
+
   def index
     list
     render :action => 'list'
@@ -22,9 +26,8 @@ class PatientController < ApplicationController
 
   def create
     @patient = Patient.new(params[:patient])
-    @patient.created_by(session[:id])
     if @patient.save
-      flash[:notice] = 'Patient was successfully created.'
+      #flash[:notice] = 'Patient was successfully created.'
       redirect_to :action => 'list'
     else
       render :action => 'new'
