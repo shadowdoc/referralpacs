@@ -1,7 +1,8 @@
 /* create.sql for ReferralonRails
  * Marc Kohli
  * For all of the created/modified timestamps, the names have changed to take
- * advantage of Rails.
+ * advantage of Rails.  
+ * This file is deprecated in favor of migrations.
  */
 
 drop table if exists encounters;
