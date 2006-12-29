@@ -1,0 +1,25 @@
+<% @page_title = "Encounter list" %>
+
+<h1>Listing encounters</h1>
+
+<table>
+  <tr>
+  <% for column in Encounter.content_columns %>
+    <th><%= column.human_name %></th>
+  <% end %>
+  </tr>
+  
+<% for encounter in @encounters %>
+  <tr>
+  <% for column in Encounter.content_columns %>
+    <td><%=h encounter.send(column.name) %></td>
+  <% end %>
+    <td><%= link_to 'Show', :action => 'show', :id => encounter %></td>
+    <td><%= link_to 'Edit', :action => 'edit', :id => encounter %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => encounter }, :confirm => 'Are you sure?', :post => true %></td>
+  </tr>
+<% end %>
+</table>
+<br />
+
+<%= link_to 'New encounter', :action => 'new_encounter', :id => patient %>

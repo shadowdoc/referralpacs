@@ -1,8 +1,8 @@
 <%= error_messages_for 'encounter' %>
 
 <!--[form:encounter]-->
-<p><label for="encounter_encounter_date">Encounter date</label><br/>
-<%= datetime_select 'encounter', 'encounter_date'  %></p>
+<p><label for="encounter_date">Date</label><br/>
+<%= datetime_select 'encounter', 'date'  %></p>
 
 <p><label for="encounter_patient_id">Patient id</label><br />
 <%= text_field 'encounter', 'patient_id' %></p>
@@ -15,9 +15,6 @@
 
 <p><label for="encounter_impression">Impression</label><br/>
 <%= text_area 'encounter', 'impression'  %></p>
-
-<p><label for="encounter_invoice">Invoice</label><br/>
-<%= text_field 'encounter', 'invoice'  %></p>
 
 <p><label for="encounter_created_dy">Created by</label><br/>
 <%= text_field 'encounter', 'created_by'  %></p>

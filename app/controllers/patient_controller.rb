@@ -58,7 +58,8 @@ class PatientController < ApplicationController
   end
   
   def encounters
-    @patients = Patient.find(params[:id])
+    @patient = Patient.find(params[:id])
     @encounters = Encounter.find(:all, :conditions => ["patient_id = ?", params[:id]])
   end
+  
 end

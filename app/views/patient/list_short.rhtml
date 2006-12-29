@@ -4,11 +4,6 @@
 
 <table>
     <th>Mrn ampath</th>
-<!--    
-    <th>Mrn mtrh ip</th>
-    <th>Mrn mtrh op</th>
-    <th>National ID</th>
--->
     <th>Name</th>
     <th>Gender</th>
     <th>Race</th>
@@ -20,12 +15,7 @@
 <% for patient in @patients %>
 
   <tr>
-    <td><%=h patient.send("mrn_ampath") %></td>
-<!--    
-    <td><%=h patient.send("mrn_mtrh_ip") %></td>
-    <td><%=h patient.send("mrn_mtrh_op") %></td>
-    <td><%=h patient.send("national_identifier") %></td>
--->
+    <td><%= link_to h(patient.send("mrn_ampath")), :action => 'encounters', :id => patient %></td>
     <td><%=h patient.send("prefix") << ' ' << patient.send("given_name") << ' ' << patient.send("family_name") %></td>
     <td><%=h patient.send("gender") %></td>
     <td><%=h patient.send("race") %></td>
