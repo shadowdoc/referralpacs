@@ -7,4 +7,10 @@ class EncounterTest < Test::Unit::TestCase
   def test_truth
     assert true
   end
+
+  def test_invalid_with_empty_attributes
+    encounter = Encounter.new
+    assert !encounter.valid?
+    
+  end
 end

@@ -59,7 +59,7 @@ class PatientController < ApplicationController
   
   def encounters
     @patient = Patient.find(params[:id])
-    @encounters = Encounter.find(:all, :conditions => ["patient_id = ?", params[:id]])
+    @encounters = @patient.encounters.find_all
   end
   
 end
