@@ -26,6 +26,7 @@ class EncounterController < ApplicationController
   end
 
   def new
+    @all_encounter_types = EncounterType.find_all
     @encounter = Encounter.new
   end
 

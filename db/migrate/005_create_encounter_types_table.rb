@@ -11,10 +11,13 @@ class CreateEncounterTypesTable < ActiveRecord::Migration
       t.column "modified_at", :datetime
       t.column "modified_by", :integer
     end
+    
+    add_column :encounters, "encounter_type_id", :integer
   
   end
 
   def self.down
     drop_table :encounter_types
+    remove_column :encounters, "encounter_type_id"
   end
 end

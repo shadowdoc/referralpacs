@@ -10,19 +10,20 @@ ActiveRecord::Schema.define(:version => 6) do
     t.column "created_at",  :datetime
     t.column "created_by",  :integer
     t.column "modified_at", :datetime
-    t.column "modified_by", :datetime
+    t.column "modified_by", :integer
   end
 
   create_table "encounters", :force => true do |t|
-    t.column "date",       :datetime
-    t.column "patient_id", :integer
-    t.column "indication", :string
-    t.column "findings",   :string
-    t.column "impression", :string
-    t.column "created_by", :integer
-    t.column "created_at", :datetime
-    t.column "updated_by", :integer
-    t.column "updated_at", :datetime
+    t.column "date",              :datetime
+    t.column "patient_id",        :integer
+    t.column "indication",        :string
+    t.column "findings",          :string
+    t.column "impression",        :string
+    t.column "created_by",        :integer
+    t.column "created_at",        :datetime
+    t.column "updated_by",        :integer
+    t.column "updated_at",        :datetime
+    t.column "encounter_type_id", :integer
   end
 
   create_table "patients", :force => true do |t|
