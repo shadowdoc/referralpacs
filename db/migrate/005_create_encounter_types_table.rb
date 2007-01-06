@@ -9,7 +9,7 @@ class CreateEncounterTypesTable < ActiveRecord::Migration
       t.column "created_at", :datetime
       t.column "created_by", :integer
       t.column "modified_at", :datetime
-      t.column "modified_by", :datetime
+      t.column "modified_by", :integer
     end
   
   end
