@@ -19,6 +19,14 @@ class User < ActiveRecord::Base
     self.password = nil
   end
   
+  def before_update
+    self.hashed_password = User.hash_password(self.password)
+  end
+  
+  def after_update
+    self.password = nil
+  end
+  
   def self.login(email, password)
     hashed_password = hash_password(password || "")
     find(:first,

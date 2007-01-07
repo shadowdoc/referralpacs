@@ -1,19 +1,19 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 marc:
-  id: 1
-  name: Marc
-  email: mkohli@iupui.edu
+  id:              1
+  name:            Marc
+  email:           mkohli@iupui.edu
   hashed_password: 5f4dcc3b5aa765d61d8327deb882cf99
-  privilege_id: 1
+  privilege_id:    1
 lisa:
-  id: 2
-  name: Lisa
-  email: llaws@iupui.edu
+  id:              2
+  name:            Lisa
+  email:           llaws@iupui.edu
   hashed_password: 5f4dcc3b5aa765d61d8327deb882cf99
-  privilege_id: 2
+  privilege_id:    2
 john:
-  id: 3
-  name: 'John K Bradshaw'
-  email: johnkbradshaw@yahoo.com
+  id:              3
+  name:            'John K Bradshaw'
+  email:           johnkbradshaw@yahoo.com
   hashed_password: 5f4dcc3b5aa765d61d8327deb882cf99
-  privilege_id: 1
+  privilege_id:    1

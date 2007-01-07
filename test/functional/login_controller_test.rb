@@ -5,6 +5,9 @@ require 'login_controller'
 class LoginController; def rescue_action(e) raise e end; end
 
 class LoginControllerTest < Test::Unit::TestCase
+
+  fixtures :users, :privileges
+
   def setup
     @controller = LoginController.new
     @request    = ActionController::TestRequest.new
@@ -12,7 +15,7 @@ class LoginControllerTest < Test::Unit::TestCase
   end
 
   # Replace this with your real tests.
-  def test_truth
-    assert true
+  def test_default
+    assert true  
   end
 end
