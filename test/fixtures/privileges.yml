@@ -1,0 +1,22 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+administrator:
+  id: 1
+  name: Administrator
+  view_study: true
+  add_study: true
+  remove_study: true
+  add_user: true
+  remove_user: true
+  add_patient: true
+  remove_patient: true
+  
+client:
+  id: 2
+  name: Client
+  view_study: true
+  add_study: false
+  remove_study: false
+  add_user: false
+  remove_user: false
+  add_patient: false
+  remove_patient: false

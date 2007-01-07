@@ -4,7 +4,6 @@ class CreateUsers < ActiveRecord::Migration
       t.column "name",            :string
       t.column "hashed_password", :string
       t.column "email",           :string
-      t.column "access_level_id", :integer
       t.column "provider_id",     :integer
       t.column "created_by",      :integer
       t.column "created_at",      :datetime

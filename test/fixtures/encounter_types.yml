@@ -1,5 +1,9 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-one:
+chest_xr:
   id: 1
-two:
+  name: 'Chest X-ray'
+  modality: XR
+foot_xr:
   id: 2
+  name: 'Foot X-ray'
+  modality: XR

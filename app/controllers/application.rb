@@ -8,10 +8,18 @@ class ApplicationController < ActionController::Base
     redirect_to(:controller => 'admin', :action => 'list')
   end
   
-  def authorize
+  def authorize_login
     unless session[:user_id] 
       flash[:notice] = "Please log in."
       redirect_to(:controller => "login", :action => "login")
+    end
+  end
+  
+  def authorize_add_user
+    @user = User.find session[:user_id]
+    unless @user.privilege.add_user?
+      flash[:notice] = "Not authorized to add users"
+      redirect_to(:controller => "login", :action => "list_users")
     end
   end
   

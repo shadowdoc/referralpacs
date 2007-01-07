@@ -1,0 +1,17 @@
+<%= error_messages_for 'user' %>
+
+<!--[form:user]-->
+<p><label for="user_name">Name</label><br/>
+<%= text_field 'user', 'name'   %></p>
+
+<p><label for="user_email">E-mail</label><br/>
+<%= text_field 'user', 'email'  %></p>
+
+<p><label for="user_privilege_id">Access Level</label><br/>
+<%= collection_select('user', 'privilege_id', @all_privileges, :id, :name) %>
+
+<p><label for="user_password">Password</label><br />
+<%= text_field 'user', 'password' %></p>
+
+<!--[eoform:user]-->
+

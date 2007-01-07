@@ -1,18 +1,7 @@
-<% @page_title = "Add a user" -%>
+<% @page_title = "Add User" -%>
 <%= error_messages_for  'user' %>
-<%= form_tag %>
-<table>
-    <tr>
-        <td>E-mail: </td> 
-        <td><%= text_field("user", "email") %></td>
-    </tr>
-    <tr>
-        <td>Password: </td>
-        <td><%= password_field("user", "password") %></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td><input type="submit" value=" ADD USER " /></td>
-    </tr>
-</table>
+<%= start_form_tag :action => "add_user", :id => @user %>
+    <%= render_partial 'form' %>
+    <%= submit_tag 'Save' %>
 <%= end_form_tag %>
+<%= link_to 'Back', :action => 'list_users' %>

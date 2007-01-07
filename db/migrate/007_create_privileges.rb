@@ -1,6 +1,6 @@
-class CreateAccessLevels < ActiveRecord::Migration
+class CreatePrivileges < ActiveRecord::Migration
   def self.up
-    create_table :access_levels do |t|
+    create_table :privileges do |t|
       t.column "name", :string
       t.column "view_study", :bool
       t.column "add_study", :bool
@@ -10,9 +10,13 @@ class CreateAccessLevels < ActiveRecord::Migration
       t.column "add_user", :bool
       t.column "remove_user", :bool
     end
+    
+    add_column :users, "privilege_id", :integer
+    
   end
 
   def self.down
-    drop_table :access_levels
+    drop_table :privileges
+    remove_column :users, "privilege_id"
   end
 end

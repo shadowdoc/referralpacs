@@ -1,13 +1,17 @@
 class LoginController < ApplicationController
 
-  # before_filter :authorize, :except => "login"
+  before_filter :authorize_login, :except => "login"
   layout "admin"
-  scaffold :user
   
   # If the requst is of the GET type, return the add_user
   # form.  Otherwise, we have a POST request, attempt to add the
   # new user and return to the user list.
   def add_user
+    
+    authorize_add_user
+    
+    @all_privileges = Privilege.find_all
+    
     if request.get?
       @user = User.new
     else 
@@ -42,6 +46,20 @@ class LoginController < ApplicationController
   def edit_user
     id = params[:id]
     @user = User.find(id)
+    @all_access_levels = AccessLevel.find_all
+  end
+  
+  def update_user
+    id = params[:id]
+    @user = User.find(id)
+    @all_access_levels = AccessLevel.find_all
+    if @user.update_attributes(params[:user])
+      flash[:notice] = 'User was successfully updated.'
+      redirect_to :action => 'list_users'
+    else
+      render :action => 'edit_user'
+    end
+  
   end
   
   def login

@@ -1,6 +1,6 @@
 class EncounterController < ApplicationController
 
-  before_filter :authorize
+  before_filter :authorize_login
   layout "admin"
   
   def index 
@@ -22,11 +22,11 @@ class EncounterController < ApplicationController
   end
 
   def show
+    @all_encounter_types = EncounterType.find_all
     @encounter = Encounter.find(params[:id])
   end
 
   def new
-    @all_encounter_types = EncounterType.find_all
     @encounter = Encounter.new
   end
 
@@ -41,6 +41,7 @@ class EncounterController < ApplicationController
   end
 
   def edit
+    @all_encounter_types = EncounterType.find_all
     @encounter = Encounter.find(params[:id])
   end
 

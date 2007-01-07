@@ -4,11 +4,8 @@
 <p><label for="encounter_date">Date</label><br/>
 <%= datetime_select 'encounter', 'date'  %></p>
 
-<p><lable for="encounter_types">Type</label><br/>
-<select id="encounter_types" name="encounter_types">
-
-<%= options_from_collection_for_select(@all_encounter_types, :id, :name) %>
-</select>
+<p><label for="encounter_type_id">Type</label><br/>
+<%= collection_select('encounter', 'encounter_type_id', @all_encounter_types, :id, :name) %>
 
 <p><label for="encounter_patient_id">Patient id</label><br />
 <%= text_field 'encounter', 'patient_id' %></p>

@@ -3,13 +3,13 @@ require "digest/md5"
 class User < ActiveRecord::Base
 
   attr_accessor :password
-  attr_accessible :email, :password
+  attr_accessible :email, :password, :name, :access_level_id
   
   validates_uniqueness_of :email
   validates_presence_of :email, :password
   
   before_destroy :dont_destroy_marc
-  has_one :access_level
+  belongs_to :privilege
     
   def before_create
     self.hashed_password = User.hash_password(self.password)

@@ -1,6 +1,6 @@
 class PatientController < ApplicationController
 
-  before_filter :authorize
+  before_filter :authorize_login
   layout "admin"
 
   def index

@@ -1,5 +1,12 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-first:
+baxter:
   id: 1
-another:
+  given_name: Baxter
+  family_name: Kohli
+  mtrh_rad_id: 12345
+  
+stanley:
   id: 2
+  given_name: Stanley
+  family_name: Kohli
+  mtrh_rad_id: 54321
