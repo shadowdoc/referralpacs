@@ -9,7 +9,8 @@ class User < ActiveRecord::Base
   validates_presence_of :email, :password
   
   before_destroy :dont_destroy_marc
-  
+  has_one :access_level
+    
   def before_create
     self.hashed_password = User.hash_password(self.password)
   end
