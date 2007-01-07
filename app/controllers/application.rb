@@ -15,14 +15,6 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  def authorize_add_user
-    @user = User.find session[:user_id]
-    unless @user.privilege.add_user?
-      flash[:notice] = "Not authorized to add users"
-      redirect_to(:controller => "login", :action => "list_users")
-    end
-  end
-  
   def set_current_user
     id = session[:user_id] && nil
     if !id.nil? 

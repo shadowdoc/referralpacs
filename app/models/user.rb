@@ -3,7 +3,7 @@ require "digest/md5"
 class User < ActiveRecord::Base
 
   attr_accessor :password
-  attr_accessible :email, :password, :name, :access_level_id
+  attr_accessible :email, :password, :name, :privilege_id
   
   validates_uniqueness_of :email
   validates_presence_of :email, :password, :name

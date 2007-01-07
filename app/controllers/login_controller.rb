@@ -27,16 +27,24 @@ class LoginController < ApplicationController
   # The model raises an exception if we attempt to delete
   # the special user.
   def delete_user
+  
+    # Check to see if the current user is authorized to remove users.
+    authorize_remove_user
+
     id = params[:id]
-    if id && user = User.find(id)
-      begin
-        user.destroy
-        flash[:notice] = "User #{user.name} deleted"
-      rescue
-        flash[:notice] = "Can't delete that user"
+    if id == session[:user_id]
+      flash[:notice] = "Can't delete self"
+    else
+      if id && user = User.find(id)
+        begin
+          user.destroy
+          flash[:notice] = "User #{user.name} deleted"
+        rescue
+          flash[:notice] = "Can't delete that user"
+        end
       end
     end
-  redirect_to(:action => :list_users)
+    redirect_to(:action => :list_users)
   end
 
   def list_users
@@ -46,13 +54,12 @@ class LoginController < ApplicationController
   def edit_user
     id = params[:id]
     @user = User.find(id)
-    @all_access_levels = AccessLevel.find_all
+    @all_privileges = Privilege.find_all
   end
   
   def update_user
     id = params[:id]
     @user = User.find(id)
-    @all_access_levels = AccessLevel.find_all
     if @user.update_attributes(params[:user])
       flash[:notice] = 'User was successfully updated.'
       redirect_to :action => 'list_users'
@@ -81,6 +88,24 @@ class LoginController < ApplicationController
   def logout
     session[:user_id] = nil
     redirect_to(:action => "login")
+  end
+  
+  private
+  def authorize_add_user
+    @user = User.find session[:user_id]
+    unless @user.privilege.add_user?
+      flash[:notice] = "Not authorized to add users"
+      redirect_to(:controller => "login", :action => "list_users")
+    end
+  end
+  
+  private
+  def authorize_remove_user
+    @user = User.find session[:user_id]
+    unless @user.privilege.remove_user?
+      flash[:notice] = "Not authorized to remove users"
+      redirect_to(:controller => "login", :action => "list_users")
+    end
   end
   
 end

@@ -1,27 +1,17 @@
 <% @page_title = "Patient List" %>
 
-<h1>Listing patients</h1>
-
 <table>
-    <th>Mrn ampath</th>
+    <th>Rad Id</th>
     <th>Name</th>
     <th>Gender</th>
-    <th>Race</th>
-    <th>Tribe</th>
-    <th>Address1</th>
-    <th>Address2</th>
       
   </tr> 
 <% for patient in @patients %>
 
   <tr>
-    <td><%= link_to h(patient.send("mrn_ampath")), :action => 'encounters', :id => patient %></td>
+    <td><%= link_to h(patient.mtrh_rad_id), :action => 'encounters', :id => patient %></td>
     <td><%=h patient.full_name %></td>
     <td><%=h patient.send("gender") %></td>
-    <td><%=h patient.send("race") %></td>
-    <td><%=h patient.send("tribe") %></td>
-    <td><%=h patient.send("address1") %></td>
-    <td><%=h patient.send("address2") %></td>
     <td><%= link_to 'Show', :action => 'show', :id => patient %></td>
     <td><%= link_to 'Edit', :action => 'edit', :id => patient %></td>
     <td><%= link_to 'Destroy', { :action => 'destroy', :id => patient }, :confirm => 'Are you sure?', :post => true %></td>

@@ -26,15 +26,18 @@ class EncounterController < ApplicationController
     @encounter = Encounter.find(params[:id])
   end
 
+  # Creates a new encounter given a patient id.
   def new
-    @encounter = Encounter.new
+    @all_encounter_types = EncounterType.find_all
+    @encounter = Encounter.new()
+    @encounter.patient_id = params[:id]
   end
 
   def create
     @encounter = Encounter.new(params[:encounter])
     if @encounter.save
       flash[:notice] = 'Encounter was successfully created.'
-      redirect_to :action => 'list'
+      redirect_to :controller => 'patient', :action => 'encounters', :id => @encounter.patient.id
     else
       render :action => 'new'
     end
@@ -59,5 +62,5 @@ class EncounterController < ApplicationController
     Encounter.find(params[:id]).destroy
     redirect_to :action => 'list'
   end
-   
+  
 end

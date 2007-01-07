@@ -10,13 +10,9 @@ class PatientController < ApplicationController
 
   # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
   verify :method => :post, :only => [ :destroy, :create, :update ],
-         :redirect_to => { :action => :list_short }
+         :redirect_to => { :action => :list }
 
   def list
-    @patient_pages, @patients = paginate :patients, :per_page => 10
-  end
-
-  def list_short
     @patient_pages, @patients = paginate :patients, :per_page => 10
   end
 
@@ -32,7 +28,7 @@ class PatientController < ApplicationController
     @patient = Patient.new(params[:patient])
     if @patient.save
       #flash[:notice] = 'Patient was successfully created.'
-      redirect_to :action => 'list_short'
+      redirect_to :action => 'list'
     else
       render :action => 'new'
     end
@@ -54,12 +50,12 @@ class PatientController < ApplicationController
 
   def destroy
     Patient.find(params[:id]).destroy
-    redirect_to :action => 'list_short'
+    redirect_to :action => 'list'
   end
   
   def encounters
     @patient = Patient.find(params[:id])
-    @encounters = @patient.encounters.find_all
+    @encounter_pages, @encounters = paginate :encounters, :conditions => ["patient_id = ?", params[:id]], :per_page => 10
   end
   
 end

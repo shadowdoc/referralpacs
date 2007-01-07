@@ -1,25 +1,28 @@
-<% @page_title = "Encounter list" %>
-
-<h1>Listing encounters</h1>
+<% @page_title = "#{@patient.full_name}" %>
 
 <table>
   <tr>
-  <% for column in Encounter.content_columns %>
-    <th><%= column.human_name %></th>
-  <% end %>
+    <th>Date</th>
+    <th>Type</th>
+    <th>Indication</th>
+    <th>Impression</th>
   </tr>
   
 <% for encounter in @encounters %>
   <tr>
-  <% for column in Encounter.content_columns %>
-    <td><%=h encounter.send(column.name) %></td>
-  <% end %>
-    <td><%= link_to 'Show', :action => 'show', :id => encounter %></td>
-    <td><%= link_to 'Edit', :action => 'edit', :id => encounter %></td>
-    <td><%= link_to 'Destroy', { :action => 'destroy', :id => encounter }, :confirm => 'Are you sure?', :post => true %></td>
+    <td><%=h encounter.date.strftime("%d %b %Y") %></td>
+    <td><%=h encounter.encounter_type.name %></td>
+    <td><%=h encounter.indication %></td>
+    <td><%=h encounter.impression %></td>
+    <td><%= link_to 'Show', :controller => 'encounter', :action => 'show', :id => encounter %></td>
+    <td><%= link_to 'Edit', :controller => 'encounter', :action => 'edit', :id => encounter %></td>
+    <td><%= link_to 'Destroy', { :controller => 'encounter', :action => 'destroy', :id => encounter }, :confirm => 'Are you sure?', :post => true %></td>
   </tr>
 <% end %>
 </table>
 <br />
 
-<%= link_to 'New encounter', :action => 'new_encounter', :id => @patient.id %>
+<%= link_to 'Previous page', { :page => @encounter_pages.current.previous } if @encounter_pages.current.previous %>
+<%= link_to 'Next page', { :page => @encounter_pages.current.next } if @encounter_pages.current.next %> 
+
+<%= link_to 'New encounter', :controller => 'encounter', :action => 'new', :id => @patient %>
