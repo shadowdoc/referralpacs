@@ -1,8 +1,4 @@
-<% for column in Encounter.content_columns %>
-<p>
-  <b><%= column.human_name %>:</b> <%=h @encounter.send(column.name) %>
-</p>
-<% end %>
+<%= render :partial => 'form' %>
 
 <%= link_to 'Edit', :action => 'edit', :id => @encounter %> |
-<%= link_to 'Back', :action => 'list' %>
+<%= link_to 'List', :action => 'list' %>

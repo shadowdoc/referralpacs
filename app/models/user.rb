@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :name, :access_level_id
   
   validates_uniqueness_of :email
-  validates_presence_of :email, :password
+  validates_presence_of :email, :password, :name
   
   before_destroy :dont_destroy_marc
   belongs_to :privilege

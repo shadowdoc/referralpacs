@@ -16,7 +16,7 @@
 
   <tr>
     <td><%= link_to h(patient.send("mrn_ampath")), :action => 'encounters', :id => patient %></td>
-    <td><%=h patient.send("prefix") << ' ' << patient.send("given_name") << ' ' << patient.send("family_name") %></td>
+    <td><%=h patient.full_name %></td>
     <td><%=h patient.send("gender") %></td>
     <td><%=h patient.send("race") %></td>
     <td><%=h patient.send("tribe") %></td>
