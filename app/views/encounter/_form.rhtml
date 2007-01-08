@@ -1,23 +1,25 @@
 <%= error_messages_for 'encounter' %>
 
 <!--[form:encounter]-->
+<%= hidden_field 'encounter', 'patient_id' %>
+
 <p><label for="encounter_date">Date</label><br/>
 <%= datetime_select 'encounter', 'date'  %></p>
 
 <p><label for="encounter_type_id">Type</label><br/>
 <%= collection_select('encounter', 'encounter_type_id', @all_encounter_types, :id, :name) %>
 
-<p><label for="encounter_patient_id">Patient id</label><br />
-<%= text_field 'encounter', 'patient_id' %></p>
-
 <p><label for="encounter_indication">Indication</label><br/>
-<%= text_area 'encounter', 'indication'  %></p>
+<%= text_field 'encounter', 'indication'  %></p>
 
 <p><label for="encounter_findings">Findings</label><br/>
-<%= text_area 'encounter', 'findings'  %></p>
+<%= text_field 'encounter', 'findings'  %></p>
 
 <p><label for="encounter_impression">Impression</label><br/>
-<%= text_area 'encounter', 'impression'  %></p>
+<%= text_field 'encounter', 'impression'  %></p>
+
+<p><label for="encounter_provider_id">Provider</label><br/>
+<%= collection_select('encounter', 'provider_id', @all_providers, :id, :name) %>
 
 <!--[eoform:encounter]-->
 

@@ -2,6 +2,7 @@ class EncounterController < ApplicationController
 
   before_filter :authorize_login
   layout "admin"
+  require "user"
   
   def index 
     list
@@ -28,7 +29,8 @@ class EncounterController < ApplicationController
 
   # Creates a new encounter given a patient id.
   def new
-    @all_encounter_types = EncounterType.find_all
+    @all_encounter_types = EncounterType.find(:all)
+    @all_providers = Provider.find(:all)
     @encounter = Encounter.new()
     @encounter.patient_id = params[:id]
   end
@@ -44,6 +46,7 @@ class EncounterController < ApplicationController
   end
 
   def edit
+    @all_providers = Provider.find(:all)
     @all_encounter_types = EncounterType.find_all
     @encounter = Encounter.find(params[:id])
   end

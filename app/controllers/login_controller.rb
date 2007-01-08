@@ -6,6 +6,11 @@ class LoginController < ApplicationController
   # If the requst is of the GET type, return the add_user
   # form.  Otherwise, we have a POST request, attempt to add the
   # new user and return to the user list.
+  
+  def index
+    login
+  end
+  
   def add_user
     
     authorize_add_user

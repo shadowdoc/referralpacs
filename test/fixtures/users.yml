@@ -5,6 +5,8 @@ marc:
   email:           mkohli@iupui.edu
   hashed_password: 5f4dcc3b5aa765d61d8327deb882cf99
   privilege_id:    1
+  type:            Provider
+  title:           MD
 lisa:
   id:              2
   name:            Lisa
@@ -17,3 +19,12 @@ john:
   email:           johnkbradshaw@yahoo.com
   hashed_password: 5f4dcc3b5aa765d61d8327deb882cf99
   privilege_id:    1
+  type:            Provider
+  title:           MD
+madura:
+  id:              4
+  name:            'James Madura'
+  email:           madura@surgeryrocks.com
+  hashed_password: 5f4dcc3b5aa765d61d8327deb882cf99
+  privilege_id:    2
+  

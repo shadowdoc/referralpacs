@@ -8,16 +8,20 @@
         ReferralPACS : <%= @page_title %>
     </div>
     <div id="columns">
-    <div id="side">
-        <% if session[:user_id] -%>
-            <%= link_to("List patients", :controller => "patient", :action => "list") %><br />
-            <%= link_to("List encounters", :controller => "encounter", :action => "list") %><br />
-            <hr/>
-            <%= link_to("List users", :controller => "login", :action => "list_users") %><br />
-            <hr/>
-            <%= link_to("Log out", :controller => "login", :action => "logout") %>
-            
-        <% end -%>
+        <div id="side">
+            <% if session[:user_id] -%>
+                <% if !@side_bar_commands.nil? -%>
+                    <% for command in @side_bar_commands %>
+                        <%= command %><br />
+                    <% end -%>
+                    <hr/>
+                <% end -%>
+
+                <%= link_to("List patients", :controller => "patient", :action => "list") %><br />
+                <hr/>
+                <%= link_to("Log out", :controller => "login", :action => "logout") %>
+                <hr/>
+            <% end -%>
         </div>
         <div id="main">
             <% if flash[:notice] -%>

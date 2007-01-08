@@ -1,4 +1,6 @@
 <% @page_title = "User List" -%>
+<% @side_bar_commands = [link_to("List Users", :controller => "login", :action => "list_users"), link_to("Add Provider", :action=> :add_provider), link_to("Add User", :action => "add_user")] %>
+
 <table>
   <% odd_or_even = 0
      for user in @all_users 
@@ -6,9 +8,9 @@
   %>
     <tr valign="top" class="ListLine<%= odd_or_even %>">
       <td><%= user.email %></td>
+      <td><%= user[:type] %></td>
       <td><%= link_to(" edit ", :action => :edit_user, :id => user.id)%> <%= link_to(" delete ", :action => :delete_user, :id => user.id) %></td>
     </tr>
     
   <% end -%>
 </table>
-<%= link_to("Add user", :action => "add_user") %>

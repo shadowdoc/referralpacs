@@ -7,6 +7,7 @@ right_pneumonia:
   findings: 'Right basilar airspace disease'
   impression: 'Right lower lobe pneumonia'
   encounter_type_id: 1
+  provider_id: 1
 
 chest_pain:
   id: 2
@@ -16,3 +17,4 @@ chest_pain:
   findings: 'Right apical pneumothorax.  No mediastinal shift. No rib fractures. Bullous emphysema'
   impression: 'Right pneumothorax.'
   encounter_type_id: 1
+  provider_id: 3

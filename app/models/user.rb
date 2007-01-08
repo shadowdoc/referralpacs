@@ -47,3 +47,7 @@ class User < ActiveRecord::Base
   end
   
 end
+
+class Provider < User
+  attr_accessible :title
+end
