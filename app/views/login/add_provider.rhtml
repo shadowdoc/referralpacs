@@ -1,0 +1,7 @@
+<% @page_title = "Add Provider" -%>
+<%= error_messages_for  'Provider' %>
+<%= form_tag :action => "add_provider", :id => @provider %>
+    <%= render :partial => 'form' %>
+    <%= submit_tag 'Save' %>
+</form>
+<%= link_to 'Back', :action => 'list_users' %>

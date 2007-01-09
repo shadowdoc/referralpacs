@@ -1,7 +1,7 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 marc:
   id:              1
-  name:            Marc
+  name:            'Marc Kohli'
   email:           mkohli@iupui.edu
   hashed_password: 5f4dcc3b5aa765d61d8327deb882cf99
   privilege_id:    1
@@ -27,4 +27,5 @@ madura:
   email:           madura@surgeryrocks.com
   hashed_password: 5f4dcc3b5aa765d61d8327deb882cf99
   privilege_id:    2
-  
+  type:            Provider
+  title:           MD

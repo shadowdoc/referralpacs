@@ -8,15 +8,13 @@ class LoginController < ApplicationController
   # new user and return to the user list.
   
   def index
-    login
+    redirect_to(:action => "login")
   end
   
   def add_user
-    
     authorize_add_user
     
-    @all_privileges = Privilege.find_all
-    
+    @all_privileges = Privilege.find(:all)
     if request.get?
       @user = User.new
     else 
@@ -93,6 +91,19 @@ class LoginController < ApplicationController
   def logout
     session[:user_id] = nil
     redirect_to(:action => "login")
+  end
+  
+  def add_provider
+    if request.get?
+      @provider = Provider.new
+      @all_privileges = Privilege.find :all
+    else
+      @provider = Provider.new(params[:user])
+      if @provider.save
+        flash[:notice] = "Provider #{@provider.email} created."
+        redirect_to(:action => "list_users")
+      end  
+    end
   end
   
   private
