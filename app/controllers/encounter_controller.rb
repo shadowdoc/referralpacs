@@ -66,4 +66,17 @@ class EncounterController < ApplicationController
     redirect_to :action => 'list'
   end
   
+  def upload
+    #@eid = params[:id]
+    #@all_encounter_types = EncounterType.find_all
+    #@encounter = Encounter.find(params[:id])
+    @eid = params[:id]
+  end
+  
+  def add_image
+    @image = Image.create params[:image]
+    flash[:notice] = 'File uploaded'
+    redirect_to :action => 'show', :id => @image.encounter
+  end
+  
 end

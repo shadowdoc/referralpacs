@@ -10,13 +10,13 @@
 <%= collection_select('encounter', 'encounter_type_id', @all_encounter_types, :id, :name) %>
 
 <p><label for="encounter_indication">Indication</label><br/>
-<%= text_field 'encounter', 'indication'  %></p>
+<%= text_area 'encounter', 'indication', 'rows' => '3'  %></p>
 
 <p><label for="encounter_findings">Findings</label><br/>
-<%= text_field 'encounter', 'findings'  %></p>
+<%= text_area 'encounter', 'findings', 'rows' => '4'  %></p>
 
 <p><label for="encounter_impression">Impression</label><br/>
-<%= text_field 'encounter', 'impression'  %></p>
+<%= text_area 'encounter', 'impression', 'rows' => '4'  %></p>
 
 <p><label for="encounter_provider_id">Provider</label><br/>
 <%= collection_select('encounter', 'provider_id', @all_providers, :id, :name) %>

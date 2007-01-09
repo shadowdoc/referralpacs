@@ -10,7 +10,7 @@ ActiveRecord::Schema.define(:version => 8) do
     t.column "created_at",  :datetime
     t.column "created_by",  :integer
     t.column "modified_at", :datetime
-    t.column "modified_by", :integer
+    t.column "modified_by", :datetime
   end
 
   create_table "encounters", :force => true do |t|
@@ -23,8 +23,15 @@ ActiveRecord::Schema.define(:version => 8) do
     t.column "created_at",        :datetime
     t.column "updated_by",        :integer
     t.column "updated_at",        :datetime
-    t.column "encounter_type_id", :integer
+    t.column "encounter_type_id", :integer,  :limit => 10
     t.column "provider_id",       :integer
+  end
+
+  create_table "images", :force => true do |t|
+    t.column "path",         :string
+    t.column "encounter_id", :integer
+    t.column "created_at",   :datetime
+    t.column "updated_at",   :datetime
   end
 
   create_table "patients", :force => true do |t|
@@ -63,6 +70,7 @@ ActiveRecord::Schema.define(:version => 8) do
     t.column "name",            :string
     t.column "hashed_password", :string
     t.column "email",           :string
+    t.column "access_level_id", :integer
     t.column "provider_id",     :integer
     t.column "created_by",      :integer
     t.column "created_at",      :datetime
