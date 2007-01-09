@@ -23,7 +23,8 @@ class EncounterController < ApplicationController
   end
 
   def show
-    @all_encounter_types = EncounterType.find_all
+    @all_encounter_types = EncounterType.find(:all)
+    @all_providers = Provider.find(:all)
     @encounter = Encounter.find(params[:id])
   end
 

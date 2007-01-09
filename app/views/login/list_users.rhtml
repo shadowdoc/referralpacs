@@ -4,6 +4,7 @@
 <table>
   <% for user in @all_users %>
     <tr valign="top" class="<%= cycle ("ListLine1", "ListLine0") %>">
+      <td><%= user.name %></td>
       <td><%= user.email %></td>
       <td><%= user[:type] %></td>
       <td><%= user.privilege.name %></td>
