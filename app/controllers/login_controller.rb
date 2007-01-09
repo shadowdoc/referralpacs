@@ -12,16 +12,20 @@ class LoginController < ApplicationController
   end
   
   def add_user
-    authorize_add_user
-    
-    @all_privileges = Privilege.find(:all)
-    if request.get?
-      @user = User.new
-    else 
-      @user = User.new(params[:user])
-      if @user.save
-        flash[:notice] = "User #{@user.email} created."
-        redirect_to(:action => "list_users")
+    @current_user = User.find(session[:user_id])
+    unless @current_user.privilege.add_user
+      flash[:notice] = "Not authorized to add users"
+      redirect_to(:action => 'list_users')
+    else
+      @all_privileges = Privilege.find(:all)
+      if request.get?
+        @user = User.new
+      else 
+        @user = User.new(params[:user])
+        if @user.save
+          flash[:notice] = "User #{@user.email} created."
+          redirect_to(:action => 'list_user')
+        end
       end
     end
   end
@@ -30,24 +34,26 @@ class LoginController < ApplicationController
   # The model raises an exception if we attempt to delete
   # the special user.
   def delete_user
-  
-    # Check to see if the current user is authorized to remove users.
-    authorize_remove_user
-
-    id = params[:id]
-    if id == session[:user_id]
-      flash[:notice] = "Can't delete self"
+    @current_user = User.find(session[:user_id])
+    unless @current_user.privlige.remove_user
+      flash[:notice] = "Not authorized to delete users"
+      redirect_to(:action => 'list_users')
     else
-      if id && user = User.find(id)
-        begin
-          user.destroy
-          flash[:notice] = "User #{user.name} deleted"
-        rescue
-          flash[:notice] = "Can't delete that user"
+      id = params[:id]
+      if id == session[:user_id]
+        flash[:notice] = "Can't delete self"
+      else
+        if id && user = User.find(id)
+          begin
+            user.destroy
+            flash[:notice] = "User #{user.name} deleted"
+          rescue
+            flash[:notice] = "Can't delete that user"
+          end
         end
       end
+      redirect_to(:action => :list_users)
     end
-    redirect_to(:action => :list_users)
   end
 
   def list_users
@@ -105,23 +111,5 @@ class LoginController < ApplicationController
       end  
     end
   end
-  
-  private
-  def authorize_add_user
-    @user = User.find session[:user_id]
-    unless @user.privilege.add_user?
-      flash[:notice] = "Not authorized to add users"
-      redirect_to(:controller => "login", :action => "list_users")
-    end
-  end
-  
-  private
-  def authorize_remove_user
-    @user = User.find session[:user_id]
-    unless @user.privilege.remove_user?
-      flash[:notice] = "Not authorized to remove users"
-      redirect_to(:controller => "login", :action => "list_users")
-    end
-  end
-  
+    
 end
