@@ -16,6 +16,22 @@ class LoginControllerTest < Test::Unit::TestCase
 
   # Replace this with your real tests.
   def test_default
-    assert true  
+    assert true   
   end
+  
+  def test_index
+    get :index
+    assert_equal "Please log in.", flash[:notice]
+    assert_redirected_to(:controller => "login", :action=>"login")
+  end
+  
+  def test_login
+    get :login
+    post :login, :user => {:email => users(:marc).email, :password => "password"}
+    
+    assert :success
+    assert_redirected_to(:controller => "login", :action => "list_users")
+  end
+
+  def test_
 end
