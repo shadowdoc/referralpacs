@@ -4,7 +4,8 @@
 
   <label for='image_file_data'>File location: </label>
   <%= f.file_field :file_data %><br/>
-  <%= f.hidden_field :eid, :value => @eid %>
+  <%= f.hidden_field :encounter_id, :value => @encounter.id %>
   
   <%= submit_tag "upload"%>
+  
 <%end%>

@@ -33,5 +33,4 @@ class LoginControllerTest < Test::Unit::TestCase
     assert_redirected_to(:controller => "login", :action => "list_users")
   end
 
-  def test_
 end

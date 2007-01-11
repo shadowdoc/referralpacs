@@ -1,8 +1,10 @@
+require "user"
+
 class EncounterController < ApplicationController
 
   before_filter :authorize_login
   layout "admin"
-  require "user"
+
   
   def index 
     list
@@ -67,8 +69,9 @@ class EncounterController < ApplicationController
   def upload
     #@eid = params[:id]
     #@all_encounter_types = EncounterType.find_all
-    #@encounter = Encounter.find(params[:id])
-    @eid = params[:id]
+    @encounter = Encounter.find(params[:id])
+    @image = Image.new()
+    @image.encounter_id = @encounter.id
   end
   
   def add_image
