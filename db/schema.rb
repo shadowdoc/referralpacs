@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(:version => 10) do
     t.column "encounter_id", :integer
     t.column "created_at",   :datetime
     t.column "updated_at",   :datetime
+    t.column "extension",    :string,   :limit => 5, :default => "jpg"
   end
 
   create_table "patients", :force => true do |t|

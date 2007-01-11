@@ -1,5 +1,6 @@
 class Image < ActiveRecord::Base
-
+  require 'RMagick'
+  
   belongs_to :encounter
 
   BASEDIRECTORY = 'public/image_test'
@@ -24,19 +25,28 @@ class Image < ActiveRecord::Base
   end
   
   def thumb_path
-    File.join (BASEDIRECTORY, short_path, thumb_filename)
+    File.join(BASEDIRECTORY, short_path, thumb_filename)
   end
   
-  def filename(ext = 'full')
-    "#{self.encounter.id}-#{self.id}-#{ext}.#{extension}"
+  def filename(suffix = 'full')
+    "#{self.encounter.id}-#{self.id}-#{suffix}.#{self.extension}"
   end
   
   def thumb_filename
     filename('thumb')
   end
   
+  def thumb_url
+    thumb_path.sub(/^public/,'')
+  end
+  
+  def full_url
+    full_path.sub(/^public/,'')
+  end
+  
   def all_versions_path
-    
+    allversions = filename('*')
+    File.join(BASEDIRECTORY, short_path, allversions)
   end
   
   def short_path
@@ -50,6 +60,7 @@ class Image < ActiveRecord::Base
       create_directory
       cleanup
       save_fullsize
+      create_thumbnail
       @file_data = nil
     end
   end
@@ -65,11 +76,13 @@ class Image < ActiveRecord::Base
   end
   
   def create_thumbnail
-    image = Magick::Image.read(full_path)
+    image = Magick::Image.read(full_path).first
+    thumbnail = image.thumbnail(*THUMB_MAX_SIZE)
+    thumbnail.write thumb_path
   end
   
   def cleanup
-    Dir[full_path].each do |filename|
+    Dir[all_versions_path].each do |filename|
       File.unlink(filename) rescue nil
     end
   end

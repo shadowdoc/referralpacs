@@ -76,8 +76,8 @@ class EncounterController < ApplicationController
     flash[:notice] = 'File uploaded'
     redirect_to :action => 'show', :id => @image.encounter
   end
-  
-  private
+
+ private
   def populate_collections
     @all_encounter_types = EncounterType.find_all
     @all_providers = Provider.find(:all)
