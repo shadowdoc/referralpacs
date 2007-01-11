@@ -23,15 +23,13 @@ class EncounterController < ApplicationController
   end
 
   def show
-    @all_encounter_types = EncounterType.find(:all)
-    @all_providers = Provider.find(:all)
+    populate_collections
     @encounter = Encounter.find(params[:id])
   end
 
   # Creates a new encounter given a patient id.
   def new
-    @all_encounter_types = EncounterType.find(:all)
-    @all_providers = Provider.find(:all)
+    populate_collections
     @encounter = Encounter.new()
     @encounter.patient_id = params[:id]
   end
@@ -47,8 +45,7 @@ class EncounterController < ApplicationController
   end
 
   def edit
-    @all_providers = Provider.find(:all)
-    @all_encounter_types = EncounterType.find_all
+    populate_collections
     @encounter = Encounter.find(params[:id])
   end
 
@@ -78,6 +75,13 @@ class EncounterController < ApplicationController
     @image = Image.create params[:image]
     flash[:notice] = 'File uploaded'
     redirect_to :action => 'show', :id => @image.encounter
+  end
+  
+  private
+  def populate_collections
+    @all_encounter_types = EncounterType.find_all
+    @all_providers = Provider.find(:all)
+    @all_clients = Client.find(:all)
   end
   
 end

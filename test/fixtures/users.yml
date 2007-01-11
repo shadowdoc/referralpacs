@@ -27,5 +27,5 @@ madura:
   email:           madura@surgeryrocks.com
   hashed_password: 5f4dcc3b5aa765d61d8327deb882cf99
   privilege_id:    2
-  type:            Provider
-  title:           MD
+  type:            Client
+  contact:         'Email'

@@ -51,3 +51,7 @@ end
 class Provider < User
   attr_accessible :title
 end
+
+class Client < User
+  attr_accessible :contact
+end
