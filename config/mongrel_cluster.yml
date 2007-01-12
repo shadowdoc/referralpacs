@@ -1,0 +1,4 @@
+--- 
+port: 3000
+pid_file: log/mongrel.pid
+servers: 2
