@@ -1,5 +1,6 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-one:
-  id: 1
-two:
-  id: 2
+hot_cocoa:
+  id:           3
+  path:         2007/1/5
+  encounter_id: 2
+  extension:    jpg
