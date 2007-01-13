@@ -4,5 +4,5 @@ class Encounter < ActiveRecord::Base
   belongs_to :encounter_type
   belongs_to :provider
   belongs_to :client
-  has_many :images, :exclusively_dependent => true
+  has_many :images, :dependent => :delete_all
 end

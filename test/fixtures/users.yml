@@ -1,9 +1,10 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
 marc:
   id:              1
   name:            'Marc Kohli'
   email:           mkohli@iupui.edu
-  hashed_password: 5f4dcc3b5aa765d61d8327deb882cf99
+  hashed_password: <%= User.hash_password('password') %>
   privilege_id:    1
   type:            Provider
   title:           MD
@@ -11,13 +12,13 @@ lisa:
   id:              2
   name:            Lisa
   email:           llaws@iupui.edu
-  hashed_password: 5f4dcc3b5aa765d61d8327deb882cf99
+  hashed_password: <%= User.hash_password('password') %>
   privilege_id:    2
 john:
   id:              3
   name:            'John K Bradshaw'
   email:           johnkbradshaw@yahoo.com
-  hashed_password: 5f4dcc3b5aa765d61d8327deb882cf99
+  hashed_password: <%= User.hash_password('password') %>
   privilege_id:    1
   type:            Provider
   title:           MD
@@ -25,7 +26,13 @@ madura:
   id:              4
   name:            'James Madura'
   email:           madura@surgeryrocks.com
-  hashed_password: 5f4dcc3b5aa765d61d8327deb882cf99
+  hashed_password: <%= User.hash_password('password') %>
   privilege_id:    2
   type:            Client
   contact:         'Email'
+tech:
+  id:              5
+  name:            'Soet'
+  email:            Soet@email.com
+  hashed_password: <%= User.hash_password('password') %>
+  privilege_id:    3

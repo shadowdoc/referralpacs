@@ -29,8 +29,16 @@ class LoginControllerTest < Test::Unit::TestCase
     get :login
     post :login, :user => {:email => users(:marc).email, :password => "password"}
     
-    assert :success
     assert_redirected_to(:controller => "login", :action => "list_users")
+  end
+  
+  def test_bad_login
+    get :login
+    post :login, :user => {:email => users(:marc).email, :password => "wrong"}
+    
+    assert :success
+    assert_equal "Invalid user/password combination", flash[:notice]
+    assert_template "login"
   end
 
 end
