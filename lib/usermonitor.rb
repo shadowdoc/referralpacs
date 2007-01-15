@@ -28,7 +28,9 @@ module ActiveRecord
 
     def update_with_user
       user = current_user
-      self[:updated_by] = user.id if respond_to?(:updated_by) && !user.nil?
+      if !user.null?
+        self[:updated_by] = user.id if respond_to?(:updated_by) && !user.nil?
+      end
       update_without_user
     end
 

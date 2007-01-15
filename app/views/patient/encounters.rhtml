@@ -16,7 +16,7 @@
     <td><%=h encounter.impression %></td>
     <td><%= link_to 'Show', :controller => 'encounter', :action => 'show', :id => encounter %></td>
     <td><%= link_to 'Edit', :controller => 'encounter', :action => 'edit', :id => encounter %></td>
-    <td><%= link_to 'Destroy', { :controller => 'encounter', :action => 'destroy', :id => encounter }, :confirm => 'Are you sure?', :post => true %></td>
+    <td><%= link_to 'Destroy', { :controller => 'encounter', :action => 'destroy', :id => encounter }, :confirm => 'Are you sure?', :method => 'post' %></td>
   </tr>
 <% end %>
 </table>

@@ -6,7 +6,7 @@ class TechController; def rescue_action(e) raise e end; end
 
 class TechControllerTest < Test::Unit::TestCase
 
-  fixtures :users, :encounters, :patients
+  fixtures :users, :encounters, :patients, :encounter_types
   
   def setup
     @controller = TechController.new
@@ -19,10 +19,27 @@ class TechControllerTest < Test::Unit::TestCase
     assert true
   end
   
+  def test_find_encounters_recent
+    get(:find_encounters, {}, {:user_id => users(:marc).id})
+    
+    assert_response :success
+    assert_template 'find_encounters'
+    assert_select "tr#encounter", :count => 2
+  end
+  
+  def test_find_encounters_with_patient_id
+    put(:find_encounters, {:id => patients(:stanley).id}, {:user_id => users(:marc).id})
+    assert_response :success
+    assert true, @show_new_encounter_link
+    assert_template 'find_encounters'
+    assert_select "tr#encounter", :count => patients(:stanley).encounters.count
+  end
+  
   def test_show_encounter_new
     put(:show_encounter, {:encounter => {:patient_id => patients(:baxter).id }}, {:user_id => users(:marc).id})
     assert_response :success
     assert_template 'show_encounter'
+    
   end
   
   def test_show_encounter_old

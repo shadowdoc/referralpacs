@@ -1,6 +1,7 @@
 class ClientController < ApplicationController
 
   def find_patients
+   
   end
 
   def find_encounter

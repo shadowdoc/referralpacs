@@ -1,2 +1,34 @@
-<h1>Tech#find_encounters</h1>
-<p>Find me in app/views/tech/find_encounters.rhtml</p>
+<h1>Encounters</h1>
+
+<table>
+  <tr>
+    <th>Date</th>
+    <th>Patient</th>
+    <th>MTRH Rad ID</th>
+    <th>Type</th>
+    <th>Indication</th>
+    <th>Impression</th>
+  </tr>
+  
+<% for encounter in @encounters %>
+  <tr id="encounter">
+    <td><%=h encounter.date.strftime("%d %b %Y") %></td>
+    <td><%=h encounter.patient.full_name %></td>
+    <td><%=h encounter.patient.mtrh_rad_id %></td>
+    <td><%=h encounter.encounter_type.name %></td>
+    <td><%=h encounter.indication %></td>
+    <td><%=h encounter.impression %></td>
+    <td><%= link_to 'Show', :action => 'show', :id => encounter %></td>
+    <td><%= link_to 'Edit', :action => 'edit', :id => encounter %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => encounter }, :confirm => 'Are you sure?', :method => 'post' %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'Previous page', { :page => @encounter_pages.current.previous } if @encounter_pages.current.previous %>
+<%= link_to 'Next page', { :page => @encounter_pages.current.next } if @encounter_pages.current.next %> 
+
+<br />
+<% if @show_new_encounter_link
+  link_to 'New Encounter', {:action => 'show_encounter', :patient_id => @patient.id, :method => 'post'}
+end %><br/>

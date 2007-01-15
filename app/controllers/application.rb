@@ -16,9 +16,8 @@ class ApplicationController < ActionController::Base
   end
   
   def set_current_user
-    id = session[:user_id] && nil
-    if !id.nil? 
-      Thread.current['user'] = User.find(id)
+    unless session[:user_id].nil?
+      Thread.current['user'] = User.find(session[:user_id])
     end
   end
 end

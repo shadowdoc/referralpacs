@@ -14,7 +14,7 @@
     <td><%=h patient.send("gender") %></td>
     <td><%= link_to 'Show', :action => 'show', :id => patient %></td>
     <td><%= link_to 'Edit', :action => 'edit', :id => patient %></td>
-    <td><%= link_to 'Destroy', { :action => 'destroy', :id => patient }, :confirm => 'Are you sure?', :post => true %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => patient }, :confirm => 'Are you sure?', :method => 'post' %></td>
   </tr>
 <% end %>
 </table>
