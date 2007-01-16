@@ -1,12 +1,14 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 baxter:
   id: 1
-  given_name: Baxter
+  given_name:  Baxter
   family_name: Kohli
   mtrh_rad_id: 12345
+  mrn_ampath:  4321
   
 stanley:
   id: 2
-  given_name: Stanley
+  given_name:  Stanley
   family_name: Kohli
   mtrh_rad_id: 54321
+  mrn_ampath:  1234

@@ -1,2 +1,33 @@
-<h1>Tech#find_patients</h1>
-<p>Find me in app/views/tech/find_patients.rhtml</p>
+<div>
+<%= form_tag :action => 'find_patients' %>
+    AMPATH_ID<%= radio_button 'search', 'identifier_type', 'mrn_ampath'%><br/>
+    MTRH_RAD_ID<%= radio_button 'search', 'identifier_type', 'mtrh_rad_id'%><br/>
+    Name<%= radio_button 'search', 'identifier_type', 'name' %><br/>
+    <%= text_field 'search', 'search_criteria'%>
+    <%= submit_tag 'Search'%>
+</form>
+</div>
+
+
+<% if @patients %>
+    <div>
+        <table>
+          <tr>
+            <th>Rad Id</th>
+            <th>AMPATH ID</th>
+            <th>Name</th>
+            <th>Gender</th>
+          </tr> 
+          <% for patient in @patients %>
+             <tr>
+                <td><%= link_to h(patient.mtrh_rad_id), :action => 'find_encounters', :id => patient %></td>
+                <td><%=h patient.mrn_ampath %></td>
+                <td><%=h patient.full_name %></td>
+                <td><%=h patient.send("gender") %></td>
+                <td><%= link_to 'Edit', :action => 'edit', :id => patient %></td>
+              </tr>
+          <% end %>
+        </table>
+    </div>
+<% end %>
+
