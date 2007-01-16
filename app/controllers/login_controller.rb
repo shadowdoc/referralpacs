@@ -1,7 +1,7 @@
 class LoginController < ApplicationController
 
   before_filter :authorize_login, :except => "login"
-  layout "admin"
+  layout "ref"
   
   # If the requst is of the GET type, return the add_user
   # form.  Otherwise, we have a POST request, attempt to add the
@@ -87,7 +87,7 @@ class LoginController < ApplicationController
       logged_in_user = @user.try_to_login
       if logged_in_user
         session[:user_id] = logged_in_user.id
-        redirect_to(:action => "list_users")
+        redirect_to(:controller => "tech", :action => "find_patients")
       else
         flash[:notice] = "Invalid user/password combination"
       end

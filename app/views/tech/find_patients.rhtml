@@ -1,4 +1,6 @@
-<div>
+<% @page_title = "Find Patients" %>
+
+How would you like to search?
 <%= form_tag :action => 'find_patients' %>
     AMPATH_ID<%= radio_button 'search', 'identifier_type', 'mrn_ampath'%><br/>
     MTRH_RAD_ID<%= radio_button 'search', 'identifier_type', 'mtrh_rad_id'%><br/>
@@ -6,7 +8,6 @@
     <%= text_field 'search', 'search_criteria'%>
     <%= submit_tag 'Search'%>
 </form>
-</div>
 
 
 <% if @patients %>

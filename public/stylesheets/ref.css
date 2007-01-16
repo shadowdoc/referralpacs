@@ -1,141 +1,98 @@
-#banner {
-  background: #9c9;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  border-bottom: 2px solid;
-  font: small-caps 40px/40px "Arial", serif;
-  color: #282;
-  text-align: left;
+/* Css for ReferralPACS 2.0 */
+/* Three-column layout stolen from http://www.glish.com/css/7.asp, Thanks! */
+
+/* Styles for tech layout */
+
+body { margin: 10px 10px 0px;
+    padding: 0px;
+    font:	12px/1.2 Verdana, Arial, Helvetica, sans-serif;
+}
+#banner { 
+    border-top: 1px solid rgb(0, 0, 0);
+    border-left: 1px solid rgb(0, 0, 0);
+    border-right: 1px solid rgb(0, 0, 0);
+    background: #5F8F08;
+    color: #CDC759;
+    voice-family: inherit;
+    height: 39px;
 }
 
-#banner img {
-  float: left;
+#banner h1 { 
+    margin: 0px;
+    font-size: 26px;
 }
 
-#columns {
-  background: #141;
+#banner-user {
+    float: right;
+    margin-top: -20px;
+    margin-right: 0px;
 }
 
-#main {
-  margin-left: 7em;
-  padding-top: 4ex;
-  padding-left: 2em;
-  background: white;
+html > body #banner { height: 39px;
 }
 
-#side {
-  float: left;
-  padding-top: 1em;
-  padding-left: 1em;
-  padding-bottom: 1em;
-  width: 7em;
-  background: #141;
+#leftcontent { 
+    border: 1px solid rgb(0, 0, 0);
+    background: #728f3e;
+    position: absolute;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    left: 10px;
+    top: 50px;
+    width: 100px;
+}
+
+#leftcontent a {
+    color: #CDC759;
+}
+
+#centercontent { border: 1px solid rgb(0, 0, 0);
+    background: rgb(255, 255, 255) 
+    voice-family: inherit;
+    margin-left: 101px;
+    /* margin-right: 101px; */
+}
+
+html > body #centercontent { margin-left: 201px;
+    margin-right: 101px;
+}
+
+#rightcontent { border: 1px solid rgb(0, 0, 0);
+    background: #aed95f;
+    position: absolute;
+    right: 10px;
+    top: 50px;
+    width: 200px;
+}
+
+p, h1, pre { margin: 0px 10px 10px;
+}
+
+h1 { font-size: 14px;
+    padding-top: 10px;
+}
+
+
+
+#rightcontent p { 
+ font-size: 10px;
+}
+ 
+html > body #banner { 
+    height: 39px;
+}
+
+p, h1, pre { 
+    margin: 0px 10px 10px;
+}
+
+h1 { 
+    font-size: 16px;
+    padding-top: 10px;
 }
 
 #notice {
-  border: 2px solid red;
-  padding: 1em;
-  margin-bottom: 2em;
-  background-color: #f0f0f0;
-  font: bold smaller sans-serif;
-}
-
-a {
-  text-decoration: none;
-  font: smaller sans-serif;
-}
-
-a.addtocart {
-  padding-left: 1em;
-  padding-right: 1em;
-  color: #141;
-  background: #cec;
-  font-weight: bold;
-}
-
-a.addtocart:hover {
-  color: #000;
-  background: #eec;
-}
-
-#side a {
-  color: #ada;
-  font: smaller sans-serif;
-}
-
-#side a:hover {
-  color: #fff;
-}
-
-
-/**** styles for lists ****/
-.ListLine0 {
-background: #ffffff;
-}
-.ListLine1 {
-background: #dddddd;
-}
-
-/**** styles for the catalog ***/
-
-/* === Use the Holly Hack to fix layout bugs in IE on Windows === */
-
-/* Hide from IE-mac \*/
-* html .catalogentry { height: 1%; }
-/* End hide from IE-mac */
-
-.catalogentry {
-  padding: 1ex 0ex;
-}
-
-.catalogentry img {
-  float: left;
-  margin-right: 2em;
-}
-
-.catalogentry h3 {
-  font: larger bold;
-  color: #282;
-  margin-top: 0ex;
-  margin-bottom: 0.5ex;
-}
-
-.catalogentry p {
-  font: smaller sans-serif;
-  margin-bottom: .5ex;
-}
-
-.catalogprice {
-  padding-right: 4em;
-}
-
-/* Shoppng cart screen */
-
-.carttitle {
-  background: #282;
-  color: #dfd;
-  font: bold smaller sans-serif;
-  text-align: center;
-}
-
-.carttitle TD {
-  padding-top: 0px;
-  padding-bottom: 0px;
-}
-
-#cartmenu {
-  float: right;
-  border-left: 1px dotted #282;
-}
-
-#totalcell {
-  font-weight: bold;
-  border-top: 1px solid #282;
-  border-bottom: 2px solid #282;
-  text-align: right;
-}
-
-.separator {
-  border-bottom: 1px dotted #282;
-  clear: both;
+    border: 2px solid #AED95F;
+    color: #192D08;
+    background-color: #BDA801;
 }

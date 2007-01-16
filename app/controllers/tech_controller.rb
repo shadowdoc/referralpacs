@@ -2,6 +2,7 @@ class TechController < ApplicationController
 
   before_filter :authorize_login
   ENCOUNTERS_PER_PAGE = 10
+  layout "tech"
 
   def find_patients
 
@@ -11,9 +12,7 @@ class TechController < ApplicationController
 
       case search_hash['identifier_type']
         when 'name'
-          flash[:notice] = "NAME"
           @patients = Patient.find(:all, :conditions => ["given_name = ? OR family_name = ?", search_criteria, search_criteria], :limit => 10)
-    
         when 'mrn_ampath'
           @patient = Patient.find(:first, :conditions => ['mrn_ampath = ?', search_criteria])
           if @patient
@@ -62,6 +61,7 @@ class TechController < ApplicationController
   end
 
   def upload_image
+    
   end
   
   def remove_image

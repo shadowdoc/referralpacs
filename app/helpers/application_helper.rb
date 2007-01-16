@@ -12,5 +12,5 @@ module ApplicationHelper
   def link_add_user
     link_to("Add User", :action => "add_user")  
   end
-  
+    
 end

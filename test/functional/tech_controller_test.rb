@@ -62,7 +62,7 @@ class TechControllerTest < Test::Unit::TestCase
       assert flash[:notice] = "No such patient: mrn_ampath = 93.  Click New Patient"
   end
   
-    def test_find_patients_mtrh_rad_id
+  def test_find_patients_mtrh_rad_id
     baxter = patients(:baxter)
     post(:find_patients, 
         {:search => {'search_criteria' => baxter.mtrh_rad_id, 'identifier_type' => 'mtrh_rad_id'}},
@@ -81,6 +81,5 @@ class TechControllerTest < Test::Unit::TestCase
       assert_template "find_patients"
       assert flash[:notice] = "No such patient: mtrh_rad_id = 92.  Click New Patient"
   end
-  
-  
+
 end
