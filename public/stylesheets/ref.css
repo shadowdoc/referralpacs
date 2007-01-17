@@ -7,6 +7,7 @@ body { margin: 10px 10px 0px;
     padding: 0px;
     font:	12px/1.2 Verdana, Arial, Helvetica, sans-serif;
 }
+
 #banner { 
     border-top: 1px solid rgb(0, 0, 0);
     border-left: 1px solid rgb(0, 0, 0);
@@ -14,7 +15,11 @@ body { margin: 10px 10px 0px;
     background: #5F8F08;
     color: #CDC759;
     voice-family: inherit;
-    height: 39px;
+    height: 49px;
+}
+
+html > body #banner { 
+    height: 49px;
 }
 
 #banner h1 { 
@@ -28,9 +33,6 @@ body { margin: 10px 10px 0px;
     margin-right: 0px;
 }
 
-html > body #banner { height: 39px;
-}
-
 #leftcontent { 
     border: 1px solid rgb(0, 0, 0);
     background: #728f3e;
@@ -38,23 +40,32 @@ html > body #banner { height: 39px;
     padding-top: 50px;
     padding-bottom: 50px;
     left: 10px;
-    top: 50px;
+    top: 60px;
     width: 100px;
 }
 
 #leftcontent a {
     color: #CDC759;
+    padding: 5px;
 }
 
-#centercontent { border: 1px solid rgb(0, 0, 0);
+#leftcontent a:hover {
+    color: blue;
+}
+
+#leftcontent a:visited {
+    color: black;
+}
+
+#centercontent { 
+    border: 1px solid rgb(0, 0, 0);
     background: rgb(255, 255, 255) 
     voice-family: inherit;
     margin-left: 101px;
-    /* margin-right: 101px; */
 }
 
-html > body #centercontent { margin-left: 201px;
-    margin-right: 101px;
+html > body #centercontent { 
+    margin-left: 101px;
 }
 
 #rightcontent { border: 1px solid rgb(0, 0, 0);
@@ -72,14 +83,8 @@ h1 { font-size: 14px;
     padding-top: 10px;
 }
 
-
-
 #rightcontent p { 
  font-size: 10px;
-}
- 
-html > body #banner { 
-    height: 39px;
 }
 
 p, h1, pre { 
@@ -95,4 +100,9 @@ h1 {
     border: 2px solid #AED95F;
     color: #192D08;
     background-color: #BDA801;
+}
+
+/* Styles for readonly_encounter */
+#encounter_type {
+    font-size: 20px;
 }

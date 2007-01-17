@@ -54,6 +54,7 @@ class TechController < ApplicationController
     # 
     # Technologists will not be able to edit existing encounters
     if params[:id] && @encounter = Encounter.find(params[:id])
+      @provider = @encounter.provider
       render :action => 'readonly_encounter'
     else
       @encounter = Encounter.new(params[:encounter])
