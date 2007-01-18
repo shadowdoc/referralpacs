@@ -101,5 +101,10 @@ class TechController < ApplicationController
   end
   
   def remove_image
+    @image = Image.find(params[:id])
+    @encounter = @image.encounter
+    @image.destroy
+    flash[:notice] = 'Image Destroyed'
+    redirect_to :action => 'upload_image', :id => @encounter
   end
 end

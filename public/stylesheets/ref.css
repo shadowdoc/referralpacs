@@ -91,6 +91,7 @@ p, h1, pre {
     border: 2px solid #AED95F;
     color: #192D08;
     background-color: #BDA801;
+    width: 250px;
 }
 
 /* Styles for tech/readonly_encounter */
@@ -134,4 +135,24 @@ p, h1, pre {
   padding: 2px;
   background-color: red;
   display: table;
+}
+
+/* tech/upload_image */
+#upload {
+  display: block;
+  width: 100;
+}
+
+/* Thumbnail Styles */
+
+#thumbnail {
+  float: left;
+}
+
+#thumbnail a {
+  text-align: center;
+}
+
+#thumbnails {
+  width: 100%;
 }

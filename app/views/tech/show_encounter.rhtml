@@ -4,23 +4,27 @@
 <% set_current_patient_banner %>
 <% set_tech_sidebar %>
 
-<p id='encounter_type' >
-<%= @encounter.encounter_type.name %> from <%= @encounter.date.strftime("%d %b %Y") %></p>
-
-<p><label for="encounter_indication">Indication</label><br/>
-<%= text_area 'encounter', 'indication', {'rows' => '3', 'readonly' => true} %></p>
-
-<p><label for="encounter_findings">Findings</label><br/>
-<%= text_area 'encounter', 'findings', {'rows' => '4', 'readonly' => true} %></p>
-
-<p><label for="encounter_impression">Impression</label><br/>
-<%= text_area 'encounter', 'impression', {'rows' => '4', 'readonly' => true} %></p>
-
-<p><label for="encounter_name">Provider</label><br/>
-<%= text_field 'provider', 'name', 'readonly' => true %></p>
-
+<% form_for :encounter,
+            :url => {:action => "upload_image"},
+            :builder => TaggedBuilder do |form| %>
+            
+    <h2><%= @encounter.encounter_type.name %> from <%= @encounter.date.strftime("%d %b %Y") %></h2>
+    
+    
+    <%= form.text_field :indication, {'readonly' => true} %>
+    <%= form.text_field :findings, {'readonly' => true} %>
+    <%= form.text_field :impression, {'readonly' => true} %>
+    <% fields_for :provider,
+                  :builder => TaggedBuilder do |provider| %>
+        <p><label for="encounter_provider">Provider</label></p>
+        <%= provider.text_field :name %>
+    <% end %>
+<% end %>
 <div id='thumbnails'>
     <% @encounter.images.each do |i|%>
-    <a href='<%= i.full_url %>'><img src='<%= i.thumb_url %>'></a>
-    <%end%>
+        <div id='thumbnail'>
+            <a href='<%= i.full_url %>'><img src='<%= i.thumb_url %>'></a><br/>
+            <%= link_to "remove", :action => 'remove_image', :id => i %>
+        </div>
+    <% end %>
 </div>

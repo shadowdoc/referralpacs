@@ -1,7 +1,11 @@
 <% @page_title = "Add Provider" -%>
 <%= error_messages_for  'Provider' %>
-<%= form_tag :action => "add_provider", :id => @provider %>
-    <%= render :partial => 'form' %>
-    <%= submit_tag 'Save' %>
-</form>
+<% form_for :provider
+             :url => {:action => "add_provider" } do |form|%>
+<p>Name:          <%= form.text_field :name %></p>
+<p>E-mail:        <%= form.text_field :email %></p>
+<p>Privilege Set: <%= form.collection_select('user', 'privilege_id', @all_privileges, :id, :name) %></p>
+<p>Password:      <%= form.text_field 'user', 'password' %></p><br/>
+                  <%= form.submit_tag 'Save' %>
+<% end %>
 <%= link_to 'Back', :action => 'list_users' %>

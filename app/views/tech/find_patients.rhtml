@@ -3,9 +3,9 @@
 <p>
 How would you like to search?
 <%= form_tag :action => 'find_patients' %>
-    <%= radio_button 'search', 'identifier_type', 'mrn_ampath'%>AMPATH_ID<br/>
-    <%= radio_button 'search', 'identifier_type', 'mtrh_rad_id'%>MTRH_RAD_ID<br/>
-    <%= radio_button 'search', 'identifier_type', 'name' %>Name<br/>
+    <%= radio_button 'search', 'identifier_type', 'mrn_ampath'%>Ampath ID<br/>
+    <%= radio_button 'search', 'identifier_type', 'mtrh_rad_id'%>MTRH Radiology ID<br/>
+    <%= radio_button 'search', 'identifier_type', 'name', "checked" => "checked" %>Name<br/>
     <%= text_field 'search', 'search_criteria'%>
     <%= submit_tag 'Search'%>
 </form>

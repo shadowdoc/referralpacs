@@ -4,35 +4,41 @@
 <% set_current_patient_banner %>
 <% set_tech_sidebar %>
 
-<p id='encounter_type' >
-<%= @encounter.encounter_type.name %> from <%= @encounter.date.strftime("%d %b %Y") %></p>
-
-<p><label for="encounter_indication">Indication</label><br/>
-<%= text_area 'encounter', 'indication', {'rows' => '3', 'readonly' => true} %></p>
-
-<p><label for="encounter_findings">Findings</label><br/>
-<%= text_area 'encounter', 'findings', {'rows' => '4', 'readonly' => true} %></p>
-
-<p><label for="encounter_impression">Impression</label><br/>
-<%= text_area 'encounter', 'impression', {'rows' => '4', 'readonly' => true} %></p>
-
-<p><label for="encounter_provider_name">Provider</label><br/>
-<%= text_field 'provider', 'name', 'readonly' => true %></p>
-
-<div id='thumbnails'>
-    <% @encounter.images.each do |i|%>
-    <a href='<%= i.full_url %>'><img src='<%= i.thumb_url %>'></a>
-    <%end%>
+<div>
+    <% form_for :encounter,
+                :url => {:action => "upload_image"},
+                :builder => TaggedBuilder do |form| %>
+                
+        <h2><%= @encounter.encounter_type.name %> from <%= @encounter.date.strftime("%d %b %Y") %></h2>
+        
+        
+        <%= form.text_field :indication, {'readonly' => true} %></p>
+        <%= form.text_field :findings, {'readonly' => true} %></p>
+        <%= form.text_field :impression, {'readonly' => true} %></p>
+        <% fields_for :provider,
+                      :builder => TaggedBuilder do |provider| %>
+            <%= provider.text_field :name %>
+        <% end %>
+    <% end %>
+    <div id='thumbnails'>
+        <% @encounter.images.each do |i|%>
+            <div id='thumbnail'>
+                <a href='<%= i.full_url %>'><img src='<%= i.thumb_url %>'></a><br/>
+                <%= link_to "remove", :action => 'remove_image', :id => i %>
+            </div>
+        <% end %>
+    </div>
+    <div id="upload">
+        <% form_for :image, 
+                    :url => {:action => 'add_image'}, 
+                    :html => {:multipart => true} do |f| %>
+        
+          <label for='image_file_data'>File location: </label>
+          <%= f.file_field :file_data %><br/>
+          <%= f.hidden_field :encounter_id, :value => @encounter.id %>
+          
+          <%= submit_tag "upload"%>
+          
+        <%end%>
+    </div>
 </div>
-
-<% form_for :image, @image, :url => {:action => 'add_image'}, :html => {:multipart => true} do |f| %>
-
-  <label for='image_file_data'>File location: </label>
-  <%= f.file_field :file_data %><br/>
-  <%= f.hidden_field :encounter_id, :value => @encounter.id %>
-  
-  <%= submit_tag "upload"%>
-  
-<%end%>
-
-<% button_to "Return to Encounter List", :action => "find_encounters", :id => @encounter %>
