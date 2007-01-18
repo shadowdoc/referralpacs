@@ -29,7 +29,7 @@
 <%= text_field 'patient', 'race'  %></p>
 
 <p><label for="patient_tribe">Tribe</label><br/>
-<%= text_field 'patient', 'tribe'  %></p>
+<%= collection_select('patient', 'tribe_id', @all_tribes, :id, :name) %>
 
 <p><label for="patient_address1">Address1</label><br/>
 <%= text_field 'patient', 'address1'  %></p>

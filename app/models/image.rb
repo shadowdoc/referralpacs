@@ -3,7 +3,7 @@ class Image < ActiveRecord::Base
   
   belongs_to :encounter
 
-  BASEDIRECTORY = 'public/image_test'
+  BASEDIRECTORY = '/image_archive'
   THUMB_MAX_SIZE = [125,125]
   
   after_save :process

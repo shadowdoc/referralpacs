@@ -73,13 +73,15 @@ class TechControllerTest < Test::Unit::TestCase
   end
   
   def test_find_patients_bad_mtrh_rad_id
-      post(:find_patients, 
-      {:search => {'search_criteria' => 92, 'identifier_type' => 'mtrh_rad_id'}},
-      {:user_id => users(:marc).id})
-      
-      assert_response :success
-      assert_template "find_patients"
-      assert flash[:notice] = "No such patient: mtrh_rad_id = 92.  Click New Patient"
+    post(:find_patients, 
+    {:search => {'search_criteria' => 92, 'identifier_type' => 'mtrh_rad_id'}},
+    {:user_id => users(:marc).id})
+    
+    assert_response :success
+    assert_template "find_patients"
+    assert flash[:notice] = "No such patient: mtrh_rad_id = 92.  Click New Patient"
   end
-
-end
+  
+  def test_new_encounter 
+      
+  end

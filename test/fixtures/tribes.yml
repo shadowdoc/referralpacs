@@ -1,0 +1,133 @@
+--- 
+tribes_040: 
+  name: Chuka
+  id: "40"
+tribes_029: 
+  name: Kauma
+  id: "29"
+tribes_018: 
+  name: Kipsigis
+  id: "18"
+tribes_007: 
+  name: Meru
+  id: "7"
+tribes_041: 
+  name: Suba
+  id: "41"
+tribes_030: 
+  name: Karamoja
+  id: "30"
+tribes_019: 
+  name: Keiyo
+  id: "19"
+tribes_008: 
+  name: Aembu
+  id: "8"
+tribes_042: 
+  name: Mbere
+  id: "42"
+tribes_031: 
+  name: Kambe
+  id: "31"
+tribes_020: 
+  name: Markwet
+  id: "20"
+tribes_009: 
+  name: Mijikenda
+  id: "9"
+tribes_043: 
+  name: Unknown
+  id: "43"
+tribes_032: 
+  name: Ribe
+  id: "32"
+tribes_021: 
+  name: Sabaot
+  id: "21"
+tribes_010: 
+  name: Pokot
+  id: "10"
+tribes_044: 
+  name: Tharaka
+  id: "44"
+tribes_033: 
+  name: Jibala
+  id: "33"
+tribes_022: 
+  name: Tugen
+  id: "22"
+tribes_011: 
+  name: Samburu
+  id: "11"
+tribes_034: 
+  name: Chonyi
+  id: "34"
+tribes_023: 
+  name: Njemps
+  id: "23"
+tribes_012: 
+  name: Luo
+  id: "12"
+tribes_001: 
+  name: Kikuyu
+  id: "1"
+tribes_035: 
+  name: Kuria
+  id: "35"
+tribes_024: 
+  name: Digo
+  id: "24"
+tribes_013: 
+  name: Trukana
+  id: "13"
+tribes_002: 
+  name: Luhya
+  id: "2"
+tribes_036: 
+  name: Ogiek
+  id: "36"
+tribes_025: 
+  name: Taita
+  id: "25"
+tribes_014: 
+  name: Borana
+  id: "14"
+tribes_003: 
+  name: Kalenjin
+  id: "3"
+tribes_037: 
+  name: Elmolo
+  id: "37"
+tribes_026: 
+  name: Taveta
+  id: "26"
+tribes_015: 
+  name: Somali
+  id: "15"
+tribes_004: 
+  name: Kamba
+  id: "4"
+tribes_038: 
+  name: Oromo
+  id: "38"
+tribes_027: 
+  name: Elgeyo
+  id: "27"
+tribes_016: 
+  name: Teso
+  id: "16"
+tribes_005: 
+  name: Kisii
+  id: "5"
+tribes_039: 
+  name: Rendile
+  id: "39"
+tribes_028: 
+  name: Doroba
+  id: "28"
+tribes_017: 
+  name: Nandi
+  id: "17"
+tribes_006: 
+  name: Maasai
+  id: "6"

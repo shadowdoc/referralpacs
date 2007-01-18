@@ -1,8 +1,7 @@
 <% @page_title = "Find Patients" %>
+<% set_tech_sidebar %>
 <p>
 How would you like to search?
-</p>
-<p>
 <%= form_tag :action => 'find_patients' %>
     <%= radio_button 'search', 'identifier_type', 'mrn_ampath'%>AMPATH_ID<br/>
     <%= radio_button 'search', 'identifier_type', 'mtrh_rad_id'%>MTRH_RAD_ID<br/>
@@ -20,6 +19,7 @@ How would you like to search?
             <th>AMPATH ID</th>
             <th>Name</th>
             <th>Gender</th>
+            <th>Tribe</th>
           </tr> 
           <% for patient in @patients %>
              <tr>
@@ -27,6 +27,7 @@ How would you like to search?
                 <td><%=h patient.mrn_ampath %></td>
                 <td><%=h patient.full_name %></td>
                 <td><%=h patient.send("gender") %></td>
+                <td><%=h patient.tribe.name %></td>
                 <td><%= link_to 'Edit', :action => 'edit', :id => patient %></td>
               </tr>
           <% end %>

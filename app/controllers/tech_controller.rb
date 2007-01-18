@@ -2,8 +2,15 @@ class TechController < ApplicationController
 
   before_filter :authorize_login
   ENCOUNTERS_PER_PAGE = 10
-  layout "tech"
-
+  layout "ref"
+  
+#  verify :method => :post, :only => [ :upload_image, :remove_image],
+#         :redirect_to => {:action => :find_patients}
+  
+  def index
+    redirect_to :action => 'find_patients'
+  end
+  
   def find_patients
 
     if request.post?
@@ -33,7 +40,18 @@ class TechController < ApplicationController
   end
 
   def new_patient
-    @patient = Patient.new()
+    if request.get?
+      @all_tribes = Tribe.find(:all)
+      @patient = Patient.new()
+    else
+      @patient = Patient.new(params[:patient])
+      if @patient.save
+        flash[:notice] = 'Patient was successfully created.'
+        redirect_to :action => "find_encounters", :id => @patient.id
+      else
+        render :action => 'new_patient'
+      end
+    end
   end
 
   def find_encounters
@@ -42,27 +60,44 @@ class TechController < ApplicationController
     if params[:id]
       @patient = Patient.find(params[:id])
       @encounter_pages, @encounters = paginate :encounters, :conditions => ["patient_id = ?", params[:id]], :per_page => ENCOUNTERS_PER_PAGE
-      @show_new_encounter_link = true
     else
       @encounter_pages, @encounters = paginate :encounters, :per_page => ENCOUNTERS_PER_PAGE
     end
   end
 
   def show_encounter
-    # This method must be called with a PUT, including params[:encounter]
-    # if a new encounter is desired.
-    # 
     # Technologists will not be able to edit existing encounters
-    if params[:id] && @encounter = Encounter.find(params[:id])
-      @provider = @encounter.provider
-      render :action => 'readonly_encounter'
+    @encounter = Encounter.find(params[:id])
+  end
+
+  def new_encounter
+    if request.get? && params[:encounter].nil?
+      @all_encounter_types = EncounterType.find(:all)
+      @all_providers = Provider.find(:all)
+  
+      @encounter = Encounter.new()  
+      @encounter.patient_id = params[:id]
     else
       @encounter = Encounter.new(params[:encounter])
+      if @encounter.save
+        flash[:notice] = "Encounter saved"
+        redirect_to :action => "upload_image", :id => @encounter
+      end
     end
   end
 
   def upload_image
-    
+    @all_encounter_types = EncounterType.find(:all)
+    @all_providers = Provider.find(:all)
+    @encounter = Encounter.find(params[:id])
+    @image = Image.new()
+    @image.encounter_id = @encounter.id
+  end
+
+  def add_image
+    @image = Image.create(params[:image])
+    flash[:notice] = 'File uploaded'
+    redirect_to :action => 'upload_image', :id => @image.encounter.id
   end
   
   def remove_image

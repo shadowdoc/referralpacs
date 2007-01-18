@@ -1,2 +1,8 @@
-<h1>Tech#new_patient</h1>
-<p>Find me in app/views/tech/new_patient.rhtml</p>
+<% @page_title = "New Patient" %>
+<% set_tech_sidebar %>
+
+<%= form_tag :action => 'new_patient' %>
+    <%= render :partial => "form_patient" %>
+    <%= submit_tag "Create" %>
+</form>
+

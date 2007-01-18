@@ -12,5 +12,9 @@ module ApplicationHelper
   def link_add_user
     link_to("Add User", :action => "add_user")  
   end
+  
+  def set_current_patient_banner
+    @current_patient_banner = @patient.full_name + " | AMPATH ID: " + @patient.mrn_ampath.to_s  + " | MTRH Rad ID: " + @patient.mtrh_rad_id.to_s
+  end
     
 end

@@ -8,17 +8,14 @@
 
 <body>
     <div id="banner">
-        <h1>ReferralPACS - <%= @page_title %></h1>
-<% if false %>        <div id="banner-user"><% end %>
-<% if false %>          Logged in as: <%= User.find(session[:user_id]).email %> | <% end %>
-<% if false %>          <%= link_to "Log Out", :controller => :login, :action => :logout %><% end %>
-<% if false %>        </div><% end %>
+        <h1>ReferralPACS - <%= @page_title %></h1><br/>
+        <h2><%= @current_patient_banner unless @current_patient_banner.nil? %></h2>
     </div>
     <div id="leftcontent">
       <%= link_to "Find Patients", :action => :find_patients %><br/>
       <%= link_to "New Patient", :action => :new_patient %><br/>
-      <hr>
-    </div>    
+      <%= link_to "Log Out", :controller => :login, :action => :logout %><br/>
+    </div>
     <div id="centercontent">
         <% if flash[:notice] -%>
             <div id="notice"><%= flash[:notice] %></div>

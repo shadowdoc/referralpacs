@@ -20,4 +20,5 @@ class ApplicationController < ActionController::Base
       Thread.current['user'] = User.find(session[:user_id])
     end
   end
+  
 end

@@ -5,6 +5,7 @@ baxter:
   family_name: Kohli
   mtrh_rad_id: 12345
   mrn_ampath:  4321
+  tribe_id:    1
   
 stanley:
   id: 2
@@ -12,3 +13,4 @@ stanley:
   family_name: Kohli
   mtrh_rad_id: 54321
   mrn_ampath:  1234
+  tribe_id:    1

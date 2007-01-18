@@ -1,11 +1,12 @@
+<% @page_title = "Encounters List" %>
+<% set_current_patient_banner %>
+<% set_tech_sidebar %>
+
 <h1>Encounters</h1>
 
 <table>
   <tr>
     <th>Date</th>
-    <th>Patient</th>
-    <th>MTRH Rad ID</th>
-    <th>Ampath MRN</th>
     <th>Type</th>
     <th>Indication</th>
     <th>Impression</th>
@@ -14,9 +15,6 @@
 <% for encounter in @encounters %>
   <tr id="encounter">
     <td><%=h encounter.date.strftime("%d %b %Y") %></td>
-    <td><%=h encounter.patient.full_name %></td>
-    <td><%=h encounter.patient.mtrh_rad_id %></td>
-    <td><%=h encounter.patient.mrn_ampath %></td>
     <td><%=h encounter.encounter_type.name %></td>
     <td><%=h encounter.indication %></td>
     <td><%=h encounter.impression %></td>
@@ -29,6 +27,4 @@
 <%= link_to 'Next page', { :page => @encounter_pages.current.next } if @encounter_pages.current.next %> 
 
 <br />
-<% if @show_new_encounter_link
-  link_to 'New Encounter', {:action => 'show_encounter', :patient_id => @patient.id, :method => 'post'}
-end %><br/>
+<%= link_to 'New Encounter', {:action => 'new_encounter', :id => @patient.id} %><br/>

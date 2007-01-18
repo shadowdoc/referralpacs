@@ -1,4 +1,5 @@
 <% @page_title = @encounter.patient.full_name %>
+<% set_tech_sidebar %>
 
 <p id='encounter_type' >
 <%= @encounter.encounter_type.name %> from <%= @encounter.date.strftime("%d %b %Y") %></p>

@@ -1,0 +1,9 @@
+<% @page_title = "New Encounter" %>
+<% @patient = @encounter.patient %>
+<% set_current_patient_banner %>
+<% set_tech_sidebar %>
+
+<%= form_tag :action => "new_encounter" %>
+    <%= render :partial => "form_encounter" %>
+<p><%= submit_tag "Save text, continue..." %></p>
+</form>

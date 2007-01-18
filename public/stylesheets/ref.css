@@ -9,78 +9,74 @@ body { margin: 10px 10px 0px;
 }
 
 #banner { 
-    border-top: 1px solid rgb(0, 0, 0);
-    border-left: 1px solid rgb(0, 0, 0);
-    border-right: 1px solid rgb(0, 0, 0);
+    border-bottom: 2px solid;
     background: #5F8F08;
     color: #CDC759;
     voice-family: inherit;
-    height: 49px;
+    height: 70px;
 }
 
 html > body #banner { 
-    height: 49px;
+    height: 70px;
 }
 
 #banner h1 { 
     margin: 0px;
-    font-size: 26px;
+    font-size: 24px;
+    padding: 2px;
 }
 
-#banner-user {
-    float: right;
-    margin-top: -20px;
-    margin-right: 0px;
+#banner h2 {
+    font-size: 14px;
+    padding: 2px;
 }
 
 #leftcontent { 
-    border: 1px solid rgb(0, 0, 0);
     background: #728f3e;
     position: absolute;
     padding-top: 50px;
     padding-bottom: 50px;
     left: 10px;
-    top: 60px;
-    width: 100px;
+    width: 150px;
 }
 
 #leftcontent a {
     color: #CDC759;
-    padding: 5px;
+    padding: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
 }
 
 #leftcontent a:hover {
-    color: blue;
-}
-
-#leftcontent a:visited {
     color: black;
+    text-decoration: underline;
 }
 
-#centercontent { 
-    border: 1px solid rgb(0, 0, 0);
+#centercontent {
     background: rgb(255, 255, 255) 
     voice-family: inherit;
-    margin-left: 101px;
+    margin-left: 151px;
 }
 
 html > body #centercontent { 
-    margin-left: 101px;
+    margin-left: 151px;
+}
+
+#centercontent p {
+    padding: 5px;
 }
 
 #rightcontent { border: 1px solid rgb(0, 0, 0);
     background: #aed95f;
     position: absolute;
     right: 10px;
-    top: 50px;
+    top: 70px;
     width: 200px;
 }
 
-p, h1, pre { margin: 0px 10px 10px;
-}
-
-h1 { font-size: 14px;
-    padding-top: 10px;
+h1 { 
+  font-size: 14px;
 }
 
 #rightcontent p { 
@@ -91,18 +87,51 @@ p, h1, pre {
     margin: 0px 10px 10px;
 }
 
-h1 { 
-    font-size: 16px;
-    padding-top: 10px;
-}
-
 #notice {
     border: 2px solid #AED95F;
     color: #192D08;
     background-color: #BDA801;
 }
 
-/* Styles for readonly_encounter */
+/* Styles for tech/readonly_encounter */
 #encounter_type {
     font-size: 20px;
+}
+
+/* Error formatting */
+
+#errorExplanation {
+  width: 400px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+
+#errorExplanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  background-color: #c00;
+  color: #fff;
+}
+
+#errorExplanation p {
+  color: #333;
+  margin-bottom: 0;
+  padding: 5px;
+}
+
+#errorExplanation ul li {
+  font-size: 12px;
+  list-style: square;
+}
+
+.fieldWithErrors {
+  padding: 2px;
+  background-color: red;
+  display: table;
 }

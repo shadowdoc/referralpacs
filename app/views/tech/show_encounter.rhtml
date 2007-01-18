@@ -1,2 +1,26 @@
-<h1>Tech#show_encounter</h1>
-<p>Find me in app/views/tech/show_encounter.rhtml</p>
+<% @page_title = "Show Encounter" %>
+<% @patient = @encounter.patient %>
+<% @provider = @encounter.provider %>
+<% set_current_patient_banner %>
+<% set_tech_sidebar %>
+
+<p id='encounter_type' >
+<%= @encounter.encounter_type.name %> from <%= @encounter.date.strftime("%d %b %Y") %></p>
+
+<p><label for="encounter_indication">Indication</label><br/>
+<%= text_area 'encounter', 'indication', {'rows' => '3', 'readonly' => true} %></p>
+
+<p><label for="encounter_findings">Findings</label><br/>
+<%= text_area 'encounter', 'findings', {'rows' => '4', 'readonly' => true} %></p>
+
+<p><label for="encounter_impression">Impression</label><br/>
+<%= text_area 'encounter', 'impression', {'rows' => '4', 'readonly' => true} %></p>
+
+<p><label for="encounter_name">Provider</label><br/>
+<%= text_field 'provider', 'name', 'readonly' => true %></p>
+
+<div id='thumbnails'>
+    <% @encounter.images.each do |i|%>
+    <a href='<%= i.full_url %>'><img src='<%= i.thumb_url %>'></a>
+    <%end%>
+</div>
