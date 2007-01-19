@@ -1,0 +1,12 @@
+<h2><%=h @encounter.encounter_type.name %> from <%=h @encounter.date.strftime("%d %b %Y") %></h2>
+Indication: <%=h @encounter.indication %><br />
+Findings:   <%=h @encounter.findings %><br />
+Impression: <%=h @encounter.impression %><br />
+Provider:   <%=h @encounter.provider.name %><br />
+<div id='thumbnails'>
+    <% @encounter.images.each do |i|%>
+        <div id='thumbnail'>
+            <a href='<%= i.full_url %>'><img src='<%= i.thumb_url %>'></a><br/>
+        </div>
+    <% end %>
+</div>

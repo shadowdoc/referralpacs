@@ -1,14 +1,18 @@
 module TechHelper
 
-  def set_tech_sidebar
+  def setup_tech_layout
+    
+    set_current_user_banner
+  
     if @patient.nil? || @patient.new_record?
-      @side_bar_commands = [
+      @command_list = [
           link_to('Find Patients', :action => :find_patients),
           link_to('New Patient', :action => :new_patient)]
     else
-      @side_bar_commands = [
+      set_current_patient_banner
+      @command_list = [
           link_to('Find Patients', :action => :find_patients),
-          link_to('New Patietnt', :action => :find_patients),
+          link_to('New Patient', :action => :find_patients),
           link_to("#{@patient.full_name}", :action => :find_encounters, :id => @patient)] 
     end
   end

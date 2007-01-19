@@ -1,12 +1,6 @@
 class ClientController < ApplicationController
+  before_filter :authorize_login
 
-  def find_patients
-   
-  end
+  layout "ref"
 
-  def find_encounter
-  end
-
-  def show_encounter
-  end
 end

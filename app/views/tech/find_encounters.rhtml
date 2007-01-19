@@ -1,28 +1,11 @@
-<% @page_title = "Encounters List" %>
-<% set_current_patient_banner %>
-<% set_tech_sidebar %>
+<% @page_title = "Encounter List" %>
+<% setup_tech_layout %>
 
-<table>
-  <tr>
-    <th>Date</th>
-    <th>Type</th>
-    <th>Indication</th>
-    <th>Impression</th>
-  </tr>
-  
-<% for encounter in @encounters %>
-  <tr id="encounter">
-    <td><%=h encounter.date.strftime("%d %b %Y") %></td>
-    <td><%=h encounter.encounter_type.name %></td>
-    <td><%=h encounter.indication %></td>
-    <td><%=h encounter.impression %></td>
-    <td><%= link_to 'Show', :action => 'show_encounter', :id => encounter %></td>
-  </tr>
-<% end %>
-</table>
+<%= render :partial => "shared/find_encounters",
+           :collection => @encounters %>
 
-<%= link_to 'Previous page', { :page => @encounter_pages.current.previous } if @encounter_pages.current.previous %>
-<%= link_to 'Next page', { :page => @encounter_pages.current.next } if @encounter_pages.current.next %> 
-
+<% render :partial => "shared/page_nav",
+          :locals => {:encounter_pages => @encounter_pages} unless @encounter_pages.nil? %>
+<br />
 <br />
 <%= link_to 'New Encounter', {:action => 'new_encounter', :id => @patient.id} %><br/>

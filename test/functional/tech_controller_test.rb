@@ -19,14 +19,12 @@ class TechControllerTest < Test::Unit::TestCase
     assert_response :success
     assert true, @show_new_encounter_link
     assert_template 'find_encounters'
-    assert_select "tr#encounter", :count => patients(:stanley).encounters.count
   end
   
   def test_show_encounter
     put(:show_encounter, {:id => encounters(:chest_pain).id}, {:user_id => users(:marc).id})
     assert_response :success
     assert_template 'show_encounter'
-    assert_select "h2"
   end
   
   def test_find_patients_mrn_ampath

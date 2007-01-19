@@ -2,7 +2,7 @@
 <% @patient = @encounter.patient %>
 <% @provider = @encounter.provider %>
 <% set_current_patient_banner %>
-<% set_tech_sidebar %>
+<% setup_tech_layout %>
 
 <div>
     <% form_for :encounter,
@@ -41,4 +41,5 @@
           
         <%end%>
     </div>
+    <%= link_to "Close and Save Encounter", :action => 'find_encounters', :id => @encounter.patient %>
 </div>

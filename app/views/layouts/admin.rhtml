@@ -10,8 +10,8 @@
     <div id="columns">
         <div id="side">
             <% if session[:user_id] -%>
-                <% if !@side_bar_commands.nil? -%>
-                    <% for command in @side_bar_commands %>
+                <% if !@command_list.nil? -%>
+                    <% for command in @command_list %>
                         <%= command %><br />
                     <% end -%>
                     <hr/>

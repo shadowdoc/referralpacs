@@ -1,2 +1,5 @@
-<h1>Client#show_encounter</h1>
-<p>Find me in app/views/client/show_encounter.rhtml</p>
+<% @page_title = "Show Encounter" %>
+<% @patient = @encounter.patient %>
+<% setup_client_layout %>
+
+<%= render :partial => "shared/encounter" %>

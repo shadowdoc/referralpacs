@@ -1,11 +1,13 @@
 /* Css for ReferralPACS 2.0 */
 /* Three-column layout stolen from http://www.glish.com/css/7.asp, Thanks! */
 
-/* Styles for tech layout */
+/* Styles for ref layout */
 
-body { margin: 10px 10px 0px;
+body { 
+    margin: 10px 10px 0px;
     padding: 0px;
     font:	12px/1.2 Verdana, Arial, Helvetica, sans-serif;
+    text-align: center;
 }
 
 #banner { 
@@ -14,6 +16,7 @@ body { margin: 10px 10px 0px;
     color: #CDC759;
     voice-family: inherit;
     height: 70px;
+    text-align: left;
 }
 
 html > body #banner { 
@@ -31,16 +34,21 @@ html > body #banner {
     padding: 2px;
 }
 
-#leftcontent { 
-    background: #728f3e;
-    position: absolute;
-    padding-top: 50px;
-    padding-bottom: 50px;
-    left: 10px;
-    width: 150px;
+#user_banner {
+    height: 30px;
+    text-align: right;
 }
 
-#leftcontent a {
+#user_banner h3 {
+   font-size: 12px;
+}
+
+#command_list { 
+    background: #728f3e;
+    text-align: center;
+}
+
+#command_list a {
     color: #CDC759;
     padding: 6px;
     text-decoration: none;
@@ -48,7 +56,7 @@ html > body #banner {
     font-weight: bold;
 }
 
-#leftcontent a:hover {
+#command_list a:hover {
     color: black;
     text-decoration: underline;
 }
@@ -56,36 +64,25 @@ html > body #banner {
 #centercontent {
     background: rgb(255, 255, 255) 
     voice-family: inherit;
-    margin-left: 151px;
-}
-
-html > body #centercontent { 
-    margin-left: 151px;
+    width: 700px;
+    margin: 0 auto;
+    text-align: left;
 }
 
 #centercontent p {
     padding: 5px;
 }
 
-#rightcontent { border: 1px solid rgb(0, 0, 0);
-    background: #aed95f;
-    position: absolute;
-    right: 10px;
-    top: 70px;
-    width: 200px;
+
+p, h1, pre { 
+    margin: 0px 10px 10px;
 }
 
 h1 { 
   font-size: 14px;
 }
 
-#rightcontent p { 
- font-size: 10px;
-}
-
-p, h1, pre { 
-    margin: 0px 10px 10px;
-}
+/* Error formatting */
 
 #notice {
     border: 2px solid #AED95F;
@@ -94,12 +91,6 @@ p, h1, pre {
     width: 250px;
 }
 
-/* Styles for tech/readonly_encounter */
-#encounter_type {
-    font-size: 20px;
-}
-
-/* Error formatting */
 
 #errorExplanation {
   width: 400px;
@@ -137,6 +128,91 @@ p, h1, pre {
   display: table;
 }
 
+/* Global pagination */
+
+#page_nav {
+
+}
+
+#left {
+  float: left;
+}
+
+#right {
+  float: right;
+}
+
+/* Styles for tech/find_encounters */
+#encounter > #header {
+  background: #5F8F08;
+  color: #CDC759;
+  font-weight: bold;
+  padding: 2px;
+}
+
+#encounter > #header a {
+    color: #CDC759;
+    padding: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#encounter > #header a:hover {
+    color: black;
+    text-decoration: underline;
+}
+
+#header > #date_type {
+  width: 500;
+}
+
+#header > #links {
+  width: 200;
+  position: relative;
+  left: 501;
+  text-align: right;
+}
+
+#encounter > #impression {
+  padding: 5px;
+}
+
+#encounter#header {
+  background: #5F8F08;
+  color: #CDC759;
+  font-weight: bold;
+  padding: 2px;
+}
+
+#encounter#header a {
+    color: #CDC759;
+    padding: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#encounter#header a:hover {
+    color: black;
+    text-decoration: underline;
+}
+
+#header#date_type {
+  width: 500;
+}
+
+#header#links {
+  width: 200;
+  position: relative;
+  left: 501;
+  text-align: right;
+}
+
+#encounter#impression {
+  padding: 5px;
+}
+
 /* tech/upload_image */
 #upload {
   display: block;
@@ -154,5 +230,6 @@ p, h1, pre {
 }
 
 #thumbnails {
-  width: 100%;
+  width: 100;
 }
+

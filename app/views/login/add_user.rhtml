@@ -1,5 +1,5 @@
 <% @page_title = "Add User" -%>
-<% @side_bar_commands = [link_list_users] %>
+<% @command_list = [link_list_users] %>
 <%= error_messages_for  'user' %>
 <%= start_form_tag :action => "add_user", :id => @user %>
     <%= render_partial 'form' %>

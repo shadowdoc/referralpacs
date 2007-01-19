@@ -1,30 +1,7 @@
 <% @page_title = "Show Encounter" %>
 <% @patient = @encounter.patient %>
-<% @provider = @encounter.provider %>
-<% set_current_patient_banner %>
-<% set_tech_sidebar %>
+<% setup_tech_layout %>
 
-<% form_for :encounter,
-            :url => {:action => "upload_image"},
-            :builder => TaggedBuilder do |form| %>
-            
-    <h2><%= @encounter.encounter_type.name %> from <%= @encounter.date.strftime("%d %b %Y") %></h2>
-    
-    
-    <%= form.text_field :indication, {'readonly' => true} %>
-    <%= form.text_field :findings, {'readonly' => true} %>
-    <%= form.text_field :impression, {'readonly' => true} %>
-    <% fields_for :provider,
-                  :builder => TaggedBuilder do |provider| %>
-        <p><label for="encounter_provider">Provider</label></p>
-        <%= provider.text_field :name %>
-    <% end %>
-<% end %>
-<div id='thumbnails'>
-    <% @encounter.images.each do |i|%>
-        <div id='thumbnail'>
-            <a href='<%= i.full_url %>'><img src='<%= i.thumb_url %>'></a><br/>
-            <%= link_to "remove", :action => 'remove_image', :id => i %>
-        </div>
-    <% end %>
-</div>
+<%= render :partial => "shared/encounter" %>
+
+<%= link_to "Return to Encounter list", :action => 'find_encounters', :id => @patient %>
