@@ -20,7 +20,6 @@ class LoginController < ApplicationController
       logged_in_user = @user.try_to_login
       if logged_in_user
         session[:user_id] = logged_in_user.id
-        flash[:notice] = logged_in_user.privilege.name
         redirect_to(:controller => logged_in_user.privilege.name, :action => "find_patients")
       else
         flash[:notice] = "Invalid user/password combination"

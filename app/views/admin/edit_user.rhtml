@@ -1,5 +1,6 @@
 <% @page_title = "Edit User" -%>
-<%= error_messages_for  'user' %>
+<% setup_admin_layout %>
+
 <%= start_form_tag :action => "update_user", :id => @user %>
     <%= render_partial 'form' %>
     <%= submit_tag 'Save' %>

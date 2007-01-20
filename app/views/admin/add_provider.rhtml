@@ -1,11 +1,18 @@
 <% @page_title = "Add Provider" -%>
+<% setup_admin_layout %>
+
 <%= error_messages_for  'Provider' %>
-<% form_for :provider
-             :url => {:action => "add_provider" } do |form|%>
-<p>Name:          <%= form.text_field :name %></p>
-<p>E-mail:        <%= form.text_field :email %></p>
-<p>Privilege Set: <%= form.collection_select('user', 'privilege_id', @all_privileges, :id, :name) %></p>
-<p>Password:      <%= form.text_field 'user', 'password' %></p><br/>
-                  <%= form.submit_tag 'Save' %>
+
+<% form_for :provider,
+            :url => {:action => "add_provider" },
+            :builder => TaggedBuilder  do |form|%>
+    <%= form.text_field :name %>
+    <%= form.text_field :email %>
+    <%= form.collection_select(:privilege_id, @all_privileges, :id, :name) %>
+    <%= form.password_field 'password' %>
+    <%= form.text_field :title %>
+    <br/>
+    <%= submit_tag 'Save' %>
 <% end %>
+<br/>
 <%= link_to 'Back', :action => 'list_users' %>

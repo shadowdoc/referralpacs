@@ -1,0 +1,17 @@
+<% @page_title = "User List" -%>
+<% setup_admin_layout %>
+
+<table>
+  <% for provider in @all_providers %>
+    <tr valign="top" id="<%= cycle("ListLine1", "ListLine0") %>">
+      <td><%=h provider.name %></td>
+      <td><%=h provider.email %></td>
+      <td><%=h provider[:type] %></td>
+      <td><%=h provider.privilege.name %></td>
+      <td><%=h provider.title %></td>
+      <td><%= link_to(" edit ", :action => :edit_provider, :id => provider.id)%> &nbsp; <%= link_to(" delete ", :action => :delete_provider, :id => provider.id) %></td>
+    </tr>
+    
+  <% end -%>
+</table>
+<%= link_to("Add Provider", :action => "add_provider") %>

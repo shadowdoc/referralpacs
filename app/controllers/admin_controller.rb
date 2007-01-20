@@ -1,7 +1,6 @@
 class AdminController < ApplicationController
   
   before_filter :authorize_login
-
   layout "ref"
 
   def new_patient
@@ -12,19 +11,14 @@ class AdminController < ApplicationController
   
   def add_user
     @current_user = User.find(session[:user_id])
-    unless @current_user.privilege.add_user
-      flash[:notice] = "Not authorized to add users"
-      redirect_to(:action => 'list_users')
-    else
-      @all_privileges = Privilege.find(:all)
-      if request.get?
-        @user = User.new
-      else 
-        @user = User.new(params[:user])
-        if @user.save
-          flash[:notice] = "User #{@user.email} created."
-          redirect_to(:action => 'list_user')
-        end
+    @all_privileges = Privilege.find(:all)
+    if request.get?
+      @user = User.new
+    else 
+      @user = User.new(params[:user])
+      if @user.save
+        flash[:notice] = "User #{@user.email} created."
+        redirect_to(:action => 'list_users')
       end
     end
   end
@@ -34,25 +28,20 @@ class AdminController < ApplicationController
   # the special user.
   def delete_user
     @current_user = User.find(session[:user_id])
-    unless @current_user.privlige.remove_user
-      flash[:notice] = "Not authorized to delete users"
-      redirect_to(:action => 'list_users')
+    id = params[:id]
+    if id == session[:user_id]
+      flash[:notice] = "Can't delete self"
     else
-      id = params[:id]
-      if id == session[:user_id]
-        flash[:notice] = "Can't delete self"
-      else
-        if id && user = User.find(id)
-          begin
-            user.destroy
-            flash[:notice] = "User #{user.name} deleted"
-          rescue
-            flash[:notice] = "Can't delete that user"
-          end
+      if id && user = User.find(id)
+        begin
+          user.destroy
+          flash[:notice] = "User #{user.name} deleted"
+        rescue
+          flash[:notice] = "Can't delete that user"
         end
       end
-      redirect_to(:action => :list_users)
     end
+    redirect_to(:action => :list_users)
   end
 
   def list_users
@@ -76,16 +65,20 @@ class AdminController < ApplicationController
     end
   
   end
+  
+  def list_providers
+    @all_providers = Provider.find(:all)
+  end
 
   def add_provider
     if request.get?
       @provider = Provider.new
-      @all_privileges = Privilege.find :all
+      @all_privileges = Privilege.find(:all)
     else
-      @provider = Provider.new(params[:user])
+      @provider = Provider.new(params[:provider])
       if @provider.save
         flash[:notice] = "Provider #{@provider.email} created."
-        redirect_to(:action => "list_users")
+        redirect_to(:action => "list_providers")
       end  
     end
   end

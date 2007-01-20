@@ -1,5 +1,6 @@
 <% @page_title = "Add User" -%>
-<% @command_list = [link_list_users] %>
+<% setup_admin_layout %>
+
 <%= error_messages_for  'user' %>
 <%= start_form_tag :action => "add_user", :id => @user %>
     <%= render_partial 'form' %>

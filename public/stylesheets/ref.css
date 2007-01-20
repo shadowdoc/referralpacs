@@ -82,6 +82,14 @@ h1 {
   font-size: 14px;
 }
 
+/* Alternating colors */
+#ListLine1 {
+  background: #9bd532;
+}
+#ListLine0 {
+  background: #CDC759;
+}
+
 /* Error formatting */
 
 #notice {

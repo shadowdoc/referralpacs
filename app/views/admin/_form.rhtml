@@ -10,8 +10,8 @@
 <p><label for="user_privilege_id">Privilege Set</label><br/>
 <%= collection_select('user', 'privilege_id', @all_privileges, :id, :name) %>
 
-<p><label for="user_password">Password</label><br />
-<%= text_field 'user', 'password' %></p>
+<p><label for="password">Password</label><br />
+<%= password_field 'user', 'password' %>
 
 <!--[eoform:user]-->
 

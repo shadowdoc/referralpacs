@@ -1,16 +1,15 @@
 <% @page_title = "User List" -%>
-<% @command_list = [link_list_users, link_add_provider, link_add_user] %>
+<% setup_admin_layout %>
 
 <table>
   <% for user in @all_users %>
     <tr valign="top" class="<%= cycle("ListLine1", "ListLine0") %>">
       <td><%=h user.name %></td>
       <td><%=h user.email %></td>
-      <td><%=h user[:type] %></td>
       <td><%=h user.privilege.name %></td>
-      <td><%= link_to(" edit ", :action => :edit_user, :id => user.id)%> <%= link_to(" delete ", :action => :delete_user, :id => user.id) %></td>
+      <td><%= link_to(" edit ", :action => :edit_user, :id => user.id)%> &nbsp; <%= link_to(" delete ", :action => :delete_user, :id => user.id) %></td>
     </tr>
     
   <% end -%>
 </table>
-<%= link_add_provider %>
+<%= link_to("Add User", :action => "add_user") %>
