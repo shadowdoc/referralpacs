@@ -4,10 +4,10 @@
 <table>
   <% for user in @all_users %>
     <tr valign="top" class="<%= cycle("ListLine1", "ListLine0") %>">
-      <td><%= user.name %></td>
-      <td><%= user.email %></td>
-      <td><%= user[:type] %></td>
-      <td><%= user.privilege.name %></td>
+      <td><%=h user.name %></td>
+      <td><%=h user.email %></td>
+      <td><%=h user[:type] %></td>
+      <td><%=h user.privilege.name %></td>
       <td><%= link_to(" edit ", :action => :edit_user, :id => user.id)%> <%= link_to(" delete ", :action => :delete_user, :id => user.id) %></td>
     </tr>
     

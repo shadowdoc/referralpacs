@@ -29,7 +29,7 @@ class LoginControllerTest < Test::Unit::TestCase
     get :login
     post :login, :user => {:email => users(:marc).email, :password => "password"}
     
-    assert_redirected_to(:controller => "login", :action => "list_users")
+    assert_redirected_to(:controller => users(:marc).privilege.name)
   end
   
   def test_bad_login

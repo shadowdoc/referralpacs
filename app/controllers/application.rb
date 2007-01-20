@@ -3,17 +3,30 @@
 class ApplicationController < ActionController::Base
 
   before_filter :set_current_user
+#  include SslRequirement
+  
   ENCOUNTERS_PER_PAGE = 10
 
-  def redirect_to_encounters
-    redirect_to(:controller => 'admin', :action => 'list')
+#  def redirect_to_encounters
+#    redirect_to(:controller => 'admin', :action => 'list')
+#  end
+
+  def index
+    redirect_to(:controller => "login", :action => "login")
   end
   
   def authorize_login
     unless session[:user_id] 
       flash[:notice] = "Please log in."
       redirect_to(:controller => "login", :action => "login")
+#    else
+#      # Make sure each user is accessing the correct controller
+#      user = User.find(session[:user_id])
+#      if user.privilege.name == controller_name
+#        redirect_to(:controller => user.privilege.name)
+#      end
     end
+    
   end
   
   def set_current_user
@@ -31,6 +44,7 @@ class ApplicationController < ActionController::Base
     else
       @encounter_pages, @encounters = paginate :encounters, :per_page => ENCOUNTERS_PER_PAGE
     end
+    
   end
   
   def find_patients
@@ -63,6 +77,59 @@ class ApplicationController < ActionController::Base
   
   def show_encounter
     @encounter = Encounter.find(params[:id])
+  end
+  
+    def new_patient
+    if request.get?
+      @all_tribes = Tribe.find(:all)
+      @patient = Patient.new()
+    else
+      @patient = Patient.new(params[:patient])
+      if @patient.save
+        flash[:notice] = 'Patient was successfully created.'
+        redirect_to :action => "find_encounters", :id => @patient.id
+      else
+        render :action => 'new_patient'
+      end
+    end
+  end
+
+  def new_encounter
+    if request.get? && params[:encounter].nil?
+      @all_encounter_types = EncounterType.find(:all)
+      @all_providers = Provider.find(:all)
+  
+      @encounter = Encounter.new()  
+      @encounter.patient_id = params[:id]
+    else
+      @encounter = Encounter.new(params[:encounter])
+      if @encounter.save
+        flash[:notice] = "Encounter saved"
+        redirect_to :action => "upload_image", :id => @encounter
+      end
+    end
+  end
+
+  def upload_image
+    @all_encounter_types = EncounterType.find(:all)
+    @all_providers = Provider.find(:all)
+    @encounter = Encounter.find(params[:id])
+    @image = Image.new()
+    @image.encounter_id = @encounter.id
+  end
+
+  def add_image
+    @image = Image.create(params[:image])
+    flash[:notice] = 'File uploaded'
+    redirect_to :action => 'upload_image', :id => @image.encounter.id
+  end
+  
+  def remove_image
+    @image = Image.find(params[:id])
+    @encounter = @image.encounter
+    @image.destroy
+    flash[:notice] = 'Image Destroyed'
+    redirect_to :action => 'upload_image', :id => @encounter
   end
   
 end

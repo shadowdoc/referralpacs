@@ -3,7 +3,7 @@
 <% set_current_patient_banner %>
 <% setup_tech_layout %>
 
-<%= error_messages_for 'encounter' %>
+<%=h error_messages_for('encounter')%>
 
 <% form_for :encounter,
             :url => {:action => "new_encounter"},

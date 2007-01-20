@@ -1,37 +1,5 @@
 <% @page_title = "Find Patients" %>
 <% setup_tech_layout %>
-<p>
-How would you like to search?
-<%= form_tag :action => 'find_patients' %>
-    <%= radio_button 'search', 'identifier_type', 'mrn_ampath'%>Ampath ID<br/>
-    <%= radio_button 'search', 'identifier_type', 'mtrh_rad_id'%>MTRH Radiology ID<br/>
-    <%= radio_button 'search', 'identifier_type', 'name', "checked" => "checked" %>Name<br/>
-    <%= text_field 'search', 'search_criteria'%>
-    <%= submit_tag 'Search'%>
-</form>
-</p>
 
-<% if @patients %>
-    <div>
-        <table>
-          <tr>
-            <th>Rad Id</th>
-            <th>AMPATH ID</th>
-            <th>Name</th>
-            <th>Gender</th>
-            <th>Tribe</th>
-          </tr> 
-          <% for patient in @patients %>
-             <tr>
-                <td><%= link_to h(patient.mtrh_rad_id), :action => 'find_encounters', :id => patient %></td>
-                <td><%=h patient.mrn_ampath %></td>
-                <td><%=h patient.full_name %></td>
-                <td><%=h patient.send("gender") %></td>
-                <td><%=h patient.tribe.name %></td>
-                <td><%= link_to 'Edit', :action => 'edit', :id => patient %></td>
-              </tr>
-          <% end %>
-        </table>
-    </div>
-<% end %>
+<%= render :partial => "shared/find_patients" %>
 

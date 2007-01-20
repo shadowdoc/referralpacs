@@ -1,45 +1,5 @@
-<% @page_title = "Add Images" %>
-<% @patient = @encounter.patient %>
-<% @provider = @encounter.provider %>
-<% set_current_patient_banner %>
+<% @page_title = "Upload Images" %>
 <% setup_tech_layout %>
 
-<div>
-    <% form_for :encounter,
-                :url => {:action => "upload_image"},
-                :builder => TaggedBuilder do |form| %>
-                
-        <h2><%= @encounter.encounter_type.name %> from <%= @encounter.date.strftime("%d %b %Y") %></h2>
-        
-        
-        <%= form.text_field :indication, {'readonly' => true} %></p>
-        <%= form.text_field :findings, {'readonly' => true} %></p>
-        <%= form.text_field :impression, {'readonly' => true} %></p>
-        <% fields_for :provider,
-                      :builder => TaggedBuilder do |provider| %>
-            <%= provider.text_field :name %>
-        <% end %>
-    <% end %>
-    <div id='thumbnails'>
-        <% @encounter.images.each do |i|%>
-            <div id='thumbnail'>
-                <a href='<%= i.full_url %>'><img src='<%= i.thumb_url %>'></a><br/>
-                <%= link_to "remove", :action => 'remove_image', :id => i %>
-            </div>
-        <% end %>
-    </div>
-    <div id="upload">
-        <% form_for :image, 
-                    :url => {:action => 'add_image'}, 
-                    :html => {:multipart => true} do |f| %>
-        
-          <label for='image_file_data'>File location: </label>
-          <%= f.file_field :file_data %><br/>
-          <%= f.hidden_field :encounter_id, :value => @encounter.id %>
-          
-          <%= submit_tag "upload"%>
-          
-        <%end%>
-    </div>
-    <%= link_to "Close and Save Encounter", :action => 'find_encounters', :id => @encounter.patient %>
-</div>
+<%= render :partial => "shared/upload_image",
+           :locals => {:encounter => @encounter} %>

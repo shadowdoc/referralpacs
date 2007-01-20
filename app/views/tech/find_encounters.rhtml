@@ -4,8 +4,8 @@
 <%= render :partial => "shared/find_encounters",
            :collection => @encounters %>
 
-<% render :partial => "shared/page_nav",
-          :locals => {:encounter_pages => @encounter_pages} unless @encounter_pages.nil? %>
+<%= render :partial => "shared/page_nav",
+           :locals => {:encounter_pages => @encounter_pages} unless @encounter_pages.nil? %>
 <br />
 <br />
 <%= link_to 'New Encounter', {:action => 'new_encounter', :id => @patient.id} %><br/>

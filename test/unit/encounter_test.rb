@@ -1,10 +1,11 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class EncounterTest < Test::Unit::TestCase
-  fixtures :encounters
+  fixtures :encounters, :users
 
   def setup
     @encounter = Encounter.find 1
+    Thread.current['user'] = User.find 1
   end
 
   # Replace this with your real tests.
@@ -18,12 +19,14 @@ class EncounterTest < Test::Unit::TestCase
     assert_equal encounters(:right_pneumonia).encounter_type_id, @encounter.encounter_type_id
   end
 
-  def test_encounter_update
+  def test_encounter_update  
     assert_equal encounters(:right_pneumonia).impression, @encounter.impression
     @encounter.impression = "Normal"
     assert @encounter.save, @encounter.errors.full_messages.join("; ")
     @encounter.reload
     assert_equal "Normal", @encounter.impression
+
+    assert_equal users[:marc].id, @encounter.updated_by
   end
   
   def test_destroy
