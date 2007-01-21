@@ -1,0 +1,18 @@
+<% @page_title = "Add Client" -%>
+<% setup_admin_layout %>
+
+<%= error_messages_for  'Client' %>
+
+<% form_for :client,
+            :url => {:action => "add_client" },
+            :builder => TaggedBuilder  do |form|%>
+    <%= form.text_field :name %>
+    <%= form.text_field :email %>
+    <%= form.collection_select(:privilege_id, @all_privileges, :id, :name) %>
+    <%= form.password_field 'password' %>
+    <%= form.text_field :contact %>
+    <br/>
+    <%= submit_tag 'Save' %>
+<% end %>
+<br/>
+<%= link_to 'Back', :action => 'list_users' %>

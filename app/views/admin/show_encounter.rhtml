@@ -1,0 +1,7 @@
+<% @page_title = "Show Encounter" %>
+<% @patient = @encounter.patient %>
+<% setup_admin_layout %>
+
+<%= render :partial => "shared/encounter" %>
+
+<%= link_to "Return to Encounter list", :action => 'find_encounters', :id => @patient %>

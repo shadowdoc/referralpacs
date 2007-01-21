@@ -1,0 +1,16 @@
+<% @page_title = "Client List" -%>
+<% setup_admin_layout %>
+
+<table>
+  <% for client in @all_clients %>
+    <tr valign="top" id="<%= cycle("ListLine1", "ListLine0") %>">
+      <td><%=h client.name %></td>
+      <td><%=h client.email %></td>
+      <td><%=h client.privilege.name %></td>
+      <td><%=h client.contact %></td>
+      <td><%= link_to(" edit ", :action => :edit_client, :id => client.id) %></td>
+    </tr>
+    
+  <% end -%>
+</table>
+<%= link_to("Add client", :action => "add_client") %>

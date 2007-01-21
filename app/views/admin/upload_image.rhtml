@@ -1,2 +1,5 @@
-<h1>Admin#upload_image</h1>
-<p>Find me in app/views/admin/upload_image.rhtml</p>
+<% @page_title = "Upload Images" %>
+<% setup_admin_layout %>
+
+<%= render :partial => "shared/upload_image",
+           :locals => {:encounter => @encounter} %>

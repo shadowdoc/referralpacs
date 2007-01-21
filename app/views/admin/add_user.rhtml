@@ -2,8 +2,8 @@
 <% setup_admin_layout %>
 
 <%= error_messages_for  'user' %>
-<%= start_form_tag :action => "add_user", :id => @user %>
+<%= form_tag :action => "add_user", :id => @user %>
     <%= render_partial 'form' %>
     <%= submit_tag 'Save' %>
-<%= end_form_tag %>
+</form>
 <%= link_to 'Back', :action => 'list_users' %>

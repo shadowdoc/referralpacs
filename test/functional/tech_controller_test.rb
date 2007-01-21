@@ -46,6 +46,7 @@ class TechControllerTest < Test::Unit::TestCase
     assert_redirected_to :action => :upload_image
     follow_redirect
     assert_template "upload_image"
+    
     assert 3, Encounter.count    
   end
   

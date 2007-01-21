@@ -1,2 +1,11 @@
-<h1>Admin#find_encounters</h1>
-<p>Find me in app/views/admin/find_encounters.rhtml</p>
+<% @page_title = "Encounter List" %>
+<% setup_admin_layout %>
+
+<%= render :partial => "shared/find_encounters",
+           :collection => @encounters %>
+
+<%= render :partial => "shared/page_nav",
+           :locals => {:encounter_pages => @encounter_pages} unless @encounter_pages.nil? %>
+<br />
+<br />
+<%= link_to 'New Encounter', {:action => 'new_encounter', :id => @patient.id} %><br/>

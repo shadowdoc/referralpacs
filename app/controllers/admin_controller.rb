@@ -4,7 +4,7 @@ class AdminController < ApplicationController
   layout "ref"
   
   def edit_patient
-    @all_tribes = Tribe.find_all
+    @all_tribes = Tribe.find(:all)
     if request.get?
       @patient = Patient.find(params[:id])
     else
@@ -62,12 +62,13 @@ class AdminController < ApplicationController
   def edit_user
     id = params[:id]
     @user = User.find(id)
-    @all_privileges = Privilege.find_all
+    @all_privileges = Privilege.find(:all)
   end
   
   def update_user
     id = params[:id]
     @user = User.find(id)
+    @all_privileges = Privilege.find(:all)
     if @user.update_attributes(params[:user])
       flash[:notice] = 'User was successfully updated.'
       redirect_to :action => 'list_users'
@@ -93,5 +94,22 @@ class AdminController < ApplicationController
       end  
     end
   end
+  
+  def list_clients
+    @all_clients = Client.find_all
+  end
 
+  def add_client
+
+    if request.get?
+      @client = Client.new
+      @all_privileges = Privilege.find(:all)
+    else
+      @client = Client.new(params[:client])
+      if @client.save
+        flash[:notice] = "Client #{@client.email} created."
+        redirect_to(:action => "list_clients")
+      end  
+    end
+  end
 end

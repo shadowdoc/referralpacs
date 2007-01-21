@@ -8,6 +8,7 @@ module AdminHelper
       @command_list = [
           link_to('Manage Users', :action => :list_users),
           link_to('Manage Providers', :action => :list_providers),
+          link_to('Manage Clients', :action => :list_clients),
           link_to('Find Patients', :action => :find_patients),
           link_to('Manage Patients', :action => :manage_patients)]
     else
