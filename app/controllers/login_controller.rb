@@ -1,6 +1,6 @@
 class LoginController < ApplicationController
 
-  before_filter :authorize_login, :except => "login"
+  before_filter :authorize_login, :except => [:login, :logout]
   layout "ref"
   
   # If the requst is of the GET type, return the add_user

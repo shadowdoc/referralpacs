@@ -1,15 +1,36 @@
 require "#{File.dirname(__FILE__)}/../test_helper"
 
 class LibUsermonitorTest < ActionController::IntegrationTest
-  fixtures :users
+  fixtures :users, :patients
   
   def test_created_by
-    post 'login/login', :user => {:email => users(:marc).email, :password => "password"}
+    post('login/login', 
+         :user => {:email => users(:marc).email, 
+                   :password => "password"})
 
-    get 'patient/edit/1'
+    get('admin/new_patient')
     assert :success
-    assert_template 'patient/edit'
+    assert_template 'admin/new_patient'
     assert Thread.current['user'], users(:marc)
+    
+    assert Patient.count, 2
+    
+    post('admin/new_patient',
+        {:patient => {:given_name => "Evelyn",
+                      :family_name => "Wasike",
+                      :mtrh_rad_id => 12346,
+                      :mrn_ampath => 5321,
+                      :tribe_id => 2}})
+    
+    assert :success
+    assert_redirected_to :action => "find_encounters"    
+    
+    assert Patient.count, 3
+    
+    wasike = Patient.find(:first, :conditions => ["mtrh_rad_id = ?", 12346])
+    
+    assert wasike.created_by, 1
+    
   end
   
 end

@@ -6,7 +6,7 @@ class TechController; def rescue_action(e) raise e end; end
 
 class TechControllerTest < Test::Unit::TestCase
 
-  fixtures :users, :encounters, :patients, :encounter_types
+  fixtures :users, :encounters, :patients, :encounter_types, :privileges
   
   def setup
     @controller = TechController.new
@@ -17,7 +17,7 @@ class TechControllerTest < Test::Unit::TestCase
   def test_new_encounter_display
     get(:new_encounter, 
         {},
-        :user_id => users(:marc).id)
+        :user_id => users(:tech).id)
     
     assert_response :success
     assert_template "new_encounter"
@@ -30,7 +30,7 @@ class TechControllerTest < Test::Unit::TestCase
   
     get(:new_encounter,
         {:id => patients(:baxter).id},
-        {:user_id => users(:marc).id})
+        {:user_id => users(:tech).id})
         
     post(:new_encounter,
         {:encounter => {:date => chest_pain.date,
@@ -40,7 +40,7 @@ class TechControllerTest < Test::Unit::TestCase
                         :impression => chest_pain.impression,
                         :encounter_type_id => chest_pain.encounter_type_id,
                         :provider_id => chest_pain.provider_id}},
-        {:user_id => users(:marc).id})
+        {:user_id => users(:tech).id})
         
     assert_response :redirect
     assert_redirected_to :action => :upload_image
@@ -56,7 +56,7 @@ class TechControllerTest < Test::Unit::TestCase
   
     get(:new_patient,
         {},
-        {:user_id => users(:marc).id})
+        {:user_id => users(:tech).id})
     
     post(:new_patient,
         {:patient => {:given_name => "Evelyn",
@@ -64,7 +64,7 @@ class TechControllerTest < Test::Unit::TestCase
                       :mtrh_rad_id => 12346,
                       :mrn_ampath => 5321,
                       :tribe_id => 2}},
-        {:user_id => users(:marc).id})
+        {:user_id => users(:tech).id})
     assert 3, Patient.count
     
   end
@@ -73,14 +73,14 @@ class TechControllerTest < Test::Unit::TestCase
 #    assert 1, Image.count
 #    get(:upload_image,
 #       {:id => encounters(:chest_pain)},
-#       {:user_id => users(:marc).id})
+#       {:user_id => users(:tech).id})
 #    
 #    img = uploaded_jpeg("#{File.expand_path(RAILS_ROOT)}/test/fixtures/rails.jpg")
 #    
 #    post(:add_image,
 #        {:image => {:file_data => img,
 #                    :encounter_id => encounters(:chest_pain).id}},
-#        {:user_id => users(:marc).id})
+#        {:user_id => users(:tech).id})
 #
 #    assert_redirected_to :action => "upload_image"
 #    follow_redirect
@@ -92,7 +92,7 @@ class TechControllerTest < Test::Unit::TestCase
 #    
 #    post(:remove_image,
 #        {:id => 3},
-#        {:user_id => users(:marc).id})
+#        {:user_id => users(:tech).id})
 #        
 #    assert 1, Image.count
 #    

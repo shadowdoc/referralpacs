@@ -22,7 +22,7 @@ john:
   privilege_id:    1
   type:            Provider
   title:           MD
-madura:
+client:
   id:              4
   name:            'James Madura'
   email:           madura@surgeryrocks.com

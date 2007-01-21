@@ -6,7 +6,7 @@ class AdminController; def rescue_action(e) raise e end; end
 
 class AdminControllerTest < Test::Unit::TestCase
   
-  fixtures :users, :encounters, :patients, :encounter_types
+  fixtures :users, :encounters, :patients, :encounter_types, :privileges
 
   def setup
     @controller = AdminController.new

@@ -3,6 +3,10 @@ class AdminController < ApplicationController
   before_filter :authorize_login
   layout "ref"
   
+  def index
+    redirect_to(:action => "find_patients")
+  end
+  
   def edit_patient
     @all_tribes = Tribe.find(:all)
     if request.get?

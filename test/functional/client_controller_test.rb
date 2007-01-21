@@ -6,7 +6,7 @@ class ClientController; def rescue_action(e) raise e end; end
 
 class ClientControllerTest < Test::Unit::TestCase
 
-  fixtures :users, :encounters, :patients, :encounter_types
+  fixtures :users, :encounters, :patients, :encounter_types, :privileges
 
   def setup
     @controller = ClientController.new
@@ -20,14 +20,18 @@ class ClientControllerTest < Test::Unit::TestCase
   end
   
   def test_find_encounters_with_patient_id
-    put(:find_encounters, {:id => patients(:stanley).id}, {:user_id => users(:marc).id})
+    post(:find_encounters, 
+         {:id => patients(:stanley).id}, 
+         {:user_id => users(:client).id})
     assert_response :success
     assert true, @show_new_encounter_link
     assert_template 'find_encounters'
   end
   
   def test_show_encounter
-    put(:show_encounter, {:id => encounters(:chest_pain).id}, {:user_id => users(:marc).id})
+    put(:show_encounter, 
+        {:id => encounters(:chest_pain).id}, 
+        {:user_id => users(:client).id})
     assert_response :success
     assert_template 'show_encounter'
   end
@@ -36,7 +40,7 @@ class ClientControllerTest < Test::Unit::TestCase
     baxter = patients(:baxter)
     post(:find_patients, 
         {:search => {'search_criteria' => baxter.mrn_ampath, 'identifier_type' => 'mrn_ampath'}},
-        {:user_id => users(:marc).id})
+        {:user_id => users(:client).id})
     
     assert_response :redirect
     assert_redirected_to :action => 'find_encounters', :id => baxter.id
@@ -47,7 +51,7 @@ class ClientControllerTest < Test::Unit::TestCase
   def test_find_patients_bad_mrn_ampath
       post(:find_patients, 
           {:search => {'search_criteria' => 93, 'identifier_type' => 'mrn_ampath'}},
-          {:user_id => users(:marc).id})
+          {:user_id => users(:client).id})
 
       assert :success
       assert_template "find_patients"
@@ -58,7 +62,7 @@ class ClientControllerTest < Test::Unit::TestCase
     baxter = patients(:baxter)
     post(:find_patients, 
         {:search => {'search_criteria' => baxter.mtrh_rad_id, 'identifier_type' => 'mtrh_rad_id'}},
-        {:user_id => users(:marc).id})
+        {:user_id => users(:client).id})
     
     assert_response :redirect
     assert_redirected_to :action => 'find_encounters', :id => baxter.id
@@ -69,7 +73,7 @@ class ClientControllerTest < Test::Unit::TestCase
   def test_find_patients_bad_mtrh_rad_id
     post(:find_patients, 
         {:search => {'search_criteria' => 92, 'identifier_type' => 'mtrh_rad_id'}},
-        {:user_id => users(:marc).id})
+        {:user_id => users(:client).id})
     
     assert_response :success
     assert_template "find_patients"
