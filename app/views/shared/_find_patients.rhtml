@@ -26,7 +26,6 @@
             <td><%=h patient.full_name %></td>
             <td><%=h patient.send("gender") %></td>
             <td><%=h patient.tribe.name %></td>
-            <td><%= link_to 'Edit', :action => 'edit', :id => patient %></td>
           </tr>
       <% end %>
     </table>

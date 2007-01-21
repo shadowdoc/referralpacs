@@ -8,14 +8,6 @@ class ApplicationController < ActionController::Base
 #  include SslRequirement
   
   ENCOUNTERS_PER_PAGE = 10
-
-#  def redirect_to_encounters
-#    redirect_to(:controller => 'admin', :action => 'list')
-#  end
-
-  def index
-    redirect_to(:controller => "login", :action => "login")
-  end
   
   def authorize_login
     unless session[:user_id] 

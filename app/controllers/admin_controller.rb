@@ -2,8 +2,19 @@ class AdminController < ApplicationController
   
   before_filter :authorize_login
   layout "ref"
-
-  def new_patient
+  
+  def edit_patient
+    @all_tribes = Tribe.find_all
+    if request.get?
+      @patient = Patient.find(params[:id])
+    else
+      @patient = Patient.find(params[:id])
+      if @patient.update_attributes(params[:patient])
+          flash[:notice] = "Saved #{@patient.full_name}"
+      else
+          flash[:notice] = "Error saving patient."
+      end
+    end
   end
 
   def merge_patients
