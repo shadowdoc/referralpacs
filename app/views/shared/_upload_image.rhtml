@@ -3,15 +3,11 @@
             :builder => TaggedBuilder do |form| %>
             
     <h2><%= @encounter.encounter_type.name %> from <%= @encounter.date.strftime("%d %b %Y") %></h2>
-    
-    
+      
     <%= form.text_field :indication, {'readonly' => true} %></p>
     <%= form.text_field :findings, {'readonly' => true} %></p>
     <%= form.text_field :impression, {'readonly' => true} %></p>
-    <% fields_for :provider,
-                  :builder => TaggedBuilder do |provider| %>
-        <%= provider.text_field :name %>
-    <% end %>
+
 <% end %>
 <div id='thumbnails'>
     <% @encounter.images.each do |i|%>

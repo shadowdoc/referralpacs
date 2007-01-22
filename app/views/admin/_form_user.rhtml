@@ -1,8 +1,11 @@
 <%= error_messages_for 'user' %>
 
 <!--[form:user]-->
-<p><label for="user_name">Name</label><br/>
-<%= text_field 'user', 'name'   %></p>
+<p><label for="user_given_name">Given Name</label><br/>
+<%= text_field 'user', 'given_name'   %></p>
+
+<p><label for="user_family_name">Family Name</label><br/>
+<%= text_field 'user', 'family_name'   %></p>
 
 <p><label for="user_email">E-mail</label><br/>
 <%= text_field 'user', 'email'  %></p>

@@ -4,7 +4,7 @@
 <table>
   <% for client in @all_clients %>
     <tr valign="top" id="<%= cycle("ListLine1", "ListLine0") %>">
-      <td><%=h client.name %></td>
+      <td><%=h client.full_name %></td>
       <td><%=h client.email %></td>
       <td><%=h client.privilege.name %></td>
       <td><%=h client.contact %></td>

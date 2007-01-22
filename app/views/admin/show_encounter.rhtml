@@ -2,6 +2,26 @@
 <% @patient = @encounter.patient %>
 <% setup_admin_layout %>
 
-<%= render :partial => "shared/encounter" %>
+<% error_messages_for('encounter') %>
+
+<% form_for :encounter,
+            :url => {:action => "edit_encounter", :id => @encounter},
+            :builder => TaggedBuilder do |form| %>
+    <%= form.date_select :date %>
+    <%= form.collection_select :encounter_type_id, @all_encounter_types, :id, :name %>
+    <%= form.text_field :indication %>
+    <%= form.text_field :findings %>
+    <%= form.text_field :impression %>
+    <%= form.collection_select :provider_id, @all_providers, :id, :name %>
+    <div id='thumbnails'>
+        <% @encounter.images.each do |i|%>
+            <div id='thumbnail'>
+                <a href='<%= i.full_url %>'><img src='<%= i.thumb_url %>'></a><br/>
+            </div>
+        <% end %>
+    </div>
+    <%= submit_tag "Save Changes and Continue..." %>
+    
+<% end %>
 
 <%= link_to "Return to Encounter list", :action => 'find_encounters', :id => @patient %>

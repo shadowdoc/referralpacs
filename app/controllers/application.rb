@@ -73,9 +73,9 @@ class ApplicationController < ActionController::Base
     @encounter = Encounter.find(params[:id])
   end
   
-    def new_patient
+  def new_patient
+    @all_tribes = Tribe.find(:all)
     if request.get?
-      @all_tribes = Tribe.find(:all)
       @patient = Patient.new()
     else
       @patient = Patient.new(params[:patient])

@@ -13,11 +13,6 @@ class AdminControllerTest < Test::Unit::TestCase
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
   end
-
-  # Replace this with your real tests.
-  def test_truth
-    assert true
-  end
   
   def test_edit_patient
     baxter = patients(:baxter)
@@ -38,7 +33,7 @@ class AdminControllerTest < Test::Unit::TestCase
     
     buster = Patient.find(baxter.id)
     
-    assert "Buster", buster.given_name
+    assert_equal "Buster", buster.given_name
     
   end
   
@@ -48,38 +43,51 @@ class AdminControllerTest < Test::Unit::TestCase
   
   def test_add_user
     
-    assert User.count, 5
+    assert_equal User.count, 5
   
     get(:add_user,
       {},
       {:user_id => users(:marc)})
     
     post(:add_user,
-        {:user => {:name => "Wasike",
+        {:user => {:given_name => "Evelyn",
+                   :family_name => "Wasike",
                    :email => "wasike@email.com",
                    :privilege_id => 1,
                    :password => "password"}},
         {:user_id => users(:marc)})
                   
     assert_redirected_to(:action => :list_users)
-    assert "User wasike@email.com created.", flash[:notice]
+    assert_equal "User wasike@email.com created.", flash[:notice]
     
     follow_redirect
     assert_template "list_users"
     
-    assert User.count, 6
+    assert_equal User.count, 6
     
   end
   
   def test_delete_user
     
-    assert User.count, 5
+    assert_equal User.count, 5
   
     post(:delete_user,
         {:id => 5},
         {:user_id => users(:marc)})
         
-    assert User.count, 4
+    assert_equal User.count, 4
+  
+  end
+  
+  def test_delete_user_non_admin
+  
+    assert_equal User.count, 5
+  
+    post(:delete_user,
+        {:id => 5},
+        {:user_id => users(:tech)})
+        
+    assert_equal User.count, 5
   
   end
   
@@ -101,7 +109,8 @@ class AdminControllerTest < Test::Unit::TestCase
         
     post(:update_user,
          {:id => marc.id, 
-          :user => {:name => "marcus",
+          :user => {:given_name => "marcus",
+                    :family_name => "Kohli",
                     :email => "junk@email.com",
                     :password => "password"}},
          {:user_id => users(:marc)})
@@ -112,7 +121,64 @@ class AdminControllerTest < Test::Unit::TestCase
     
     marcus = User.find(marc.id)
     
-    assert "marcus", marcus.name
+    assert_equal "marcus", marcus.given_name
+  end
+  
+  def test_list_providers
+    get(:list_providers,
+        {},
+        {:user_id => users(:marc)})
+        
+    assert :success
+    assert_template "list_providers"
+  end
+  
+  def test_add_provider
+    
+    assert_equal 2, Provider.count
+     
+    get(:add_provider,
+        {},
+        {:user_id => users(:marc)})
+        
+    post(:add_provider,
+         :provider => {:given_name => "Joseph", 
+                       :family_name => "Abuya",
+                       :email => "abuya@email.com",
+                       :password => "password",
+                       :privilege_id => 2,
+                       :title => "MD"},
+         :user_id => users(:marc))
+    
+    assert_redirected_to :action => "list_providers"
+    follow_redirect
+    
+    assert_equal  "Provider abuya@email.com created.", flash[:notice]
+    assert_template "list_providers"
+    
+    assert_equal 3, Provider.count
+  end
+  
+  def test_edit_provider
+    
+    marc = users(:marc)
+    
+    get(:edit_provider,
+        {:id => marc.id},
+        {:user_id => users(:marc)})
+     
+    post(:edit_provider,
+        {:provider => {:given_name => "marcus",
+                       :family_name => "kohlius",
+                       :password => "password"}, :id => marc.id},
+         :user_id => users(:marc))
+ 
+    assert_redirected_to :action => "list_providers"
+    assert_equal "Provider #{marc.email} was successfully updated", flash[:notice]
+    
+    follow_redirect
+    assert_template "list_providers"
+         
   end
   
 end

@@ -6,7 +6,8 @@
 <% form_for :client,
             :url => {:action => "add_client" },
             :builder => TaggedBuilder  do |form|%>
-    <%= form.text_field :name %>
+    <%= form.text_field :given_name %>
+    <%= form.text_field :family_name %>
     <%= form.text_field :email %>
     <%= form.collection_select(:privilege_id, @all_privileges, :id, :name) %>
     <%= form.password_field 'password' %>
