@@ -1,0 +1,27 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+infiltrate:
+  id:           1
+  name:         INFILTRATE
+  description:  "Opacity, generally in a patchy, fluffy distribution"
+cavitation:
+  id:           2
+  name:         CAVITATION
+  description:  "Having a hollowed-out appearance"
+right_upper_lung:
+  id:           3
+  name:         'RIGHT UPPER LUNG ZONE'
+right_mid_lung:
+  id:           4
+  name:         'RIGHT MIDDLE LUNG ZONE'
+right_lower_lung:
+  id:           5
+  name:         'RIGHT LOWER LUNG ZONE'
+left_upper_lung:
+  id:           6
+  name:         'LEFT UPPER LUNG ZONE'
+left_mid_lung:
+  id:           7
+  name:         'LEFT MIDDLE LUNG ZONE'
+left_lower_lung:
+  id:           8
+  name:         'LEFT LOWER LUNG ZONE'

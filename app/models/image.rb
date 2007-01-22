@@ -14,6 +14,14 @@ class Image < ActiveRecord::Base
     write_attribute 'extension', file_data.original_filename.split('.').last.downcase
     write_attribute 'path', short_path
   end
+  
+  def link_path
+    File.join("/image_archive/", short_path, filename)
+  end
+  
+  def link_thumb_path
+    File.join("/image_archive", short_path, thumb_filename)
+  end
     
   def full_path
     File.join(BASEDIRECTORY, short_path, filename)

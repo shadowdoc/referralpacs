@@ -1,0 +1,16 @@
+<% @page_title = "Dictionary" %>
+
+<p>
+<b>Name</b>
+<%= in_place_editor_field :concept, :name %>
+</p>
+<p>
+<b>Description</b>
+<%= in_place_editor_field :concept, :description, :rows => 5 %>
+</p>
+
+<% for answer in @concept.answers %>
+   <p>
+       <%=h answer.concept.name %>
+   </p>
+<% end %>

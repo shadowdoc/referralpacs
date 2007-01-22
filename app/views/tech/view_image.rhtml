@@ -1,0 +1,7 @@
+<% @page_title = "View Image" %>
+<% @patient = @image.encounter.patient %>
+<% setup_tech_layout %>
+
+<div id="full_image">
+  <%= image_tag @image.link_path %>
+</div>

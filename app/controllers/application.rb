@@ -126,4 +126,8 @@ class ApplicationController < ActionController::Base
     redirect_to :action => 'upload_image', :id => @encounter
   end
   
+  def view_image
+    @image = Image.find(params[:id])
+    @encounter = @image.encounter
+  end
 end

@@ -3,6 +3,8 @@ class AdminController < ApplicationController
   before_filter :authorize_login
   layout "ref"
   
+  auto_complete_for :patient, :family_name
+  
   def index
     redirect_to(:action => "find_patients")
   end

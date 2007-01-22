@@ -241,3 +241,22 @@ h1 {
   width: 100;
 }
 
+#full_image {
+  width: 100;
+  text-align: center;
+  margin 0 auto;
+}
+
+/* Dictionary Styles */
+#concept {
+  width: 500px;
+  font-size:20px;
+}
+
+#answer {
+ font-size:10px;
+}
+
+.inplaceeditor-form input[type="text"] {
+width: 350px;
+}

@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+right_upper_infiltrate:
+  id:           1
+  concept_id:   1
+  answer_id:    3
+right_mid_infiltrate:
+  id:           2
+  concept_id:   1
+  answer_id:    4
+right_mid_infiltrate:
+  id:           3
+  concept_id:   1
+  answer_id:    5
