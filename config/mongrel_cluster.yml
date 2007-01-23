@@ -1,4 +1,7 @@
 --- 
-port: 3000
+cwd: /tmp/www/cap/ref/current
+port: "8000"
+environment: production
+address: 127.0.0.1
 pid_file: log/mongrel.pid
 servers: 2
