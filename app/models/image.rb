@@ -22,6 +22,17 @@ class Image < ActiveRecord::Base
   def link_thumb_path
     File.join("/image_archive", short_path, thumb_filename)
   end
+  
+  def rotate(direction)
+    image = Magick::Image.read(full_path).first
+    if direction == "right"
+      image = image.rotate(90)
+    else
+      image = image.rotate(-90)
+    end
+    image.write(full_path)
+    create_thumbnail
+  end
     
   def full_path
     File.join(BASEDIRECTORY, short_path, filename)

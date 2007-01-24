@@ -130,4 +130,12 @@ class ApplicationController < ActionController::Base
     @image = Image.find(params[:id])
     @encounter = @image.encounter
   end
+  
+  def rotate
+    @image = Image.find(params[:id])
+    direction = params[:direction]
+    @image.rotate(direction)
+    redirect_to(:action => "view_image", :id => @image)
+  end
+  
 end

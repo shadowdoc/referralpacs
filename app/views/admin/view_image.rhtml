@@ -1,0 +1,10 @@
+<% @page_title = "View Image" %>
+<% @patient = @image.encounter.patient %>
+<% setup_admin_layout %>
+
+<div id="full_image">
+  <%= @image.full_path %>
+  <%= image_tag @image.link_path %>
+</div>
+<%= link_to("Rotate Left", {:action => :rotate, :direction => "left", :id => @image.id}, :post => true) %>
+<%= link_to("Rotate Right", {:action => :rotate, :direction => "right", :id => @image.id }, :post => true) %>

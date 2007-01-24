@@ -16,7 +16,8 @@
     <div id='thumbnails'>
         <% @encounter.images.each do |i|%>
             <div id='thumbnail'>
-                <a href='<%= i.full_url %>'><img src='<%= i.thumb_url %>'></a><br/>
+                <%= link_to(image_tag(i.link_thumb_path), :action => "view_image", :id => i) %><br/>
+                <%= link_to "remove", :action => 'remove_image', :id => i %>
             </div>
         <% end %>
     </div>

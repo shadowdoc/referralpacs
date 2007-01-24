@@ -1,0 +1,4 @@
+var concepts = new Array(<%= @concepts.size %>);
+<% @concepts.each_with_index do |concept, index| %>
+concepts[<%= index %>] = "<%= concept.name %>" ;
+<% end %>
