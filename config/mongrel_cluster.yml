@@ -1,5 +1,5 @@
 --- 
-cwd: /tmp/www/cap/ref/current
+cwd: /var/www/cap/ref/current
 port: "8000"
 environment: production
 address: 127.0.0.1
