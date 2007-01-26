@@ -64,13 +64,17 @@ html > body #banner {
 #centercontent {
     background: rgb(255, 255, 255) 
     voice-family: inherit;
-    width: 700px;
     margin: 0 auto;
     text-align: left;
 }
 
 #centercontent p {
     padding: 5px;
+}
+
+#blankspace {
+  background: rgb(255.255.255)
+  padding: 5px;
 }
 
 
