@@ -1,13 +1,49 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-right_upper_infiltrate:
-  id:           1
-  concept_id:   1
-  answer_id:    3
-right_mid_infiltrate:
-  id:           2
-  concept_id:   1
-  answer_id:    4
-right_mid_infiltrate:
-  id:           3
-  concept_id:   1
-  answer_id:    5
+--- 
+answers_012: 
+  concept_id: "2"
+  id: "13"
+  answer_id: "7"
+answers_001: 
+  concept_id: "1"
+  id: "1"
+  answer_id: "3"
+answers_002: 
+  concept_id: "1"
+  id: "3"
+  answer_id: "5"
+answers_003: 
+  concept_id: "1"
+  id: "4"
+  answer_id: "4"
+answers_004: 
+  concept_id: "1"
+  id: "5"
+  answer_id: "6"
+answers_005: 
+  concept_id: "1"
+  id: "6"
+  answer_id: "7"
+answers_006: 
+  concept_id: "1"
+  id: "7"
+  answer_id: "8"
+answers_007: 
+  concept_id: "2"
+  id: "8"
+  answer_id: "3"
+answers_008: 
+  concept_id: "2"
+  id: "9"
+  answer_id: "4"
+answers_009: 
+  concept_id: "2"
+  id: "10"
+  answer_id: "5"
+answers_010: 
+  concept_id: "2"
+  id: "11"
+  answer_id: "8"
+answers_011: 
+  concept_id: "2"
+  id: "12"
+  answer_id: "6"

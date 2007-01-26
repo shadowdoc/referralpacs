@@ -138,4 +138,19 @@ class ApplicationController < ActionController::Base
     redirect_to(:action => "view_image", :id => @image)
   end
   
+  def new_chest_report
+    if request.get?
+      @encounter = Encounter.find(params[:id])
+      @cxr = Concept.find(:first, :conditions => ["name = 'CHEST XRAY'"])    
+      
+      obs_groups = @cxr.answers
+      
+      for obs_group in obs_groups
+        for observation in obs_group.concept.answers
+          @observations[] += Observation.new
+        end
+      end
+    end
+  end
+  
 end

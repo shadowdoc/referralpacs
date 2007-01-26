@@ -1,0 +1,14 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+right_upper_lung_zone_infiltrate:
+  id:               1
+  encounter_id:     1
+  patient_id:       1
+  concept_id:       1
+  value_concept_id: 3
+  
+right_middle_lung_zone_infiltrate:
+  id:               2
+  encounter_id:     1
+  patient_id:       1
+  concept_id:       1
+  value_concept:    4
