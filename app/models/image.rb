@@ -4,6 +4,7 @@ class Image < ActiveRecord::Base
   belongs_to :encounter
 
   BASEDIRECTORY = "public/system/image_archive"
+  LINKDIRECTORY = "/system/image_archive"
   THUMB_MAX_SIZE = [125,125]
   
   after_save :process
@@ -14,15 +15,7 @@ class Image < ActiveRecord::Base
     write_attribute 'extension', file_data.original_filename.split('.').last.downcase
     write_attribute 'path', short_path
   end
-  
-  def link_path
-    File.join("/image_archive/", short_path, filename)
-  end
-  
-  def link_thumb_path
-    File.join("/image_archive", short_path, thumb_filename)
-  end
-  
+    
   def rotate(direction)
     image = Magick::Image.read(full_path).first
     if direction == "right"
@@ -41,6 +34,15 @@ class Image < ActiveRecord::Base
   def thumb_path
     File.join(BASEDIRECTORY, short_path, thumb_filename)
   end
+  
+  def link_path
+    File.join(LINKDIRECTORY, short_path, filename)
+  end
+  
+  def link_thumb_path
+    File.join(LINKDIRECTORY, short_path, thumb_filename)
+  end
+  
   
   def filename(suffix = 'full')
     "#{self.encounter.id}-#{self.id}-#{suffix}.#{self.extension}"
