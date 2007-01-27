@@ -46,10 +46,10 @@ class ApplicationController < ActionController::Base
     if request.post?
       search_hash = params[:search]
       search_criteria = search_hash['search_criteria']
-
+      
       case search_hash['identifier_type']
-        when 'name'
-          @patients = Patient.find(:all, :conditions => ["given_name = ? OR family_name = ?", search_criteria, search_criteria], :limit => 10)
+#        when 'name'
+#          @patients = Patient.find(:all, :conditions => ["given_name = ? OR family_name = ?", search_criteria, search_criteria], :limit => 10)
         when 'mrn_ampath'
           @patient = Patient.find(:first, :conditions => ['mrn_ampath = ?', search_criteria])
           if @patient
@@ -64,10 +64,25 @@ class ApplicationController < ActionController::Base
           else
             flash[:notice] = "No such patient: mtrh_rad_id = #{search_criteria}.  Click New Patient"
           end
+        else
+          if params[:patient][:name]
+            @patient = Patient.find(:first, 
+                       :conditions => [ 'LOWER(CONCAT(given_name, " ", family_name)) LIKE ?',
+                       '%' + params[:patient][:name].downcase + '%' ])
+            redirect_to(:action => :find_encounters, :id => @patient.id)
+          end
       end
-      
     end
   end
+  
+  def auto_complete_for_patient_name
+      @patients = Patient.find(:all, 
+                  :conditions => [ 'LOWER(CONCAT(given_name, " ", family_name)) LIKE ?',
+                  '%' + params[:patient][:name].downcase + '%' ], 
+                  :order => 'family_name ASC',
+                  :limit => 8)    
+    render :partial => 'shared/patients'
+  end  
   
   def show_encounter
     @encounter = Encounter.find(params[:id])
