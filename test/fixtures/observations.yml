@@ -4,7 +4,7 @@ right_upper_lung_zone_infiltrate:
   encounter_id:     1
   patient_id:       1
   concept_id:       1
-  value_concept_id: 3
+  value_concept:     3
   
 right_middle_lung_zone_infiltrate:
   id:               2

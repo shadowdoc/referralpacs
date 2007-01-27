@@ -1,2 +1,7 @@
-<h1>Admin#new_patient</h1>
-<p>Find me in app/views/admin/new_patient.rhtml</p>
+<% @page_title = "New Patient" %>
+<% setup_admin_layout %>
+
+<%= form_tag :action => 'new_patient' %>
+    <%= render :partial => "shared/form_patient" %>
+    <%= submit_tag "Create" %>
+</form>

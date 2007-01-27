@@ -31,3 +31,14 @@ tech:
   remove_user:    false
   add_patient:    true
   remove_patient: false
+  
+register:
+  id:             4
+  name:           register
+  view_study:     false
+  add_study:      false
+  remove_study:   false
+  add_user:       false
+  remove_user:    false
+  add_patient:    true
+  remove_patient: false

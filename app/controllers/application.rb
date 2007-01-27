@@ -162,7 +162,7 @@ class ApplicationController < ActionController::Base
       
       for obs_group in obs_groups
         for observation in obs_group.concept.answers
-          @observations[] += Observation.new
+          @observations[] = Observation.new
         end
       end
     end
