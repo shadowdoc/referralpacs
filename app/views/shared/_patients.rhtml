@@ -1,7 +1,5 @@
 <ul class="patients">
 <% for patient in @patients do -%>
-  <li class="patient">
-    <div class="name"><%=h patient.full_name %></div>
-  </li>
+  <li class="patient"><div class="name"><%=h patient.full_name %></div></li>
 <% end -%>
 </ul>
