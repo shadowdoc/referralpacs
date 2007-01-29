@@ -47,6 +47,8 @@ class AdminController < ApplicationController
     @all_privileges = Privilege.find(:all)
     if request.get?
       @user = User.new
+      # Sets the default privilege level to "Client"
+      @user.privilege_id = 2
     else 
       @user = User.new(params[:user])
       if @user.save

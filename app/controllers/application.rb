@@ -167,13 +167,13 @@ class ApplicationController < ActionController::Base
     @image = Image.find(params[:id])
     direction = params[:direction]
     @image.rotate(direction)
-    redirect_to(:action => "view_image", :id => @image)
+    redirect_to(:action => "edit_image", :id => @image)
   end
   
   def crop
     @image = Image.find(params[:id])
     if params[:x1] 
-      @image.crop(params[:x1].to_i, params[:y1].to_i, params[:x2].to_i, params[:y2].to_i)
+      @image.crop(params[:x1].to_i, params[:y1].to_i, params[:width].to_i, params[:height].to_i)
     else
       flash[:notice] = "No crop selected"
     end

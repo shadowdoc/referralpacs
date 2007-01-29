@@ -38,7 +38,9 @@
 <%= text_field 'patient', 'address2'  %></p>
 
 <p><label for="patient_birthdate">Birthdate</label><br/>
-<%= datetime_select 'patient', 'birthdate'  %></p>
+<%= date_select 'patient', 'birthdate',
+    :start_year => getBirthDateStart,
+    :end_year => getBirthDateEnd  %></p>
 
 <!--[eoform:patient]-->
 

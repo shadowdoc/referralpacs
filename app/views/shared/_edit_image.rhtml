@@ -12,6 +12,8 @@
         	$( 'y1' ).value = coords.y1;
         	$( 'x2' ).value = coords.x2;
         	$( 'y2' ).value = coords.y2;
+      		$( 'width' ).value = dimensions.width;
+            $( 'height' ).value = dimensions.height;
         }
   </script>
 
@@ -22,6 +24,8 @@
     <%= hidden_field_tag 'y1' %>
     <%= hidden_field_tag 'x2' %>
     <%= hidden_field_tag 'y2' %>
+    <%= hidden_field_tag 'width' %>
+    <%= hidden_field_tag 'height' %>
     <%= submit_tag "Crop"%>
 </form>
 

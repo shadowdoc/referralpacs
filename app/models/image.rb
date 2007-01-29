@@ -27,9 +27,9 @@ class Image < ActiveRecord::Base
     create_thumbnail
   end
   
-  def crop(x1, y1, x2, y2)
+  def crop(x1, y1, width, height)
     image = Magick::Image.read(full_path).first
-    image.crop!(x1, y1, x2, y2) 
+    image.crop!(x1, y1, width, height) 
     image.write(full_path)
     create_thumbnail
   end
