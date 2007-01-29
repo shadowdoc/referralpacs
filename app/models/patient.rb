@@ -9,7 +9,13 @@ class Patient < ActiveRecord::Base
   
   #Provide a concatenated name for cleaner display.
   def full_name
-    given_name + " " + family_name
+    unless self.given_name.nil? || self.family_name.nil?
+      self.given_name + " " + self.family_name
+    end
+  end
+  
+  def birthdate_formatted
+    self.birthdate.strftime("%d %b %Y") unless birthdate.nil?
   end
   
   def uppercase

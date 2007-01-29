@@ -22,6 +22,24 @@ class AdminController < ApplicationController
   end
 
   def merge_patients
+    if request.get?
+      @patient0 = Patient.new()
+      @patient1 = Patient.new()
+    else
+
+    end
+  end
+  
+  def set_patient
+    mtrh_rad_id = params[:mtrh_rad_id]
+    @which_patient = params[:which_patient]
+    @patient = Patient.find(:first, :conditions => ['mtrh_rad_id = ?', mtrh_rad_id])
+    if @patient.nil?
+      flash[:notice] = "Patient could not be set, please enter a valid MTRH Radiology ID"
+    else
+      render :action => "set_patient", :locals => {:patient => @patient,
+                                                   :which_patient => @which_patient }
+    end
   end
   
   def add_user

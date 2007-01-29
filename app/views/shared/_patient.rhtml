@@ -1,12 +1,9 @@
-<%= error_messages_for 'patient' %>
-
-
 <tr>
     <td><%=h patient.mrn_ampath%></td>
     <td><%=h patient.mtrh_rad_id %></td>
     <td><%=h patient.full_name %></td>
     <td><%=h patient.gender %></td>
     <td><%=h patient.address1 %></td>
-    <td><%=h patient.birthdate.strftime("%d %b %Y") %></td>
+    <td><%=h patient.birthdate_formatted %></td>
     <td><%= link_to('Select', :action => "find_encounters", :id => patient.id) %></td>
 </tr>

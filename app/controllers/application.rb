@@ -87,7 +87,7 @@ class ApplicationController < ActionController::Base
                   '%' + params[:patient][:name].downcase + '%' ], 
                   :order => 'family_name ASC',
                   :limit => 8)    
-    render :partial => 'shared/patients'
+    render :partial => 'shared/patient_autocomplete'
   end  
   
   def show_encounter
