@@ -157,12 +157,6 @@ class AdminController < ApplicationController
   
   def edit_encounter
     @encounter = Encounter.find(params[:id])
-    
-    if @encounter.update_attributes(params[:encounter])
-      redirect_to(:action => "upload_image", :id => @encounter)
-    else
-      redirect_to(:action => "show_encounter")
-    end
-  
+    @encounter.update_attributes(params[:encounter])
   end
 end

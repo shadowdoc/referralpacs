@@ -1,0 +1,12 @@
+<% form_remote_for :encounter,
+                   :url => url_for(:action => "edit_encounter", :id => @encounter),
+                   :loading => 'Form.disable("encounter-form")',
+                   :complete => 'Form.enable("encounter-form")',
+                   :html => {:id => "encounter-form"},
+                   :builder => TaggedBuilder do |form| %>
+    <%= form.date_select :date %>
+    <%= form.collection_select :encounter_type_id, @all_encounter_types, :id, :name %>
+    <%= form.text_field :indication %>
+    <%= form.collection_select :provider_id, @all_providers, :id, :name %>
+    <%= submit_tag "Save Changes to Encounter Details" %>    
+<% end %>
