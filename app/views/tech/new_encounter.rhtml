@@ -15,7 +15,8 @@
     <%= form.text_area :indication, 'rows' => '3'  %>
     <%= form.text_area :findings, 'rows' => '4'  %>
     <%= form.text_area :impression, 'rows' => '4'  %>
-    <%= form.collection_select(:provider_id, @all_providers, :id, :name) %>
+    <%= form.collection_select(:provider_id, @all_providers, :id, :full_name) %>
+    <%= form.collection_select(:client_id, @all_clients, :id, :full_name) %>
     
 <p><%= submit_tag "Save text, continue..." %></p>
 <% end %>

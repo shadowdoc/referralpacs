@@ -1,0 +1,31 @@
+<div id="full_image">
+  <%= image_tag @image.link_path, :id => "refpacs-image" %>
+  <script type="text/javascript" language="javascript">
+    	Event.observe( window, 'load', function() {
+    		new Cropper.Img(
+    			'refpacs-image',
+    			{ onEndCrop: onEndCrop }
+    		);
+    	} );
+    	function onEndCrop( coords, dimensions ) {
+        	$( 'x1' ).value = coords.x1;
+        	$( 'y1' ).value = coords.y1;
+        	$( 'x2' ).value = coords.x2;
+        	$( 'y2' ).value = coords.y2;
+        }
+  </script>
+
+</div>
+
+<%= form_tag :action => "crop", :id => @image.id %>
+    <%= hidden_field_tag 'x1' %>
+    <%= hidden_field_tag 'y1' %>
+    <%= hidden_field_tag 'x2' %>
+    <%= hidden_field_tag 'y2' %>
+    <%= submit_tag "Crop"%>
+</form>
+
+<%= link_to("Rotate Left", {:action => :rotate, :direction => "left", :id => @image.id}, :post => true) %>
+<%= link_to("Rotate Right", {:action => :rotate, :direction => "right", :id => @image.id }, :post => true) %><br/>
+<br/>
+<%= link_to("Return to Upload Images", {:action => :upload_image, :id => @encounter.id }) %>

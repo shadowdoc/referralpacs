@@ -26,6 +26,13 @@ class Image < ActiveRecord::Base
     image.write(full_path)
     create_thumbnail
   end
+  
+  def crop(x1, y1, x2, y2)
+    image = Magick::Image.read(full_path).first
+    image.crop!(x1, y1, x2, y2) 
+    image.write(full_path)
+    create_thumbnail
+  end
     
   def full_path
     File.join(BASEDIRECTORY, short_path, filename)

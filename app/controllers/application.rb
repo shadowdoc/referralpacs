@@ -116,6 +116,7 @@ class ApplicationController < ActionController::Base
     if request.get? && params[:encounter].nil?
       @all_encounter_types = EncounterType.find(:all)
       @all_providers = Provider.find(:all)
+      @all_clients = Client.find(:all)
   
       @encounter = Encounter.new()  
       @encounter.patient_id = params[:id]
@@ -131,6 +132,8 @@ class ApplicationController < ActionController::Base
   def upload_image
     @all_encounter_types = EncounterType.find(:all)
     @all_providers = Provider.find(:all)
+    @all_clients = Client.find(:all)
+    
     @encounter = Encounter.find(params[:id])
     @image = Image.new()
     @image.encounter_id = @encounter.id
@@ -155,11 +158,26 @@ class ApplicationController < ActionController::Base
     @encounter = @image.encounter
   end
   
+  def edit_image
+    @image = Image.find(params[:id])
+    @encounter = @image.encounter
+  end
+  
   def rotate
     @image = Image.find(params[:id])
     direction = params[:direction]
     @image.rotate(direction)
     redirect_to(:action => "view_image", :id => @image)
+  end
+  
+  def crop
+    @image = Image.find(params[:id])
+    if params[:x1] 
+      @image.crop(params[:x1].to_i, params[:y1].to_i, params[:x2].to_i, params[:y2].to_i)
+    else
+      flash[:notice] = "No crop selected"
+    end
+    redirect_to(:action => "edit_image", :id => @image)    
   end
   
 end

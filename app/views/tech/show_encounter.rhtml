@@ -2,6 +2,6 @@
 <% @patient = @encounter.patient %>
 <% setup_tech_layout %>
 
-<%= render :partial => "shared/encounter" %>
+<%= render :partial => "shared/show_encounter" %>
 
 <%= link_to "Return to Encounter list", :action => 'find_encounters', :id => @patient %>

@@ -1,5 +1,3 @@
 <div id="full_image">
-  <%= image_tag @image.link_path %>
+  <%= image_tag @image.link_path, :id => "refpacs-image" %>
 </div>
-<%= link_to("Rotate Left", {:action => :rotate, :direction => "left", :id => @image.id}, :post => true) %>
-<%= link_to("Rotate Right", {:action => :rotate, :direction => "right", :id => @image.id }, :post => true) %>

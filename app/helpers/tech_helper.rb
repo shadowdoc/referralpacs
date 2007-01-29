@@ -12,7 +12,7 @@ module TechHelper
       set_current_patient_banner
       @command_list = [
           link_to('Find Patients', :action => :find_patients),
-          link_to('New Patient', :action => :new_patients),
+          link_to('New Patient', :action => :new_patient),
           link_to("#{@patient.full_name}", :action => :find_encounters, :id => @patient)] 
     end
   end
