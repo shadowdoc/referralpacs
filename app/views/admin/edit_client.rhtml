@@ -3,7 +3,7 @@
 
 <%= error_messages_for  'client' %>
 
-<% form_for :provider, 
+<% form_for :client, 
             :url => {:action => "edit_client", :id => @client},
             :builder => TaggedBuilder do |form| %>
     <%= form.text_field :given_name %>

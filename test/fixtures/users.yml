@@ -33,7 +33,7 @@ client:
   hashed_password: <%= User.hash_password('password') %>
   privilege_id:    2
   type:            Client
-  contact:         'Email'
+  title:           MD
 tech:
   id:              5
   given_name:      ''

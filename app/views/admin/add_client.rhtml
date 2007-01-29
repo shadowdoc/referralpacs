@@ -10,8 +10,8 @@
     <%= form.text_field :family_name %>
     <%= form.text_field :email %>
     <%= form.collection_select(:privilege_id, @all_privileges, :id, :name) %>
+    <%= form.text_field :title %>
     <%= form.password_field 'password' %>
-    <%= form.text_field :contact %>
     <br/>
     <%= submit_tag 'Save' %>
 <% end %>

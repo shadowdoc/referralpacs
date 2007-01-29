@@ -42,14 +42,11 @@ class ApplicationController < ActionController::Base
   end
   
   def find_patients
-  
     if request.post?
       search_hash = params[:search]
       search_criteria = search_hash['search_criteria']
       
       case search_hash['identifier_type']
-#        when 'name'
-#          @patients = Patient.find(:all, :conditions => ["given_name = ? OR family_name = ?", search_criteria, search_criteria], :limit => 10)
         when 'mrn_ampath'
           @patient = Patient.find(:first, :conditions => ['mrn_ampath = ?', search_criteria])
           if @patient
@@ -65,12 +62,21 @@ class ApplicationController < ActionController::Base
             flash[:notice] = "No such patient: mtrh_rad_id = #{search_criteria}.  Click New Patient"
           end
         else
-          if params[:patient][:name]
-            @patient = Patient.find(:first, 
-                       :conditions => [ 'LOWER(CONCAT(given_name, " ", family_name)) LIKE ?',
-                       '%' + params[:patient][:name].downcase + '%' ])
-            redirect_to(:action => :find_encounters, :id => @patient.id)
-          end
+          unless params[:patient][:name] == ""
+            @patients = Patient.find(:all, 
+                                    :conditions => [ 'LOWER(CONCAT(given_name, " ", family_name)) LIKE ?',
+                                    '%' + params[:patient][:name].downcase + '%' ])
+            case @patients.length
+              when 0
+                flash[:notice] = "No such patient: name = #{params[:patient][:name]}"              
+              when 1
+                redirect_to(:action => :find_encounters, :id => @patients[0].id)            
+              else
+                render(:action => :list_patients)
+            end
+          else
+            flash[:notice] = "Please enter your search parameters"
+          end         
       end
     end
   end
@@ -85,11 +91,14 @@ class ApplicationController < ActionController::Base
   end  
   
   def show_encounter
+    @all_encounter_types = EncounterType.find(:all)
+    @all_providers = Provider.find(:all)
+    @all_clients = Client.find(:all)
     @encounter = Encounter.find(params[:id])
   end
   
   def new_patient
-    @all_tribes = Tribe.find(:all)
+    @all_tribes = Tribe.find(:all, :order => "name ASC")
     if request.get?
       @patient = Patient.new()
     else
@@ -151,10 +160,6 @@ class ApplicationController < ActionController::Base
     direction = params[:direction]
     @image.rotate(direction)
     redirect_to(:action => "view_image", :id => @image)
-  end
-  
-  def new_report
-
   end
   
 end

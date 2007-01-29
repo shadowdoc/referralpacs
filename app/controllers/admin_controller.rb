@@ -8,7 +8,7 @@ class AdminController < ApplicationController
   end
   
   def edit_patient
-    @all_tribes = Tribe.find(:all)
+    @all_tribes = Tribe.find(:all, :order => "name ASC")
     if request.get?
       @patient = Patient.find(params[:id])
     else
@@ -147,12 +147,6 @@ class AdminController < ApplicationController
         @all_privileges = Privilege.find(:all)
       end
     end
-  end
-  
-  def show_encounter
-    @all_encounter_types = EncounterType.find(:all)
-    @all_providers = Provider.find(:all)
-    @encounter = Encounter.find(params[:id])
   end
   
   def edit_encounter

@@ -2,7 +2,8 @@
 Indication: <%=h @encounter.indication %><br />
 Findings:   <%=h @encounter.findings %><br />
 Impression: <%=h @encounter.impression %><br />
-Provider:   <%=h @encounter.provider.family_name %><br />
+Provider:   <%=h @encounter.provider.full_name %><br />
+Client:     <%=h @encounter.client.full_name %><br />
 <div id='thumbnails'>
     <% @encounter.images.each do |i|%>
         <div id='thumbnail'>
