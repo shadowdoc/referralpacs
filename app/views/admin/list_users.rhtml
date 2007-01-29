@@ -1,13 +1,15 @@
 <% @page_title = "User List" -%>
 <% setup_admin_layout %>
 
+<% error_messages_for "user" %>
+
 <table>
   <% for user in @all_users %>
     <tr valign="top" id="<%= cycle("ListLine1", "ListLine0") %>">
       <td><%=h user.full_name %></td>
       <td><%=h user.email %></td>
       <td><%=h user.privilege.name %></td>
-      <td><%= link_to(" edit ", :action => :edit_user, :id => user.id)%> &nbsp; <%= link_to(" delete ", :action => :delete_user, :id => user.id, :confirm => "This cannot be undone, are you sure?") %></td>
+      <td><%= link_to(" edit ", :action => :edit_user, :id => user.id)%>&nbsp;<%= link_to(" delete ", {:action => :delete_user, :id => user.id}, :confirm => "This cannot be undone, are you sure?") %></td>
     </tr>
     
   <% end -%>

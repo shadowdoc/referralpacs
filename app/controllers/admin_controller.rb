@@ -70,8 +70,9 @@ class AdminController < ApplicationController
       if id && user = User.find(id)
         begin
           user.destroy
-          flash[:notice] = "User #{user.name} deleted"
+          flash[:notice] = "User deleted"
         rescue
+          raise error_messages
           flash[:notice] = "Can't delete that user"
         end
       end
