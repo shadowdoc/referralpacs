@@ -62,7 +62,7 @@ html > body #banner {
 }
 
 #centercontent {
-    background: rgb(255, 255, 255) 
+    background: rgb(255, 255, 255);
     voice-family: inherit;
     margin: 0 auto;
     text-align: left;
@@ -73,7 +73,7 @@ html > body #banner {
 }
 
 #blankspace {
-  background: rgb(255.255.255)
+  background: rgb(255,255,255);
   padding: 5px;
 }
 
@@ -245,12 +245,6 @@ h1 {
   width: 100;
 }
 
-#full_image {
-  width: 100;
-  text-align: center;
-  margin 0 auto;
-}
-
 /* Dictionary Styles */
 #concept {
   width: 500px;
@@ -279,8 +273,8 @@ div.auto_complete ul {
     list-style-type:none;
 }
 div.auto_complete ul li {
-    margin:0;
-    padding:3px;
+    margin: 0;
+    padding: 3px;
 }
 div.auto_complete ul li.selected {
     background-color: #ffb;
@@ -289,4 +283,48 @@ div.auto_complete ul strong.highlight {
     color: #800;
     margin:0;
     padding:0;
+}
+
+/* Styles for resize sliders */
+div#slider {
+    margin: 10px 0 10px 10px;
+}
+
+div#slider-bar {
+    width: 200px;
+    background-image: url('/images/scaler_slider_track.gif');
+    background-repeat: repeat-x;
+    background-position: center left;
+    height:18px;
+}
+
+div#slider-handle {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+}
+
+div#canvas {
+    border: 1px solid #ddd;
+    overflow: auto;
+    margin: 0 0 30px 0;
+}
+
+.scale-image {
+    width: 100px;
+    height: auto;
+    margin: 0;
+    border: 0;
+    text-align:center;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:10px;
+}
+
+.img-container
+	{
+	margin: 4px 0px 0px 10px;
+	padding: 10px 10px 10px 10px;
+	float:left;
+	border:1px solid #ddd;
 }
