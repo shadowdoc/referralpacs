@@ -174,4 +174,5 @@ class AdminController < ApplicationController
     @encounter = Encounter.find(params[:id])
     @encounter.update_attributes(params[:encounter])
   end
+  
 end
