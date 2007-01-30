@@ -1,8 +1,0 @@
-if @encounter.errors?
-  page.alert "The Encounter could not be updated for the following reasons:\n" +
-  @encounter.errors.full_messages.join("\n")
-else
-  page.replace 'encounter_detail', :partial => 'encounter_detail'
-  page.visual_effect :highlight, "expense-#{@expense.id}"
-  page.form.reset 'expense-form'
-end

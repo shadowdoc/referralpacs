@@ -21,4 +21,10 @@ module ApplicationHelper
   def getBirthDateEnd()
     Time.now.year
   end
+  
+  def fillCollections
+    @all_encounter_types = EncounterType.find(:all)
+    @all_providers = Provider.find(:all)
+    @all_clients = Client.find(:all)
+  end
 end

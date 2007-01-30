@@ -1,0 +1,22 @@
+<%= stylesheet_link_tag "ref" %>
+
+<% for con in @concepts %>
+    <div id="concept">
+      <div id="<%=cycle "ListLine0", "ListLine1" %>">
+        <%=h con.name %>
+      </div>
+      <div id="description">
+        <%=h con.description %>
+      </div>
+      <% for answer in con.answers %>
+        <div id="answer">
+           <%=h answer.concept.name %>
+        </div>
+      <% end %>
+      <div id="link">
+        <%= link_to('Show', :action => :show_concept, :id => con) %>
+      </div>
+    </div>
+<% end %>
+
+<%= link_to('New Concept', :action => :show_concept) %>

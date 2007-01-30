@@ -1,6 +1,9 @@
-<% @encounter.images.each do |i|%>
-    <div id='thumbnail'>
-        <%= link_to(image_tag(i.link_thumb_path), :action => "view_image", :id => i) %><br/>
-        <%= link_remote_to "remove", :action => 'remove_image', :id => i %>
-    </div>
-<% end %>
+<div id="thumbnails">
+    <h2>Image Thumbnails</h2>
+    <% @encounter.images.each do |i|%>
+        <div id="thumbnail-<%= i.id %>" class="thumbnail" >
+            <%= link_to(image_tag(i.link_thumb_path), :action => "view_image", :id => i) %><br/>
+            <%= link_to_remote "remove", :url => {:action => 'remove_image', :id => i} %>
+        </div>
+    <% end %>
+</div>

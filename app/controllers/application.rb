@@ -91,10 +91,48 @@ class ApplicationController < ActionController::Base
   end  
   
   def show_encounter
-    @all_encounter_types = EncounterType.find(:all)
-    @all_providers = Provider.find(:all)
-    @all_clients = Client.find(:all)
     @encounter = Encounter.find(params[:id])
+    @observation = Observation.new(:encounter_id => @encounter.id)
+  end
+  
+  def edit_encounter
+    if params[:id].nil?
+      @encounter = Encounter.new(params[:encounter])
+      @encounter.save
+    else
+      @encounter = Encounter.find(params[:id])
+      @encounter.update_attributes(params[:encounter])
+      @encounter.save
+    end
+    render :partial => 'shared/edit_encounter', :object => @encounter
+  end
+  
+  def new_encounter
+    @patient = Patient.find(params[:id])
+    @encounter = Encounter.new()  
+    @encounter.patient_id = @patient.id
+    @observation = Observation.new(:encounter_id => @encounter.id, :patient_id => @encounter.patient.id)
+  end
+
+  def add_observation
+    @id = params[:encounter_id]
+    @encounter = Encounter.find(@id)
+    @concept = Concept.find(:first, :conditions => ["name = ?", params[:concept_name]])
+    @value_concept = Concept.find(:first, :conditions => ["name = ?", params[:value_concept_name]])
+    @observation = Observation.new(:encounter_id => @encounter.id,
+                                   :patient_id => @encounter.patient.id,
+                                   :concept_id => @concept.id,
+                                   :value_concept_id => @value_concept.id)
+    @observation.save
+    render :partial => "shared/add_observation", :object => @observation
+  end
+  
+  def remove_observation
+    @observation = Observation.find(params[:id])
+    @observation.destroy
+    render :update do |page|
+        page.remove "observation-#{params[:id]}"
+    end    
   end
   
   def new_patient
@@ -112,28 +150,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def new_encounter
-    if request.get? && params[:encounter].nil?
-      @all_encounter_types = EncounterType.find(:all)
-      @all_providers = Provider.find(:all)
-      @all_clients = Client.find(:all)
-  
-      @encounter = Encounter.new()  
-      @encounter.patient_id = params[:id]
-    else
-      @encounter = Encounter.new(params[:encounter])
-      if @encounter.save
-        flash[:notice] = "Encounter saved"
-        redirect_to :action => "upload_image", :id => @encounter
-      end
-    end
-  end
-
-  def upload_image
-    @all_encounter_types = EncounterType.find(:all)
-    @all_providers = Provider.find(:all)
-    @all_clients = Client.find(:all)
-    
+  def upload_image    
     @encounter = Encounter.find(params[:id])
     @image = Image.new()
     @image.encounter_id = @encounter.id
@@ -142,15 +159,16 @@ class ApplicationController < ActionController::Base
   def add_image
     @image = Image.create(params[:image])
     flash[:notice] = 'File uploaded'
-    redirect_to :action => 'upload_image', :id => @image.encounter.id
+    redirect_to(:action => 'show_encounter', :id => @image.encounter.id)
   end
   
   def remove_image
     @image = Image.find(params[:id])
     @encounter = @image.encounter
     @image.destroy
-    flash[:notice] = 'Image Destroyed'
-    redirect_to :action => 'upload_image', :id => @encounter
+    render :update do |page|
+      page.remove "thumbnail-#{params[:id]}"
+    end
   end
   
   def view_image

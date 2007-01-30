@@ -1,0 +1,6 @@
+<h2>Image Thumbnails</h2>
+<% @encounter.images.each do |i|%>
+    <div id="thumbnail-<%= i.id %>" class="thumbnail" >
+        <%= link_to(image_tag(i.link_thumb_path), :action => "view_image", :id => i) %><br/>
+    </div>
+<% end %>

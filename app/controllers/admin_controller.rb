@@ -170,9 +170,10 @@ class AdminController < ApplicationController
     end
   end
   
-  def edit_encounter
-    @encounter = Encounter.find(params[:id])
-    @encounter.update_attributes(params[:encounter])
+  def add_image
+    @image = Image.create(params[:image])
+    flash[:notice] = 'File uploaded'
+    redirect_to :action => 'show_encounter', :id => @image.encounter.id
   end
   
 end

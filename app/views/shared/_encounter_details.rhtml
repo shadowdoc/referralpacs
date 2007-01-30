@@ -1,13 +1,7 @@
+<div id="encounter-detail">
 <h2><%=h @encounter.encounter_type.name %> from <%=h @encounter.date.strftime("%d %b %Y") %></h2>
 Indication: <%=h @encounter.indication %><br />
-Findings:   <%=h @encounter.findings %><br />
 Impression: <%=h @encounter.impression %><br />
 Provider:   <%=h @encounter.provider.full_name %><br />
 Client:     <%=h @encounter.client.full_name %><br />
-<div id='thumbnails'>
-    <% @encounter.images.each do |i|%>
-        <div id='thumbnail'>
-            <%= link_to(image_tag(i.link_thumb_path), :action => "view_image", :id => i) %><br/>
-        </div>
-    <% end %>
 </div>

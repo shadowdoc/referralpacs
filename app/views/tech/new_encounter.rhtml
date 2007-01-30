@@ -1,22 +1,26 @@
 <% @page_title = "New Encounter" %>
 <% @patient = @encounter.patient %>
-<% set_current_patient_banner %>
 <% setup_tech_layout %>
+<% fillCollections %>
 
-<%=h error_messages_for('encounter')%>
+<% error_messages_for('encounter') %>
 
-<% form_for :encounter,
-            :url => {:action => "new_encounter"},
-            :builder => TaggedBuilder do |form| %>
-            
-    <%= hidden_field :encounter, :patient_id %>
-    <%= form.date_select :date  %>
-    <%= form.collection_select(:encounter_type_id, @all_encounter_types, :id, :name) %>
-    <%= form.text_area :indication, 'rows' => '3'  %>
-    <%= form.text_area :findings, 'rows' => '4'  %>
-    <%= form.text_area :impression, 'rows' => '4'  %>
-    <%= form.collection_select(:provider_id, @all_providers, :id, :full_name) %>
-    <%= form.collection_select(:client_id, @all_clients, :id, :full_name) %>
-    
-<p><%= submit_tag "Save text, continue..." %></p>
-<% end %>
+<%= render :partial => "shared/encounter_details_rw",
+           :locals => {:encounter => @encounter,
+                       :all_encounter_types => @all_encounter_types,
+                       :all_providers => @all_providers,
+                       :patient => @patient } %>
+                       
+<div id="break"><hr></div>                       
+<%= render :partial => "shared/observations_rw",
+           :locals => {:encounter => @encounter} %>
+
+<div id="break"><hr></div>
+<%= render :partial => "shared/thumbnails_rw", 
+           :locals => {:encounter => @encounter} %>
+
+<%= render :partial => "shared/upload_image",
+           :locals => {:encounter => @encounter} %>
+
+<div id="break">&nbsp;</div>
+<%= link_to "Return to Encounter list", :action => 'find_encounters', :id => @patient %>

@@ -1,0 +1,8 @@
+if @observation.errors.empty?
+  page.insert_html :bottom, 'observation-table', :partial => 'shared/observation_rw'
+  page.visual_effect :highlight, "observation-#{@observation.id}"
+  page.form.reset 'observation-form'
+else
+  page.alert "The Observation could not be updated for the following reasons:\n" +
+  @observation.errors.full_messages.join("\n")
+end

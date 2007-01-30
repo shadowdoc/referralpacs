@@ -210,6 +210,10 @@ h1 {
     text-decoration: underline;
 }
 
+#encounter-detail {
+    font-size: 15px;
+}
+
 #header#date_type {
   width: 500;
 }
@@ -233,16 +237,14 @@ h1 {
 
 /* Thumbnail Styles */
 
-#thumbnail {
+.thumbnail {
+  text-align: left;
   float: left;
+  padding: 5px;
 }
 
-#thumbnail a {
-  text-align: center;
-}
-
-#thumbnails {
-  width: 100;
+#break {
+  width: 100%;
 }
 
 /* Dictionary Styles */
