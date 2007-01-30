@@ -1,7 +1,9 @@
 <% @page_title = "Encounter List" %>
 <% setup_admin_layout %>
 
-<%= render :partial => "shared/find_encounters",
+<%= error_messages_for "encounter" %>
+
+<%= render :partial => "shared/find_encounters_del",
            :collection => @encounters %>
 
 <%= render :partial => "shared/page_nav",

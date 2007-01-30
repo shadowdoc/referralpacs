@@ -1,0 +1,26 @@
+<% @page_title = "New Encounter" %>
+<% @patient = @encounter.patient %>
+<% setup_admin_layout %>
+<% fillCollections %>
+
+<% error_messages_for('encounter') %>
+
+<%= render :partial => "shared/encounter_details_rw",
+           :locals => {:encounter => @encounter,
+                       :all_encounter_types => @all_encounter_types,
+                       :all_providers => @all_providers,
+                       :patient => @patient } %>
+                       
+<div id="break"><hr></div>                       
+<%= render :partial => "shared/observations_rw",
+           :locals => {:encounter => @encounter} %>
+
+<div id="break"><hr></div>
+<%= render :partial => "shared/thumbnails_rw", 
+           :locals => {:encounter => @encounter} %>
+
+<%= render :partial => "shared/upload_image",
+           :locals => {:encounter => @encounter} %>
+
+<div id="break">&nbsp;</div>
+<%= link_to "Return to Encounter list", :action => 'find_encounters', :id => @patient %>

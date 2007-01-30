@@ -176,4 +176,16 @@ class AdminController < ApplicationController
     redirect_to :action => 'show_encounter', :id => @image.encounter.id
   end
   
+  def del_encounter
+    @encounter = Encounter.find(params[:id])
+    @patient = @encounter.patient
+    begin 
+      @encounter.destroy
+      flash[:notice] = "Encounter deleted."
+    rescue
+      flash[:notice] = "Could not delete encounter."
+    end 
+    redirect_to :action => "find_encounters", :id => @patient.id
+  end
+  
 end

@@ -12,3 +12,18 @@ right_middle_lung_zone_infiltrate:
   patient_id:       1
   concept_id:       1
   value_concept_id: 4
+  
+right_upper_lung_zone_cavitation:
+  id:               3
+  encounter_id:     2
+  patient_id:       1
+  concept_id:       2
+  value_concept_id: 3
+  
+right_middle_lung_zone_cavitation:
+  id:               4
+  encounter_id:     2
+  patient_id:       1
+  concept_id:       2
+  value_concept_id: 4
+  

@@ -1,4 +1,4 @@
-<% @javascript = "cropper/cropper, builder" -%>
+<%= javascript_include_tag  'cropper/cropper', 'builder' %>
 
 <div id="full_image">
   <%= image_tag @image.link_path, :id => "refpacs-image" %>
@@ -34,4 +34,4 @@
 <%= link_to("Rotate Left", {:action => :rotate, :direction => "left", :id => @image.id}, :post => true) %>
 <%= link_to("Rotate Right", {:action => :rotate, :direction => "right", :id => @image.id }, :post => true) %><br/>
 <br/>
-<%= link_to("Return to Upload Images", {:action => :upload_image, :id => @encounter.id }) %>
+<%= link_to("Return to Encounter", {:action => :show_encounter, :id => @encounter.id }) %>

@@ -1,10 +1,9 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 right_pneumonia:
   id: 1
-  date: 2007-01-06 23:49:00.0
+  date: 2007-01-06
   patient_id: 1
   indication: 'Cough'
-  findings: 'Right basilar airspace disease'
   impression: 'Right lower lobe pneumonia'
   encounter_type_id: 1
   provider_id: 1
@@ -15,7 +14,6 @@ chest_pain:
   date: 2007-01-05
   patient_id: 2
   indication: 'Chest pain'
-  findings: 'Right apical pneumothorax.  No mediastinal shift. No rib fractures. Bullous emphysema'
   impression: 'Right pneumothorax.'
   encounter_type_id: 1
   provider_id: 3
