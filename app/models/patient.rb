@@ -3,7 +3,7 @@ class Patient < ActiveRecord::Base
   belongs_to :tribe
   
   validates_presence_of :given_name, :family_name, :mtrh_rad_id
-  validates_uniqueness_of :mrn_ampath, :mtrh_rad_id
+  validates_uniqueness_of :mtrh_rad_id
   
   before_save :uppercase
   

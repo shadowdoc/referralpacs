@@ -1,5 +1,5 @@
 class Encounter < ActiveRecord::Base
-  validates_presence_of :date, :indication, :impression
+  validates_presence_of :date
   belongs_to :patient
   belongs_to :encounter_type
   belongs_to :provider
