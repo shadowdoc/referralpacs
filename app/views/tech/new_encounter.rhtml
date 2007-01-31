@@ -10,16 +10,16 @@
                        :all_encounter_types => @all_encounter_types,
                        :all_providers => @all_providers,
                        :patient => @patient } %>
-                       
-<div id="break"><hr></div>                       
-<%= render :partial => "shared/observations_rw",
-           :locals => {:encounter => @encounter} %>
 
 <div id="break"><hr></div>
 <%= render :partial => "shared/thumbnails_rw", 
            :locals => {:encounter => @encounter} %>
 
 <%= render :partial => "shared/upload_image",
+           :locals => {:encounter => @encounter} %>                       
+                       
+<div id="break"><hr></div>                       
+<%= render :partial => "shared/observations_rw",
            :locals => {:encounter => @encounter} %>
 
 <div id="break">&nbsp;</div>

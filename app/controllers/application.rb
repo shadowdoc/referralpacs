@@ -29,26 +29,37 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  def find_encounters
-    # This controller will return a list of encounters, which may or may not be patient specific.
- 
-    if params[:id]
-      @patient = Patient.find(params[:id])
-      @encounter_pages, @encounters = paginate :encounters, :conditions => ["patient_id = ?", params[:id]], :per_page => ENCOUNTERS_PER_PAGE
-    else
-      @encounter_pages, @encounters = paginate :encounters, :per_page => ENCOUNTERS_PER_PAGE
-    end
-    
-  end
-  
   def find_patients
+    # If the request is a get, there is nothing to do.
+  
+    if request.post?
+      if params[:patient][:name] == ""
+        @patients = Patient.find(:all, 
+                    :conditions => ['mrn_ampath = ? OR mtrh_rad_id = ?', params[:patient][:mrn_ampath], params[:patient][:mtrh_rad_id]])
+      else
+        @patients = Patient.find(:all, 
+                    :conditions => ['mrn_ampath = ? OR mtrh_rad_id = ? OR LOWER(CONCAT(given_name, " ", family_name)) LIKE ?', params[:patient][:mrn_ampath], params[:patient][:mtrh_rad_id], '%' + params[:patient][:name].downcase + '%'])
+      end
+      if @patients.nil? || @patients.empty?
+         render :update do |page|
+           page.replace_html "patient-list", "No patients found, click new patient"
+           page.visual_effect :highlight, "patient-list"
+           page.form.reset 'patient-form'
+         end
+      else
+         render :partial => "shared/ajax_list_patients"
+      end
+    end
+  end
+    
+  def find_patients_old
     if request.post?
       search_hash = params[:search]
       search_criteria = search_hash['search_criteria']
       
       case search_hash['identifier_type']
         when 'mrn_ampath'
-          @patient = Patient.find(:first, :conditions => ['mrn_ampath = ?', search_criteria])
+          @patient = Patient.find(:first, :conditions => ['mrn_ampath = ? ', search_criteria])
           if @patient
             redirect_to(:action => :find_encounters, :id => @patient.id)
           else
@@ -81,14 +92,51 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  def auto_complete_for_patient_name
-      @patients = Patient.find(:all, 
-                  :conditions => [ 'LOWER(CONCAT(given_name, " ", family_name)) LIKE ?',
-                  '%' + params[:patient][:name].downcase + '%' ], 
-                  :order => 'family_name ASC',
-                  :limit => 8)    
-    render :partial => 'shared/patient_autocomplete'
-  end  
+  def manage_patients
+  end
+  
+  def new_patient
+    @all_tribes = Tribe.find(:all, :order => "name ASC")
+    if request.get?
+      @patient = Patient.new()
+    else
+      @patient = Patient.new(params[:patient])
+      if @patient.save
+        flash[:notice] = 'Patient was successfully created.'
+        redirect_to :action => "find_encounters", :id => @patient.id
+      else
+        render :action => 'new_patient'
+      end
+    end
+  end
+  
+  def edit_patient
+    @all_tribes = Tribe.find(:all, :order => "name ASC")
+    if request.get?
+      @patient = Patient.find(params[:id])
+    else
+      @patient = Patient.find(params[:id])
+      if @patient.update_attributes(params[:patient])
+          flash[:notice] = "Saved #{@patient.full_name}"
+      else
+          flash[:notice] = "Error saving patient."
+      end
+      redirect_to :action => "find_patients"
+    end
+  end
+    
+  def find_encounters
+    # This controller will return a list of encounters, which may or may not be patient specific.
+ 
+    if params[:id]
+      @patient = Patient.find(params[:id])
+      @encounter_pages, @encounters = paginate :encounters, :conditions => ["patient_id = ?", params[:id]], :per_page => ENCOUNTERS_PER_PAGE
+    else
+      @encounter_pages, @encounters = paginate :encounters, :per_page => ENCOUNTERS_PER_PAGE
+    end
+    
+  end
+  
   
   def show_encounter
     @encounter = Encounter.find(params[:id])
@@ -133,21 +181,6 @@ class ApplicationController < ActionController::Base
     render :update do |page|
         page.remove "observation-#{params[:id]}"
     end    
-  end
-  
-  def new_patient
-    @all_tribes = Tribe.find(:all, :order => "name ASC")
-    if request.get?
-      @patient = Patient.new()
-    else
-      @patient = Patient.new(params[:patient])
-      if @patient.save
-        flash[:notice] = 'Patient was successfully created.'
-        redirect_to :action => "find_encounters", :id => @patient.id
-      else
-        render :action => 'new_patient'
-      end
-    end
   end
 
   def upload_image    
@@ -198,4 +231,38 @@ class ApplicationController < ActionController::Base
     redirect_to(:action => "edit_image", :id => @image)    
   end
   
+    def list_clients
+    @all_clients = Client.find_all
+  end
+
+  def add_client
+    if request.get?
+      @client = Client.new
+      @all_privileges = Privilege.find(:all)
+    else
+      @client = Client.new(params[:client])
+      @client.privilege_id = Privilege.find(:first, :conditions => ['name = ?', "client"])
+      if @client.save
+        flash[:notice] = "Client #{@client.email} created."
+        redirect_to(:action => "list_clients")
+      else
+        @all_privileges = Privilege.find(:all)
+      end  
+    end
+  end
+  
+  def edit_client
+    if request.get?
+      @client = Client.find(params[:id])
+      @all_privileges = Privilege.find(:all)
+    else
+      @client = Client.find(params[:id])
+      if @client.update_attributes(params[:client])
+        flash[:notice] = "Client #{@client.email} saved."
+        redirect_to(:action => "list_clients")
+      else
+        @all_privileges = Privilege.find(:all)
+      end
+    end
+  end
 end

@@ -330,3 +330,8 @@ div#canvas {
 	float:left;
 	border:1px solid #ddd;
 }
+
+/* Find Patients styles */
+.search-box {
+    width: 300px;
+}

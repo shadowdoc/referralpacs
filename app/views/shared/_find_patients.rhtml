@@ -1,13 +1,21 @@
 <div id="find_patients">
-    How would you like to search?
-    <%= form_tag :action => 'find_patients' %>
-        <%= radio_button 'search', 'identifier_type', 'mrn_ampath'%>Ampath ID<br/>
-        <%= radio_button 'search', 'identifier_type', 'mtrh_rad_id'%>MTRH Radiology ID<br/>
-        <%= text_field 'search', 'search_criteria'%>
-        <%= submit_tag 'Search' %><br/>
-        <b>OR</b><br/>
-        Name<br/>
-        <%= text_field_with_auto_complete :patient, 'name' %>
-        <%= submit_tag 'Go' %>
-    </form>
+    <% form_remote_tag :url => {:action => 'find_patients'},
+                       :loading => 'Form.disable("patient-form")',
+                       :complete => 'Form.enable("patient-form")',
+                       :html => {:id => "patient-form"} do %>
+        <table>
+           <tr>
+             <th>AMPATH ID</th>
+             <th>MTRH Radiology ID</th>
+             <th>Patient Name</th>
+           </tr>
+           <tr>
+             <td class="search-box"><%= text_field :patient, 'mrn_ampath', {:class => "search-box"} %></td>
+             <td class="search-box"><%= text_field :patient, 'mtrh_rad_id', {:class => "search-box"} %></td>
+             <td class="search-box"><%= text_field :patient, 'name', {:class => "search-box"} %></td>
+             <td><%= submit_tag "Go" %>
+           </tr>
+        </table>
+    <% end %>
+    <div id="patient-list">Fill in the boxes above and click go.</div>
 </div>

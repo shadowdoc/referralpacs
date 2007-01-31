@@ -1,0 +1,11 @@
+<% form_for :client, 
+            :url => {:action => "edit_client", :id => @client},
+            :builder => TaggedBuilder do |form| %>
+    <%= form.text_field :given_name %>
+    <%= form.text_field :family_name %>
+    <%= form.text_field :email %>
+    <%= form.text_field :title %>
+    <%= form.text_field :password %>
+    <%= submit_tag 'Save' %>
+<% end %>
+<%= link_to 'Back', :action => 'list_clients' %>

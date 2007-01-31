@@ -9,9 +9,6 @@
            :locals => {:encounter => @encounter,
                        :all_encounter_types => @all_encounter_types,
                        :all_providers => @all_providers } %>
-<div id="break"><hr></div>                       
-<%= render :partial => "shared/observations_rw",
-           :locals => {:encounter => @encounter} %>
 
 <div id="break"><hr></div>
 <%= render :partial => "shared/thumbnails_rw", 
@@ -19,5 +16,10 @@
 
 <%= render :partial => "shared/upload_image",
            :locals => {:encounter => @encounter} %>
+
+<div id="break"><hr></div>                       
+<%= render :partial => "shared/observations_rw",
+           :locals => {:encounter => @encounter} %>
+
 <div id="break">&nbsp;</div>
 <%= link_to "Return to Encounter list", :action => 'find_encounters', :id => @patient %>

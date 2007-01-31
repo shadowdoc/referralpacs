@@ -6,20 +6,6 @@ class AdminController < ApplicationController
   def index
     redirect_to(:action => "find_patients")
   end
-  
-  def edit_patient
-    @all_tribes = Tribe.find(:all, :order => "name ASC")
-    if request.get?
-      @patient = Patient.find(params[:id])
-    else
-      @patient = Patient.find(params[:id])
-      if @patient.update_attributes(params[:patient])
-          flash[:notice] = "Saved #{@patient.full_name}"
-      else
-          flash[:notice] = "Error saving patient."
-      end
-    end
-  end
 
   def merge_patients
     if request.get?
@@ -136,40 +122,7 @@ class AdminController < ApplicationController
     end
     
   end
-  
-  def list_clients
-    @all_clients = Client.find_all
-  end
-
-  def add_client
-    if request.get?
-      @client = Client.new
-      @all_privileges = Privilege.find(:all)
-    else
-      @client = Client.new(params[:client])
-      if @client.save
-        flash[:notice] = "Client #{@client.email} created."
-        redirect_to(:action => "list_clients")
-      else
-        @all_privileges = Privilege.find(:all)
-      end  
-    end
-  end
-  
-  def edit_client
-    if request.get?
-      @client = Client.find(params[:id])
-      @all_privileges = Privilege.find(:all)
-    else
-      if @client.update_attributes(params[:client])
-        flash[:notice] = "Client #{@client.email} saved."
-        redirect_to(:action => "list_clients")
-      else
-        @all_privileges = Privilege.find(:all)
-      end
-    end
-  end
-  
+    
   def add_image
     @image = Image.create(params[:image])
     flash[:notice] = 'File uploaded'
