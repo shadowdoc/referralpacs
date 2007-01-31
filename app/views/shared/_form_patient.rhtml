@@ -1,14 +1,11 @@
 <%= error_messages_for 'patient' %>
 
 <!--[form:patient]-->
-<p><label for="patient_mrn_ampath">Mrn ampath</label><br/>
+<p><label for="patient_mrn_ampath">AMPATH ID</label><br/>
 <%= text_field 'patient', 'mrn_ampath'  %></p>
 
 <p><label for="patient_mtrh_rad_id">MTRH Radiology Id</label><br/>
 <%= text_field 'patient', 'mtrh_rad_id'  %></p>
-
-<p><label for="patient_prefix">Prefix</label><br/>
-<%= text_field 'patient', 'prefix'  %></p>
 
 <p><label for="patient_given_name">Given name</label><br/>
 <%= text_field 'patient', 'given_name'  %></p>
@@ -19,14 +16,8 @@
 <p><label for="patient_family_name">Family name</label><br/>
 <%= text_field 'patient', 'family_name'  %></p>
 
-<p><label for="patient_last_name_prefix">Last name prefix</label><br/>
-<%= text_field 'patient', 'last_name_prefix'  %></p>
-
 <p><label for="patient_gender">Gender</label><br/>
-<%= text_field 'patient', 'gender'  %></p>
-
-<p><label for="patient_race">Race</label><br/>
-<%= text_field 'patient', 'race'  %></p>
+<%= select('patient', 'gender', ["Male", "Female"], {}) %></p>
 
 <p><label for="patient_tribe">Tribe</label><br/>
 <%= collection_select('patient', 'tribe_id', @all_tribes, :id, :name) %>
@@ -41,6 +32,9 @@
 <%= date_select 'patient', 'birthdate',
     :start_year => getBirthDateStart,
     :end_year => getBirthDateEnd  %></p>
+    
+<p><label for="birthdate_estimated">Birthdate Estimated? (Check if yes)</label><br/>
+<%= check_box_tag('patient', 'birthdate_estimated') %></p>
 
 <!--[eoform:patient]-->
 

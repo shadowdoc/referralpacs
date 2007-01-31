@@ -1,5 +1,6 @@
 <div id="encounter-detail">
 <h2><%=h @encounter.encounter_type.name %> from <%=h @encounter.date.strftime("%d %b %Y") %></h2>
+X-ray ID: <%=h @encounter.xray_id %>
 Indication: <%=h @encounter.indication %><br />
 Impression: <%=h @encounter.impression %><br />
 Provider:   <%=h @encounter.provider.full_name %><br />
