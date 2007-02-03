@@ -7,7 +7,6 @@ module TechHelper
     if @patient.nil? || @patient.new_record?
       @command_list = [
           link_to('Find Patients', :action => :find_patients),
-          link_to('New Patient', :action => :new_patient),
           link_to('Manage Clients', :action => :list_clients)]
     else
       set_current_patient_banner
