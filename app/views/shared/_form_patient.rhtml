@@ -20,13 +20,22 @@
 <%= select('patient', 'gender', ["Male", "Female"], {}) %></p>
 
 <p><label for="patient_tribe">Tribe</label><br/>
-<%= collection_select('patient', 'tribe_id', @all_tribes, :id, :name) %>
+<%= collection_select('patient', 'tribe_id', @all_tribes, :id, :name) %></p>
 
 <p><label for="patient_address1">Address1</label><br/>
 <%= text_field 'patient', 'address1'  %></p>
 
 <p><label for="patient_address2">Address2</label><br/>
 <%= text_field 'patient', 'address2'  %></p>
+
+<p><label for="patient_city_village">City/Village</label><br/>
+<%= text_field 'patient', 'city_village' %></p>
+
+<p><label for="patient_state_province">State/Province</label><br/>
+<%= text_field 'patient', 'state_province' %></p>
+
+<p><label for="patient_country">Country</label><br/>
+<%= text_field 'patient', 'country', {:value => "Kenya"} %></p>
 
 <p><label for="patient_birthdate">Birthdate</label><br/>
 <%= date_select 'patient', 'birthdate',

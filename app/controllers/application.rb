@@ -266,4 +266,29 @@ class ApplicationController < ActionController::Base
       end
     end
   end
+  
+  private
+  def find_ampath_patients
+    # Code to access the AMPATH REST api
+    # Thanks Burke!
+    query = CGI.escape(params[:patient][:mrn_ampath])
+    url = "https://192.168.5.230/amrs/moduleServlet/restModule/api/patient/"
+    username = "refpacs"
+    password = "mtrh pacs 30"
+    @ampath_patients = Array.new
+    
+    begin
+      open(url + query, :http_basic_authentication => [username, password]) do |f|
+        doc = REXML::Document.new f.read
+        for element in REXML::XPath.match(doc, "//patient")
+          pid = REXML::XPath.match(element, "*/identifier").first
+          if pid
+            @ampath_patients += []     
+          end
+        end
+      end
+    rescue OpenURI::HTTPError => err
+      puts "error = " + err
+    end
+  end
 end

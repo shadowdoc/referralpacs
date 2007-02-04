@@ -2,8 +2,11 @@ class Patient < ActiveRecord::Base
   has_many :encounters
   belongs_to :tribe
   
-  validates_presence_of :given_name, :family_name, :mtrh_rad_id
+  validates_presence_of :given_name, :family_name
   validates_uniqueness_of :mtrh_rad_id
+  
+  validates_uniqueness_of :mrn_ampath, 
+                          :if => Proc.new {|mrn_ampath| mrn_ampath.nil?}
   
   before_save :uppercase
   

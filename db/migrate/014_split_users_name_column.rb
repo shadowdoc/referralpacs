@@ -5,7 +5,7 @@ class SplitUsersNameColumn < ActiveRecord::Migration
   end
 
   def self.down
+    rename_column :users, "given_name", "name"
     remove_column :users, "family_name"
-    rename_column "given_name", "name"
   end
 end
