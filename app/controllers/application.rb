@@ -33,12 +33,18 @@ class ApplicationController < ActionController::Base
     # If the request is a get, there is nothing to do.
   
     if request.post?
-      if params[:patient][:name] == ""
-        @patients = Patient.find(:all, 
-                    :conditions => ['mrn_ampath = ? OR mtrh_rad_id = ?', params[:patient][:mrn_ampath], params[:patient][:mtrh_rad_id]])
+      if params[:patient][:mrn_ampath] == ""
+        if params[:patient][:mtrh_rad_id] == ""
+          @patients = Patient.find(:all, 
+                        :conditions => ['LOWER(CONCAT(given_name, " ", family_name)) LIKE ?', '%' + params[:patient][:name].downcase + '%'])
+        else
+          @patients = Patient.find(:all, 
+                      :conditions => ['mtrh_rad_id = ?', params[:patient][:mtrh_rad_id]])
+        end
       else
-        @patients = Patient.find(:all, 
-                    :conditions => ['mrn_ampath = ? OR mtrh_rad_id = ? OR LOWER(CONCAT(given_name, " ", family_name)) LIKE ?', params[:patient][:mrn_ampath], params[:patient][:mtrh_rad_id], '%' + params[:patient][:name].downcase + '%'])
+        # AMPATH search code goes here
+        @patients = Patient.find(:all,
+                    :conditions => ['mrn_ampath = ?', params[:patient][:mrn_ampath]])
       end
       
       if @patients.nil? || @patients.empty?
