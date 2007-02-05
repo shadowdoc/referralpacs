@@ -1,27 +1,465 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-infiltrate:
-  id:           1
-  name:         INFILTRATE
-  description:  "Opacity, generally in a patchy, fluffy distribution"
-cavitation:
-  id:           2
-  name:         CAVITATION
-  description:  "Having a hollowed-out appearance"
-right_upper_lung:
-  id:           3
-  name:         'RIGHT UPPER LUNG ZONE'
-right_mid_lung:
-  id:           4
-  name:         'RIGHT MIDDLE LUNG ZONE'
-right_lower_lung:
-  id:           5
-  name:         'RIGHT LOWER LUNG ZONE'
-left_upper_lung:
-  id:           6
-  name:         'LEFT UPPER LUNG ZONE'
-left_mid_lung:
-  id:           7
-  name:         'LEFT MIDDLE LUNG ZONE'
-left_lower_lung:
-  id:           8
-  name:         'LEFT LOWER LUNG ZONE'
+--- 
+concepts_048: 
+  name: LEFT BASILAR
+  updated_at: 2007-02-02 09:56:57
+  created_by: "1"
+  updated_by: "1"
+  id: "48"
+  description: ""
+  created_at: 2007-02-02 09:56:48
+concepts_037: 
+  name: MIDDLE
+  updated_at: 2007-02-02 09:53:17
+  created_by: "1"
+  updated_by: "1"
+  id: "37"
+  description: Anatomic descriptor
+  created_at: 2007-02-02 09:53:03
+concepts_026: 
+  name: RIGHT PARATRACHEAL
+  updated_at: 2007-02-02 09:47:29
+  created_by: "1"
+  updated_by: "1"
+  id: "26"
+  description: ""
+  created_at: 2007-02-02 09:47:15
+concepts_015: 
+  name: LEFT DIFFUSE
+  updated_at: 2007-01-31 09:38:10
+  created_by: "1"
+  updated_by: "1"
+  id: "15"
+  description: ""
+  created_at: 2007-01-31 09:29:26
+concepts_004: 
+  name: RIGHT MIDDLE LUNG ZONE
+  updated_at: 
+  created_by: 
+  updated_by: 
+  id: "4"
+  description: 
+  created_at: 
+concepts_050: 
+  name: RIGHT LESS THAN  25%
+  updated_at: 2007-02-02 09:58:53
+  created_by: "1"
+  updated_by: "1"
+  id: "50"
+  description: ""
+  created_at: 2007-02-02 09:58:35
+concepts_049: 
+  name: PLEURAL SCARRING
+  updated_at: 2007-02-02 09:57:32
+  created_by: "1"
+  updated_by: "1"
+  id: "49"
+  description: ""
+  created_at: 2007-02-02 09:57:11
+concepts_038: 
+  name: POSTERIOR
+  updated_at: 2007-02-02 09:53:32
+  created_by: "1"
+  updated_by: "1"
+  id: "38"
+  description: Anatomic descriptor
+  created_at: 2007-02-02 09:53:22
+concepts_027: 
+  name: LEFT PARATRACHEAL
+  updated_at: 2007-02-02 09:47:43
+  created_by: "1"
+  updated_by: "1"
+  id: "27"
+  description: ""
+  created_at: 2007-02-02 09:47:33
+concepts_016: 
+  name: PULMONARY NODULE (OR MASS)
+  updated_at: 2007-01-31 09:46:26
+  created_by: "1"
+  updated_by: "1"
+  id: "16"
+  description: ""
+  created_at: 2007-01-31 09:45:55
+concepts_005: 
+  name: RIGHT LOWER LUNG ZONE
+  updated_at: 
+  created_by: 
+  updated_by: 
+  id: "5"
+  description: 
+  created_at: 
+concepts_051: 
+  name: RIGHT GREATER THAN 25%
+  updated_at: 2007-02-02 09:59:08
+  created_by: "1"
+  updated_by: "1"
+  id: "51"
+  description: ""
+  created_at: 2007-02-02 09:58:55
+concepts_040: 
+  name: MILD
+  updated_at: 2007-02-02 09:54:44
+  created_by: "1"
+  updated_by: "1"
+  id: "40"
+  description: ""
+  created_at: 2007-02-02 09:54:37
+concepts_039: 
+  name: CARDIOMEGALY
+  updated_at: 2007-02-02 09:54:32
+  created_by: "1"
+  updated_by: "1"
+  id: "39"
+  description: Enlargement of the heart
+  created_at: 2007-02-02 09:54:17
+concepts_028: 
+  name: RIGHT HILAR
+  updated_at: 2007-02-02 09:47:58
+  created_by: "1"
+  updated_by: "1"
+  id: "28"
+  description: ""
+  created_at: 2007-02-02 09:47:49
+concepts_017: 
+  name: RIGHT SINGLE
+  updated_at: 2007-01-31 09:47:49
+  created_by: "1"
+  updated_by: "1"
+  id: "17"
+  description: Only one, solitary.
+  created_at: 2007-01-31 09:46:37
+concepts_006: 
+  name: LEFT UPPER LUNG ZONE
+  updated_at: 
+  created_by: 
+  updated_by: 
+  id: "6"
+  description: 
+  created_at: 
+concepts_052: 
+  name: LEFT LESS THAN 25%
+  updated_at: 2007-02-02 09:59:20
+  created_by: "1"
+  updated_by: "1"
+  id: "52"
+  description: ""
+  created_at: 2007-02-02 09:59:10
+concepts_041: 
+  name: MODERATE
+  updated_at: 2007-02-02 09:54:59
+  created_by: "1"
+  updated_by: "1"
+  id: "41"
+  description: ""
+  created_at: 2007-02-02 09:54:50
+concepts_030: 
+  name: AORTA
+  updated_at: 2007-02-02 09:50:14
+  created_by: "1"
+  updated_by: "1"
+  id: "30"
+  description: ""
+  created_at: 2007-02-02 09:50:06
+concepts_029: 
+  name: LEFT HILAR
+  updated_at: 2007-02-02 09:48:12
+  created_by: "1"
+  updated_by: "1"
+  id: "29"
+  description: ""
+  created_at: 2007-02-02 09:48:03
+concepts_018: 
+  name: CALCIFIED
+  updated_at: 2007-02-02 09:12:37
+  created_by: "1"
+  updated_by: "1"
+  id: "18"
+  description: ""
+  created_at: 2007-01-31 09:46:57
+concepts_007: 
+  name: LEFT MIDDLE LUNG ZONE
+  updated_at: 
+  created_by: 
+  updated_by: 
+  id: "7"
+  description: 
+  created_at: 
+concepts_053: 
+  name: LEFT GREATER THAN 25%
+  updated_at: 2007-02-02 09:59:34
+  created_by: "1"
+  updated_by: "1"
+  id: "53"
+  description: ""
+  created_at: 2007-02-02 09:59:24
+concepts_042: 
+  name: SEVERE
+  updated_at: 2007-02-02 09:55:10
+  created_by: "1"
+  updated_by: "1"
+  id: "42"
+  description: ""
+  created_at: 2007-02-02 09:55:01
+concepts_031: 
+  name: UNFOLDED
+  updated_at: 2007-02-02 09:50:37
+  created_by: "1"
+  updated_by: "1"
+  id: "31"
+  description: Description of the aorta, implying an aneurysm.
+  created_at: 2007-02-02 09:50:19
+concepts_020: 
+  name: MULTIPLE CALCIFIED
+  updated_at: 2007-01-31 09:49:27
+  created_by: "1"
+  updated_by: "1"
+  id: "20"
+  description: ""
+  created_at: 2007-01-31 09:49:17
+concepts_019: 
+  name: LEFT SINGLE
+  updated_at: 2007-01-31 09:48:01
+  created_by: "1"
+  updated_by: "1"
+  id: "19"
+  description: ""
+  created_at: 2007-01-31 09:47:52
+concepts_008: 
+  name: LEFT LOWER LUNG ZONE
+  updated_at: 
+  created_by: 
+  updated_by: 
+  id: "8"
+  description: 
+  created_at: 
+concepts_054: 
+  name: PNEUMOTHORAX
+  updated_at: 2007-02-02 09:59:51
+  created_by: "1"
+  updated_by: "1"
+  id: "54"
+  description: ""
+  created_at: 2007-02-02 09:59:41
+concepts_043: 
+  name: RIGHT APICAL
+  updated_at: 2007-02-02 09:55:58
+  created_by: "1"
+  updated_by: "1"
+  id: "43"
+  description: ""
+  created_at: 2007-02-02 09:55:49
+concepts_032: 
+  name: PULMONARY VASCULATURE
+  updated_at: 2007-02-02 09:51:20
+  created_by: "1"
+  updated_by: "1"
+  id: "32"
+  description: ""
+  created_at: 2007-02-02 09:51:06
+concepts_021: 
+  name: RIGHT TWO-FIVE
+  updated_at: 2007-02-02 09:45:15
+  created_by: "1"
+  updated_by: "1"
+  id: "21"
+  description: ""
+  created_at: 2007-02-02 09:12:52
+concepts_010: 
+  name: INTERSTITIAL DISEASE
+  updated_at: 2007-01-26 09:58:48
+  created_by: "1"
+  updated_by: "1"
+  id: "10"
+  description: A "reticular" and sometimes nodular pattern.
+  created_at: 2007-01-26 09:58:21
+concepts_009: 
+  name: CHEST XRAY
+  updated_at: 2007-01-26 09:57:32
+  created_by: "1"
+  updated_by: "1"
+  id: "9"
+  description: A radiograph of the chest.
+  created_at: 2007-01-26 09:57:16
+concepts_055: 
+  name: BONES
+  updated_at: 2007-02-02 10:01:49
+  created_by: "1"
+  updated_by: "1"
+  id: "55"
+  description: ""
+  created_at: 2007-02-02 10:01:03
+concepts_044: 
+  name: RIGHT BASILAR
+  updated_at: 2007-02-02 09:56:17
+  created_by: "1"
+  updated_by: "1"
+  id: "44"
+  description: ""
+  created_at: 2007-02-02 09:56:00
+concepts_033: 
+  name: ENLARGED
+  updated_at: 2007-02-02 09:51:35
+  created_by: "1"
+  updated_by: "1"
+  id: "33"
+  description: ""
+  created_at: 2007-02-02 09:51:26
+concepts_022: 
+  name: LEFT TWO-FIVE
+  updated_at: 2007-02-02 09:45:35
+  created_by: "1"
+  updated_by: "1"
+  id: "22"
+  description: ""
+  created_at: 2007-02-02 09:45:21
+concepts_011: 
+  name: PERIHILAR
+  updated_at: 2007-01-26 10:01:43
+  created_by: "1"
+  updated_by: "1"
+  id: "11"
+  description: Disase emanating from the middle mediastinum
+  created_at: 2007-01-26 10:00:27
+concepts_056: 
+  name: OSTEOPENIA
+  updated_at: 2007-02-02 10:02:06
+  created_by: "1"
+  updated_by: "1"
+  id: "56"
+  description: ""
+  created_at: 2007-02-02 10:01:57
+concepts_045: 
+  name: RIGHT LATERAL
+  updated_at: 2007-02-02 09:56:26
+  created_by: "1"
+  updated_by: "1"
+  id: "45"
+  description: ""
+  created_at: 2007-02-02 09:56:20
+concepts_034: 
+  name: NORMAL
+  updated_at: 2007-02-02 09:51:50
+  created_by: "1"
+  updated_by: "1"
+  id: "34"
+  description: ""
+  created_at: 2007-02-02 09:51:41
+concepts_023: 
+  name: RIGHT MORE THAN FIVE
+  updated_at: 2007-02-02 09:46:11
+  created_by: "1"
+  updated_by: "1"
+  id: "23"
+  description: ""
+  created_at: 2007-02-02 09:45:46
+concepts_012: 
+  name: "PARENCHYMAL SCARRING   "
+  updated_at: 2007-01-31 09:26:36
+  created_by: "1"
+  updated_by: "1"
+  id: "12"
+  description: Scarring in the lung.  Usually from prior infection
+  created_at: 2007-01-31 09:25:42
+concepts_001: 
+  name: INFILTRATE
+  updated_at: 
+  created_by: 
+  updated_by: 
+  id: "1"
+  description: Opacity, generally in a patchy, fluffy distribution
+  created_at: 
+concepts_057: 
+  name: ACUTE FRACTURE
+  updated_at: 2007-02-02 10:02:23
+  created_by: "1"
+  updated_by: "1"
+  id: "57"
+  description: ""
+  created_at: 2007-02-02 10:02:14
+concepts_046: 
+  name: LEFT APICAL
+  updated_at: 2007-02-02 09:56:36
+  created_by: "1"
+  updated_by: "1"
+  id: "46"
+  description: ""
+  created_at: 2007-02-02 09:56:28
+concepts_035: 
+  name: MEDIASTINAL MASS
+  updated_at: 2007-02-02 09:52:39
+  created_by: "1"
+  updated_by: "1"
+  id: "35"
+  description: Mass lesion within the mediastinum
+  created_at: 2007-02-02 09:52:24
+concepts_024: 
+  name: LEFT GREATER THAN FIVE
+  updated_at: 2007-02-02 09:46:32
+  created_by: "1"
+  updated_by: "1"
+  id: "24"
+  description: ""
+  created_at: 2007-02-02 09:46:18
+concepts_013: 
+  name: RIGHT DIFFUSE
+  updated_at: 2007-01-31 09:28:25
+  created_by: "1"
+  updated_by: "1"
+  id: "13"
+  description: ""
+  created_at: 2007-01-31 09:27:36
+concepts_002: 
+  name: CAVITATION
+  updated_at: 
+  created_by: 
+  updated_by: 
+  id: "2"
+  description: Having a hollowed-out appearance
+  created_at: 
+concepts_058: 
+  name: HEALED FRACTURE
+  updated_at: 2007-02-02 10:02:38
+  created_by: "1"
+  updated_by: "1"
+  id: "58"
+  description: ""
+  created_at: 2007-02-02 10:02:26
+concepts_047: 
+  name: LEFT LATERAL
+  updated_at: 2007-02-02 09:56:46
+  created_by: "1"
+  updated_by: "1"
+  id: "47"
+  description: ""
+  created_at: 2007-02-02 09:56:37
+concepts_036: 
+  name: ANTERIOR
+  updated_at: 2007-02-02 09:52:58
+  created_by: "1"
+  updated_by: "1"
+  id: "36"
+  description: Anatomic descriptor
+  created_at: 2007-02-02 09:52:44
+concepts_025: 
+  name: ADENOPATHY
+  updated_at: 2007-02-02 09:48:21
+  created_by: "1"
+  updated_by: "1"
+  id: "25"
+  description: ""
+  created_at: 2007-02-02 09:47:03
+concepts_014: 
+  name: ATELECTASIS
+  updated_at: 2007-01-31 09:28:57
+  created_by: "1"
+  updated_by: "1"
+  id: "14"
+  description: Collapsed lung
+  created_at: 2007-01-31 09:28:44
+concepts_003: 
+  name: RIGHT UPPER LUNG ZONE
+  updated_at: 
+  created_by: 
+  updated_by: 
+  id: "3"
+  description: 
+  created_at: 
