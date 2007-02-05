@@ -248,7 +248,7 @@ class ApplicationController < ActionController::Base
       @all_privileges = Privilege.find(:all)
     else
       @client = Client.new(params[:client])
-      @client.privilege_id = Privilege.find(:first, :conditions => ['name = ?', "client"])
+      @client.privilege_id = 2 
       if @client.save
         flash[:notice] = "Client #{@client.email} created."
         redirect_to(:action => "list_clients")
