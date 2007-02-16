@@ -62,46 +62,6 @@ class ApplicationController < ActionController::Base
       end
     end
   end
-    
-#  def find_patients_old
-#    if request.post?
-#      search_hash = params[:search]
-#      search_criteria = search_hash['search_criteria']
-#      
-#      case search_hash['identifier_type']
-#        when 'mrn_ampath'
-#          @patient = Patient.find(:first, :conditions => ['mrn_ampath = ? ', search_criteria])
-#          if @patient
-#            redirect_to(:action => :find_encounters, :id => @patient.id)
-#          else
-#            flash[:notice] = "No such patient: mrn_ampath = #{search_criteria}.  Click New Patient"
-#          end
-#        when 'mtrh_rad_id'
-#          @patient = Patient.find(:first, :conditions => ['mtrh_rad_id = ?', search_criteria])
-#          if @patient
-#            redirect_to(:action => :find_encounters, :id => @patient.id)
-#          else
-#            flash[:notice] = "No such patient: mtrh_rad_id = #{search_criteria}.  Click New Patient"
-#          end
-#        else
-#          unless params[:patient][:name] == ""
-#            @patients = Patient.find(:all, 
-#                                    :conditions => [ 'LOWER(CONCAT(given_name, " ", family_name)) LIKE ?',
-#                                    '%' + params[:patient][:name].downcase + '%' ])
-#            case @patients.length
-#              when 0
-#                flash[:notice] = "No such patient: name = #{params[:patient][:name]}"              
-#              when 1
-#                redirect_to(:action => :find_encounters, :id => @patients[0].id)            
-#              else
-#                render(:action => :list_patients)
-#            end
-#          else
-#            flash[:notice] = "Please enter your search parameters"
-#          end         
-#      end
-#    end
-#  end
   
   def new_patient
     @all_tribes = Tribe.find(:all, :order => "name ASC")

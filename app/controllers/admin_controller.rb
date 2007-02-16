@@ -141,4 +141,15 @@ class AdminController < ApplicationController
     redirect_to :action => "find_encounters", :id => @patient.id
   end
   
+  def statistics
+    @patients = Patient.find(:all)
+    @today = Encounter.find(:all, :conditions => ['created_at LIKE ?', Time.now.strftime("%Y-%m-%d") + "%"])
+    @reports_today = 0
+    for enc in @today
+      if enc.observations.length > 0 
+        @reports_today += 1
+      end
+    end
+  end
+  
 end

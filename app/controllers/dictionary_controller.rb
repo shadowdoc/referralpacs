@@ -7,11 +7,8 @@ class DictionaryController < ApplicationController
   
   def concepts_for_lookup
     @concepts = Concept.find(:all, :order => "name ASC")
-    @headers['content-type'] = 'text/javascript'
+    headers['content-type'] = 'text/javascript'
     render :layout => false
-  end
-  
-  def test
   end
  
   def show_concept
@@ -34,7 +31,6 @@ class DictionaryController < ApplicationController
     @concept_answer = Concept.find(:first, :conditions => ['name = ?', params[:concept_lookup]])
     @answer = Answer.new(:concept_id => @concept.id, :answer_id => @concept_answer.id)
     @answer.save!
-    
     render :partial => "answer", :object => @answer, :layout => false
   end
 end
