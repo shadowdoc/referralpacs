@@ -4,6 +4,7 @@
         <td class="search-box"><%=h patient.mrn_ampath unless patient.mrn_ampath.nil? %></td>
         <td class="search-box"><%=h patient.mtrh_rad_id unless patient.mtrh_rad_id.nil? %></td>
         <td class="search-box"><%=h patient.full_name %></td>
+        <td class="search-box"><%=h patient.encounters.last.date.strftime("%Y-%m-%d") %></td>
         <td class="search-box">
             <%= link_to("Show", :action => :find_encounters, :id => patient.id) %>&nbsp;&nbsp;
         </td>

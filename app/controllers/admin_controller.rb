@@ -143,11 +143,20 @@ class AdminController < ApplicationController
   
   def statistics
     @patients = Patient.find(:all)
-    @today = Encounter.find(:all, :conditions => ['created_at LIKE ?', Time.now.strftime("%Y-%m-%d") + "%"])
-    @reports_today = 0
-    for enc in @today
+    if request.get?
+      @start_date = Time.now.strftime("%Y-%m-%d")
+      @end_date = @start_date
+      @encounters_during_range = Encounter.find_range
+    else
+      @start_date = params[:report][:start_date]
+      @end_date = params[:report][:end_date]
+      @encounters_during_range = Encounter.find_range(params[:report][:start_date], params[:report][:end_date])
+    end
+    
+    @reports_during_range = 0
+    for enc in @encounters_during_range
       if enc.observations.length > 0 
-        @reports_today += 1
+        @reports_during_range += 1
       end
     end
   end

@@ -9,4 +9,10 @@ class Encounter < ActiveRecord::Base
   
   attr_protected :created_at, :created_by, :updated_at, :updated_by
   
+  def self.find_range(start_date = Time.now.strftime("%y-%m-%d"), end_date = Time.now.strftime("%y-%m-%d"))
+    #This method returns encounters between the given dates.
+    #If no dates are given, these default to today
+    Encounter.find(:all, :conditions => ['date between ? and ?', start_date, end_date])
+  end
+  
 end

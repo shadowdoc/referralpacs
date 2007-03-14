@@ -55,3 +55,10 @@ require 'usermonitor'
 ActiveRecord::Base.class_eval do
   include ActiveRecord::UserMonitor
 end
+
+# For the date calendering stuff
+# From http://www.methods.co.nz/rails_date_kit/rails_date_kit.html
+
+ActiveSupport::CoreExtensions::Date::Conversions::DATE_FORMATS.merge!(
+  :default => '%Y-%m-%d'
+)

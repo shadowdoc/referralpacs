@@ -1,4 +1,5 @@
 # Methods added to this helper will be available to all templates in the application.
+
 module ApplicationHelper
   
   def set_current_patient_banner
@@ -22,9 +23,11 @@ module ApplicationHelper
     Time.now.year
   end
   
+  # Fill all of the collections for dropdown selections
   def fillCollections
     @all_encounter_types = EncounterType.find(:all)
     @all_providers = Provider.find(:all)
     @all_clients = Client.find(:all)
   end
+  
 end

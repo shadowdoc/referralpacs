@@ -2,5 +2,17 @@
 <% setup_admin_layout %>
 
 Total Patients: <%= @patients.length %><br/>
-Patient encounters today: <%= @today.length %><br/>
-Patient reports today: <%= @reports_today %><br/>
+Period: <%= @start_date + " to " + @end_date %><br/>
+Patient encounters for selected time period: <%= @encounters_during_range.length unless @encounters_during_range.nil? %><br/>
+Patient reports for selected time period: <%= @reports_during_range unless @reports_during_range.nil? %><br/>
+
+<% form_tag :action => "statistics"  do |form| %>
+  <label 
+  <p><label for="stats_start_date">Start Date</label><br/>
+    <%= date_field "report", :start_date %>
+  </p>
+  <p><label for="stats_end_date">End Date</label><br/>
+    <%= date_field "report", :end_date %>
+  </p>
+  <%= submit_tag "Stats" %>
+<% end -%>
