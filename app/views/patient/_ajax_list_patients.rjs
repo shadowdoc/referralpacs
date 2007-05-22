@@ -1,0 +1,6 @@
+if Thread.current['user'].privilege.name == "client"
+  page.replace_html "patient-list", :partial => "list_patients", :object => @patients
+else
+  page.replace_html "patient-list", :partial => "list_patients_rw", :object => @patients
+end
+page.visual_effect :highlight, "patient-list"

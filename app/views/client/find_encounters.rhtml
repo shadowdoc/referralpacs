@@ -1,8 +1,0 @@
-<% @page_title = "Encounter List" %>
-<% setup_client_layout %>
-
-<%= render :partial => "shared/find_encounters",
-          :collection => @encounters %>
-          
-<%= render :partial => "shared/page_nav",
-          :locals => {:encounter_pages => @encounter_pages} unless @encounter_pages.nil? %>

@@ -31,5 +31,40 @@ class LoginController < ApplicationController
     session[:user_id] = nil
     redirect_to(:action => "login")
   end
+  
+  def list_clients
+    @all_clients = Client.find_all
+  end
+
+  def add_client
+    if request.get?
+      @client = Client.new
+      @all_privileges = Privilege.find(:all)
+    else
+      @client = Client.new(params[:client])
+      @client.privilege_id = 2 
+      if @client.save
+        flash[:notice] = "Client #{@client.email} created."
+        redirect_to(:action => "list_clients")
+      else
+        @all_privileges = Privilege.find(:all)
+      end  
+    end
+  end
+  
+  def edit_client
+    if request.get?
+      @client = Client.find(params[:id])
+      @all_privileges = Privilege.find(:all)
+    else
+      @client = Client.find(params[:id])
+      if @client.update_attributes(params[:client])
+        flash[:notice] = "Client #{@client.email} saved."
+        redirect_to(:action => "list_clients")
+      else
+        @all_privileges = Privilege.find(:all)
+      end
+    end
+  end
     
 end

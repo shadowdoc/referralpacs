@@ -1,0 +1,11 @@
+if @encounter.errors.empty?
+  page.replace "encounter-detail", :partial => "encounter_details_rw", :object => @encounter
+  page.visual_effect :highlight, "encounter-detail"
+  page.replace_html "encounter-indicator", "Saved..."
+  page.replace "observations", :partial => "observations_rw", :object => @encounter
+  page.replace "thumbnails", :partial => "image/thumbnails_rw", :object => @encounter
+  page.replace "upload", :partial => "image/upload_image", :object => @encounter
+else
+  page.alert "The Encounter could not be updated for the following reasons:\n" +
+  @encounter.errors.full_messages.join("\n")
+end
