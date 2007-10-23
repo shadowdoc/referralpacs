@@ -12,13 +12,7 @@ class ApplicationController < ActionController::Base
   def authorize_login
     unless session[:user_id] 
       flash[:notice] = "Please log in."
-      redirect_to(:controller => "login", :action => "login")
-    else
-      # Make sure each user is accessing the correct controller
-      user = User.find(session[:user_id])
-      unless user.privilege.name == controller_name
-        redirect_to(:controller => user.privilege.name)
-      end
+      render :file => "login/login"
     end
     
   end

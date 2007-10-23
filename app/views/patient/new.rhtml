@@ -1,7 +1,6 @@
 <% @page_title = "New Patient" %>
-<% setup_admin_layout %>
 
-<%= form_tag :action => 'new_patient' %>
+<%= form_tag :action => 'new' %>
     <%= render :partial => "form_patient" %>
     <%= submit_tag "Create" %>
 </form>

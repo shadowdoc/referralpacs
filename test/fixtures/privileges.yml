@@ -6,7 +6,8 @@ administrator:
   add_study:      true
   remove_study:   true
   add_user:       true
-  remove_user:    true
+  delete_user:    true
+  update_user:    true
   add_patient:    true
   remove_patient: true
   
@@ -17,7 +18,8 @@ client:
   add_study:      false
   remove_study:   false
   add_user:       false
-  remove_user:    false
+  delete_user:    false
+  update_user:    false
   add_patient:    false
   remove_patient: false
 
@@ -28,7 +30,8 @@ tech:
   add_study:      true
   remove_study:   false
   add_user:       false
-  remove_user:    false
+  delete_user:    false
+  update_user:    false
   add_patient:    true
   remove_patient: false
   
@@ -39,6 +42,7 @@ register:
   add_study:      false
   remove_study:   false
   add_user:       false
-  remove_user:    false
+  delete_user:    false
+  update_user:    true
   add_patient:    true
   remove_patient: false

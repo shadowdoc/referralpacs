@@ -1,5 +1,5 @@
 <div id="find_patients">
-    <% form_remote_tag :url => {:action => 'find_patients'},
+    <% form_remote_tag :url => {:action => 'find'},
                        :loading => 'Form.disable("patient-form")',
                        :complete => 'Form.enable("patient-form")',
                        :html => {:id => "patient-form"} do %>

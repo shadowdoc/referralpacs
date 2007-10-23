@@ -1,6 +1,7 @@
 class PatientController < ApplicationController
+  layout "ref"
 
-  def find_patients
+  def find
     # If the request is a get, there is nothing to do.
   
     if request.post?
@@ -62,7 +63,7 @@ class PatientController < ApplicationController
     end
   end
   
-  def new_patient
+  def new
     @all_tribes = Tribe.find(:all, :order => "name ASC")
     if request.get?
       @patient = Patient.new()
@@ -70,14 +71,14 @@ class PatientController < ApplicationController
       @patient = Patient.new(params[:patient])
       if @patient.save
         flash[:notice] = 'Patient was successfully created.'
-        redirect_to :action => "find_encounters", :id => @patient.id
+        redirect_to :controller => :encounter, :action => "find", :id => @patient.id
       else
-        render :action => 'new_patient'
+        render :action => 'new'
       end
     end
   end
   
-  def edit_patient
+  def edit
     @all_tribes = Tribe.find(:all, :order => "name ASC")
     if request.get?
       @patient = Patient.find(params[:id])
@@ -88,7 +89,7 @@ class PatientController < ApplicationController
       else
           flash[:notice] = "Error saving patient."
       end
-      redirect_to :action => "find_patients"
+      redirect_to :action => "find"
     end
   end
 

@@ -15,6 +15,8 @@
 <% else %>
 <body>
 <% end %>
+
+<% setup_layout -%>
     <div id="banner">
         <h1>ReferralPACS - <%= @page_title %></h1>
         <h2><%= @current_patient_banner unless @current_patient_banner.nil? %></h2>
@@ -24,7 +26,7 @@
     </div>
     <div id="command_list">
         <% if session[:user_id] -%>
-            <% if !@command_list.nil? -%>
+            <% unless @command_list.nil? -%>
                 &nbsp;|&nbsp;
                 <% for command in @command_list %>
                     <%= command %>&nbsp;|&nbsp;

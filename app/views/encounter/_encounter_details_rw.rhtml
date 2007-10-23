@@ -2,7 +2,7 @@
 <div id="encounter-detail">
     <h2>Encounter Details</h2>
     <% form_remote_for :encounter,
-                       :url => {:action => "edit_encounter", :id => @encounter.id},
+                       :url => {:controller => "encounter", :action => "edit", :id => @encounter.id},
                        :loading => 'Form.disable("encounter-form")',
                        :complete => 'Form.enable("encounter-form")',
                        :html => {:id => "encounter-form"},

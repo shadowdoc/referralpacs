@@ -8,11 +8,10 @@ class ImageController < ApplicationController
     @image.encounter_id = @encounter.id
   end
 
-  def add_image
-  
+  def add_image  
     @image = Image.create(params[:image])
     flash[:notice] = 'File uploaded'
-    redirect_to(:action => 'show_encounter', :id => @image.encounter.id)
+    redirect_to(:controller => "encounter", :action => 'show', :id => @image.encounter.id)
   end
   
   def remove_image

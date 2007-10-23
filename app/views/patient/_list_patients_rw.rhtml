@@ -6,8 +6,8 @@
         <td class="search-box"><%=h patient.full_name %></td>
         <td class="search-box"><%=h patient.encounters.last.date.strftime("%Y-%m-%d") %></td>
         <td class="search-box">
-            <%= link_to("Show", :action => :find_encounters, :id => patient.id) %>&nbsp;&nbsp;
-            <%= link_to("Edit", :action => :edit_patient, :id => patient.id) %>
+            <%= link_to("Show", :controller => :encounter, :action => :find, :id => patient.id) %>&nbsp;&nbsp;
+            <%= link_to("Edit", :action => :edit, :id => patient.id) %>
         </td>
     </tr>
   <% end %>

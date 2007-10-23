@@ -80,4 +80,32 @@ class PatientControllerTest < Test::Unit::TestCase
     
   end
   
+    def test_edit_patient
+    baxter = patients(:baxter)
+  
+    get(:edit_patient,
+        {:id => baxter},
+        {:user_id => users(:marc)})
+        
+    assert :success
+    
+    post(:edit_patient,
+        {:id => baxter,
+         :patient => {:given_name => "Buster"}},
+        {:user_id => users(:marc)})
+        
+    assert :success
+    assert_template "edit_patient"
+    
+    buster = Patient.find(baxter.id)
+    
+    assert_equal "Buster", buster.given_name
+    
+  end
+  
+  def test_merge_patients
+  
+  end
+
+  
 end
