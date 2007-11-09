@@ -73,6 +73,7 @@ class LoginController < ApplicationController
   end
   
   def add_user
+    
     # After checking to see if the current user has the privilege to 
     # Add new users, if the requst is of the GET type, return the add_user
     # form.  Otherwise, we have a POST request, attempt to add the

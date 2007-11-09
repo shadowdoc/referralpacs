@@ -5,14 +5,27 @@ require 'dictionary_controller'
 class DictionaryController; def rescue_action(e) raise e end; end
 
 class DictionaryControllerTest < Test::Unit::TestCase
+  
+  fixtures :concepts, :answers
+  
   def setup
     @controller = DictionaryController.new
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
   end
-
-  # Replace this with your real tests.
-  def test_truth
-    assert true
+  
+  def test_population_of_concepts_for_lookup_array
+    
+    assert_nil @concepts
+    
+    get "concepts_for_lookup"
+    
+    assert :success
+    
+    # This should really test to see if the javascript is returned correctly
+    
   end
+  
+  
+  
 end

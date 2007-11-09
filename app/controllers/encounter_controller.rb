@@ -1,5 +1,17 @@
 class EncounterController < ApplicationController
   layout "ref"
+  before_filter :security, :except => [:find, :show] # make sure to check permission for all except find and show
+  
+  def security
+    # This method is called before data modifying actions to make sure the user 
+    # has the ability to modify encounters
+    @current_user = User.find(session[:user_id])
+    
+    unless @current_user.privilege.modify_encounter
+      flash[:notice] = "Not enough privilege to modify encounter."
+      return(redirect_to :controller => "patient", :action => "find")
+    end 
+  end
 
   def find
     # This controller will return a list of encounters, which may or may not be patient specific.
@@ -32,12 +44,15 @@ class EncounterController < ApplicationController
       @encounter.update_attributes(params[:encounter])
       @encounter.save
     end
+    
     render :partial => 'edit_encounter', :object => @encounter
+    
   end
   
   def new
-    
-    # Given a patient.id from the params, this creates a new encounter.
+
+    # Given a patient.id from the params, this creates a new encounter object and returns
+    # it to the view for manipulation.
   
     @patient = Patient.find(params[:id])
     @encounter = Encounter.new()  
@@ -47,6 +62,8 @@ class EncounterController < ApplicationController
   end
   
   def delete
+    
+    @id = params[:encounter_id] 
     @encounter = Encounter.find(params[:id])
     @patient = @encounter.patient
     begin 
@@ -55,11 +72,12 @@ class EncounterController < ApplicationController
     rescue
       flash[:notice] = "Could not delete encounter."
     end 
-    redirect_to :action => "find", :id => @patient.id
+    redirect_to :controller => "patient", :action => "find", :id => @patient.id
+    
   end
 
   def add_observation
-  
+    
     # Adds an observation to an encounter.
     @id = params[:encounter_id]
     @encounter = Encounter.find(@id)
@@ -74,7 +92,6 @@ class EncounterController < ApplicationController
   end
   
   def remove_observation
-  
     # Removes a specific observation from an encounter.
     @observation = Observation.find(params[:id])
     @observation.destroy
@@ -84,7 +101,9 @@ class EncounterController < ApplicationController
   end
   
   def statistics
+
     @patients = Patient.find(:all)
+
     if request.get?
       @start_date = Time.now.strftime("%Y-%m-%d")
       @end_date = @start_date

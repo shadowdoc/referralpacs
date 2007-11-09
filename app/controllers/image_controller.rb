@@ -1,9 +1,25 @@
 class ImageController < ApplicationController
+  before_filter :security, :except => :view_image
+  
+  def security
+    @current_user = User.find(session[:user_id])
+    @encounter = Encounter.find(params[:id])
+    
+    unless @current_user.privilege.modify_encounter
+      flash[:notice] = "Not enough privilege to modify images."
+      return(redirect_to :controller => "encounter", :action => "show", :id => @encounter.id)
+    end 
+    
+  end
+
+  def view_image  
+    @image = Image.find(params[:id])
+    @encounter = @image.encounter
+  end
   
   def upload_image
+      
     # Given an encounter, this creates a new image object and links the two.
-
-    @encounter = Encounter.find(params[:id])
     @image = Image.new()
     @image.encounter_id = @encounter.id
   end
@@ -15,23 +31,21 @@ class ImageController < ApplicationController
   end
   
   def remove_image
-
+    # Destroys an image given an id
+    
     @image = Image.find(params[:id])
-    @encounter = @image.encounter
     @image.destroy
     render :update do |page|
       page.remove "thumbnail-#{params[:id]}"
     end
   end
   
-  def view_image
   
-    @image = Image.find(params[:id])
-    @encounter = @image.encounter
-  end
-  
-  def edit_image
-  
+  def edit_image  
+    
+    # Finds the image to edit and returns the image and encounter objects
+    # to the view
+
     @image = Image.find(params[:id])
     @encounter = @image.encounter
   end
