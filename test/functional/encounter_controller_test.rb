@@ -5,21 +5,19 @@ require 'encounter_controller'
 class EncounterController; def rescue_action(e) raise e end; end
 
 class EncounterControllerTest < Test::Unit::TestCase
+  
+  fixtures :patients, :users, :encounters
+  
   def setup
     @controller = EncounterController.new
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
   end
 
-  # Replace this with your real tests.
-  def test_truth
-    assert true
-  end
-  
   def test_find_encounters_with_patient_id
     post(:find, 
          {:id => patients(:stanley).id}, 
-         {:user_id => users(:admin).id})
+         {:user_id => users(:marc).id})
     assert_response :success
     assert true, @show_new_encounter_link
     assert_template 'find'
@@ -61,8 +59,9 @@ class EncounterControllerTest < Test::Unit::TestCase
                         :provider_id => chest_pain.provider_id}},
         {:user_id => users(:tech).id})
         
-    assert_response :success
-    
+    assert_response :redirect
+    folow_redirect
+    assert_template :show_encounters
     assert 3, Encounter.count    
   end
   

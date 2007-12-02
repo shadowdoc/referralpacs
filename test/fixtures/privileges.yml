@@ -10,6 +10,7 @@ administrator:
   update_user:    true
   add_patient:    true
   remove_patient: true
+  modify_encounter: true
   
 client:
   id:             2
@@ -22,6 +23,7 @@ client:
   update_user:    false
   add_patient:    false
   remove_patient: false
+  modify_encounter: false
 
 tech:
   id:             3
@@ -34,7 +36,7 @@ tech:
   update_user:    false
   add_patient:    true
   remove_patient: false
-  
+  modify_encounter: true
 register:
   id:             4
   name:           register
@@ -46,3 +48,4 @@ register:
   update_user:    true
   add_patient:    true
   remove_patient: false
+  modify_encounter: false

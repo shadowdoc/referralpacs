@@ -1,6 +1,7 @@
 class RegisterController < ApplicationController
   require 'railspdf'
   layout 'ref'
+  before_filter :authorize_login # Make sure an authorized user is logged in.
 
   def report
     if request.get? || params[:report][:start_date].nil? || params[:report][:end_date].nil?

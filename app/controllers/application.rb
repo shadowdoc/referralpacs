@@ -14,7 +14,6 @@ class ApplicationController < ActionController::Base
       flash[:notice] = "Please log in."
       render :file => "login/login"
     end
-    
   end
   
   def set_current_user

@@ -1,6 +1,6 @@
 class LoginController < ApplicationController
 
-  before_filter :authorize_login, :except => [:login, :logout]
+  before_filter :authorize_login, :except => [:login, :logout] # Make sure an authorized user is logged in.
   layout "ref"
 
   def login
@@ -133,7 +133,7 @@ class LoginController < ApplicationController
     redirect_to(:action => :list_users)
   end
     
-  def update_user
+  def edit_user
     
     # First we make sure the current user can update user
     # records    

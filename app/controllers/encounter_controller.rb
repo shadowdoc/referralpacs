@@ -1,5 +1,6 @@
 class EncounterController < ApplicationController
   layout "ref"
+  before_filter :authorize_login
   before_filter :security, :except => [:find, :show] # make sure to check permission for all except find and show
   
   def security
@@ -63,6 +64,8 @@ class EncounterController < ApplicationController
   
   def delete
     
+    # This method will permenantly delete an encounter
+    
     @id = params[:encounter_id] 
     @encounter = Encounter.find(params[:id])
     @patient = @encounter.patient
@@ -79,6 +82,7 @@ class EncounterController < ApplicationController
   def add_observation
     
     # Adds an observation to an encounter.
+    
     @id = params[:encounter_id]
     @encounter = Encounter.find(@id)
     @concept = Concept.find(:first, :conditions => ["name = ?", params[:concept_name]])

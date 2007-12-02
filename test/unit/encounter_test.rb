@@ -8,7 +8,6 @@ class EncounterTest < Test::Unit::TestCase
     Thread.current['user'] = User.find 1
   end
 
-  # Replace this with your real tests.
   def test_encounter_content
     assert_equal encounters(:right_pneumonia).id, @encounter.id
     assert_equal encounters(:right_pneumonia).patient_id, @encounter.patient_id
