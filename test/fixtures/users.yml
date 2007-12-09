@@ -1,6 +1,6 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-marc:
+admin:
   id:              1
   given_name:      Marc
   family_name:     Kohli
@@ -9,15 +9,8 @@ marc:
   privilege_id:    1
   type:            Provider
   title:           MD
-lisa:
+other_admin:
   id:              2
-  given_name:      Lisa
-  family_name:     Kohli
-  email:           llaws@iupui.edu
-  hashed_password: <%= User.hash_password('password') %>
-  privilege_id:    2
-john:
-  id:              3
   given_name:      John
   family_name:     Bradshaw
   email:           johnkbradshaw@yahoo.com

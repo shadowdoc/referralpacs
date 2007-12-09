@@ -16,7 +16,7 @@ class PatientControllerTest < Test::Unit::TestCase
   
   def test_new_patient
   
-    assert 2, Patient.count
+    assert_equal 2, Patient.count
   
     get(:new,
         {},
@@ -29,7 +29,7 @@ class PatientControllerTest < Test::Unit::TestCase
                       :mrn_ampath => 5321,
                       :tribe_id => 2}},
         {:user_id => users(:tech).id})
-    assert 3, Patient.count
+    assert_equal 3, Patient.count
     
   end
   
@@ -38,14 +38,14 @@ class PatientControllerTest < Test::Unit::TestCase
   
     get(:edit,
         {:id => baxter},
-        {:user_id => users(:marc)})
+        {:user_id => users(:admin)})
         
     assert :success
     
     post(:edit,
         {:id => baxter,
          :patient => {:given_name => "Buster"}},
-        {:user_id => users(:marc)})
+        {:user_id => users(:admin)})
         
     assert :success
     
@@ -65,7 +65,7 @@ class PatientControllerTest < Test::Unit::TestCase
 #        {:patient => {'mrn_ampath' => baxter.mrn_ampath}},
 #        {:user_id => users(:client).id})    
 #        
-#    assert nil, @flash
+#    assert_nil, @flash
 #  end
 #  
 #  def test_find_patients_bad_mrn_ampath

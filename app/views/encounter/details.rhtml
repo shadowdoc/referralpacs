@@ -1,5 +1,6 @@
 <% @page_title = "Show Encounter" %>
 <% @patient = @encounter.patient %>
+
 <% fillCollections %>
 
 <% error_messages_for('encounter') %>
@@ -9,14 +10,18 @@
                        :all_encounter_types => @all_encounter_types,
                        :all_providers => @all_providers } %>
 <div id="break"><hr></div>                       
+
 <%= render :partial => "observations_rw",
            :locals => {:encounter => @encounter} %>
 
 <div id="break"><hr></div>
+
 <%= render :partial => "image/thumbnails_rw", 
            :locals => {:encounter => @encounter} %>
 
 <%= render :partial => "image/upload_image",
            :locals => {:encounter => @encounter} %>
+
 <div id="break">&nbsp;</div>
+
 <%= link_to "Return to Encounter list", :action => 'find_encounters', :id => @patient %>

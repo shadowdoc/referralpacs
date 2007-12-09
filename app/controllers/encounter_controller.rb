@@ -15,19 +15,22 @@ class EncounterController < ApplicationController
   end
 
   def find
+    #TODO Install will_paginate plugin and restore pagination.  
+    
     # This controller will return a list of encounters, which may or may not be patient specific.
     # If given an ID, the encounters will be for that patient.
  
-    if params[:id]
+#    if params[:id]
       @patient = Patient.find(params[:id])
-      @encounter_pages, @encounters = paginate :encounters, :conditions => ["patient_id = ?", params[:id]], :per_page => ENCOUNTERS_PER_PAGE
-    else
-      @encounter_pages, @encounters = paginate :encounters, :per_page => ENCOUNTERS_PER_PAGE
-    end
-    
+      @encounters = @patient.encounters
+      @current_user = User.find(session[:user_id])
+#    else
+#      @encounters = Encounter.find(:all)
+#    end
+#    
   end
 
-  def show
+  def details
     @encounter = Encounter.find(params[:id])
     @observation = Observation.new(:encounter_id => @encounter.id)
   end
@@ -75,7 +78,7 @@ class EncounterController < ApplicationController
     rescue
       flash[:notice] = "Could not delete encounter."
     end 
-    redirect_to :controller => "patient", :action => "find", :id => @patient.id
+    redirect_to :action => "find", :id => @patient.id
     
   end
 

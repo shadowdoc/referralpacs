@@ -7,8 +7,8 @@ class User < ActiveRecord::Base
   
   validates_uniqueness_of :email
   validates_presence_of :email, :password, :family_name, :given_name
-  
-  before_destroy :dont_destroy_marc
+
+  before_destroy :dont_destroy_admin
   belongs_to :privilege
     
   def before_create
@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
       self.hashed_password = User.hash_password(self.password)
     end
   end
-  
+    
   def after_update
     self.password = nil
   end
@@ -47,15 +47,16 @@ class User < ActiveRecord::Base
     end
   end
   
+  def dont_destroy_admin
+    raise "Can't destroy mkohli@iupui.edu" if self.email == 'mkohli@iupui.edu'
+  end
+
+  
   private
   def self.hash_password(password)
     Digest::MD5.hexdigest(password)
   end
-  
-  def dont_destroy_marc
-    raise "Can't destroy mkohli@iupui.edu" if self.email == 'mkohli@iupui.edu'
-  end
-  
+    
 end
 
 class Provider < User

@@ -1,9 +1,27 @@
 class PatientController < ApplicationController
   layout "ref"
   before_filter :authorize_login # Make sure an authorized user is logged in.
+  
+  before_filter :security, :except => :find
+
+  def security
+    # This method is called before any method that
+    # Modifies patient data
+    current_user = User.find(session[:user_id])
+    
+    unless current_user.privilege.modify_patient
+      flash[:notice] = "Not enough privilege to modify patients."
+      return(redirect_to :action => "find")
+    end
+    
+  end
 
   def find
     # If the request is a get, there is nothing to do.
+  
+    # We'll use this in this method, and also in the view to make
+    # sure the links are correct
+    @current_user = User.find(session[:user_id])  
   
     if request.post?
     
@@ -47,7 +65,7 @@ class PatientController < ApplicationController
       if @patients.nil? || @patients.empty?
          render :update do |page|
 
-           @current_user = User.find(session[:user_id])
+           #TODO Shouldn't this be in an RJS template?
 
            # Can the current user add patients?  If so, let's give them the opportunity.
            if @current_user.privilege.add_patient
@@ -57,11 +75,12 @@ class PatientController < ApplicationController
            end
            
            page.visual_effect :highlight, "patient-list"
+           
            page.form.reset 'patient-form'
            
          end
        else
-       
+         
          render :partial => "ajax_list_patients"
          
       end
@@ -97,5 +116,21 @@ class PatientController < ApplicationController
       redirect_to :action => "find"
     end
   end
+  
+  def delete
+    # It takes not only modify_patient, but also remove_patient privilege to delete
+    
+    current_user = User.find(session[:user_id])
+    patient = Patient.find(params[:id])
+    
+    if current_user.privilege.remove_patient
+      patient.destroy
+    else
+      flash[:notice] = "Not enough privilege to delete a patient"
+
+    end
+    redirect_to :action => "find"    
+  end
+
 
 end

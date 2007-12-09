@@ -11,12 +11,7 @@ class LoginControllerTest < Test::Unit::TestCase
   def setup
     @controller = LoginController.new
     @request    = ActionController::TestRequest.new
-    @response   = ActionController::TestResponse.new
-    
-    marc = users(:marc)
-    client = users(:client)
-    tech = users(:tech)
-    
+    @response   = ActionController::TestResponse.new    
   end
   
   def test_login
@@ -25,15 +20,15 @@ class LoginControllerTest < Test::Unit::TestCase
     
     get "login"
     post(:login, 
-         :user => {:email => users(:marc).email, :password => "password"})
+         :user => {:email => users(:admin).email, :password => "password"})
     
-    assert session[:user_id] = users(:marc).id
+    assert session[:user_id] = users(:admin).id
     
   end
   
   def test_login_without_privilege
     get "login"
-    post "login", :user => {:email => users(:marc).email, :password => "wrong"}
+    post "login", :user => {:email => users(:admin).email, :password => "wrong"}
     
     assert :success
     assert_equal "Invalid user/password combination", flash[:notice]
@@ -43,12 +38,12 @@ class LoginControllerTest < Test::Unit::TestCase
       
   def test_add_user
     
-    assert_equal User.count, 5
+    assert_equal 5, User.count
     assert_nil User.find(:first, :conditions => ["given_name = ?", "Evelyn"])
   
     get(:add_user,
         {},
-        {:user_id => users(:marc)})
+        {:user_id => users(:admin)})
     
     assert_response :success
     
@@ -58,9 +53,9 @@ class LoginControllerTest < Test::Unit::TestCase
                    :email => "wasike@email.com",
                    :privilege_id => 1,
                    :password => "password"}},
-        {:user_id => users(:marc).id})
+        {:user_id => users(:admin).id})
 
-    assert_equal User.count, 6
+    assert_equal 6, User.count
 
     new_user = User.find(:first, :conditions => ["given_name = ?", "Evelyn"])
 
@@ -104,7 +99,7 @@ class LoginControllerTest < Test::Unit::TestCase
   
     post(:delete_user,
         {:id => 5},
-        {:user_id => users(:marc)})
+        {:user_id => users(:admin)})
         
     assert_equal 4, User.count
     
@@ -129,7 +124,7 @@ class LoginControllerTest < Test::Unit::TestCase
   def test_list_users
     get(:list_users,
         {},
-        {:user_id => users(:marc)})
+        {:user_id => users(:admin)})
         
     assert :success
     assert_template "list_users"
@@ -138,25 +133,25 @@ class LoginControllerTest < Test::Unit::TestCase
   
 
   def test_update_user
-    marc = users(:marc)
+    admin = users(:admin)
     get(:update_user,
-        {:id => marc},
-        {:user_id => users(:marc)})
+        {:id => admin},
+        {:user_id => users(:admin)})
         
     post(:update_user,
-         {:id => marc.id, 
+         {:id => admin.id, 
           :user => {:given_name => "marcus",
                     :family_name => "Kohli",
                     :email => "junk@email.com",
                     :password => "password"}},
-         {:user_id => users(:marc)})
+         {:user_id => users(:admin)})
          
     assert_redirected_to(:action => "list_users")
     
     follow_redirect
     assert_template "list_users"
     
-    marcus = User.find(marc.id)
+    marcus = User.find(admin.id)
     
     assert_equal "marcus", marcus.given_name
   
@@ -165,14 +160,14 @@ class LoginControllerTest < Test::Unit::TestCase
   def test_update_user_without_privliege
     
     post(:update_user,
-         {:id => users(:marc),
+         {:id => users(:admin),
           :user => {:given_name => "marcus",
                     :family_name => "Kohli",
                     :email => "junkit@email.com",
                     :password => "password"}},
          {:user_id => users(:client)})
     
-    marc = User.find(users(:marc).id)
+    marc = User.find(users(:admin).id)
     
     assert "Marc", marc.given_name
 
@@ -184,7 +179,7 @@ class LoginControllerTest < Test::Unit::TestCase
     
     get(:list_providers,
         {},
-        {:user_id => users(:marc)})
+        {:user_id => users(:admin)})
         
     assert :success
     
@@ -198,7 +193,7 @@ class LoginControllerTest < Test::Unit::TestCase
      
     get(:add_provider,
         {},
-        {:user_id => users(:marc)})
+        {:user_id => users(:admin)})
         
     post(:add_provider,
          :provider => {:given_name => "Joseph", 
@@ -207,7 +202,7 @@ class LoginControllerTest < Test::Unit::TestCase
                        :password => "password",
                        :privilege_id => 2,
                        :title => "MD"},
-         :user_id => users(:marc))
+         :user_id => users(:admin))
     
     assert_redirected_to :action => "list_providers"
     
@@ -221,10 +216,10 @@ class LoginControllerTest < Test::Unit::TestCase
     
     assert_equal 2, Provider.count
     
-    marc = users(:marc)
+    admin = users(:admin)
     
     get(:add_provider, 
-        {:id => marc.id},
+        {:id => admin.id},
         {:user_id => users(:client).id})
         
     assert_equal 2, Provider.count
@@ -235,17 +230,17 @@ class LoginControllerTest < Test::Unit::TestCase
   
   def test_edit_provider
     
-    marc = users(:marc)
+    admin = users(:admin)
     
     get(:edit_provider,
-        {:id => marc.id},
-        {:user_id => marc.id})
+        {:id => admin.id},
+        {:user_id => admin.id})
      
     post(:edit_provider,
         {:provider => {:given_name => "marcus",
                        :family_name => "kohlius",
-                       :password => "password"}, :id => marc.id},
-         :user_id => marc.id)
+                       :password => "password"}, :id => admin.id},
+         :user_id => admin.id)
  
     assert_redirected_to :action => "list_providers"
     
@@ -256,10 +251,10 @@ class LoginControllerTest < Test::Unit::TestCase
 
   def test_edit_provider_without_privilege
     
-    marc = users(:marc)
+    admin = users(:admin)
     
     get(:edit_provider,
-        {:id => marc.id},
+        {:id => admin.id},
         {:user_id => users(:client)})
          
     assert_redirected_to(:controller => "patient", :action => "find")

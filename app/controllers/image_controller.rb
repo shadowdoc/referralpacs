@@ -22,6 +22,8 @@ class ImageController < ApplicationController
   def upload_image
       
     # Given an encounter, this creates a new image object and links the two.
+    @encounter = Encounter.find(params[:id])
+    
     @image = Image.new()
     @image.encounter_id = @encounter.id
   end

@@ -1,0 +1,16 @@
+<div id="encounter">
+    <div id="header">
+        <div id="date_type">
+            <%=h encounter.date.strftime("%d %b %Y") + " : " + encounter.encounter_type.name %>
+        </div>
+        <div id="links">
+        	<% encounter_links_helper(encounter) %>
+            <% @links.each do |link| -%>
+			  <%= link %>
+			<% end -%>
+        </div>
+    </div>
+    <div id="impression">
+        <p>Impression: <%=h encounter.impression %></p>
+    </div>
+</div>

@@ -5,13 +5,13 @@ class LibUsermonitorTest < ActionController::IntegrationTest
   
   def test_created_by
     post('login/login', 
-         :user => {:email => users(:marc).email, 
+         :user => {:email => users(:admin).email, 
                    :password => "password"})
 
     get('admin/new_patient')
     assert :success
     assert_template 'admin/new_patient'
-    assert Thread.current['user'], users(:marc)
+    assert Thread.current['user'], users(:admin)
     
     assert Patient.count, 2
     

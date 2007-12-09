@@ -1,9 +1,12 @@
 <tr>
-    <td><%=h patient.mrn_ampath%></td>
-    <td><%=h patient.mtrh_rad_id %></td>
-    <td><%=h patient.full_name %></td>
-    <td><%=h patient.gender %></td>
-    <td><%=h patient.address1 %></td>
-    <td><%=h patient.birthdate_formatted %></td>
-    <td><%= link_to('Select', :action => "find_encounters", :id => patient.id) %></td>
+    <td class="search-box"><%=h patient.mrn_ampath unless patient.mrn_ampath.nil? %></td>
+    <td class="search-box"><%=h patient.mtrh_rad_id unless patient.mtrh_rad_id.nil? %></td>
+    <td class="search-box"><%=h patient.full_name %></td>
+    <td class="search-box"><%=h patient.encounters.last.date.strftime("%Y-%m-%d") %></td>
+    <td class="search-box">
+        <% patient_link_helper(patient) -%>
+		<% @links.each do |link| %>
+			<%= link %>
+		<% end -%>
+    </td>
 </tr>

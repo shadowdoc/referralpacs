@@ -2,11 +2,9 @@
 
 <%= error_messages_for "encounter" %>
 
-<%= render :partial => "find_encounters_del",
+<%= render :partial => "encounter",
            :collection => @encounters %>
 
-<%= render :partial => "shared/page_nav",
-           :locals => {:encounter_pages => @encounter_pages} unless @encounter_pages.nil? %>
 <br />
 <br />
 <%= link_to 'New Encounter', {:action => 'new', :id => @patient.id} %><br/>

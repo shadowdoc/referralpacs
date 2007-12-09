@@ -29,7 +29,7 @@ class LoginFindPatientTest < ActionController::IntegrationTest
         assert_nil session[:user_id] # prove this session has no one logged in
         get "login/login"
         assert_response :success
-        post "login/login", :email => users[:marc].email, :password => users[:marc].password
+        post "login/login", :email => users[:admin].email, :password => users[:admin].password
         assert_not_nil session[:user_id]
         assert_response :redirect
         assert_redirected_to "patient/find"

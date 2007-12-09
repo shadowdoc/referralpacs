@@ -25,7 +25,7 @@ class EncounterTest < Test::Unit::TestCase
     @encounter.reload
     assert_equal "Normal", @encounter.impression
 
-    assert_equal users(:marc), @encounter.updated_by
+    assert_equal users(:admin), @encounter.updated_by
   end
   
   def test_destroy
