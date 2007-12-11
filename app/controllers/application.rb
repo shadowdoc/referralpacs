@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   helper :date
   before_filter :set_current_user
   
-#  include SslRequirement
+#  TODO include SslRequirement
   
   ENCOUNTERS_PER_PAGE = 10
   

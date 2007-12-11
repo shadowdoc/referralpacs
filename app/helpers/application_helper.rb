@@ -24,14 +24,38 @@ module ApplicationHelper
     unless session[:user_id].nil?
       user = User.find(session[:user_id])
       unless user.nil?
+        
+        # First we set up the string that displays the current user.
+        
         @current_user_banner = "Logged in as: " + user.email.to_s + " | " + link_to("Log Off", :controller => :login, :action => :logout)
-        @command_list = [link_to('Statistics', :controller => :encounter, :action => :statistics),
-                         link_to('Manage Users', :controller => :login, :action => :list_users),
-                         link_to('Manage Providers', :controller => :login, :action => :list_providers),
-                         link_to('Manage Clients', :controller => :login, :action => :list_clients),
-                         link_to('Find Patients', :controller => :patient, :action => :find),
-                         link_to('New Patient', :controller => :patient, :action => :new)]
-  
+        
+        # Here we put together the command list that will be at the top of every page
+
+        find_patients = link_to('Find Patients', :controller => :patient, :action => :find)
+        manage_users = link_to('Manage Users', :controller => :login, :action => :list_users)
+        manage_providers = link_to('Manage Providers', :controller => :login, :action => :list_providers)
+        manage_clients = link_to('Manage Clients', :controller => :login, :action => :list_clients)
+        stats = link_to('Statistics', :controller => :encounter, :action => :statistics)
+        @command_list = []
+        
+        case user.privilege.name
+          when "admin"
+            @command_list = [stats,
+                             manage_users,
+                             manage_providers,
+                             manage_clients,
+                             find_patients]     
+          when "tech"
+            @command_list = [find_patients,
+                             manage_clients]
+          when "client"
+            @command_list = [find_patients]
+          else
+            @command_list = [find_patients]
+        end
+        
+        
+
       end
     end
   end

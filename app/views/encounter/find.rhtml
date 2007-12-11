@@ -7,4 +7,6 @@
 
 <br />
 <br />
-<%= link_to 'New Encounter', {:action => 'new', :id => @patient.id} %><br/>
+
+
+<%= link_to('New Encounter', {:action => 'new', :id => @patient.id}) if @current_user.privilege.add_encounter %><br/>

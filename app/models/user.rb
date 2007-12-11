@@ -50,7 +50,6 @@ class User < ActiveRecord::Base
   def dont_destroy_admin
     raise "Can't destroy mkohli@iupui.edu" if self.email == 'mkohli@iupui.edu'
   end
-
   
   private
   def self.hash_password(password)

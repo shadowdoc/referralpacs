@@ -1,9 +1,9 @@
 class PatientController < ApplicationController
   layout "ref"
   before_filter :authorize_login # Make sure an authorized user is logged in.
-  
   before_filter :security, :except => :find
 
+  protected
   def security
     # This method is called before any method that
     # Modifies patient data
@@ -16,6 +16,7 @@ class PatientController < ApplicationController
     
   end
 
+  public
   def find
     # If the request is a get, there is nothing to do.
   
@@ -24,9 +25,6 @@ class PatientController < ApplicationController
     @current_user = User.find(session[:user_id])  
   
     if request.post?
-    
-#      # If a date is supplied, we'll use that as a filter
-#      if params[:encounter][:date] == ""
         
       # AMPATH mrn is the best identifier, so let's see if we have one of those first
       unless params[:patient][:mrn_ampath] == ""
@@ -68,7 +66,7 @@ class PatientController < ApplicationController
            #TODO Shouldn't this be in an RJS template?
 
            # Can the current user add patients?  If so, let's give them the opportunity.
-           if @current_user.privilege.add_patient
+           unless @current_user.privilege.add_patient
              page.replace_html "patient-list", "No patients found, please search again"
            else
              page.replace_html "patient-list", "No patients found. <br/><br/>" + link_to("New Patient", :controller => :patient, :action => :new)

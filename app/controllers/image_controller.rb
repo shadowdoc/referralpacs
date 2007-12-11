@@ -3,6 +3,7 @@ class ImageController < ApplicationController
   before_filter :authorize_login # Make sure a valid user is logged in.
   before_filter :security, :except => :view_image # Make sure the current user can modify image data
   
+  protected
   def security
     
     @current_user = User.find(session[:user_id])
@@ -14,6 +15,7 @@ class ImageController < ApplicationController
     
   end
 
+  public
   def view_image  
     @image = Image.find(params[:id])
     @encounter = @image.encounter

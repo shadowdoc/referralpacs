@@ -3,6 +3,7 @@ class EncounterController < ApplicationController
   before_filter :authorize_login
   before_filter :security, :except => [:find, :show] # make sure to check permission for all except find and show
   
+  protected
   def security
     # This method is called before data modifying actions to make sure the user 
     # has the ability to modify encounters
@@ -14,6 +15,7 @@ class EncounterController < ApplicationController
     end 
   end
 
+  public
   def find
     #TODO Install will_paginate plugin and restore pagination.  
     
