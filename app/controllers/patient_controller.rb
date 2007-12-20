@@ -25,38 +25,18 @@ class PatientController < ApplicationController
     @current_user = User.find(session[:user_id])  
   
     if request.post?
-        
-      # AMPATH mrn is the best identifier, so let's see if we have one of those first
-      unless params[:patient][:mrn_ampath] == ""
-        
-        # TODO: Will need to rectify patients who are already in the database
-        # Who haven't had their AMPATH identities verified
-        # Perhaps we should add a field to the patient database that
-        # Indicates that the demographics for that patient have been checked
-        
-        @patients = Patient.find(:all,
-                    :conditions => ['mrn_ampath = ?', params[:patient][:mrn_ampath]])
-                    
-      else
-        # If we don't have an AMPATH ID, what about a MTRH radiology id?
+      
+      #TODO This is the donor site for the previously held find code.
+      
+      @patients = Patient.search(params).to_a
 
-        unless params[:patient][:mtrh_rad_id] == ""
-          @patients = Patient.find(:all, 
-                      :conditions => ['mtrh_rad_id = ?', params[:patient][:mtrh_rad_id]])
-        else
-          # We're left to search names or filter encounters by date to get patient names
-          unless params[:patient][:name] == ""
-            @patients = Patient.find(:all, 
-                        :conditions => ['LOWER(CONCAT(given_name, " ", family_name)) LIKE ?', '%' + params[:patient][:name].downcase + '%'])
-          else
-            @encounters = Encounter.find(:all, :conditions => ['date LIKE ?', '%' + params[:encounter][:date] + '%'])
-            @patients = []
-            @encounters.each { |enc| @patients << enc.patient }       
-            @patients.uniq!
-          end
-        end
+      if @patients.nil? && params[:encounter][:date]
+        # If we haven't found any patients and someone listed a date
+        @encounters = Encounter.find(:all, :conditions => ['date LIKE ?', '%' + params[:encounter][:date] + '%'])
+        @patients = Array.new()
+        @encounters.each { |enc| @patients << enc.patient }       
+        @patients.uniq!
       end
-
 
       # Our patients arrays should be set now.  If not, no one was found.
       

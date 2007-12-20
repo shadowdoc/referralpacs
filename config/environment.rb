@@ -62,3 +62,10 @@ end
 ActiveSupport::CoreExtensions::Date::Conversions::DATE_FORMATS.merge!(
   :default => '%Y-%m-%d'
 )
+
+require_gem 'pdf-writer'
+
+# Constants to hook up to openmrs
+OPENMRS_USER = "admin"
+OPENMRS_PASSWORD = "test"
+OPENMRS_SERVER = "127.0.0.1:8080"
