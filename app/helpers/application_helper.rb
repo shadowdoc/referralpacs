@@ -36,15 +36,17 @@ module ApplicationHelper
         manage_providers = link_to('Manage Providers', :controller => :login, :action => :list_providers)
         manage_clients = link_to('Manage Clients', :controller => :login, :action => :list_clients)
         stats = link_to('Statistics', :controller => :encounter, :action => :statistics)
+        dictionary = link_to('Dictionary', :controller => :dictionary, :action => :list_concepts)
         @command_list = []
         
         case user.privilege.name
           when "admin"
-            @command_list = [stats,
+            @command_list = [find_patients,
+                             dictionary,
                              manage_users,
                              manage_providers,
                              manage_clients,
-                             find_patients]     
+                             stats]     
           when "tech"
             @command_list = [find_patients,
                              manage_clients]

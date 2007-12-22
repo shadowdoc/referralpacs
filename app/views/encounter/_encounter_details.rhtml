@@ -1,8 +1,21 @@
+<% fillCollections %>
 <div id="encounter-detail">
-<h2><%=h @encounter.encounter_type.name %> from <%=h @encounter.date.strftime("%d %b %Y") %></h2>
-X-ray ID: <%=h @encounter.xray_id %>
-Indication: <%=h @encounter.indication %><br />
-Impression: <%=h @encounter.impression %><br />
-Provider:   <%=h @encounter.provider.full_name %><br />
-Client:     <%=h @encounter.client.full_name %><br />
+    <h2>Encounter Details</h2>
+    <% form_remote_for :encounter,
+                       :url => {:controller => "encounter", :action => "edit", :id => @encounter.id},
+                       :loading => 'Form.disable("encounter-form")',
+                       :complete => 'Form.enable("encounter-form")',
+                       :html => {:id => "encounter-form"},
+                       :builder => TaggedBuilder do |form| %>
+        <%= hidden_field :encounter, :patient_id %>                       
+        <%= form.date_select :date %>
+        <%= form.collection_select :encounter_type_id, @all_encounter_types, :id, :name %>
+        <%= form.text_field :xray_id %>
+        <%= form.text_field :indication %>
+        <%= form.text_field :impression %>
+        <%= form.collection_select :provider_id, @all_providers, :id, :full_name %>
+        <%= form.collection_select :client_id, @all_clients, :id, :full_name %>
+        <%= submit_tag "Save Changes to Encounter Details" %>    
+    <% end %>
+    <div id="encounter-indicator">&nbsp;</div>
 </div>

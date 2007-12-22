@@ -1,5 +1,5 @@
 if @encounter.errors.empty?
-  page.replace "encounter-detail", :partial => "encounter_details_rw", :object => @encounter
+  page.replace "encounter-detail", :partial => "encounter_details", :object => @encounter
   page.visual_effect :highlight, "encounter-detail"
   page.replace_html "encounter-indicator", "Saved..."
   page.replace "observations", :partial => "observations_rw", :object => @encounter

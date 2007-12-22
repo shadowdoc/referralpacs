@@ -10,7 +10,7 @@ class ImageController < ApplicationController
     
     unless @current_user.privilege.modify_encounter
       flash[:notice] = "Not enough privilege to modify images."
-      return(redirect_to :controller => "encounter", :action => "show", :id => params[:encounter_id])
+      return(redirect_to :controller => "encounter", :action => "details", :id => params[:encounter_id])
     end 
     
   end
@@ -33,7 +33,7 @@ class ImageController < ApplicationController
   def add_image  
     @image = Image.create(params[:image])
     flash[:notice] = 'File uploaded'
-    redirect_to(:controller => "encounter", :action => 'show', :id => @image.encounter.id)
+    redirect_to(:controller => "encounter", :action => 'details', :id => @image.encounter.id)
   end
   
   def remove_image

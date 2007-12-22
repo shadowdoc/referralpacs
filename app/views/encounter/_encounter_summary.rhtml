@@ -1,0 +1,27 @@
+<div id="encounter">
+	
+	<!-- Make an @encounter varible for some of the other following views -->
+	<% @encounter = encounter_summary -%>
+	<% @observations = encounter_summary.observations %>
+	
+    <div id="header">
+        <div id="date_type">
+            <%=h encounter_summary.date.strftime("%d %b %Y") + " : " + encounter_summary.encounter_type.name %>
+        </div>
+        <div id="links">
+        	<% encounter_links_helper(encounter_summary) %>
+            <% @links.each do |link| -%>
+			  <%= link %>
+			<% end -%>
+        </div>
+    </div>
+	<div id="thumbnails">
+		<%= render :partial => "image/thumbnails", 
+    		       :locals => {:encounter => encounter_summary } %>
+	</div>
+	
+    <div id="observation">		
+		<%= render :partial => "observation_list" %><br/>
+    </div>
+</div>
+<div id="encounter_spacer">&nbsp;</div>
