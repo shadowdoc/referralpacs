@@ -29,7 +29,11 @@ class EncounterController < ApplicationController
 #    else
 #      @encounters = Encounter.find(:all)
 #    end
-#    
+
+    if @encounters.empty?
+      flash[:notice] = "No encounters for #{@patient.full_name} - "
+    end
+  
   end
 
   def details
