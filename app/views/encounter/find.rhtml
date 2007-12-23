@@ -6,5 +6,5 @@
            :collection => @encounters %>
 <div id="new">
   <%= link_to('New Encounter', {:action => 'new', :id => @patient.id}) if @current_user.privilege.add_encounter %><br/>	
-  <%= link_to('Find New Patient', {:controller => :patient, :action => :find}) %>
+  <%= link_to('Find Patient', {:controller => :patient, :action => :find}) %>
 </div>

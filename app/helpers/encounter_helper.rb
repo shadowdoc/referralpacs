@@ -2,7 +2,7 @@ module EncounterHelper
   
   def encounter_links_helper(encounter)
     # Make sure that we get the appropriate links based on the current user
-
+    @links = [] 
     
     # Only users who can modify encounters should see the details and delete links
     if @current_user.privilege.modify_encounter
