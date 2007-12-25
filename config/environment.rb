@@ -63,9 +63,16 @@ ActiveSupport::CoreExtensions::Date::Conversions::DATE_FORMATS.merge!(
   :default => '%Y-%m-%d'
 )
 
+# Requried to use .rpdf views, currently used by registrars
+# To generate reports.
+
 require_gem 'pdf-writer'
 
-# Constants to hook up to openmrs
-OPENMRS_USER = "admin"
-OPENMRS_PASSWORD = "test"
-OPENMRS_SERVER = "127.0.0.1:8080"
+# If the openmrs.conf.rb file with OpenMRS integration variables exists
+# we'll include it here.  If not, turn off OpenMRS integration
+if File.exists?('config/openmrs.conf.rb')
+  $openmrs = true
+  require 'config/openmrs.conf.rb'
+else
+  $openmrs = false
+end

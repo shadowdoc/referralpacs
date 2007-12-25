@@ -11,6 +11,8 @@ class Patient < ActiveRecord::Base
   
   before_save :uppercase
   
+  require "net/https"
+  
   #Provide a concatenated name for cleaner display.
   def full_name
     unless self.given_name.nil? || self.family_name.nil?
@@ -41,27 +43,14 @@ class Patient < ActiveRecord::Base
       
       local_patient = Patient.find(:first, :conditions => ['mrn_ampath = ?', params[:patient][:mrn_ampath]])
       
-      if local_patient.nil? 
+      
+      if local_patient.nil?
         # This is the case where we didn't find the patient locally.
-        # So, we'll see if the openMRS server knows about this patient
+        # So, we'll see if the openMRS server knows about this patient if we're integrated
         
-        # This came from a browser, so let's sanitize it
-        mrn_openmrs = CGI.escape(params[:patient][:mrn_ampath])
-        url = "http://#{OPENMRS_SERVER}/openmrs/moduleServlet/restmodule/api/patient/#{mrn_openmrs}"
-        
-        # Create a URI object from our url string.
-        url = URI.parse(url)
-
-        req = Net::HTTP::Get.new(url.path)
-        req.basic_auth(OPENMRS_USER, OPENMRS_PASSWORD)
-        
-        http = Net::HTTP.new(url.host, url.port) 
-        
-        result = http.request(req)
-        
-        doc = REXML::Document.new(result.read_body)
-        
-        @patients = Patient.save_xml_to_patient_object(doc) unless doc.elements["//identifier"].nil?
+        if $openmrs == true
+          @patients = find_openmrs_patient(params[:patient][:mrn_ampath])
+        end
 
       else
         # We found the patient locally, now we can simply return the patient
@@ -93,10 +82,43 @@ class Patient < ActiveRecord::Base
     
   end
   
+  def Patient.find_openmrs_patient(mrn_openmrs)
+    # This method communicates with the OpenMRS REST interface on the server
+    # uses REXML to process the response.
+    # All of the globals below are set in config/openmrs.conf.rb
+    
+    # This came from a browser, so let's sanitize it
+    mrn_openmrs = CGI.escape(mrn_openmrs)
+    
+    url = "https://#{$openmrs_server}/openmrs/moduleServlet/restmodule/api/patient/#{mrn_openmrs}"
+    
+    # Create a URI object from our url string.
+    url = URI.parse(url)
+
+    # Create a request object from our url and attach the authorization data.
+    req = Net::HTTP::Get.new(url.path)
+    req.basic_auth($openmrs_user, $openmrs_user)
+    
+    http = Net::HTTP.new(url.host, url.port)
+    http.use_ssl = true
+
+    result = http.request(req)
+    case result
+      when Net::HTTPSuccess
+        doc = REXML::Document.new(result.read_body)
+        @patients = Patient.save_xml_to_patient_object(doc) unless doc.elements["//identifier"].nil?
+
+      else
+        #TODO insert error stating OpenMRS connection is down.
+        #res.error!
+    end    
+  end
+  
   def Patient.save_xml_to_patient_object(doc)
     # This method takes a REXML document and returns a patient object.
     
-    new_patient = Patient.new()
+    new_patient = Patient.new
+
     new_patient.mrn_ampath = doc.elements["//identifier"].text unless doc.elements["//identifier"].nil?
     new_patient.given_name = doc.elements["//givenName"].text unless doc.elements["//givenName"].nil?
     new_patient.middle_name = doc.elements["//middleName"].text unless doc.elements["//middleName"].nil?
@@ -110,7 +132,8 @@ class Patient < ActiveRecord::Base
     new_patient.country = doc.elements["//country"].text unless doc.elements["//country"].nil?
     new_patient.mtrh_rad_id = nil
     new_patient.openmrs_verified = true
-
+     
+    
     new_patient.save!
     
     return new_patient
