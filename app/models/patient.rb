@@ -97,7 +97,7 @@ class Patient < ActiveRecord::Base
 
     # Create a request object from our url and attach the authorization data.
     req = Net::HTTP::Get.new(url.path)
-    req.basic_auth($openmrs_user, $openmrs_user)
+    req.basic_auth($openmrs_user, $openmrs_password)
     
     http = Net::HTTP.new(url.host, url.port)
     http.use_ssl = true
@@ -107,7 +107,6 @@ class Patient < ActiveRecord::Base
       when Net::HTTPSuccess
         doc = REXML::Document.new(result.read_body)
         @patients = Patient.save_xml_to_patient_object(doc) unless doc.elements["//identifier"].nil?
-
       else
         #TODO insert error stating OpenMRS connection is down.
         #res.error!
@@ -117,8 +116,7 @@ class Patient < ActiveRecord::Base
   def Patient.save_xml_to_patient_object(doc)
     # This method takes a REXML document and returns a patient object.
     
-    new_patient = Patient.new
-
+    new_patient = Patient.new()
     new_patient.mrn_ampath = doc.elements["//identifier"].text unless doc.elements["//identifier"].nil?
     new_patient.given_name = doc.elements["//givenName"].text unless doc.elements["//givenName"].nil?
     new_patient.middle_name = doc.elements["//middleName"].text unless doc.elements["//middleName"].nil?
@@ -132,8 +130,6 @@ class Patient < ActiveRecord::Base
     new_patient.country = doc.elements["//country"].text unless doc.elements["//country"].nil?
     new_patient.mtrh_rad_id = nil
     new_patient.openmrs_verified = true
-     
-    
     new_patient.save!
     
     return new_patient
