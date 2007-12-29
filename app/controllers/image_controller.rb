@@ -1,7 +1,9 @@
 class ImageController < ApplicationController
   
   before_filter :authorize_login # Make sure a valid user is logged in.
-  before_filter :security, :except => :view_image # Make sure the current user can modify image data
+  before_filter :security, :except => :view # Make sure the current user can modify image data
+  
+  layout 'ref'
   
   protected
   def security
@@ -16,9 +18,17 @@ class ImageController < ApplicationController
   end
 
   public
-  def view_image  
+  def view
     @image = Image.find(params[:id])
     @encounter = @image.encounter
+    
+    respond_to do |format|
+#FIXME Please plug up this huge security hole.
+#      format.jpg 
+      format.html
+      format.xml {render :xml => @image.to_xml}
+    end
+
   end
   
   def upload_image

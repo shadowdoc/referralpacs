@@ -3,11 +3,8 @@ class Patient < ActiveRecord::Base
   belongs_to :tribe
   
   validates_presence_of :given_name, :family_name
-  validates_uniqueness_of :mtrh_rad_id,
-                          :if => Proc.new {|mtrh_rad_id| mtrh_rad_id.nil?}
-                          
-  validates_uniqueness_of :mrn_ampath, 
-                          :if => Proc.new {|mrn_ampath| mrn_ampath.nil?}
+  validates_uniqueness_of :mtrh_rad_id, :allow_blank => true                          
+  validates_uniqueness_of :mrn_ampath, :allow_blank => true
   
   before_save :uppercase
   

@@ -5,7 +5,7 @@
 # ENV['RAILS_ENV'] ||= 'production'
 
 # Specifies gem version of Rails to use when vendor/rails is not present
-RAILS_GEM_VERSION = '1.1.6'
+RAILS_GEM_VERSION = '2.0.2'
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
@@ -39,6 +39,17 @@ Rails::Initializer.run do |config|
   # config.active_record.default_timezone = :utc
   
   # See Rails::Configuration for more options
+
+  # Your secret key for verifying cookie session data integrity.
+  # If you change this key, all old sessions will become invalid!
+  # Make sure the secret is at least 30 characters and all random, 
+  # no regular words or you'll be exposed to dictionary attacks.
+  config.action_controller.session = {
+    :session_key => '_ref_session',
+    :secret      => 'jieu566kejh49947g4gh4j9g99ll1032uncdbo1094ygfbl3o3urhbpoe409383hbfhn1294856jak38tyg3jo3857nbzskwijtjhkwjkeut978392128565g1jk590a'
+                    
+  }
+
 end
 
 # Add new inflection rules using the following format 
@@ -63,10 +74,16 @@ ActiveSupport::CoreExtensions::Date::Conversions::DATE_FORMATS.merge!(
   :default => '%Y-%m-%d'
 )
 
-# Requried to use .rpdf views, currently used by registrars
-# To generate reports.
+# Requried to use railspdf and .rpdf views , currently used by registrars
+# to generate reports.
+#gem 'pdf-writer'
+gem 'pdf-writer'
 
-require_gem 'pdf-writer'
+# We need to protect our image files from people 
+# URL hacking, so we need to have the controller handle each file
+# This will use respond_to which requires knowlege of the "image/jpeg" MIME type.
+Mime::Type.register("image/jpeg", :jpg)
+
 
 # If the openmrs.conf.rb file with OpenMRS integration variables exists
 # we'll include it here.  If not, turn off OpenMRS integration
@@ -76,3 +93,20 @@ if File.exists?('config/openmrs.conf.rb')
 else
   $openmrs = false
 end
+
+# The following is a sample openmrs.config.rb file.
+
+## config/openmrs.conf.rb
+##
+## The following constants are used to connect to an openMRS system to retrieve
+## patient information.  As a best-practice we should always be using
+## https, so that's hard coded.
+## Example:
+## 
+## $openmrs_user = "openmrsuser" 
+## $openmrs_password = "openmrspassword" 
+## $openmrs_server = "127.0.0.1:8080"
+#
+#$openmrs_user = "admin"
+#$openmrs_password = "test"
+#$openmrs_server = "127.0.0.1:8443"

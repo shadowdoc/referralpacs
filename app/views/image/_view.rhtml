@@ -1,0 +1,15 @@
+<% @slider = true -%>
+<%= javascript_include_tag 'slider' %>
+
+<h3>Zoom</h3>
+<div id="slider">
+	<div id="slider-bar">
+		<div id="slider-handle"><%= image_tag "scaler_slider.gif" %></div>
+	</div>
+</div>
+
+<div class="img-container">
+  <div class="scale-image" id="1">
+    <%= image_tag @image.link_path, :width => "100%" %>
+  </div>
+</div>
