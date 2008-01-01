@@ -23,12 +23,20 @@ class ImageController < ApplicationController
     @encounter = @image.encounter
     
     respond_to do |format|
-#FIXME Please plug up this huge security hole.
-#      format.jpg 
+      
+      #FIXME Please plug up this huge security hole.
+      format.jpg {send_file(@image.full_path, :type => 'image/jpeg', :disposition => 'inline')}
       format.html
       format.xml {render :xml => @image.to_xml}
     end
 
+  end
+  
+  def thumb
+    @image = Image.find(params[:id])
+    respond_to do |format|
+      format.jpg { send_file(@image.thumb_path, :type => 'image/jpeg', :disposition => 'inline') }
+    end
   end
   
   def upload_image

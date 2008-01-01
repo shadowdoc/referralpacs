@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   def authorize_login
     unless session[:user_id] 
       flash[:notice] = "Please log in."
-      render :file => "login/login"
+      redirect_to :controller => "login", :action => "login"
     end
   end
   

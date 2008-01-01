@@ -3,9 +3,12 @@ class Image < ActiveRecord::Base
   
   belongs_to :encounter
 
-  BASEDIRECTORY = "public/system/image_archive"
-  LINKDIRECTORY = "/system/image_archive"
+  BASEDIRECTORY = "#{RAILS_ROOT}/image_archive"
   THUMB_MAX_SIZE = [125,125]
+  
+#  This is depricated after moving the images out of the reach of the 
+#  Web server and link hackers  
+#  LINKDIRECTORY = "/system/image_archive"  
   
   after_save :process
   after_destroy :cleanup
@@ -40,16 +43,7 @@ class Image < ActiveRecord::Base
   
   def thumb_path
     File.join(BASEDIRECTORY, short_path, thumb_filename)
-  end
-  
-  def link_path
-    File.join(LINKDIRECTORY, short_path, filename)
-  end
-  
-  def link_thumb_path
-    File.join(LINKDIRECTORY, short_path, thumb_filename)
-  end
-  
+  end  
   
   def filename(suffix = 'full')
     "#{self.encounter.id}-#{self.id}-#{suffix}.#{self.extension}"
@@ -109,5 +103,15 @@ class Image < ActiveRecord::Base
       File.unlink(filename) rescue nil
     end
   end
+
+#  FIXME - Remove these methods once it's clear they are not in use. 
+#  These methods should not be in use any longer as we have plugged that security hole.
+#  def link_path
+#    File.join(LINKDIRECTORY, short_path, filename)
+#  end
+#  
+#  def link_thumb_path
+#    File.join(LINKDIRECTORY, short_path, thumb_filename)
+#  end
 
 end

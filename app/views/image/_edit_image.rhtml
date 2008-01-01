@@ -1,7 +1,8 @@
 <%= javascript_include_tag  'cropper/cropper', 'builder' %>
 
 <div id="full_image">
-  <%= image_tag @image.link_path, :id => "refpacs-image" %>
+  <%= image_tag "/image/view/#{@image.id}.jpg", :id => "refpacs-image" %>
+  
   <script type="text/javascript" language="javascript">
     	Event.observe( window, 'load', function() {
     		new Cropper.Img(

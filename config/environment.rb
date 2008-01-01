@@ -52,16 +52,8 @@ Rails::Initializer.run do |config|
 
 end
 
-# Add new inflection rules using the following format 
-# (all these examples are active by default):
-# Inflector.inflections do |inflect|
-#   inflect.plural /^(ox)$/i, '\1en'
-#   inflect.singular /^(ox)en/i, '\1'
-#   inflect.irregular 'person', 'people'
-#   inflect.uncountable %w( fish sheep )
-# end
-
 # Include your application configuration below
+
 require 'usermonitor'
 ActiveRecord::Base.class_eval do
   include ActiveRecord::UserMonitor
@@ -78,35 +70,3 @@ ActiveSupport::CoreExtensions::Date::Conversions::DATE_FORMATS.merge!(
 # to generate reports.
 #gem 'pdf-writer'
 gem 'pdf-writer'
-
-# We need to protect our image files from people 
-# URL hacking, so we need to have the controller handle each file
-# This will use respond_to which requires knowlege of the "image/jpeg" MIME type.
-Mime::Type.register("image/jpeg", :jpg)
-
-
-# If the openmrs.conf.rb file with OpenMRS integration variables exists
-# we'll include it here.  If not, turn off OpenMRS integration
-if File.exists?('config/openmrs.conf.rb')
-  $openmrs = true
-  require 'config/openmrs.conf.rb'
-else
-  $openmrs = false
-end
-
-# The following is a sample openmrs.config.rb file.
-
-## config/openmrs.conf.rb
-##
-## The following constants are used to connect to an openMRS system to retrieve
-## patient information.  As a best-practice we should always be using
-## https, so that's hard coded.
-## Example:
-## 
-## $openmrs_user = "openmrsuser" 
-## $openmrs_password = "openmrspassword" 
-## $openmrs_server = "127.0.0.1:8080"
-#
-#$openmrs_user = "admin"
-#$openmrs_password = "test"
-#$openmrs_server = "127.0.0.1:8443"
