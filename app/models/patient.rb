@@ -98,16 +98,16 @@ class Patient < ActiveRecord::Base
     
     http = Net::HTTP.new(url.host, url.port)
     http.use_ssl = true
+    
+    begin
+      result = http.request(req)
+    rescue
+      raise "Server: #{$openmrs_server_name} down."
+    end
+    
+    doc = REXML::Document.new(result.read_body)
+    @patients = Patient.save_xml_to_patient_object(doc) unless doc.elements["//identifier"].nil?
 
-    result = http.request(req)
-    case result
-      when Net::HTTPSuccess
-        doc = REXML::Document.new(result.read_body)
-        @patients = Patient.save_xml_to_patient_object(doc) unless doc.elements["//identifier"].nil?
-      else
-        #TODO insert error stating OpenMRS connection is down.
-        #res.error!
-    end    
   end
   
   def Patient.save_xml_to_patient_object(doc)

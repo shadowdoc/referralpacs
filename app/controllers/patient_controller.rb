@@ -25,12 +25,14 @@ class PatientController < ApplicationController
     @current_user = User.find(session[:user_id])  
   
     if request.post?
+      begin
+        @patients = Patient.search(params).to_a
+      rescue
+        openmrs_down = true
+        @patients = nil
+      end
       
-      #TODO This is the donor site for the previously held find code.
-      
-      @patients = Patient.search(params).to_a
-
-      if @patients.nil? && params[:encounter][:date]
+      if @patients.nil? && params[:encounter][:date] != ""
         # If we haven't found any patients and someone listed a date
         @encounters = Encounter.find(:all, :conditions => ['date LIKE ?', '%' + params[:encounter][:date] + '%'])
         @patients = Array.new()
@@ -41,17 +43,25 @@ class PatientController < ApplicationController
       # Our patients arrays should be set now.  If not, no one was found.
       
       if @patients.nil? || @patients.empty?
+
          render :update do |page|
 
            #TODO Shouldn't this be in an RJS template?
-
            # Can the current user add patients?  If so, let's give them the opportunity.
-           unless @current_user.privilege.add_patient
-             page.replace_html "patient-list", "No patients found, please search again"
-           else
-             page.replace_html "patient-list", "No patients found. <br/><br/>" + link_to("New Patient", :controller => :patient, :action => :new)
+           
+           response_string = ""
+           
+           if openmrs_down
+             response_string = "OpenMRS Server <i>#{$openmrs_server_name}</i> is down, please contact the administrator.<br/><br/>"
            end
            
+           unless @current_user.privilege.add_patient
+             response_string += "No patients found, please search again"
+           else
+             response_string += "No patients found. <br/><br/>" + link_to("New Patient", :controller => :patient, :action => :new)
+           end
+
+           page.replace_html "patient-list", response_string
            page.visual_effect :highlight, "patient-list"
            
            page.form.reset 'patient-form'
