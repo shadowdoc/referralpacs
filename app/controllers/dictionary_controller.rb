@@ -6,6 +6,11 @@ class DictionaryController < ApplicationController
   in_place_edit_for :concept, :description
   
   def concepts_for_lookup
+    
+    # TODO: Currently, all of the concepts are listed by the autocomplete
+    # Would like only the answers for the selected concept to show up under 
+    # answers
+    
     @concepts = Concept.find(:all, :order => "name ASC")
     headers['content-type'] = 'text/javascript'
     render :layout => false

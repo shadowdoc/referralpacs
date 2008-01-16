@@ -91,6 +91,9 @@ class PatientController < ApplicationController
   end
   
   def edit
+    #TODO: Updating patient information is currently broken due to the date control.
+    #Additionally, I think that the update_attributes() is a security risk.
+    
     @all_tribes = Tribe.find(:all, :order => "name ASC")
     if request.get?
       @patient = Patient.find(params[:id])
