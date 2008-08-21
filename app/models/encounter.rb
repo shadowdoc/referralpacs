@@ -15,4 +15,13 @@ class Encounter < ActiveRecord::Base
     Encounter.find(:all, :conditions => ['date between ? and ?', start_date, end_date])
   end
   
+  def save
+    
+    #TODO This is where the HL7 generation code should go
+    #So that HL7 messages are automatically generated and
+    #sent when an encounter is saved.
+    
+    super
+  end
+  
 end

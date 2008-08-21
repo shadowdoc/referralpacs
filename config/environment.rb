@@ -70,3 +70,6 @@ ActiveSupport::CoreExtensions::Date::Conversions::DATE_FORMATS.merge!(
 # to generate reports.
 #gem 'pdf-writer'
 gem 'pdf-writer'
+
+# If you want to output HL7 messages, include the ruby-hl7
+require 'ruby-hl7'

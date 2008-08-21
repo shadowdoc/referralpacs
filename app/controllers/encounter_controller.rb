@@ -17,18 +17,13 @@ class EncounterController < ApplicationController
 
   public
   def find
-    #TODO Install will_paginate plugin and restore pagination.  
+    #TODO Install will_paginate plugin and restore pagination. 
     
-    # This controller will return a list of encounters, which may or may not be patient specific.
-    # If given an ID, the encounters will be for that patient.
+    # This controller will return a list of encounters, given a patient ID.
  
-#    if params[:id]
-      @patient = Patient.find(params[:id])
-      @encounters = @patient.encounters
-      @current_user = User.find(session[:user_id])
-#    else
-#      @encounters = Encounter.find(:all)
-#    end
+    @patient = Patient.find(params[:id])
+    @encounters = @patient.encounters
+    @current_user = User.find(session[:user_id])
 
     if @encounters.empty?
       flash[:notice] = "No encounters for #{@patient.full_name} - "

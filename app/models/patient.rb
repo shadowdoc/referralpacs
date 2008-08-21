@@ -16,6 +16,79 @@ class Patient < ActiveRecord::Base
       self.given_name + " " + self.family_name
     end
   end
+    
+  def hl7_pid
+    
+    # Create a new pid object to hold our info
+    pid = HL7::Message::Segment::PID.new    
+
+    # Split the AMPATH MRN into it's ID and check digit
+    ampath_id, check_digit = mrn_ampath.split("-")
+    
+    # Patient Id List
+    # 1MT^0^M10| 
+    #    ID Number (1MT) 
+    #    ^ Check Digit (0) 
+    #    ^ Check Digit Scheme (M10) 
+    #    ^ Assigning Authority (hopefully won't have to use.. but if we need multiples) 
+    #    // a ~ would separate multiple occurrences of PIDs
+    pid.patient_id_list = ampath_id + "^" + check_digit + "^M10"
+    
+    # Patient Name
+    # Patient^Jonny^Dee^^DR| 
+    #    Family Name (Patient) 
+    #    ^ Given Name (Jonny) 
+    #    ^ Second / Middle Name (Dee) 
+    #    ^ Suffix () 
+    #    ^ Prefix (DR) 
+    
+    # In our system, family_name and given_name are required
+    # middle_name is not required, and can be nil
+    
+    name = family_name + "^" + given_name + "^"
+    name += middle_name unless middle_name.nil?
+    name += "^^^"  # We don't use suffixes or prefixes
+   
+    pid.patient_name = name
+    
+    # Patient^Momma^Thee^^MS| 
+    #    Mother's Maiden Family Name (Patient) 
+    #    ^ Given Name (Momma) 
+    #    ^ Second / Middle Name (Thee) 
+    #    ^ Suffix () 
+    #    ^ Prefix (MS)
+    #pid.mothers_maiden_name = 
+    
+    # 20040101000000| 
+    #    Date/Time of Birth (YYYYMMDDHHMMSS) 
+    #    ^ Degree of Precision (for our purposes Y = estimated, and null = actual)
+    if birthdate_estimated
+      precision = "Y"
+    else
+      precision = ""
+    end
+    
+    pid.patient_dob = birthdate.strftime("%Y%m%d%H%M%S") + "^" + precision
+    
+    # M| 
+    #    Administrative Sex (M) .. M, F, O, U, A, N possible answers
+    # TODO: Have our internal types match the HL7 sex types.
+    # Will set to unkown for now, we don't have good verification to these types.
+    pid.admin_sex = "U"
+    
+    # 555 Johnson Road^Apt. 555^Indianapolis^IN^46202^USA| 
+    #    Street Address 
+    #    ^ Other Designation 
+    #    ^ City 
+    #    ^ State 
+    #    ^ Zip
+    pid.address = address1 + "^" + address2 + "^" + city_village + "^" + state_province
+
+    # The remaining pid fields are unused at the current time.
+    
+    return pid
+
+  end
   
   def birthdate_formatted
     self.birthdate.strftime("%d %b %Y") unless birthdate.nil?
@@ -55,7 +128,7 @@ class Patient < ActiveRecord::Base
         unless local_patient.openmrs_verified
           @patients = local_patient          
         else
-          # TODO verifiation process will go here
+          # TODO openmrs verifiation process will go here
           @patients = local_patient
         end
       end
