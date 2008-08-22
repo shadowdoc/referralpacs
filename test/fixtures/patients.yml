@@ -7,8 +7,8 @@ baxter:
   mrn_ampath:  9339MP-4
   tribe_id:    1
   birthdate:   2008-09-24 00:00:00.0
-  gender:	   Male
-  
+  gender:      Male
+
 stanley:
   id: 2
   given_name:  STANLEY
@@ -17,4 +17,4 @@ stanley:
   mrn_ampath:  9328KP-9
   tribe_id:    1
   birthdate:   2008-09-24 00:00:00.0
-  gender:	   Male
+  gender:      Male

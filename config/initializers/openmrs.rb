@@ -18,7 +18,7 @@ end
 ## 
 ## $openmrs_user = "openmrsuser" 
 ## $openmrs_password = "openmrspassword" 
-## $openmrs_server = "127.0.0.1:8080"
+## $openmrs_server = "127.0.0.1:8443"
 #
 #$openmrs_user = "admin"
 #$openmrs_password = "test"
