@@ -47,12 +47,12 @@ class PatientController < ApplicationController
          render :update do |page|
 
            #TODO Shouldn't this be in an RJS template?
-           # Can the current user add patients?  If so, let's give them the opportunity.
+           #TODO Can the current user add patients?  If so, let's give them the opportunity.
            
            response_string = ""
            
            if openmrs_down
-             response_string = "OpenMRS Server <i>#{$openmrs_server_name}</i> is down, please contact the administrator.<br/><br/>"
+             response_string = "Connection with OpenMRS Server <i>#{$openmrs_server_name}</i> is down, please contact the administrator.<br/><br/>"
            end
            
            unless @current_user.privilege.add_patient

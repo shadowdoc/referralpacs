@@ -3,4 +3,5 @@
 	<pathentry path="" type="src"/>
 	<pathentry path="GEM_LIB/pdf-writer-1.1.7/lib" type="var"/>
 	<pathentry path="GEM_LIB/rails-2.0.2/lib" type="var"/>
+	<pathentry path="GEM_LIB/pdf-writer-1.1.8/lib" type="var"/>
 </loadpath>
