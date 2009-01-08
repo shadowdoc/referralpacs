@@ -73,3 +73,8 @@ gem 'pdf-writer'
 
 # If you want to output HL7 messages, include the ruby-hl7
 require 'ruby-hl7'
+
+# Specify location where image files are housed
+#$image_folder = "#{RAILS_ROOT}/image_archive"
+
+$image_folder = "#{RAILS_ROOT}/image_archive"

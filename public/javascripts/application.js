@@ -73,7 +73,7 @@ function scaleIt(v) {
 function init() {
 
     demoSlider = new Control.Slider('slider-handle', 'slider-bar', {
-        axis:'horizontal', minimum: 0, maximum: 200, alignX: -5, increment: 2, sliderValue: 0.10
+        axis:'horizontal', minimum: 0, maximum: 200, alignX: -5, increment: 2, sliderValue: 1
     });
 
 	demoSlider.options.onSlide = function(value) {

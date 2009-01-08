@@ -170,7 +170,16 @@ class PatientController < ApplicationController
       f << msg
     end
     
+  end
+  
+  def unreported
     
+    @encounters = Encounter.find(:all, :conditions => ['reported = ?', false])
+    @patients = []
+    @encounters.each { |enc| @patients << enc.patient }
+    @patients.uniq!
+    
+    render :partial => "list_patients"
   end
   
 end

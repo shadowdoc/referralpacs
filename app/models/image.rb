@@ -3,7 +3,7 @@ class Image < ActiveRecord::Base
   
   belongs_to :encounter
 
-  BASEDIRECTORY = "#{RAILS_ROOT}/image_archive"
+  BASEDIRECTORY = $image_folder # set in environment.rb
   THUMB_MAX_SIZE = [125,125]
   
 #  This is depricated after moving the images out of the reach of the 

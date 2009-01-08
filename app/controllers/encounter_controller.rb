@@ -79,7 +79,15 @@ class EncounterController < ApplicationController
     rescue
       flash[:notice] = "Could not delete encounter."
     end 
-    redirect_to :action => "find", :id => @patient.id
+    
+    
+    
+    if request.env['HTTP_REFERER'].include?("unreported")
+      redirect_to :action => "unreported"
+    else
+      redirect_to :action => "find", :id => @patient.id     
+    end
+
     
   end
 
@@ -96,6 +104,14 @@ class EncounterController < ApplicationController
                                    :concept_id => @concept.id,
                                    :value_concept_id => @value_concept.id)
     @observation.save
+    
+    if @encounter.observations.length < 2
+      # If there is only one observation, would should call the save method to make sure
+      # that the reported status changes.
+      @encounter.save    
+    end
+    
+    
     render :partial => "add_observation", :object => @observation
   end
   
@@ -128,6 +144,16 @@ class EncounterController < ApplicationController
         @reports_during_range += 1
       end
     end
+  end
+  
+  def unreported
+    
+    @encounters = Encounter.find(:all, :conditions => ['reported = ?', false], :order => 'date ASC', :limit => 20)
+    
+    if @encounters.length == 0
+      render :text => 'Congratulations - No unreported studies!', :layout => true
+    end
+    
   end
 
 end

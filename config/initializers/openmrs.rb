@@ -19,7 +19,9 @@ end
 ## $openmrs_user = "openmrsuser" 
 ## $openmrs_password = "openmrspassword" 
 ## $openmrs_server = "127.0.0.1:8443"
+## $openmrs_ssl = true
 #
 #$openmrs_user = "admin"
 #$openmrs_password = "test"
-#$openmrs_server = "127.0.0.1:8443"
+#$openmrs_server = "192.168.242.128:8443"
+#$openmrs_ssl = true

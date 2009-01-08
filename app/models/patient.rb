@@ -9,6 +9,7 @@ class Patient < ActiveRecord::Base
   before_save :uppercase
   
   require "net/https"
+  require "net/http"
   
   #Provide a concatenated name for cleaner display.
   def full_name
@@ -160,7 +161,13 @@ class Patient < ActiveRecord::Base
     # This came from a browser, so let's sanitize it
     mrn_openmrs = CGI.escape(mrn_openmrs)
     
-    url = "https://#{$openmrs_server}/openmrs/moduleServlet/restmodule/api/patient/#{mrn_openmrs}"
+    if $openmrs_ssl
+      url = "https://"
+    else
+      url = "http://"
+    end
+
+    url += "#{$openmrs_server}/openmrs/moduleServlet/restmodule/api/patient/#{mrn_openmrs}"
     
     # Create a URI object from our url string.
     url = URI.parse(url)
@@ -170,7 +177,9 @@ class Patient < ActiveRecord::Base
     req.basic_auth($openmrs_user, $openmrs_password)
     
     http = Net::HTTP.new(url.host, url.port)
-    http.use_ssl = true
+    
+    http.use_ssl = $openmrs_ssl
+    
     
     begin
       result = http.request(req)
