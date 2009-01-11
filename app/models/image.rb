@@ -57,7 +57,9 @@ class Image < ActiveRecord::Base
   end
   
   def short_path
-    File.join("#{self.encounter.date.year()}", "#{self.encounter.date.month}", "#{self.encounter.date.day}")
+    unless self.encounter.nil?
+      File.join("#{self.encounter.date.year()}", "#{self.encounter.date.month}", "#{self.encounter.date.day}")
+    end
   end
   
   def config_filename
