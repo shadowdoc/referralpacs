@@ -17,6 +17,64 @@ class Patient < ActiveRecord::Base
       self.given_name + " " + self.family_name
     end
   end
+  
+  def hl7_name
+    # Create a correctly formatted name for HL7
+
+    # Patient Name
+    # Patient^Jonny^Dee^^DR| 
+    #    Family Name (Patient) 
+    #    ^ Given Name (Jonny) 
+    #    ^ Second / Middle Name (Dee) 
+    #    ^ Suffix () 
+    #    ^ Prefix (DR) 
+    
+    # In our system, family_name and given_name are required
+    # middle_name is not required, and can be nil
+
+    name = dicom_name
+    name += "^^^"  # We don't use suffixes or prefixes
+   
+    return name
+  end
+  
+  def dicom_name
+    # Createe a correctly formatted name for DICOM saves.
+    
+    name = family_name + "^" + given_name + "^"
+    name += middle_name unless middle_name.nil?
+    return name
+  end
+  
+  def dicom_birthday
+    return birthdate.strftime("%Y%m%d")
+  end
+  
+  def hl7_birthday
+    # 20040101000000| 
+    #    Date/Time of Birth (YYYYMMDDHHMMSS) 
+    #    ^ Degree of Precision (for our purposes Y = estimated, and null = actual)
+    if birthdate_estimated
+      precision = "Y"
+    else
+      precision = ""
+    end
+    
+    return birthdate.strftime("%Y%m%d%H%M%S") + "^" + precision
+    
+  end
+  
+  def hl7_sex
+    if self.gender = "Male"
+      return "M"
+    else
+      if self.gender = "Female"
+        return "F"
+      else
+        return "U"
+      end
+    end
+  end
     
   def hl7_pid
     
@@ -42,15 +100,8 @@ class Patient < ActiveRecord::Base
     #    ^ Second / Middle Name (Dee) 
     #    ^ Suffix () 
     #    ^ Prefix (DR) 
-    
-    # In our system, family_name and given_name are required
-    # middle_name is not required, and can be nil
-    
-    name = family_name + "^" + given_name + "^"
-    name += middle_name unless middle_name.nil?
-    name += "^^^"  # We don't use suffixes or prefixes
    
-    pid.patient_name = name
+    pid.patient_name = hl7_name
     
     # Patient^Momma^Thee^^MS| 
     #    Mother's Maiden Family Name (Patient) 
@@ -63,19 +114,13 @@ class Patient < ActiveRecord::Base
     # 20040101000000| 
     #    Date/Time of Birth (YYYYMMDDHHMMSS) 
     #    ^ Degree of Precision (for our purposes Y = estimated, and null = actual)
-    if birthdate_estimated
-      precision = "Y"
-    else
-      precision = ""
-    end
     
-    pid.patient_dob = birthdate.strftime("%Y%m%d%H%M%S") + "^" + precision
+    pid.patient_dob = hl7_birthday
     
     # M| 
     #    Administrative Sex (M) .. M, F, O, U, A, N possible answers
-    # TODO: Have our internal types match the HL7 sex types.
     # Will set to unkown for now, we don't have good verification to these types.
-    pid.admin_sex = "U"
+    pid.admin_sex = hl7_sex
     
     # 555 Johnson Road^Apt. 555^Indianapolis^IN^46202^USA| 
     #    Street Address 

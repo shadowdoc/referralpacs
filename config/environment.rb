@@ -82,4 +82,4 @@ $image_folder = "#{RAILS_ROOT}/image_archive"
 # Specify the location of the jpg2dcm program
 #$jpg2dcm = "/home/rifellow/dcm4che-2.0.18/bin/jpg2dcm"
 
-$jpg2dcm = "/home/rifellow/dcm4che-2.0.18/bin/jpg2dcm"
+$jpg2dcm = ""

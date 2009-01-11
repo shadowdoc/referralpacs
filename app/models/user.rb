@@ -47,6 +47,14 @@ class User < ActiveRecord::Base
     end
   end
   
+  def hl7_name
+    unless self.title.nil?
+      "#{self.given_name}^#{self.family_name}^#{self.title}"
+    else
+      "#{self.given_name}^#{self.family_name}"
+    end
+  end
+  
   def dont_destroy_admin
     raise "Can't destroy mkohli@iupui.edu" if self.email == 'mkohli@iupui.edu'
   end

@@ -32,7 +32,9 @@ class PatientController < ApplicationController
         @patients = nil
       end
       
-      if @patients.nil? && params[:encounter][:date] != ""
+      
+      
+      if @patients.length == 0 && params[:encounter][:date] != ""
         # If we haven't found any patients and someone listed a date
         @encounters = Encounter.find(:all, :conditions => ['date LIKE ?', '%' + params[:encounter][:date] + '%'])
         @patients = Array.new()
@@ -42,7 +44,7 @@ class PatientController < ApplicationController
 
       # Our patients arrays should be set now.  If not, no one was found.
       
-      if @patients.nil? || @patients.empty?
+      if @patients.length == 0 || @patients.empty?
 
          render :update do |page|
 
@@ -67,6 +69,7 @@ class PatientController < ApplicationController
            page.form.reset 'patient-form'
            
          end
+         
        else
          
          render :partial => "ajax_list_patients"
