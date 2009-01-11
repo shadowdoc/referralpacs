@@ -17,7 +17,7 @@ chest_pain:
   indication: 'Chest pain'
   impression: 'Right pneumothorax.'
   encounter_type_id: 1
-  provider_id: 3
+  provider_id: 2
   client_id: 4
   reported: true
   
@@ -28,5 +28,5 @@ unreported:
   indication: 'Chest pain'
   impression: ''
   encounter_type_id: 1
-  provider_id: 3
+  provider_id: 2
   client_id: 4
