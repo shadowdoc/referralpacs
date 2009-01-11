@@ -23,7 +23,7 @@ class ImageController < ApplicationController
     @encounter = @image.encounter
     
     respond_to do |format|
-      format.jpg {send_file(@image.full_path, :type => 'image/jpeg', :disposition => 'inline')}
+      format.jpg {send_file(@image.image_path, :type => 'image/jpeg', :disposition => 'inline')}
       format.html
       format.xml {render :xml => @image.to_xml}
     end
@@ -46,7 +46,7 @@ class ImageController < ApplicationController
     @image.encounter_id = @encounter.id
   end
 
-  def add_image  
+  def add_image
     @image = Image.create(params[:image])
     flash[:notice] = 'File uploaded'
     redirect_to(:controller => "encounter", :action => 'details', :id => @image.encounter.id)

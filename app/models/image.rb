@@ -60,20 +60,20 @@ class Image < ActiveRecord::Base
     File.join("#{self.encounter.date.year()}", "#{self.encounter.date.month}", "#{self.encounter.date.day}")
   end
   
-  def config_path
-    File.join(short_path, file_root + ".cfg")
+  def config_filename
+    File.join(BASEDIRECTORY, short_path, file_root + ".cfg")
   end
   
-  def dicom_path
-    File.join(short_path, file_root + ".dcm")
+  def dicom_filename
+    File.join(BASEDIRECTORY, short_path, file_root + ".dcm")
   end
   
   def image_path
-    File.join(short_path, filename)
+    File.join(BASEDIRECTORY, short_path, filename)
   end
   
   def thumb_path
-    File.join(short_path, thumb_filename)
+    File.join(BASEDIRECTORY, short_path, thumb_filename)
   end  
   
   private
@@ -121,7 +121,7 @@ class Image < ActiveRecord::Base
     # Write the configuration file
     patient = self.encounter.patient
     encounter = self.encounter
-    File.open(config_path, 'wb') do |file|
+    File.open(config_filename, 'wb') do |file|
     file.puts "# Patient Module Attributes
 # Patient's Name
 00100010:#{patient.dicom_name}
@@ -181,7 +181,7 @@ class Image < ActiveRecord::Base
   def create_dicom  
     
     begin
-      result = %x{ #{$jpg2dcm} -C #{config_path} #{image_path} #{dicom_path}}
+      result = %x{ #{$jpg2dcm} -C #{config_filename} #{image_path} #{dicom_filename}}
     rescue 
       raise "Dicom save failed: #{result}"
     end
