@@ -5,13 +5,13 @@ class CreateLocations < ActiveRecord::Migration
       t.timestamps
     end
     
-    add_column :encounter, :location_id, :integer
+    add_column :encounters, :location_id, :integer
     
   end
 
   def self.down
     drop_table :locations
     
-    remove_column :encounter, :location_id
+    remove_column :encounters, :location_id
   end
 end

@@ -43,6 +43,7 @@ class PatientController < ApplicationController
           if enc.location.name == params[:encounter][:location]
             @patients << enc.patient 
           end
+          
         end
         
       end
@@ -57,7 +58,7 @@ class PatientController < ApplicationController
       
       if @patient.nil? && params[:encounter][:location]!= ""
         # if we havent found any patients and someome listed by location
-        loc = Location.find(:first, :conditions => ['name LIKE ?','%' + params[:encounter][:location]+'%'])
+        loc = Location.find(:first, :conditions => ['name LIKE ?','%' + params[:encounter][:location] + '%'])
         @encounters = loc.encounters
         @patients   = Array.new()
         @encounters.each { |enc| @patients << enc.patient }       

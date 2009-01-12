@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 27) do
+ActiveRecord::Schema.define(:version => 28) do
 
   create_table "answers", :force => true do |t|
     t.integer "concept_id"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(:version => 27) do
     t.boolean  "reported",           :default => false
     t.boolean  "teachingfile",       :default => false
     t.string   "teachingfilereason"
+    t.integer  "location_id"
   end
 
   create_table "images", :force => true do |t|
@@ -59,6 +60,12 @@ ActiveRecord::Schema.define(:version => 27) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "extension",    :limit => 5, :default => "jpg"
+  end
+
+  create_table "locations", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "observations", :force => true do |t|
