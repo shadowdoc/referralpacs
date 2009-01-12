@@ -1,4 +1,4 @@
-<div id="find_patients">
+ <div id="find_patients">
     <% form_remote_tag :url => {:action => 'find'},
                        :loading => 'Form.disable("patient-form")',
                        :complete => 'Form.enable("patient-form")',
@@ -8,14 +8,16 @@
              <th>AMPATH ID</th>
              <th>MTRH Radiology ID</th>
              <th>Patient Name</th>
+			 <th>Film Location</th>
              <th>Date</th>
            </tr>
            <tr>
-             <td class="search-box"><%= text_field :patient, 'mrn_ampath', {:class => "search-box"} %></td>
-             <td class="search-box"><%= text_field :patient, 'mtrh_rad_id', {:class => "search-box"} %></td>
-             <td class="search-box"><%= text_field :patient, 'name', {:class => "search-box"} %></td>
-             <td class="search-box"><%= date_field :encounter, 'date', {:class => "search-box"} %></td>             
-             <td class="search-box"><%= submit_tag "Go" %></td>
+            <td class="search-box"><%= text_field :patient, 'mrn_ampath', {:class => "search-box"} %></td>
+            <td class="search-box"><%= text_field :patient, 'mtrh_rad_id', {:class => "search-box"} %></td>
+            <td class="search-box"><%= text_field :patient, 'name', {:class => "search-box"} %></td>
+			<td class="search-box"><%= text_field :encounter, 'location', {:class => "search-box"}%></td> 
+            <td class="search-box"><%= date_field :encounter, 'date', {:class => "search-box"} %></td> 
+			<td class="search-box"><%= submit_tag "Go" %></td>
            </tr>
         </table>
     <% end %>

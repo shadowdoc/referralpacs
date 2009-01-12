@@ -1,0 +1,21 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+mtrh:
+  id: 1
+  name: MTRH
+  
+mosoriot:
+  id: 2
+  name: Mosoriot
+
+turbo:
+  id: 3
+  name: Turbo
+
+iten:
+  id: 4
+  name: Iten
+  
+kabarnet:
+  id: 5
+  name: Kabarnet

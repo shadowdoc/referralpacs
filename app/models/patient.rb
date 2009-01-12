@@ -7,7 +7,7 @@ class Patient < ActiveRecord::Base
   validates_uniqueness_of :mrn_ampath, :allow_blank => true
   
   before_save :uppercase
-  
+ 
   require "net/https"
   require "net/http"
   

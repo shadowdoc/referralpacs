@@ -78,6 +78,7 @@ module ApplicationHelper
     @all_encounter_types = EncounterType.find(:all)
     @all_providers = Provider.find(:all)
     @all_clients = Client.find(:all)
+    @all_locations = Location.find(:all)
   end
   
 end

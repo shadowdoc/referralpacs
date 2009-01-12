@@ -27,24 +27,46 @@ class PatientController < ApplicationController
     if request.post?
       begin
         @patients = Patient.search(params).to_a
+        if @patients.length == 0 
+          @patients = nil
+        end
       rescue
         openmrs_down = true
         @patients = nil
       end
       
+      if @patients.nil? && params[:encounter][:date] != "" && params[:encounter][:location] != ""
+        # if we havent found any patients and someone listed by date and location
+        @encounters = Encounter.find(:all,:conditions => ['date LIKE ?', '%' + params[:encounter][:date] + '%']) 
+        @encounters.each do |enc| 
+        
+          if enc.location.name == params[:encounter][:location]
+            @patients << enc.patient 
+          end
+        end
+        
+      end
       
-      
-      if @patients.length == 0 && params[:encounter][:date] != ""
+      if @patients.nil? && params[:encounter][:date] != ""
         # If we haven't found any patients and someone listed a date
         @encounters = Encounter.find(:all, :conditions => ['date LIKE ?', '%' + params[:encounter][:date] + '%'])
         @patients = Array.new()
         @encounters.each { |enc| @patients << enc.patient }       
         @patients.uniq!
       end
-
+      
+      if @patient.nil? && params[:encounter][:location]!= ""
+        # if we havent found any patients and someome listed by location
+        loc = Location.find(:first, :conditions => ['name LIKE ?','%' + params[:encounter][:location]+'%'])
+        @encounters = loc.encounters
+        @patients   = Array.new()
+        @encounters.each { |enc| @patients << enc.patient }       
+        @patients.uniq!
+      end
+      
       # Our patients arrays should be set now.  If not, no one was found.
       
-      if @patients.length == 0 || @patients.empty?
+      if @patients.nil? || @patients.empty?
 
          render :update do |page|
 
