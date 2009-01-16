@@ -25,6 +25,9 @@ class PatientController < ApplicationController
     @current_user = User.find(session[:user_id])  
   
     if request.post?
+      
+      # We first search based on patient demographics supplied by the user.
+      
       begin
         @patients = Patient.search(params).to_a
         if @patients.length == 0 
@@ -127,10 +130,11 @@ class PatientController < ApplicationController
       @patient = Patient.find(params[:id])
       if @patient.update_attributes(params[:patient])
           flash[:notice] = "Saved #{@patient.full_name}"
+          redirect_to :action => "find"
       else
           flash[:notice] = "Error saving patient."
       end
-      redirect_to :action => "find"
+
     end
   end
   

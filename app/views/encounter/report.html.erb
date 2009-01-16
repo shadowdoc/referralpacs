@@ -1,0 +1,169 @@
+<%= form_tag :action => "report", :id => @encounter.id %>
+
+<div class="report_form">
+        <fieldset>
+            <legend>Lungs</legend> 
+                    <fieldset>
+                        <legend>Infiltrate</legend> 
+						<label><%= radio_button_tag("infiltrate", "none", true) %>None</label>
+                        <label><%= radio_button_tag("infiltrate", "right", false) %>Right</label>
+                        <label><%= radio_button_tag("infiltrate", "left", false) %>Left</label>
+                        <label><%= radio_button_tag("infiltrate", "perihilar", false) %>Perihilar</label>
+                        <label><%= radio_button_tag("infiltrate", "diffuse", false) %>Diffuse</label>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Cavitation</legend> 
+						<label><%= radio_button_tag("cavitation", "none", true) %>None</label>
+                        <label><%= radio_button_tag("cavitation", "right", false) %>Right</label>
+                        <label><%= radio_button_tag("cavitation", "left", false) %>Left</label>
+                        <label><%= radio_button_tag("cavitation", "bilateral", false) %>Bilateral</label>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Interstitial Disease</legend>
+                        <label><%= radio_button_tag("interstitial_disease", "none", true) %>None</label>
+                        <label><%= radio_button_tag("interstitial_disease", "right", false) %>Right</label>
+                        <label><%= radio_button_tag("interstitial_disease", "left", false) %>Left</label>
+                        <label><%= radio_button_tag("interstitial_disease", "perihilar", false) %>Perihilar</label>
+                        <label><%= radio_button_tag("interstitial_disease", "diffuse", false) %>Diffuse</label>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Parenchymal Scarring/Atelectasis</legend> 
+                        <fieldset>
+                            <legend>Upper</legend> 
+							<label><%= radio_button_tag("lung_scarring_upper", "none", true) %>None</label>
+                            <label><%= radio_button_tag("lung_scarring_upper", "right", false) %>Right</label>
+                            <label><%= radio_button_tag("lung_scarring_upper", "left", false) %>Left</label>
+                            <label><%= radio_button_tag("lung_scarring_upper", "bilateral", false) %>Bilateral</label>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>Lower</legend> 
+							<label><%= radio_button_tag("lung_scarring_lower", "none", true) %>None</label>
+                            <label><%= radio_button_tag("lung_scarring_lower", "right", false) %>Right</label>
+                            <label><%= radio_button_tag("lung_scarring_lower", "left", false) %>Left</label>
+                            <label><%= radio_button_tag("lung_scarring_lower", "bilateral", false) %>Bilateral</label>
+                        </fieldset>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Pulmonary Nodules</legend> 
+						<label><%= radio_button_tag("nodules", "none", true) %>None</label>
+                        <label><%= radio_button_tag("nodules", "solitary", false) %>Solitary</label>
+                        <label><%= radio_button_tag("nodules", "two_to_five", false) %>2-5</label>
+                        <label><%= radio_button_tag("nodules", "more_than_five", false) %>5</label>
+                        <label><%= radio_button_tag("nodules", "miliary", false) %>Miliary</label>
+                    </fieldset>
+        </fieldset>
+</div>
+<div class="report_form">
+        <fieldset>
+            <legend>Mediastinum</legend> 
+
+            <fieldset>
+                <legend>Paratracheal Adenopathy</legend> 
+				<label><%= radio_button_tag("paratracheal_adenopathy", "none", true) %>None</label>
+                <label><%= radio_button_tag("paratracheal_adenopathy", "right", false) %>Right</label>
+            </fieldset>
+
+            <fieldset>
+                <legend>Hilar Adenopathy</legend> 
+				<label><%= radio_button_tag("hilar_adenopathy", "none", true) %>None</label>
+                <label><%= radio_button_tag("hilar_adenopathy", "right", false) %>Right</label>
+                <label><%= radio_button_tag("hilar_adenopathy", "left", false) %>Left</label>
+                <label><%= radio_button_tag("hilar_adenopathy", "bilateral", false) %>Bilateral</label>
+            </fieldset>
+
+            <fieldset>
+                <legend>Aorta</legend> 
+				<label><%= radio_button_tag("aorta", "normal", true) %>Normal</label>
+                <label><%= radio_button_tag("aorta", "unfolded", false) %>Unfolded (Ectatic)</label>
+                <label><%= radio_button_tag("aorta", "aneurysm", false) %>Aneursym</label>
+            </fieldset>
+
+            <fieldset>
+                <legend>Pulmonary Vasculature</legend>
+				<label><%= radio_button_tag("pulmonary_vasculature", "normal", true) %>Normal</label>
+                <label><%= radio_button_tag("pulmonary_vasculature", "enlarged", false) %>Enlarged</label>
+                <label><%= radio_button_tag("pulmonary_vasculature", "decreased", false) %>Decreased</label>
+            </fieldset>
+
+            <fieldset>
+                <legend>Mediastinal Mass</legend> 
+				<label><%= radio_button_tag("mediastinal_mass", "no", true) %>No</label>
+                <label><%= radio_button_tag("mediastinal_mass", "yes", false) %>Yes</label>
+            </fieldset>
+
+            <fieldset>
+                <legend>Cardiomegaly</legend> 
+				<label><%= radio_button_tag("cardiomegaly", "none", true) %>None</label>
+                <label><%= radio_button_tag("cardiomegaly", "mild", false) %>Mild</label>
+                <label><%= radio_button_tag("cardiomegaly", "moderate", false) %>Moderate</label>
+                <label><%= radio_button_tag("cardiomegaly", "severe", false) %>Severe</label>
+            </fieldset>
+        </fieldset>
+</div>
+<div class="report_form">
+        <fieldset>
+            <legend>Pleura</legend> 
+			
+            <fieldset>
+                <legend>Pleural Effusion</legend> 
+
+                <fieldset>
+                    <legend>Right</legend> 
+					<label><%= radio_button_tag("pleural_effusion_right", "none", true) %>None</label>
+                    <label><%= radio_button_tag("pleural_effusion_right", "small", false) %>Small(&lt;10%)</label>
+                    <label><%= radio_button_tag("pleural_effusion_right", "moderate", false) %>Moderate(10-25%)</label>
+                    <label><%= radio_button_tag("pleural_effusion_right", "large", false) %>Large(&gt;20%)</label>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Left</legend>
+					<label><%= radio_button_tag("pleural_effusion_left", "none", true) %>None</label>
+                    <label><%= radio_button_tag("pleural_effusion_left", "small", false) %>Small(&lt;10%)</label>
+                    <label><%= radio_button_tag("pleural_effusion_left", "moderate", false) %>Moderate(10-25%)</label>
+                    <label><%= radio_button_tag("pleural_effusion_left", "large", false) %>Large(&gt;20%)</label>
+                </fieldset>
+            </fieldset>
+
+            <fieldset>
+                <legend>Pleural Scarring (Check All That Apply)</legend> 
+				<label><%= check_box_tag("pleural_scarring", "none", true) %>None</label>
+                <label><%= check_box_tag("pleural_scarring", "right_apical", false) %>Right Apical</label>
+                <label><%= check_box_tag("pleural_scarring", "right_lateral", false) %>Right Lateral</label>
+                <label><%= check_box_tag("pleural_scarring", "right_basilar", false) %>Right Basilar</label>
+                <label><%= check_box_tag("pleural_scarring", "left_apical", false) %>Left Apical</label>
+                <label><%= check_box_tag("pleural_scarring", "left_lateral", false) %>Left Lateral</label>
+                <label><%= check_box_tag("pleural_scarring", "left_basilar", false) %>Left Basilar</label>
+            </fieldset>
+            <fieldset>
+                <legend>Pneumothorax</legend> 
+
+                <fieldset>
+                    <legend>Right</legend> 
+					<label><%= radio_button_tag("pneumothorax_right", "none", true) %>None</label>
+                    <label><%= radio_button_tag("pneumothorax_right", "small", false) %>Small</label>
+                    <label><%= radio_button_tag("pneumothorax_right", "moderate", false) %>Moderate</label>
+                    <label><%= radio_button_tag("pneumothorax_right", "large", false) %>Large</label>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Left</legend>
+					<label><%= radio_button_tag("pneumothorax_left", "none", true) %>None</label>
+                    <label><%= radio_button_tag("pneumothorax_left", "small", false) %>Small</label>
+                    <label><%= radio_button_tag("pneumothorax_left", "moderate", false) %>Moderate</label>
+                    <label><%= radio_button_tag("pneumothorax_left", "large", false) %>Large</label>
+                </fieldset>
+            </fieldset>
+        </fieldset>
+
+        <fieldset>
+            <legend>Bones</legend> 
+			<label><%= radio_button_tag("bones", "normal", true) %>Normal</label>
+            <label><%= radio_button_tag("bones", "osteoporosis", false) %>Osteoporosis</label>
+            <label><%= radio_button_tag("bones", "acute_fracture", false) %>Acute Fracture</label>
+            <label><%= radio_button_tag("bones", "healed_fracture", false) %>Healed Fracture</label>
+        </fieldset>
+        <br>
+         <br>
+         <%= submit_tag "Finalize Report" %>
+</div>

@@ -79,9 +79,7 @@ class EncounterController < ApplicationController
     rescue
       flash[:notice] = "Could not delete encounter."
     end 
-    
-    
-    
+
     if request.env['HTTP_REFERER'].include?("unreported")
       redirect_to :action => "unreported"
     else
@@ -154,6 +152,59 @@ class EncounterController < ApplicationController
       render :text => 'Congratulations - No unreported studies!', :layout => true
     end
     
+  end
+  
+  def report
+    # Process input from master form.
+    
+    @encounter = Encounter.find(params[:id])
+    @patient = @encounter.patient
+    
+    if request.post? 
+      # We have a post request, let's process the record
+      
+      params.each_pair do |key, value|
+        unless value == "none"  || value == "normal"
+          unless ["id", "commit", "action", "controller"].include? key
+            @concept = Concept.find(:first, :conditions => ["name = ?", key.humanize.upcase])
+            
+            if @concept.nil?
+              raise "concept #{key.humanize.upcase} not found"
+            end
+            
+            @value_concept = Concept.find(:first, :conditions => ["name = ?", value.humanize.upcase])
+            
+            if @value_concept.nil? 
+              raise "value #{value.humanize.updase} not found"
+            end
+            
+            @observation = Observation.new(:encounter_id => @encounter.id,
+                                           :patient_id => @encounter.patient.id,
+                                           :concept_id => @concept.id,
+                                           :value_concept_id => @value_concept.id)
+            @observation.save
+         
+           end
+        end 
+      end
+      
+    end
+    
+    
+  end
+  
+  def update_location
+    @encounters = Encounter.find(:all)
+    
+    flash[:notice] = "Updating Encounters<br>"
+
+    @encounters.each do |enc|
+      enc.location_id = 1
+      enc.save
+      
+      flash[:notice] += "Encounter #{enc.id} updated.<br>"
+    end
+    redirect_to :controller => :patient, :action => :find
   end
 
 end

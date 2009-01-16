@@ -6,10 +6,6 @@ class Image < ActiveRecord::Base
   BASEDIRECTORY = $image_folder # set in environment.rb
   THUMB_MAX_SIZE = [125,125]
   
-#  This is depricated after moving the images out of the reach of the 
-#  Web server and link hackers  
-#  LINKDIRECTORY = "/system/image_archive"  
-  
   after_save :process
   after_destroy :cleanup
   
@@ -36,8 +32,6 @@ class Image < ActiveRecord::Base
     image.write(full_path)
     create_thumbnail
   end
-  
-  # File manipulation variables.
   
   def filename(suffix = 'full')
     "#{file_root}-#{suffix}.#{self.extension}"
@@ -124,7 +118,8 @@ class Image < ActiveRecord::Base
     patient = self.encounter.patient
     encounter = self.encounter
     File.open(config_filename, 'wb') do |file|
-    file.puts "# Patient Module Attributes
+      file.puts "
+# Patient Module Attributes
 # Patient's Name
 00100010:#{patient.dicom_name}
 # Patient ID 
@@ -140,15 +135,15 @@ class Image < ActiveRecord::Base
 # Study Instance UID
 #0020000D:
 # Study Date
-00080020:#{encounter.date.strftime("%Y%m%d")}
+00080020:#{encounter.date.strftime('%Y%m%d')}
 # Study Time
-00080030:#{encounter.date.strftime("%H%M%S")}
+00080030:#{encounter.date.strftime('%H%M%S')}
 # Referring Physician's Name
 00080090:#{encounter.provider.hl7_name}
 # Study ID
 00200010:
 # Accession Number
-00080050:
+00080050:#{encounter.id}
 # Study Description
 #00081030:#{encounter.encounter_type.name}
 
@@ -158,26 +153,8 @@ class Image < ActiveRecord::Base
 # Series Instance UID
 #0020,000E:
 # Series Number
-00200011:1
-
-# General Equipment Module Attributes
-# Manufacturer
-00080070:
-
-# SC Equipment Module Attributes
-# Conversion Type
-00080064:SI
-
-# General Image Module Attributes
-# Instance Number
-00200013:1
-
-# SOP Common Module Attributes
-# SOP Class UID
-00080016:1.2.840.10008.5.1.4.1.1.7
-# SOP Instance UID
-#00080018"
-
+00200011:1"
+    end
   end
 
   def create_dicom  
@@ -187,12 +164,7 @@ class Image < ActiveRecord::Base
     rescue 
       raise "Dicom save failed: #{result}"
     end
-  end
-
-
-
-    
     
   end
-
+  
 end

@@ -3,8 +3,10 @@
 module ApplicationHelper
 
   def setup_layout
-    # This method is called by the layout view to make sure that the patient being displayed is correct
-    # It also finds the name of the user whom is logged in, and displays the link choices accordingly.
+    # This method is called by the layout view to make sure that the patient 
+    # being displayed is correct.
+    # It also finds the name of the user whom is logged in, and displays 
+    # the link choices accordingly.
     
     set_current_patient_banner
     
@@ -15,7 +17,7 @@ module ApplicationHelper
   def set_current_patient_banner
     
     unless @patient.nil? || @patient.full_name.nil?
-      @current_patient_banner = @patient.full_name + " | AMPATH ID: " + @patient.mrn_ampath.to_s  + " | MTRH Rad ID: " + @patient.mtrh_rad_id.to_s
+      @current_patient_banner = @patient.full_name + " | AMPATH ID: " + @patient.mrn_ampath.to_s  + " | MTRH Rad ID: " + @patient.mtrh_rad_id.to_s + " | Current Age: " + @patient.current_age.to_s
     end
     
   end
@@ -32,9 +34,10 @@ module ApplicationHelper
         # Here we put together the command list that will be at the top of every page
 
         find_patients = link_to('Find Patients', :controller => :patient, :action => :find)
-        manage_users = link_to('Manage Users', :controller => :login, :action => :list_users)
-        manage_providers = link_to('Manage Providers', :controller => :login, :action => :list_providers)
+        #manage_users = link_to('Manage Users', :controller => :login, :action => :list_users)
+        #manage_providers = link_to('Manage Providers', :controller => :login, :action => :list_providers)
         manage_clients = link_to('Manage Clients', :controller => :login, :action => :list_clients)
+        admin = link_to('Admin', :controller => :login, :action => :administration)
         stats = link_to('Statistics', :controller => :encounter, :action => :statistics)
         dictionary = link_to('Dictionary', :controller => :dictionary, :action => :list_concepts)
         unreported = link_to('Unreported', :controller => :encounter, :action => :unreported)
@@ -45,9 +48,7 @@ module ApplicationHelper
             @command_list = [find_patients,
                              dictionary,
                              unreported,
-                             manage_users,
-                             manage_providers,
-                             manage_clients,
+                             admin,
                              stats]     
           when "tech"
             @command_list = [find_patients,

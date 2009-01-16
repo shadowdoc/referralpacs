@@ -210,5 +210,9 @@ class LoginController < ApplicationController
     end
     
   end
+  
+  def administration
+    # stub action to show a list of links for management purposes.
+  end
     
 end

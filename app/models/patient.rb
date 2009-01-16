@@ -18,6 +18,14 @@ class Patient < ActiveRecord::Base
     end
   end
   
+  def current_age
+    dob = self.birthdate
+    a = Date.today.year - dob.year
+    b = Date.new(Date.today.year, dob.month, dob.day)
+    a = a - 1 if b > Date.today
+    return a
+  end
+  
   def hl7_name
     # Create a correctly formatted name for HL7
 
@@ -212,7 +220,7 @@ class Patient < ActiveRecord::Base
       url = "http://"
     end
 
-    url += "#{$openmrs_server}/openmrs/moduleServlet/restmodule/api/patient/#{mrn_openmrs}"
+    url += "#{$openmrs_server}/amrs/moduleServlet/restmodule/api/patient/#{mrn_openmrs}"
     
     # Create a URI object from our url string.
     url = URI.parse(url)
@@ -257,6 +265,69 @@ class Patient < ActiveRecord::Base
     new_patient.save!
     
     return new_patient
+    
+  end
+  
+  def validate
+    # Here is where we check the check digit supplied with the AMPATH ID
+    
+    # Create a string of valid characters
+    valid_chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVYWXZ_"
+    
+    
+    # Upcase and split our mrn_ampath
+    id_array = self.mrn_ampath.upcase.split("-")
+    
+    id_without_check_digit = id_array[0]
+    check_digit = id_array[1]
+    
+    # setup variables for sum and position tracking
+    sum = 0
+    pos = 0
+    weights = []
+    sums = []
+    
+    id_without_check_digit.reverse.each_char do |digit|
+      # Make sure we only have valid characters
+      if !valid_chars.include? digit
+        errors.add_to_base "Invalid Character in AMPATH-ID"
+      end
+      
+      digit = digit[0] - 48
+      
+      if (pos % 2 == 0)
+ 
+        # for alternating digits starting with the rightmost, we
+        # use our formula this is the same as multiplying x 2 and
+        # adding digits together for values 0 to 9.  Using the 
+        # following formula allows us to gracefully calculate a
+        # weight for non-numeric "digits" as well (from their 
+        # ASCII value - 48).
+        weight = (2 * digit) - ((digit / 5).to_i * 9);
+ 
+      else
+   
+        # even-positioned digits just contribute their ascii
+        # value minus 48
+        weight = digit;
+   
+      end
+ 
+      # keep a running total of weights
+      sum += weight
+      weights << weight
+      sums << sum
+      
+      # increment the position 
+      pos += 1
+    end
+    
+    # avoid sums less than 10
+    sum = sum.abs + 10
+    
+    if check_digit.to_i != (10 - (sum % 10)) % 10
+      errors.add_to_base "Invalid AMPATH ID, please correct"
+    end
     
   end
 

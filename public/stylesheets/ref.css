@@ -318,3 +318,68 @@ div#canvas {
 .search-box {
     width: 200px;
 }
+
+/* Report form styles */
+
+div.report_form {
+	padding:3px;
+	margin:3px;
+	width:1000px;
+}
+
+div.report_form fieldset {
+	margin-bottom:10px;
+}
+div.report_form legend {
+	font-weight:bold;
+	font-size:16px;
+	padding:0 2px;
+}
+div.report_form label {
+	display:inline-block;
+	line-height:1.8;
+	vertical-align:top;
+}
+
+div.report_form fieldset fieldset {
+	margin:3px;
+	padding:3px;
+	float: left;
+}
+
+div.report_form fieldset fieldset legend {
+	font-weight:normal;
+	font-size:13px;
+	padding:0 0 5px;
+}
+div.report_form fieldset fieldset label {
+	display:block;
+	width:auto;
+}
+div.report_form fieldset fieldset fieldset {
+	margin:3px;
+	padding:3px;
+	float: left;
+}
+
+div.report_form fieldset fieldset fieldset legend {
+	font-weight: lighter;
+	font-size:12px;
+	padding:0 0 5px;
+}
+div.report_form fieldset fieldset fieldset label {
+	display:block;
+	width:auto;
+}
+
+div.report_form em {
+	color:#FF0000;
+	font-style:normal;
+	font-weight:bold;
+}
+div.report_form label {
+	width:120px;
+}
+div.report_form fieldset fieldset label {
+margin-left:23px;
+}
