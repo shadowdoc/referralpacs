@@ -8,7 +8,8 @@
   <%= stylesheet_link_tag 'calendar' %>
   <%= javascript_include_tag :defaults, :cache => true %>
   <%= javascript_include_tag 'calendar.js' %>
-  <script src="/dictionary/concepts_for_lookup" type="text/javascript" ></script>
+  <% if @page_specific_scripts_in %> <%= javascript_include_tag @page_specific_scripts_in %> <% end %>
+  <% if @load_concepts_js_array %><script src="/dictionary/concepts_for_lookup" type="text/javascript"></script><% end %>
 
 </head>
 

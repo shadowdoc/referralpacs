@@ -31,7 +31,7 @@ tech:
   name:           tech
   view_study:     true
   add_encounter:      true
-  delete_encounter:   false
+  delete_encounter:   true
   add_user:       false
   delete_user:    false
   update_user:    false

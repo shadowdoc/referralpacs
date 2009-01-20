@@ -330,5 +330,13 @@ class Patient < ActiveRecord::Base
     end
     
   end
+  
+  def last_location
+    if self.encounters.count == 0 || self.encounters.last.location.nil?
+      return "No encounters"
+    else
+      return self.encounters.last.location.name
+    end
+  end
 
 end

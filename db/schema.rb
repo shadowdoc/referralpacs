@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 28) do
+ActiveRecord::Schema.define(:version => 29) do
 
   create_table "answers", :force => true do |t|
     t.integer "concept_id"
@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(:version => 28) do
 
   create_table "observations", :force => true do |t|
     t.integer  "encounter_id"
-    t.integer  "concept_id"
+    t.integer  "question_concept_id"
     t.integer  "patient_id"
     t.float    "value_numeric"
     t.integer  "value_concept_id"

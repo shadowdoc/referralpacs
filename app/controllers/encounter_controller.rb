@@ -22,11 +22,11 @@ class EncounterController < ApplicationController
     # This controller will return a list of encounters, given a patient ID.
  
     @patient = Patient.find(params[:id])
-    @encounters = @patient.encounters
+    @encounters = @patient.encounters.sort! {|x, y| y.date <=> x.date }
     @current_user = User.find(session[:user_id])
 
     if @encounters.empty?
-      flash[:notice] = "No encounters for #{@patient.full_name} - "
+      flash[:notice] = "No encounters for #{@patient.full_name}"
     end
   
   end
@@ -95,12 +95,12 @@ class EncounterController < ApplicationController
     
     @id = params[:encounter_id]
     @encounter = Encounter.find(@id)
-    @concept = Concept.find(:first, :conditions => ["name = ?", params[:concept_name]])
-    @value_concept = Concept.find(:first, :conditions => ["name = ?", params[:value_concept_name]])
+    question_concept = Concept.find(:first, :conditions => ["name = ?", params[:concept_name]])
+    value_concept = Concept.find(:first, :conditions => ["name = ?", params[:value_concept_name]])
     @observation = Observation.new(:encounter_id => @encounter.id,
                                    :patient_id => @encounter.patient.id,
-                                   :concept_id => @concept.id,
-                                   :value_concept_id => @value_concept.id)
+                                   :question_concept_id => question_concept.id,
+                                   :value_concept_id => value_concept.id)
     @observation.save
     
     if @encounter.observations.length < 2
@@ -160,29 +160,34 @@ class EncounterController < ApplicationController
     @encounter = Encounter.find(params[:id])
     @patient = @encounter.patient
     
+    if request.get?
+      @observations = @encounter.observations
+      
+    end
+    
     if request.post? 
       # We have a post request, let's process the record
       
       params.each_pair do |key, value|
         unless value == "none"  || value == "normal"
           unless ["id", "commit", "action", "controller"].include? key
-            @concept = Concept.find(:first, :conditions => ["name = ?", key.humanize.upcase])
+            question_concept = Concept.find(:first, :conditions => ["name = ?", key.humanize.upcase])
             
-            if @concept.nil?
+            if question_concept.nil?
               raise "concept #{key.humanize.upcase} not found"
             end
             
-            @value_concept = Concept.find(:first, :conditions => ["name = ?", value.humanize.upcase])
+            value_concept = Concept.find(:first, :conditions => ["name = ?", value.humanize.upcase])
             
-            if @value_concept.nil? 
-              raise "value #{value.humanize.updase} not found"
+            if value_concept.nil? 
+              raise "value #{value.humanize.upcase} not found"
             end
             
-            @observation = Observation.new(:encounter_id => @encounter.id,
+            observation = Observation.new(:encounter_id => @encounter.id,
                                            :patient_id => @encounter.patient.id,
-                                           :concept_id => @concept.id,
-                                           :value_concept_id => @value_concept.id)
-            @observation.save
+                                           :question_concept_id => question_concept.id,
+                                           :value_concept_id => value_concept.id)
+            observation.save
          
            end
         end 
