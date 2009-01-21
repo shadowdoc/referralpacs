@@ -1,5 +1,6 @@
 class EncounterController < ApplicationController
   layout "ref"
+  require "railspdf"
   before_filter :authorize_login
   before_filter :security, :except => [:find, :show] # make sure to check permission for all except find and show
   
@@ -167,7 +168,7 @@ class EncounterController < ApplicationController
       @encounter.observations.each {|obs| obs.destroy }
       
       params.each_pair do |key, value|
-        unless value == "none"  || value == "normal"  || value == "no"
+        unless value == "none"  || value == "normal"  || value == "no"  || key == "impression"
           unless ["id", "commit", "action", "controller"].include? key
             unless key.include?("pleural_scarring")
               question_concept = Concept.find_by_name(key.humanize.upcase)
@@ -196,7 +197,14 @@ class EncounterController < ApplicationController
           end
         end 
       end
-      
+
+      @encounter.impression = params[:impression]
+      @encounter.reported = true
+      @encounter.save
+
+      # Let's reload our saved work for display to the browser
+      @encounter.reload
+      @observations = @encounter.observations
     end
     
     # Now we should have observations, let's load them.
@@ -218,23 +226,20 @@ class EncounterController < ApplicationController
       end
         
     end
-    
-    @encounter.reported = true
-    
+
+    if @encounter.reported
+      @impression = @encounter.impression
+    else
+      @impression = ""
+    end
+
   end
   
-  def update_location
-    @encounters = Encounter.find(:all)
-    
-    flash[:notice] = "Updating Encounters<br>"
-
-    @encounters.each do |enc|
-      enc.location_id = 1
-      enc.save
-      
-      flash[:notice] += "Encounter #{enc.id} updated.<br>"
-    end
-    redirect_to :controller => :patient, :action => :find
+  def pdf_report
+    @encounter = Encounter.find(params[:id])
+    @observations = @encounter.observations.sort! {|x, y| y.question_concept.name <=> x.question_concept.name }
+    @patient = @encounter.patient
+    render :layout => false
   end
 
 end

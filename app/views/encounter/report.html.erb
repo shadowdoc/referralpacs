@@ -138,7 +138,10 @@
 		<% choices = ["normal", "osteoporosis", "acute_fracture", "healed_fracture" ]-%>
 		<%= fieldset_helper(question, choices) %>
     </fieldset>
-    <br>
-	<br>
+	<fieldset>
+	  <legend>Impression</legend>
+	  <%= text_area_tag "impression", @impression, :size => "100x10" %>
+    </fieldset>
 </div>
+
 <%= submit_tag "Finalize Report" %>
