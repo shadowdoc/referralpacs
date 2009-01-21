@@ -2,649 +2,1034 @@
 - !ruby/object:Concept 
   attributes: 
     name: INFILTRATE
+    created_at: 
     updated_at: 
     created_by: 
-    updated_by: 
     id: "1"
+    updated_by: 
     description: Opacity, generally in a patchy, fluffy distribution
-    created_at: 
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: CAVITATION
+    created_at: 
     updated_at: 
     created_by: 
-    updated_by: 
     id: "2"
+    updated_by: 
     description: Having a hollowed-out appearance
-    created_at: 
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: RIGHT UPPER LUNG ZONE
+    created_at: 
     updated_at: 
     created_by: 
-    updated_by: 
     id: "3"
+    updated_by: 
     description: 
-    created_at: 
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: RIGHT MIDDLE LUNG ZONE
+    created_at: 
     updated_at: 
     created_by: 
-    updated_by: 
     id: "4"
+    updated_by: 
     description: 
-    created_at: 
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: RIGHT LOWER LUNG ZONE
+    created_at: 
     updated_at: 
     created_by: 
-    updated_by: 
     id: "5"
+    updated_by: 
     description: 
-    created_at: 
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: LEFT UPPER LUNG ZONE
+    created_at: 
     updated_at: 
     created_by: 
-    updated_by: 
     id: "6"
+    updated_by: 
     description: 
-    created_at: 
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: LEFT MIDDLE LUNG ZONE
+    created_at: 
     updated_at: 
     created_by: 
-    updated_by: 
     id: "7"
+    updated_by: 
     description: 
-    created_at: 
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: LEFT LOWER LUNG ZONE
+    created_at: 
     updated_at: 
     created_by: 
-    updated_by: 
     id: "8"
+    updated_by: 
     description: 
-    created_at: 
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: CHEST XRAY
+    created_at: 2007-01-26 09:57:16
     updated_at: 2007-01-26 09:57:32
     created_by: "1"
-    updated_by: "1"
     id: "9"
+    updated_by: "1"
     description: A radiograph of the chest.
-    created_at: 2007-01-26 09:57:16
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: INTERSTITIAL DISEASE
+    created_at: 2007-01-26 09:58:21
     updated_at: 2007-01-26 09:58:48
     created_by: "1"
-    updated_by: "1"
     id: "10"
+    updated_by: "1"
     description: A "reticular" and sometimes nodular pattern.
-    created_at: 2007-01-26 09:58:21
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: PERIHILAR
+    created_at: 2007-01-26 10:00:27
     updated_at: 2007-01-26 10:01:43
     created_by: "1"
-    updated_by: "1"
     id: "11"
+    updated_by: "1"
     description: Disase emanating from the middle mediastinum
-    created_at: 2007-01-26 10:00:27
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: "PARENCHYMAL SCARRING   "
+    created_at: 2007-01-31 09:25:42
     updated_at: 2007-01-31 09:26:36
     created_by: "1"
-    updated_by: "1"
     id: "12"
+    updated_by: "1"
     description: Scarring in the lung.  Usually from prior infection
-    created_at: 2007-01-31 09:25:42
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: RIGHT DIFFUSE
+    created_at: 2007-01-31 09:27:36
     updated_at: 2007-01-31 09:28:25
     created_by: "1"
-    updated_by: "1"
     id: "13"
+    updated_by: "1"
     description: ""
-    created_at: 2007-01-31 09:27:36
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: ATELECTASIS
+    created_at: 2007-01-31 09:28:44
     updated_at: 2007-01-31 09:28:57
     created_by: "1"
-    updated_by: "1"
     id: "14"
+    updated_by: "1"
     description: Collapsed lung
-    created_at: 2007-01-31 09:28:44
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: LEFT DIFFUSE
+    created_at: 2007-01-31 09:29:26
     updated_at: 2007-01-31 09:38:10
     created_by: "1"
-    updated_by: "1"
     id: "15"
+    updated_by: "1"
     description: ""
-    created_at: 2007-01-31 09:29:26
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: PULMONARY NODULE (OR MASS)
+    created_at: 2007-01-31 09:45:55
     updated_at: 2007-01-31 09:46:26
     created_by: "1"
-    updated_by: "1"
     id: "16"
+    updated_by: "1"
     description: ""
-    created_at: 2007-01-31 09:45:55
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: RIGHT SINGLE
+    created_at: 2007-01-31 09:46:37
     updated_at: 2007-01-31 09:47:49
     created_by: "1"
-    updated_by: "1"
     id: "17"
+    updated_by: "1"
     description: Only one, solitary.
-    created_at: 2007-01-31 09:46:37
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: CALCIFIED
+    created_at: 2007-01-31 09:46:57
     updated_at: 2007-02-02 09:12:37
     created_by: "1"
-    updated_by: "1"
     id: "18"
+    updated_by: "1"
     description: ""
-    created_at: 2007-01-31 09:46:57
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: LEFT SINGLE
+    created_at: 2007-01-31 09:47:52
     updated_at: 2007-01-31 09:48:01
     created_by: "1"
-    updated_by: "1"
     id: "19"
+    updated_by: "1"
     description: ""
-    created_at: 2007-01-31 09:47:52
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: MULTIPLE CALCIFIED
+    created_at: 2007-01-31 09:49:17
     updated_at: 2007-01-31 09:49:27
     created_by: "1"
-    updated_by: "1"
     id: "20"
+    updated_by: "1"
     description: ""
-    created_at: 2007-01-31 09:49:17
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: RIGHT TWO-FIVE
+    created_at: 2007-02-02 09:12:52
     updated_at: 2007-02-02 09:45:15
     created_by: "1"
-    updated_by: "1"
     id: "21"
+    updated_by: "1"
     description: ""
-    created_at: 2007-02-02 09:12:52
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: LEFT TWO-FIVE
+    created_at: 2007-02-02 09:45:21
     updated_at: 2007-02-02 09:45:35
     created_by: "1"
-    updated_by: "1"
     id: "22"
+    updated_by: "1"
     description: ""
-    created_at: 2007-02-02 09:45:21
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: RIGHT MORE THAN FIVE
+    created_at: 2007-02-02 09:45:46
     updated_at: 2007-02-02 09:46:11
     created_by: "1"
-    updated_by: "1"
     id: "23"
+    updated_by: "1"
     description: ""
-    created_at: 2007-02-02 09:45:46
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: LEFT GREATER THAN FIVE
+    created_at: 2007-02-02 09:46:18
     updated_at: 2007-02-02 09:46:32
     created_by: "1"
-    updated_by: "1"
     id: "24"
+    updated_by: "1"
     description: ""
-    created_at: 2007-02-02 09:46:18
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: ADENOPATHY
+    created_at: 2007-02-02 09:47:03
     updated_at: 2007-02-02 09:48:21
     created_by: "1"
-    updated_by: "1"
     id: "25"
+    updated_by: "1"
     description: ""
-    created_at: 2007-02-02 09:47:03
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: RIGHT PARATRACHEAL
+    created_at: 2007-02-02 09:47:15
     updated_at: 2007-02-02 09:47:29
     created_by: "1"
-    updated_by: "1"
     id: "26"
+    updated_by: "1"
     description: ""
-    created_at: 2007-02-02 09:47:15
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: LEFT PARATRACHEAL
+    created_at: 2007-02-02 09:47:33
     updated_at: 2007-02-02 09:47:43
     created_by: "1"
-    updated_by: "1"
     id: "27"
+    updated_by: "1"
     description: ""
-    created_at: 2007-02-02 09:47:33
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: RIGHT HILAR
+    created_at: 2007-02-02 09:47:49
     updated_at: 2007-02-02 09:47:58
     created_by: "1"
-    updated_by: "1"
     id: "28"
+    updated_by: "1"
     description: ""
-    created_at: 2007-02-02 09:47:49
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: LEFT HILAR
+    created_at: 2007-02-02 09:48:03
     updated_at: 2007-02-02 09:48:12
     created_by: "1"
-    updated_by: "1"
     id: "29"
+    updated_by: "1"
     description: ""
-    created_at: 2007-02-02 09:48:03
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: AORTA
+    created_at: 2007-02-02 09:50:06
     updated_at: 2007-02-02 09:50:14
     created_by: "1"
-    updated_by: "1"
     id: "30"
+    updated_by: "1"
     description: ""
-    created_at: 2007-02-02 09:50:06
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: UNFOLDED
+    created_at: 2007-02-02 09:50:19
     updated_at: 2007-02-02 09:50:37
     created_by: "1"
-    updated_by: "1"
     id: "31"
+    updated_by: "1"
     description: Description of the aorta, implying an aneurysm.
-    created_at: 2007-02-02 09:50:19
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: PULMONARY VASCULATURE
+    created_at: 2007-02-02 09:51:06
     updated_at: 2007-02-02 09:51:20
     created_by: "1"
-    updated_by: "1"
     id: "32"
+    updated_by: "1"
     description: ""
-    created_at: 2007-02-02 09:51:06
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: ENLARGED
+    created_at: 2007-02-02 09:51:26
     updated_at: 2007-02-02 09:51:35
     created_by: "1"
-    updated_by: "1"
     id: "33"
+    updated_by: "1"
     description: ""
-    created_at: 2007-02-02 09:51:26
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: NORMAL
+    created_at: 2007-02-02 09:51:41
     updated_at: 2007-02-02 09:51:50
     created_by: "1"
-    updated_by: "1"
     id: "34"
+    updated_by: "1"
     description: ""
-    created_at: 2007-02-02 09:51:41
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: MEDIASTINAL MASS
+    created_at: 2007-02-02 09:52:24
     updated_at: 2007-02-02 09:52:39
     created_by: "1"
-    updated_by: "1"
     id: "35"
+    updated_by: "1"
     description: Mass lesion within the mediastinum
-    created_at: 2007-02-02 09:52:24
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: ANTERIOR
+    created_at: 2007-02-02 09:52:44
     updated_at: 2007-02-02 09:52:58
     created_by: "1"
-    updated_by: "1"
     id: "36"
+    updated_by: "1"
     description: Anatomic descriptor
-    created_at: 2007-02-02 09:52:44
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: MIDDLE
+    created_at: 2007-02-02 09:53:03
     updated_at: 2007-02-02 09:53:17
     created_by: "1"
-    updated_by: "1"
     id: "37"
+    updated_by: "1"
     description: Anatomic descriptor
-    created_at: 2007-02-02 09:53:03
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: POSTERIOR
+    created_at: 2007-02-02 09:53:22
     updated_at: 2007-02-02 09:53:32
     created_by: "1"
-    updated_by: "1"
     id: "38"
+    updated_by: "1"
     description: Anatomic descriptor
-    created_at: 2007-02-02 09:53:22
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: CARDIOMEGALY
+    created_at: 2007-02-02 09:54:17
     updated_at: 2007-02-02 09:54:32
     created_by: "1"
-    updated_by: "1"
     id: "39"
+    updated_by: "1"
     description: Enlargement of the heart
-    created_at: 2007-02-02 09:54:17
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: MILD
+    created_at: 2007-02-02 09:54:37
     updated_at: 2007-02-02 09:54:44
     created_by: "1"
-    updated_by: "1"
     id: "40"
+    updated_by: "1"
     description: ""
-    created_at: 2007-02-02 09:54:37
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: MODERATE
+    created_at: 2007-02-02 09:54:50
     updated_at: 2007-02-02 09:54:59
     created_by: "1"
-    updated_by: "1"
     id: "41"
+    updated_by: "1"
     description: ""
-    created_at: 2007-02-02 09:54:50
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: SEVERE
+    created_at: 2007-02-02 09:55:01
     updated_at: 2007-02-02 09:55:10
     created_by: "1"
-    updated_by: "1"
     id: "42"
+    updated_by: "1"
     description: ""
-    created_at: 2007-02-02 09:55:01
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: RIGHT APICAL
+    created_at: 2007-02-02 09:55:49
     updated_at: 2007-02-02 09:55:58
     created_by: "1"
-    updated_by: "1"
     id: "43"
+    updated_by: "1"
     description: ""
-    created_at: 2007-02-02 09:55:49
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: RIGHT BASILAR
+    created_at: 2007-02-02 09:56:00
     updated_at: 2007-02-02 09:56:17
     created_by: "1"
-    updated_by: "1"
     id: "44"
+    updated_by: "1"
     description: ""
-    created_at: 2007-02-02 09:56:00
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: RIGHT LATERAL
+    created_at: 2007-02-02 09:56:20
     updated_at: 2007-02-02 09:56:26
     created_by: "1"
-    updated_by: "1"
     id: "45"
+    updated_by: "1"
     description: ""
-    created_at: 2007-02-02 09:56:20
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: LEFT APICAL
+    created_at: 2007-02-02 09:56:28
     updated_at: 2007-02-02 09:56:36
     created_by: "1"
-    updated_by: "1"
     id: "46"
+    updated_by: "1"
     description: ""
-    created_at: 2007-02-02 09:56:28
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: LEFT LATERAL
+    created_at: 2007-02-02 09:56:37
     updated_at: 2007-02-02 09:56:46
     created_by: "1"
-    updated_by: "1"
     id: "47"
+    updated_by: "1"
     description: ""
-    created_at: 2007-02-02 09:56:37
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: LEFT BASILAR
+    created_at: 2007-02-02 09:56:48
     updated_at: 2007-02-02 09:56:57
     created_by: "1"
-    updated_by: "1"
     id: "48"
+    updated_by: "1"
     description: ""
-    created_at: 2007-02-02 09:56:48
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: PLEURAL SCARRING
+    created_at: 2007-02-02 09:57:11
     updated_at: 2007-02-02 09:57:32
     created_by: "1"
-    updated_by: "1"
     id: "49"
+    updated_by: "1"
     description: ""
-    created_at: 2007-02-02 09:57:11
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: RIGHT LESS THAN  25%
+    created_at: 2007-02-02 09:58:35
     updated_at: 2007-02-02 09:58:53
     created_by: "1"
-    updated_by: "1"
     id: "50"
+    updated_by: "1"
     description: ""
-    created_at: 2007-02-02 09:58:35
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: RIGHT GREATER THAN 25%
+    created_at: 2007-02-02 09:58:55
     updated_at: 2007-02-02 09:59:08
     created_by: "1"
-    updated_by: "1"
     id: "51"
+    updated_by: "1"
     description: ""
-    created_at: 2007-02-02 09:58:55
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: LEFT LESS THAN 25%
+    created_at: 2007-02-02 09:59:10
     updated_at: 2007-02-02 09:59:20
     created_by: "1"
-    updated_by: "1"
     id: "52"
+    updated_by: "1"
     description: ""
-    created_at: 2007-02-02 09:59:10
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: LEFT GREATER THAN 25%
+    created_at: 2007-02-02 09:59:24
     updated_at: 2007-02-02 09:59:34
     created_by: "1"
-    updated_by: "1"
     id: "53"
+    updated_by: "1"
     description: ""
-    created_at: 2007-02-02 09:59:24
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: PNEUMOTHORAX
+    created_at: 2007-02-02 09:59:41
     updated_at: 2007-02-02 09:59:51
     created_by: "1"
-    updated_by: "1"
     id: "54"
+    updated_by: "1"
     description: ""
-    created_at: 2007-02-02 09:59:41
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: BONES
+    created_at: 2007-02-02 10:01:03
     updated_at: 2007-02-02 10:01:49
     created_by: "1"
-    updated_by: "1"
     id: "55"
+    updated_by: "1"
     description: ""
-    created_at: 2007-02-02 10:01:03
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: OSTEOPENIA
+    created_at: 2007-02-02 10:01:57
     updated_at: 2007-02-02 10:02:06
     created_by: "1"
-    updated_by: "1"
     id: "56"
+    updated_by: "1"
     description: ""
-    created_at: 2007-02-02 10:01:57
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: ACUTE FRACTURE
+    created_at: 2007-02-02 10:02:14
     updated_at: 2007-02-02 10:02:23
     created_by: "1"
-    updated_by: "1"
     id: "57"
+    updated_by: "1"
     description: ""
-    created_at: 2007-02-02 10:02:14
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: HEALED FRACTURE
+    created_at: 2007-02-02 10:02:26
     updated_at: 2007-02-02 10:02:38
     created_by: "1"
-    updated_by: "1"
     id: "58"
+    updated_by: "1"
     description: ""
-    created_at: 2007-02-02 10:02:26
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
+    name: PLEURAL EFFUSION
+    created_at: 2007-02-05 16:15:00
+    updated_at: 2007-02-05 16:15:10
+    created_by: "5"
+    id: "59"
+    updated_by: "5"
+    description: ""
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
+    name: RIGHT SMALL
+    created_at: 2007-02-05 16:15:27
+    updated_at: 2007-02-05 16:16:44
+    created_by: "5"
+    id: "60"
+    updated_by: "5"
+    description: ""
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
+    name: RIGHT MODERATE
+    created_at: 2007-02-05 16:16:51
+    updated_at: 2007-02-05 16:17:02
+    created_by: "5"
+    id: "61"
+    updated_by: "5"
+    description: ""
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
+    name: RIGHT LARGE
+    created_at: 2007-02-05 16:17:03
+    updated_at: 2007-02-05 16:17:09
+    created_by: "5"
+    id: "62"
+    updated_by: "5"
+    description: ""
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
+    name: LEFT SMALL
+    created_at: 2007-02-05 16:17:12
+    updated_at: 2007-02-05 16:17:19
+    created_by: "5"
+    id: "63"
+    updated_by: "5"
+    description: ""
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
+    name: LEFT MODERATE
+    created_at: 2007-02-05 16:17:20
+    updated_at: 2007-02-05 16:17:27
+    created_by: "5"
+    id: "64"
+    updated_by: "5"
+    description: ""
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
+    name: LEFT LARGE
+    created_at: 2007-02-05 16:17:29
+    updated_at: 2007-02-05 16:20:52
+    created_by: "5"
+    id: "65"
+    updated_by: "5"
+    description: ""
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
+    name: RIGHT
+    created_at: 2009-01-16 10:34:12
+    updated_at: 2009-01-16 10:34:22
+    created_by: "1"
+    id: "66"
+    updated_by: "1"
+    description: anatomic descriptor
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
+    name: LEFT
+    created_at: 2009-01-16 10:34:27
+    updated_at: 2009-01-16 10:34:37
+    created_by: "1"
+    id: "67"
+    updated_by: "1"
+    description: anatomic descriptor
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
+    name: DIFFUSE
+    created_at: 2009-01-16 10:34:41
+    updated_at: 2009-01-16 10:35:28
+    created_by: "1"
+    id: "68"
+    updated_by: "1"
+    description: description of disease pattern
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
+    name: NONE
+    created_at: 2009-01-16 10:35:44
+    updated_at: 2009-01-16 10:35:59
+    created_by: "1"
+    id: "69"
+    updated_by: "1"
+    description: word meaning nothing
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
+    name: LUNG SCARRING UPPER
+    created_at: 2009-01-16 10:39:18
+    updated_at: 2009-01-16 10:39:39
+    created_by: "1"
+    id: "70"
+    updated_by: "1"
+    description: upper lung field scarring
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
+    name: BILATERAL
+    created_at: 2009-01-16 10:40:12
+    updated_at: 2009-01-16 10:40:31
+    created_by: "1"
+    id: "71"
+    updated_by: "1"
+    description: on both sides of the body
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
+    name: LUNG SCARRING LOWER
+    created_at: 2009-01-16 10:40:38
+    updated_at: 2009-01-16 10:41:02
+    created_by: "1"
+    id: "72"
+    updated_by: "1"
+    description: scarring in the lung base
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
+    name: NODULES
+    created_at: 2009-01-16 10:41:04
+    updated_at: 2009-01-16 10:41:29
+    created_by: "1"
+    id: "73"
+    updated_by: "1"
+    description: focal lesions
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
+    name: SOLITARY
+    created_at: 2009-01-16 10:41:33
+    updated_at: 2009-01-16 10:41:53
+    created_by: "1"
+    id: "74"
+    updated_by: "1"
+    description: singular
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
+    name: TWO TO FIVE
+    created_at: 2009-01-16 10:41:56
+    updated_at: 2009-01-16 10:42:12
+    created_by: "1"
+    id: "75"
+    updated_by: "1"
+    description: qualitative description
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
+    name: MORE THAN FIVE
+    created_at: 2009-01-16 10:42:19
+    updated_at: 2009-01-16 10:42:35
+    created_by: "1"
+    id: "76"
+    updated_by: "1"
+    description: greater than five
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
+    name: MILIARY
+    created_at: 2009-01-16 10:42:37
+    updated_at: 2009-01-16 10:42:56
+    created_by: "1"
+    id: "77"
+    updated_by: "1"
+    description: multiple diffuse tiny nodlues
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
+    name: PARATRACHEAL ADENOPATHY
+    created_at: 2009-01-16 10:42:58
+    updated_at: 2009-01-16 10:44:04
+    created_by: "1"
+    id: "78"
+    updated_by: "1"
+    description: adenopathy in the paratracheal region
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
+    name: HILAR ADENOPATHY
+    created_at: 2009-01-16 10:44:05
+    updated_at: 2009-01-16 10:44:33
+    created_by: "1"
+    id: "79"
+    updated_by: "1"
+    description: adenopathy in the hilum of the lung
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
+    name: ECTATIC
+    created_at: 2009-01-16 10:44:35
+    updated_at: 2009-01-16 10:45:10
+    created_by: "1"
+    id: "80"
+    updated_by: "1"
+    description: twisted appearance of the aorta, frequently due to atherosclerotic disease
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
+    name: ANEURYSM
+    created_at: 2009-01-16 10:45:17
+    updated_at: 2009-01-16 10:45:45
+    created_by: "1"
+    id: "81"
+    updated_by: "1"
+    description: focal dilation of a tubular structure
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
+    name: PULMONARY VASCULATURE
+    created_at: 2009-01-16 10:46:12
+    updated_at: 2009-01-16 10:46:28
+    created_by: "1"
+    id: "82"
+    updated_by: "1"
+    description: the vessels throughout the lungs
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
+    name: DECREASED
+    created_at: 2009-01-16 10:46:51
+    updated_at: 2009-01-16 10:46:59
+    created_by: "1"
+    id: "83"
+    updated_by: "1"
+    description: diminished
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
+    name: "YES"
+    created_at: 2009-01-16 10:47:21
+    updated_at: 2009-01-16 10:47:32
+    created_by: "1"
+    id: "84"
+    updated_by: "1"
+    description: affirmative
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
     name: "NO"
-    updated_at: 2009-01-16 08:29:19
+    created_at: 2009-01-16 10:47:33
+    updated_at: 2009-01-16 10:47:40
     created_by: "1"
+    id: "85"
     updated_by: "1"
-    id: "83"
-    description: negative, negation
-    created_at: 2009-01-16 08:29:08
+    description: negative
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
+    name: PLEURAL EFFUSION RIGHT
+    created_at: 2009-01-16 10:47:44
+    updated_at: 2009-01-16 10:48:28
+    created_by: "1"
+    id: "86"
+    updated_by: "1"
+    description: fluid in the right pleural space
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
+    name: PLEURAL EFFUSION LEFT
+    created_at: 2009-01-16 10:48:31
+    updated_at: 2009-01-16 10:48:43
+    created_by: "1"
+    id: "87"
+    updated_by: "1"
+    description: fluid in the left pleural space
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
+    name: PLEURAL SCARRING
+    created_at: 2009-01-16 10:48:55
+    updated_at: 2009-01-16 10:49:10
+    created_by: "1"
+    id: "88"
+    updated_by: "1"
+    description: scaring in the pleural space
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
+    name: PNEUMOTHORAX RIGHT
+    created_at: 2009-01-16 10:50:52
+    updated_at: 2009-01-16 10:51:05
+    created_by: "1"
+    id: "89"
+    updated_by: "1"
+    description: gas in the right pleural space
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
+    name: PNEUMOTHORAX LEFT
+    created_at: 2009-01-16 10:51:09
+    updated_at: 2009-01-16 10:51:23
+    created_by: "1"
+    id: "90"
+    updated_by: "1"
+    description: gas in the left pleural space
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
+    name: SMALL
+    created_at: 2009-01-16 10:51:37
+    updated_at: 2009-01-16 10:52:07
+    created_by: "1"
+    id: "91"
+    updated_by: "1"
+    description: size descriptor
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
+    name: LARGE
+    created_at: 2009-01-16 10:52:23
+    updated_at: 2009-01-16 10:53:02
+    created_by: "1"
+    id: "92"
+    updated_by: "1"
+    description: size descriptor
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
+    name: BONES
+    created_at: 2009-01-16 10:53:12
+    updated_at: 2009-01-16 10:53:39
+    created_by: "1"
+    id: "93"
+    updated_by: "1"
+    description: bones
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
+    name: OSTEOPOROSIS
+    created_at: 2009-01-16 10:54:22
+    updated_at: 2009-01-16 10:54:33
+    created_by: "1"
+    id: "94"
+    updated_by: "1"
+    description: decreased bone mineral density
   attributes_cache: {}
 

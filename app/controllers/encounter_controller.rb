@@ -160,41 +160,66 @@ class EncounterController < ApplicationController
     @encounter = Encounter.find(params[:id])
     @patient = @encounter.patient
     
-    if request.get?
-      @observations = @encounter.observations
-      
-    end
-    
     if request.post? 
       # We have a post request, let's process the record
+      # First let's clear the previous observations
+      
+      @encounter.observations.each {|obs| obs.destroy }
       
       params.each_pair do |key, value|
-        unless value == "none"  || value == "normal"
+        unless value == "none"  || value == "normal"  || value == "no"
           unless ["id", "commit", "action", "controller"].include? key
-            question_concept = Concept.find(:first, :conditions => ["name = ?", key.humanize.upcase])
-            
-            if question_concept.nil?
-              raise "concept #{key.humanize.upcase} not found"
+            unless key.include?("pleural_scarring")
+              question_concept = Concept.find_by_name(key.humanize.upcase)
+              
+              if question_concept.nil?
+                raise "concept #{key.humanize.upcase} not found"
+              end
+              
+              value_concept = Concept.find_by_name(value.humanize.upcase)
+              
+            else
+              question_concept = Concept.find_by_name("PLEURAL SCARRING")    
+              value_concept = Concept.find_by_name(key.split(" ")[1].humanize.upcase)
             end
-            
-            value_concept = Concept.find(:first, :conditions => ["name = ?", value.humanize.upcase])
             
             if value_concept.nil? 
               raise "value #{value.humanize.upcase} not found"
             end
             
             observation = Observation.new(:encounter_id => @encounter.id,
-                                           :patient_id => @encounter.patient.id,
-                                           :question_concept_id => question_concept.id,
-                                           :value_concept_id => value_concept.id)
+                                          :patient_id => @encounter.patient.id,
+                                          :question_concept_id => question_concept.id,
+                                          :value_concept_id => value_concept.id)
             observation.save
-         
-           end
+            
+          end
         end 
       end
       
     end
     
+    # Now we should have observations, let's load them.
+    
+    @observations = @encounter.observations
+    
+    # We use a hash with question_concept, value_concept pairs to
+    # transfer data to the form, where it's processed by helpers
+      
+    @tag_hash = {"pleural_scarring" => {}}
+
+    @observations.each do |obs|
+      # Since pleural scarring can have multiple results
+      # we need to deal with it separately
+      if obs.question_concept.html_name == "pleural_scarring"
+        @tag_hash["pleural_scarring"].merge!({obs.value_concept.html_name => true})
+      else
+        @tag_hash.merge!({obs.question_concept.html_name => obs.value_concept.html_name})
+      end
+        
+    end
+    
+    @encounter.reported = true
     
   end
   
