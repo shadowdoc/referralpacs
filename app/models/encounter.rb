@@ -22,14 +22,7 @@ class Encounter < ActiveRecord::Base
     #TODO This is where the HL7 generation code should go
     #So that HL7 messages are automatically generated and
     #sent when an encounter is saved
-    
-    # Check to see if our encounter is reported, and if so make sure that we set that property
-    
-    if self.observations.length > 0 || self.impression != ""
-      self.reported = true
-    else
-      self.reported = false
-    end
+   
     
     super
   end

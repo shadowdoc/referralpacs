@@ -18,8 +18,6 @@ class EncounterController < ApplicationController
 
   public
   def find
-    #TODO Install will_paginate plugin and restore pagination. 
-    
     # This controller will return a list of encounters, given a patient ID.
  
     @patient = Patient.find(params[:id])
@@ -145,12 +143,12 @@ class EncounterController < ApplicationController
     end
   end
   
-  def unreported
+  def status
     
-    @encounters = Encounter.find(:all, :conditions => ['reported = ?', false], :order => 'date ASC', :limit => 20)
+    @encounters = Encounter.find_all_by_status(params[:requested_status])
     
     if @encounters.length == 0
-      render :text => 'Congratulations - No unreported studies!', :layout => true
+      render :text => "No encounters with status - #{params[:requested_status].humanize}", :layout => true
     end
     
   end
@@ -188,23 +186,23 @@ class EncounterController < ApplicationController
               raise "value #{value.humanize.upcase} not found"
             end
             
-            observation = Observation.new(:encounter_id => @encounter.id,
-                                          :patient_id => @encounter.patient.id,
-                                          :question_concept_id => question_concept.id,
-                                          :value_concept_id => value_concept.id)
-            observation.save
-            
+            @encounter.observations << Observation.new(:question_concept_id => question_concept.id,
+                                                       :value_concept_id => value_concept.id)
           end
         end 
       end
-
-      @encounter.impression = params[:impression]
-      @encounter.reported = true
-      @encounter.save
-
+      
+      
+      if @encounter.observations.count == 0 && params[:impression] == ""
+        flash[:notice] = "A valid report must contain either checked observations, or an impression"
+      else
+        @encounter.impression = params[:impression]
+        @encounter.reported = true
+        @encounter.save        
+      end
+      
       # Let's reload our saved work for display to the browser
       @encounter.reload
-      @observations = @encounter.observations
     end
     
     # Now we should have observations, let's load them.
@@ -227,10 +225,12 @@ class EncounterController < ApplicationController
         
     end
 
+    # @impression is the variable that will populate the free-text impression
+    # it defaults to normal
     if @encounter.reported
       @impression = @encounter.impression
     else
-      @impression = ""
+      @impression = "Normal"
     end
 
   end

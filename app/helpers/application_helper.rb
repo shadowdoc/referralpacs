@@ -40,19 +40,25 @@ module ApplicationHelper
         admin = link_to('Admin', :controller => :login, :action => :administration)
         stats = link_to('Statistics', :controller => :encounter, :action => :statistics)
         dictionary = link_to('Dictionary', :controller => :dictionary, :action => :list_concepts)
-        unreported = link_to('Unreported', :controller => :encounter, :action => :unreported)
+        radiologist_to_review = link_to('For Radiologist Review', :controller => :encounter, :action => :status, :requested_status => "radiologist_to_review")
+        new = link_to('New Exams', :controller => :encounter, :action => :status, :requested_status => "new")
+        ready_to_print = link_to('Ready for Printing', :controller => :encounter, :action => :status, :requested_status => "ready_for_printing")
         @command_list = []
         
         case user.privilege.name
           when "admin"
             @command_list = [find_patients,
                              dictionary,
-                             unreported,
+                             new,
+                             radiologist_to_review,
+                             ready_to_print,
                              admin,
                              stats]     
           when "tech"
             @command_list = [find_patients,
-                             unreported,
+                             new,
+                             radiologist_to_review,
+                             ready_to_print,
                              manage_clients]
           when "client"
             @command_list = [find_patients]

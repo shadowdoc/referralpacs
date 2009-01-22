@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 29) do
+ActiveRecord::Schema.define(:version => 30) do
 
   create_table "answers", :force => true do |t|
     t.integer "concept_id"
@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(:version => 29) do
     t.integer  "provider_id"
     t.integer  "client_id"
     t.integer  "xray_id"
-    t.boolean  "reported",           :default => false
+    t.string   "status"
     t.boolean  "teachingfile",       :default => false
     t.string   "teachingfilereason"
     t.integer  "location_id"

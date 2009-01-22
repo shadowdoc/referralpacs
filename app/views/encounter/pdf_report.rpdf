@@ -3,13 +3,11 @@
 pdf.select_font("Helvetica")
 
 header_image = File.open("public/images/mtrhlogo.jpg")
-pdf.move_pointer(50)
-pdf.add_image_from_file(header_image, 150, pdf.y, width=300)
-pdf.move_pointer(5)
+pdf.image(header_image, :justification => :center, :resize => 2.0)
 
 header_image.close
 
-#pdf.text "<i>Moi Teaching and Referral Hospital</i>", :font_size => 20, :justification => :center
+pdf.text "<i>PO Box 3, 3100 Eldoret Tel: +254-053-2033471/4 </i>", :font_size => 16, :justification => :center
 pdf.text "Chest X-ray Report", :font_size => 18, :justification => :center
 pdf.move_pointer(5)
 pdf.move_to(30, pdf.y - 5).line_to(550, pdf.y - 5).close_stroke
@@ -20,20 +18,19 @@ pdf.text "<b>ID:</b> #{@patient.mrn_ampath}"
 pdf.text "<b>Birthdate:</b> #{@patient.birthdate.strftime("%d-%m-%y")}"
 pdf.move_pointer(10)
 pdf.text "<b>Film Date:</b> #{@encounter.date.strftime("%d-%m-%y")}"
-pdf.text "<b>Report Date:</b> #{@encounter.observations[0].created_at.strftime("%d-%m-%y")}"
+pdf.text "<b>Report Date:</b> #{@encounter.updated_at.strftime("%d-%m-%y")}"
 pdf.move_pointer(5)
 pdf.move_to(30, pdf.y - 5).line_to(550, pdf.y - 5).close_stroke
 pdf.move_pointer(10)
 
-pdf.text "Clinical History: #{@encounter.indication}", :font_size => 12
+pdf.text "<b>Clinical History:</b>", :font_size => 14
+pdf.text "#{@encounter.indication}", :font_size => 12
 pdf.move_pointer(5)
 pdf.move_to(30, pdf.y - 5).line_to(250, pdf.y - 5).close_stroke
 pdf.move_pointer(10)
 
+
 pdf.text "<b>Observations</b>"
-pdf.move_pointer(5)
-pdf.move_to(30, pdf.y - 5).line_to(250, pdf.y - 5).close_stroke
-pdf.move_pointer(10)
 @observations.each do |o|
 
   pdf.text "#{o.question_concept.name} - #{o.value_concept.name}"
