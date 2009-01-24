@@ -34,3 +34,11 @@ tech:
   email:            Soet@email.com
   hashed_password: <%= User.hash_password('password') %>
   privilege_id:    3
+assistant:
+  id:              6
+  given_name:      'Radiology'
+  family_name:     'Assistant'
+  email:           'radassist@mtrh.co.ke'
+  hashed_password: <%= User.hash_password('password') %>
+  privilege_id:    5
+  type:            Provider

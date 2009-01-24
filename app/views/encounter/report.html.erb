@@ -2,6 +2,10 @@
 
 <div class="report_form">
   <fieldset>
+  	<legend>Clinical Summary</legend>
+	<%= text_area_tag "clinical_summary", @encounter.indication, :disabled => "true", :size => "100x5" %>
+  </fieldset>
+  <fieldset>
     <legend>Lungs</legend> 
       <fieldset>
       	<legend>Infiltrate</legend>
@@ -9,6 +13,12 @@
 		  <% choices = ["none", "right", "left", "perihilar", "diffuse"] %>
 		  <%= fieldset_helper(question, choices) %>
       </fieldset>
+	  <fieldset>
+	  	<legend>Inflation</legend>
+		<% question = "inflation" -%>
+		<% choices = "normal", "hyperinflated", "hypoinflated" -%>
+		<%= fieldset_helper(question, choices) %>
+	  </fieldset>
       <fieldset>
       	<legend>Cavitation</legend>
 		  <% question = "cavitation"-%>

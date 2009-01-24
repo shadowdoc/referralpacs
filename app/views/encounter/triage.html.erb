@@ -1,0 +1,10 @@
+<% @patient = @encounter.patient -%>
+<% @image = @encounter.images[0] -%>
+
+<%= render :partial => "image/view" %>
+
+<%= form_tag :action => "triage", :id => @encounter.id %>
+<div id="buttons">
+	<%= submit_tag "Normal" %>
+	<%= submit_tag "Send to Radiologist" %>
+</div>

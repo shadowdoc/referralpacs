@@ -1,0 +1,86 @@
+--- 
+- !ruby/object:Privilege 
+  attributes: 
+    name: admin
+    update_user: "1"
+    delete_user: "1"
+    add_user: "1"
+    merge_patients: 
+    add_encounter: "1"
+    modify_patient: "1"
+    view_study: "1"
+    id: "1"
+    modify_encounter: "1"
+    add_patient: "1"
+    delete_encounter: "1"
+    remove_patient: "1"
+  attributes_cache: {}
+
+- !ruby/object:Privilege 
+  attributes: 
+    name: client
+    update_user: "0"
+    delete_user: "0"
+    add_user: "0"
+    merge_patients: 
+    add_encounter: "0"
+    modify_patient: "0"
+    view_study: "1"
+    id: "2"
+    modify_encounter: "0"
+    add_patient: "0"
+    delete_encounter: "0"
+    remove_patient: "0"
+  attributes_cache: {}
+
+- !ruby/object:Privilege 
+  attributes: 
+    name: tech
+    update_user: "0"
+    delete_user: "0"
+    add_user: "0"
+    merge_patients: 
+    add_encounter: "1"
+    modify_patient: "1"
+    view_study: "1"
+    id: "3"
+    modify_encounter: "1"
+    add_patient: "1"
+    delete_encounter: "1"
+    remove_patient: "0"
+  attributes_cache: {}
+
+- !ruby/object:Privilege 
+  attributes: 
+    name: register
+    update_user: "1"
+    delete_user: "0"
+    add_user: "0"
+    merge_patients: 
+    add_encounter: "0"
+    modify_patient: "1"
+    view_study: "0"
+    id: "4"
+    modify_encounter: "0"
+    add_patient: "1"
+    delete_encounter: "0"
+    remove_patient: "0"
+  attributes_cache: {}
+
+- !ruby/object:Privilege 
+  attributes: 
+    name: assistant
+    update_user: "1"
+    delete_user: "0"
+    add_user: "0"
+    merge_patients: 
+    add_encounter: "1"
+    modify_patient: "0"
+    view_study: "1"
+    id: "5"
+    modify_encounter: "1"
+    add_patient: "1"
+    delete_encounter: "0"
+    remove_patient: "0"
+  attributes_cache: {}
+

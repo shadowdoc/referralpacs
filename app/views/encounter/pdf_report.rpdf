@@ -1,9 +1,7 @@
-@rails_pdf_name = "#{@encounter.id}-#{@patient.full_name}.pdf"
-
-pdf.select_font("Helvetica")
+pdf.select_font("Times-Roman")
 
 header_image = File.open("public/images/mtrhlogo.jpg")
-pdf.image(header_image, :justification => :center, :resize => 2.0)
+pdf.image(header_image, :justification => :center, :resize => 0.25)
 
 header_image.close
 

@@ -53,7 +53,12 @@ module ApplicationHelper
                              radiologist_to_review,
                              ready_to_print,
                              admin,
-                             stats]     
+                             stats]
+          when "assistant"
+            @command_list = [find_patients,
+                             new,
+                             radiologist_to_review,
+                             ready_to_print]
           when "tech"
             @command_list = [find_patients,
                              new,
@@ -62,6 +67,7 @@ module ApplicationHelper
                              manage_clients]
           when "client"
             @command_list = [find_patients]
+            
           else
             @command_list = [find_patients]
         end

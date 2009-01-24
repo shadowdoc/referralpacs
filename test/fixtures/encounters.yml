@@ -1,32 +1,48 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 right_pneumonia:
   id: 1
-  date: 2007-01-06
+  date: <%= Date.today %>
   patient_id: 1
   indication: 'Cough'
   impression: 'Right lower lobe pneumonia'
   encounter_type_id: 1
   provider_id: 1
   client_id: 4
-  reported: true
+  location_id: 1
+  status: final
 
 chest_pain:
   id: 2
-  date: 2007-01-05
+  date: <%= Date.today %>
   patient_id: 2
   indication: 'Chest pain'
   impression: 'Right pneumothorax.'
   encounter_type_id: 1
   provider_id: 2
   client_id: 4
-  reported: true
+  location_id: 1
+  status: 'radiologist_to_review'
   
-unreported:
+new:
   id: 3
-  date: 2009-01-03
+  date: <%= Date.today %>
   patient_id: 1
   indication: 'Chest pain'
   impression: ''
   encounter_type_id: 1
   provider_id: 2
   client_id: 4
+  location_id: 1
+  status: new
+  
+ready_for_printing:
+  id: 4
+  date: <%= Date.today %>
+  patient_id: 2
+  indication: 'Chest pain'
+  impression: 'Right pneumothorax.'
+  encounter_type_id: 1
+  provider_id: 2
+  client_id: 4
+  location_id: 1
+  status: 'ready_for_printing'

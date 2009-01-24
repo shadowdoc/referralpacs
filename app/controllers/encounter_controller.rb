@@ -17,78 +17,11 @@ class EncounterController < ApplicationController
   end
 
   public
-  def find
-    # This controller will return a list of encounters, given a patient ID.
- 
-    @patient = Patient.find(params[:id])
-    @encounters = @patient.encounters.sort! {|x, y| y.date <=> x.date }
-    @current_user = User.find(session[:user_id])
-
-    if @encounters.empty?
-      flash[:notice] = "No encounters for #{@patient.full_name}"
-    end
   
-  end
-
-  def details
-    @encounter = Encounter.find(params[:id])
-    @observation = Observation.new(:encounter_id => @encounter.id)
-  end
-  
-  def edit
-  
-    # This routine either creates a new encounter if it's called without a parameter, or 
-    # Saves changes to an edited encounter when called with an Encounter.id
-  
-    if params[:id].nil?
-      @encounter = Encounter.new(params[:encounter])
-      @encounter.save
-    else
-      @encounter = Encounter.find(params[:id])
-      @encounter.update_attributes(params[:encounter])
-      @encounter.save
-    end
-    
-    render :partial => 'edit_encounter', :object => @encounter
-    
-  end
-  
-  def new
-
-    # Given a patient.id from the params, this creates a new encounter object and returns
-    # it to the view for manipulation.
-  
-    @patient = Patient.find(params[:id])
-    @encounter = Encounter.new()  
-    @encounter.patient_id = @patient.id
-    @observation = Observation.new(:encounter_id => @encounter.id, :patient_id => @encounter.patient.id)
-    
-  end
-  
-  def delete
-    
-    # This method will permenantly delete an encounter
-    
-    @id = params[:encounter_id] 
-    @encounter = Encounter.find(params[:id])
-    @patient = @encounter.patient
-    begin 
-      @encounter.destroy
-      flash[:notice] = "Encounter deleted."
-    rescue
-      flash[:notice] = "Could not delete encounter."
-    end 
-
-    if request.env['HTTP_REFERER'].include?("unreported")
-      redirect_to :action => "unreported"
-    else
-      redirect_to :action => "find", :id => @patient.id     
-    end
-
-    
-  end
-
   def add_observation
+    
+    #TODO This code could be removed now that we're using the report form
+    #rather than adding single observations.
     
     # Adds an observation to an encounter.
     
@@ -111,6 +44,84 @@ class EncounterController < ApplicationController
     
     render :partial => "add_observation", :object => @observation
   end
+
+  def details
+    @encounter = Encounter.find(params[:id])
+    @observation = Observation.new(:encounter_id => @encounter.id)
+  end
+  
+  def edit
+  
+    # This routine either creates a new encounter if it's called without a parameter, or 
+    # Saves changes to an edited encounter when called with an Encounter.id
+  
+    if params[:id].nil?
+      @encounter = Encounter.new(params[:encounter])
+      @encounter.status = "new"
+      @encounter.save
+    else
+      @encounter = Encounter.find(params[:id])
+      @encounter.update_attributes(params[:encounter])
+      @encounter.save
+    end
+    
+    render :partial => 'edit_encounter', :object => @encounter
+    
+  end
+
+  def find
+    # This controller will return a list of encounters, given a patient ID.
+ 
+    @patient = Patient.find(params[:id])
+    @encounters = @patient.encounters.sort! {|x, y| y.date <=> x.date }
+    @current_user = User.find(session[:user_id])
+
+    if @encounters.empty?
+      flash[:notice] = "No encounters for #{@patient.full_name}"
+    end
+  
+  end
+  
+  def new
+
+    # Given a patient.id from the params, this creates a new encounter object and returns
+    # it to the view for manipulation.
+  
+    @patient = Patient.find(params[:id])
+    @encounter = Encounter.new()  
+    @encounter.patient_id = @patient.id
+    @encounter.status = "new"
+    @observation = Observation.new(:encounter_id => @encounter.id, :patient_id => @encounter.patient.id)
+    
+  end
+  
+  def delete
+    
+    # This method will permenantly delete an encounter
+    
+    @id = params[:encounter_id] 
+    @encounter = Encounter.find(params[:id])
+    @patient = @encounter.patient
+    begin 
+      @encounter.destroy
+      flash[:notice] = "Encounter deleted."
+    rescue
+      flash[:notice] = "Could not delete encounter."
+    end 
+ 
+    redirect_to :back
+
+  end
+
+  def pdf_report
+    @encounter = Encounter.find(params[:id])
+    @observations = @encounter.observations.sort! {|x, y| y.question_concept.name <=> x.question_concept.name }
+    @patient = @encounter.patient
+    @rails_pdf_name = "#{@encounter.date.strftime("%d-%m-%y")}-#{@patient.full_name}.pdf"
+    @encounter.status = "final"
+    @encounter.save
+    render :layout => false
+  end
   
   def remove_observation
     # Removes a specific observation from an encounter.
@@ -121,39 +132,7 @@ class EncounterController < ApplicationController
     end    
   end
   
-  def statistics
-
-    @patients = Patient.find(:all)
-
-    if request.get?
-      @start_date = Time.now.strftime("%Y-%m-%d")
-      @end_date = @start_date
-      @encounters_during_range = Encounter.find_range
-    else
-      @start_date = params[:report][:start_date]
-      @end_date = params[:report][:end_date]
-      @encounters_during_range = Encounter.find_range(params[:report][:start_date], params[:report][:end_date])
-    end
-    
-    @reports_during_range = 0
-    for enc in @encounters_during_range
-      if enc.observations.length > 0 
-        @reports_during_range += 1
-      end
-    end
-  end
-  
-  def status
-    
-    @encounters = Encounter.find_all_by_status(params[:requested_status])
-    
-    if @encounters.length == 0
-      render :text => "No encounters with status - #{params[:requested_status].humanize}", :layout => true
-    end
-    
-  end
-  
-  def report
+    def report
     # Process input from master form.
     
     @encounter = Encounter.find(params[:id])
@@ -197,21 +176,28 @@ class EncounterController < ApplicationController
         flash[:notice] = "A valid report must contain either checked observations, or an impression"
       else
         @encounter.impression = params[:impression]
-        @encounter.reported = true
+        @encounter.provider = @current_user
+        @encounter.status = "ready_for_printing"
         @encounter.save        
       end
       
-      # Let's reload our saved work for display to the browser
-      @encounter.reload
+      # If there are no errors, let's send the user back to the worklist
+      # Which would be Radiologist To Review for a rad and Triage for an assistant
+      
+      if @encounter.errors.count == 0
+        if @current_user.privilege.name == "assist"
+          redirect_to :action => "status", :requested_status => "new"
+        else
+          redirect_to :action => "status", :requested_status => "radiologist_to_review"
+        end
+      end
     end
     
-    # Now we should have observations, let's load them.
-    
     @observations = @encounter.observations
-    
+  
     # We use a hash with question_concept, value_concept pairs to
     # transfer data to the form, where it's processed by helpers
-      
+    
     @tag_hash = {"pleural_scarring" => {}}
 
     @observations.each do |obs|
@@ -222,12 +208,11 @@ class EncounterController < ApplicationController
       else
         @tag_hash.merge!({obs.question_concept.html_name => obs.value_concept.html_name})
       end
-        
     end
-
+    
     # @impression is the variable that will populate the free-text impression
     # it defaults to normal
-    if @encounter.reported
+    if @encounter.status != "new"
       @impression = @encounter.impression
     else
       @impression = "Normal"
@@ -235,11 +220,53 @@ class EncounterController < ApplicationController
 
   end
   
-  def pdf_report
+  def statistics
+
+    @patients = Patient.find(:all)
+
+    if request.get?
+      @start_date = Time.now.strftime("%Y-%m-%d")
+      @end_date = @start_date
+      @encounters_during_range = Encounter.find_range
+    else
+      @start_date = params[:report][:start_date]
+      @end_date = params[:report][:end_date]
+      @encounters_during_range = Encounter.find_range(params[:report][:start_date], params[:report][:end_date])
+    end
+    
+    @reports_during_range = 0
+    @encounters_during_range.each { |e| @reports_during_range += 1 if (e.status  == "final" || e.status == "ready_for_printing") }
+
+  end
+  
+  def status
+    
+    @encounters = Encounter.find_all_by_status(params[:requested_status], :limit => 20, :order => "date ASC")
+    
+    if @encounters.length == 0
+      render :text => "No encounters with status - #{params[:requested_status].humanize}", :layout => true
+    end
+    
+  end
+  
+  def triage
+    # If we have a get, just return the encounter for the view.
     @encounter = Encounter.find(params[:id])
-    @observations = @encounter.observations.sort! {|x, y| y.question_concept.name <=> x.question_concept.name }
-    @patient = @encounter.patient
-    render :layout => false
+    
+    if request.post?
+      if params[:commit] == "Normal"
+        @encounter.impression = "Normal"
+        @encounter.status = "ready_for_printing"
+        @encounter.provider = @current_user
+        @encounter.save
+      else
+        @encounter.status = "radiologist_to_review"
+        @encounter.save
+      end
+      
+      redirect_to :action => "status", :requested_status => "new"
+    end
+    
   end
 
 end

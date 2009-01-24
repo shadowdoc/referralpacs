@@ -52,3 +52,16 @@ register:
   remove_patient: false
   modify_encounter: false
   modify_patient: true
+assistant:
+  id:                 5
+  name:               assistant
+  view_study:         true
+  add_encounter:      true
+  delete_encounter:   false
+  add_user:           false
+  delete_user:        false
+  update_user:        true
+  add_patient:        true
+  remove_patient:     false
+  modify_encounter:   true
+  modify_patient:     false

@@ -6,7 +6,7 @@
 	
     <div id="header">
         <div id="date_type">
-            <%=h encounter_summary.date.strftime("%d %b %Y") + " : " + encounter_summary.encounter_type.name %>
+            <%=h encounter_summary.patient.full_name + " : " + encounter_summary.date.strftime("%d %b %Y") + " : " + encounter_summary.encounter_type.name %>
         </div>
         <div id="links">
         	<% encounter_links_helper(encounter_summary) %>
@@ -16,12 +16,20 @@
         </div>
     </div>
 	<div id="thumbnails">
+		&nbsp;
 		<%= render :partial => "image/thumbnails", 
     		       :locals => {:encounter => encounter_summary } %>
 	</div>
-	
-    <div id="observation">		
-		<%= render :partial => "observation_list" %><br/>
-    </div>
+	<div id="report">
+	    <div id="observation">
+	    	&nbsp;	
+			<%= render :partial => "observation_list" %><br/>
+	    </div>
+		<div id="impression">
+			&nbsp;
+			<h2>Impression: </h2> <%= @encounter.impression %>
+		</div>		
+	</div>
+
 </div>
 <div id="encounter_spacer">&nbsp;</div>
