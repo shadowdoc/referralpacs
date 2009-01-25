@@ -1,3 +1,5 @@
+<% @onload = "imagepopup(#{@encounter.id})" %>
+
 <%= form_tag :action => "report", :id => @encounter.id %>
 
 <div class="report_form">
@@ -10,7 +12,7 @@
       <fieldset>
       	<legend>Infiltrate</legend>
 		  <% question = "infiltrate" -%>
-		  <% choices = ["none", "right", "left", "perihilar", "diffuse"] %>
+		  <% choices = ["none", "right", "left", "perihilar", "diffuse"] -%>
 		  <%= fieldset_helper(question, choices) %>
       </fieldset>
 	  <fieldset>
@@ -155,3 +157,4 @@
 </div>
 
 <%= submit_tag "Finalize Report" %>
+<%= button_to_function("Reopen Images", "imagepopup('#{@encounter.id}')") %>

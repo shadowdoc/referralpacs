@@ -1,0 +1,5 @@
+<% @patient = @encounter.patient -%>
+
+<% @encounter.images.each do |@image| -%>
+  <%= render(:partial => "image_view") %>
+<% end -%>

@@ -13,7 +13,6 @@
         <%= form.collection_select :encounter_type_id, @all_encounter_types, :id, :name %>
 		<%= form.collection_select :location_id, @all_locations,:id, :name %>
         <%= form.text_area :indication, :cols => 50, :rows => 5 %>
-        <%= form.collection_select :provider_id, @all_providers, :id, :full_name %>
         <%= form.collection_select :client_id, @all_clients, :id, :full_name %>
         <%= submit_tag "Save Changes to Encounter Details" %>    
     <% end %>

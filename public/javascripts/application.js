@@ -91,6 +91,14 @@ function init() {
 
 };
 
+// Code for image popout for radiologist workflow
+
+function imagepopup(encounter_id) {
+  window.newwindow = window.open('/encounter/openimages/' + encounter_id,'images',
+                                 'height=800,width=800,scrollbars=1,status=no');
+  return false;
+}
+
 
 
 

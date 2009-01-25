@@ -1,9 +1,15 @@
-<% @patient = @encounter.patient -%>
-<% @image = @encounter.images[0] -%>
+<%- @patient = @encounter.patient -%>
 
-<%= render :partial => "image/view" %>
+<!-- Display the images associated with this Encounter -->
+
+<% @encounter.images.each do |@image| -%>
+  <%= render(:partial => "image_view") %>
+<% end -%>
+
+<!-- Give the user two choices -->
 
 <%= form_tag :action => "triage", :id => @encounter.id %>
+
 <div id="buttons">
 	<%= submit_tag "Normal" %>
 	<%= submit_tag "Send to Radiologist" %>

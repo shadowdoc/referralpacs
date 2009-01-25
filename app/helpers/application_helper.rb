@@ -94,4 +94,10 @@ module ApplicationHelper
     @all_locations = Location.find(:all)
   end
   
+  def javascript(url)
+    content_for :javascript do
+      javascript_include_tag url
+    end
+  end
+  
 end

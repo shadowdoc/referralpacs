@@ -112,6 +112,13 @@ class EncounterController < ApplicationController
     redirect_to :back
 
   end
+  
+  def openimages
+    # This action is only called via javascript openimages(encounter_id) in 
+    # Application.js
+    @encounter = Encounter.find(params[:id])
+    render :layout => false
+  end
 
   def pdf_report
     @encounter = Encounter.find(params[:id])
@@ -132,8 +139,8 @@ class EncounterController < ApplicationController
     end    
   end
   
-    def report
-    # Process input from master form.
+  def report
+    # Process input from master reporting form.
     
     @encounter = Encounter.find(params[:id])
     @patient = @encounter.patient

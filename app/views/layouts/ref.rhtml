@@ -13,8 +13,8 @@
 
 </head>
 
-<% if @slider -%>
-<body onload="init();">
+<% if @onload -%>
+<%= "<body onload='" + @onload + "'>" %>
 <% else %>
 <body>
 <% end %>
