@@ -93,12 +93,9 @@ function init() {
 
 // Code for image popout for radiologist workflow
 
-function imagepopup(encounter_id) {
-  window.newwindow = window.open('/encounter/openimages/' + encounter_id,'images',
+function imagepopup(encounter_id, window_name) {
+  window.window_name = window.open('/encounter/openimages/' + encounter_id, window_name,
                                  'height=800,width=800,scrollbars=1,status=no');
   return false;
 }
-
-
-
 

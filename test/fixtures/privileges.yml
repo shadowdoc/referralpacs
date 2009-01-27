@@ -65,3 +65,16 @@ assistant:
   remove_patient:     false
   modify_encounter:   true
   modify_patient:     false
+radiologist:
+  id:                 6
+  name:               radiologist
+  view_study:         true
+  add_encounter:      true
+  delete_encounter:   false
+  add_user:           false
+  delete_user:        false
+  update_user:        false
+  add_patient:        false
+  remove_patient:     false
+  modify_encounter:   true
+  modify_patient:     false

@@ -1,3 +1,4 @@
 <div class="img-container">
     <%= image_tag "/image/view/#{@image.id}.jpg", :width => "100%" %>
+	Study Date: <%= @image.encounter.date.strftime("%d-%m-%y") %>
 </div>

@@ -139,7 +139,7 @@ class Image < ActiveRecord::Base
 # Study Time
 00080030:#{encounter.date.strftime('%H%M%S')}
 # Referring Physician's Name
-00080090:#{encounter.provider.hl7_name}
+00080090:#{encounter.client.hl7_name}
 # Study ID
 00200010:
 # Accession Number

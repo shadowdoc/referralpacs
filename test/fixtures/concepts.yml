@@ -31,14 +31,6 @@ concept_00072:
   id: 72
   description: scarring in the lung base
   created_at: 2009-01-16 10:40:38 +03:00
-concept_00094: 
-  name: OSTEOPOROSIS
-  updated_at: 2009-01-24 12:09:55 +03:00
-  created_by: 1
-  updated_by: 1
-  id: 94
-  description: decreased bone mineral density
-  created_at: 2009-01-16 10:54:22 +03:00
 concept_00010: 
   name: INTERSTITIAL DISEASE
   updated_at: 2009-01-24 12:09:55 +03:00
@@ -87,6 +79,22 @@ concept_00073:
   id: 73
   description: focal lesions
   created_at: 2009-01-16 10:41:04 +03:00
+concept_00094: 
+  name: OSTEOPOROSIS
+  updated_at: 2009-01-24 12:09:55 +03:00
+  created_by: 1
+  updated_by: 1
+  id: 94
+  description: decreased bone mineral density
+  created_at: 2009-01-16 10:54:22 +03:00
+concept_00095: 
+  name: INFLATION
+  updated_at: 2009-01-26 10:47:01 +03:00
+  created_by: 1
+  updated_by: 1
+  id: 95
+  description: state of lung expansion
+  created_at: 2009-01-26 10:46:46 +03:00
 concept_00011: 
   name: PERIHILAR
   updated_at: 2009-01-24 12:09:55 +03:00
@@ -519,38 +527,6 @@ concept_00086:
   id: 86
   description: fluid in the right pleural space
   created_at: 2009-01-16 10:47:44 +03:00
-concept_00066: 
-  name: RIGHT
-  updated_at: 2009-01-24 12:09:55 +03:00
-  created_by: 1
-  updated_by: 1
-  id: 66
-  description: anatomic descriptor
-  created_at: 2009-01-16 10:34:12 +03:00
-concept_00003: 
-  name: RIGHT UPPER LUNG ZONE
-  updated_at: 2009-01-24 12:09:55 +03:00
-  created_by: 
-  updated_by: 
-  id: 3
-  description: 
-  created_at: 2009-01-24 12:09:55 +03:00
-concept_00024: 
-  name: LEFT GREATER THAN FIVE
-  updated_at: 2009-01-24 12:09:55 +03:00
-  created_by: 1
-  updated_by: 1
-  id: 24
-  description: ""
-  created_at: 2007-02-02 09:46:18 +03:00
-concept_00045: 
-  name: RIGHT LATERAL
-  updated_at: 2009-01-24 12:09:55 +03:00
-  created_by: 1
-  updated_by: 1
-  id: 45
-  description: ""
-  created_at: 2007-02-02 09:56:20 +03:00
 concept_00087: 
   name: PLEURAL EFFUSION LEFT
   updated_at: 2009-01-24 12:09:55 +03:00
@@ -559,30 +535,38 @@ concept_00087:
   id: 87
   description: fluid in the left pleural space
   created_at: 2009-01-16 10:48:31 +03:00
-concept_00004: 
-  name: RIGHT MIDDLE LUNG ZONE
+concept_00045: 
+  name: RIGHT LATERAL
+  updated_at: 2009-01-24 12:09:55 +03:00
+  created_by: 1
+  updated_by: 1
+  id: 45
+  description: ""
+  created_at: 2007-02-02 09:56:20 +03:00
+concept_00024: 
+  name: LEFT GREATER THAN FIVE
+  updated_at: 2009-01-24 12:09:55 +03:00
+  created_by: 1
+  updated_by: 1
+  id: 24
+  description: ""
+  created_at: 2007-02-02 09:46:18 +03:00
+concept_00003: 
+  name: RIGHT UPPER LUNG ZONE
   updated_at: 2009-01-24 12:09:55 +03:00
   created_by: 
   updated_by: 
-  id: 4
+  id: 3
   description: 
   created_at: 2009-01-24 12:09:55 +03:00
-concept_00025: 
-  name: ADENOPATHY
+concept_00066: 
+  name: RIGHT
   updated_at: 2009-01-24 12:09:55 +03:00
   created_by: 1
   updated_by: 1
-  id: 25
-  description: ""
-  created_at: 2007-02-02 09:47:03 +03:00
-concept_00046: 
-  name: LEFT APICAL
-  updated_at: 2009-01-24 12:09:55 +03:00
-  created_by: 1
-  updated_by: 1
-  id: 46
-  description: ""
-  created_at: 2007-02-02 09:56:28 +03:00
+  id: 66
+  description: anatomic descriptor
+  created_at: 2009-01-16 10:34:12 +03:00
 concept_00067: 
   name: LEFT
   updated_at: 2009-01-24 12:09:55 +03:00
@@ -591,44 +575,28 @@ concept_00067:
   id: 67
   description: anatomic descriptor
   created_at: 2009-01-16 10:34:27 +03:00
-concept_00089: 
-  name: PNEUMOTHORAX RIGHT
+concept_00046: 
+  name: LEFT APICAL
   updated_at: 2009-01-24 12:09:55 +03:00
   created_by: 1
   updated_by: 1
-  id: 89
-  description: gas in the right pleural space
-  created_at: 2009-01-16 10:50:52 +03:00
-concept_00026: 
-  name: RIGHT PARATRACHEAL
-  updated_at: 2009-01-24 12:09:55 +03:00
-  created_by: 1
-  updated_by: 1
-  id: 26
+  id: 46
   description: ""
-  created_at: 2007-02-02 09:47:15 +03:00
-concept_00047: 
-  name: LEFT LATERAL
+  created_at: 2007-02-02 09:56:28 +03:00
+concept_00025: 
+  name: ADENOPATHY
   updated_at: 2009-01-24 12:09:55 +03:00
   created_by: 1
   updated_by: 1
-  id: 47
+  id: 25
   description: ""
-  created_at: 2007-02-02 09:56:37 +03:00
-concept_00068: 
-  name: DIFFUSE
-  updated_at: 2009-01-24 12:09:55 +03:00
-  created_by: 1
-  updated_by: 1
-  id: 68
-  description: description of disease pattern
-  created_at: 2009-01-16 10:34:41 +03:00
-concept_00005: 
-  name: RIGHT LOWER LUNG ZONE
+  created_at: 2007-02-02 09:47:03 +03:00
+concept_00004: 
+  name: RIGHT MIDDLE LUNG ZONE
   updated_at: 2009-01-24 12:09:55 +03:00
   created_by: 
   updated_by: 
-  id: 5
+  id: 4
   description: 
   created_at: 2009-01-24 12:09:55 +03:00
 concept_00090: 
@@ -639,46 +607,46 @@ concept_00090:
   id: 90
   description: gas in the left pleural space
   created_at: 2009-01-16 10:51:09 +03:00
-concept_00091: 
-  name: SMALL
-  updated_at: 2009-01-24 12:09:55 +03:00
-  created_by: 1
-  updated_by: 1
-  id: 91
-  description: size descriptor
-  created_at: 2009-01-16 10:51:37 +03:00
-concept_00048: 
-  name: LEFT BASILAR
-  updated_at: 2009-01-24 12:09:55 +03:00
-  created_by: 1
-  updated_by: 1
-  id: 48
-  description: ""
-  created_at: 2007-02-02 09:56:48 +03:00
-concept_00027: 
-  name: LEFT PARATRACHEAL
-  updated_at: 2009-01-24 12:09:55 +03:00
-  created_by: 1
-  updated_by: 1
-  id: 27
-  description: ""
-  created_at: 2007-02-02 09:47:33 +03:00
-concept_00069: 
-  name: NONE
-  updated_at: 2009-01-24 12:09:55 +03:00
-  created_by: 1
-  updated_by: 1
-  id: 69
-  description: word meaning nothing
-  created_at: 2009-01-16 10:35:44 +03:00
-concept_00006: 
-  name: LEFT UPPER LUNG ZONE
+concept_00005: 
+  name: RIGHT LOWER LUNG ZONE
   updated_at: 2009-01-24 12:09:55 +03:00
   created_by: 
   updated_by: 
-  id: 6
+  id: 5
   description: 
   created_at: 2009-01-24 12:09:55 +03:00
+concept_00068: 
+  name: DIFFUSE
+  updated_at: 2009-01-24 12:09:55 +03:00
+  created_by: 1
+  updated_by: 1
+  id: 68
+  description: description of disease pattern
+  created_at: 2009-01-16 10:34:41 +03:00
+concept_00047: 
+  name: LEFT LATERAL
+  updated_at: 2009-01-24 12:09:55 +03:00
+  created_by: 1
+  updated_by: 1
+  id: 47
+  description: ""
+  created_at: 2007-02-02 09:56:37 +03:00
+concept_00026: 
+  name: RIGHT PARATRACHEAL
+  updated_at: 2009-01-24 12:09:55 +03:00
+  created_by: 1
+  updated_by: 1
+  id: 26
+  description: ""
+  created_at: 2007-02-02 09:47:15 +03:00
+concept_00089: 
+  name: PNEUMOTHORAX RIGHT
+  updated_at: 2009-01-24 12:09:55 +03:00
+  created_by: 1
+  updated_by: 1
+  id: 89
+  description: gas in the right pleural space
+  created_at: 2009-01-16 10:50:52 +03:00
 concept_00070: 
   name: LUNG SCARRING UPPER
   updated_at: 2009-01-24 12:09:55 +03:00
@@ -687,38 +655,46 @@ concept_00070:
   id: 70
   description: upper lung field scarring
   created_at: 2009-01-16 10:39:18 +03:00
-concept_00071: 
-  name: BILATERAL
+concept_00006: 
+  name: LEFT UPPER LUNG ZONE
+  updated_at: 2009-01-24 12:09:55 +03:00
+  created_by: 
+  updated_by: 
+  id: 6
+  description: 
+  created_at: 2009-01-24 12:09:55 +03:00
+concept_00069: 
+  name: NONE
   updated_at: 2009-01-24 12:09:55 +03:00
   created_by: 1
   updated_by: 1
-  id: 71
-  description: on both sides of the body
-  created_at: 2009-01-16 10:40:12 +03:00
-concept_00028: 
-  name: RIGHT HILAR
+  id: 69
+  description: word meaning nothing
+  created_at: 2009-01-16 10:35:44 +03:00
+concept_00027: 
+  name: LEFT PARATRACHEAL
   updated_at: 2009-01-24 12:09:55 +03:00
   created_by: 1
   updated_by: 1
-  id: 28
+  id: 27
   description: ""
-  created_at: 2007-02-02 09:47:49 +03:00
-concept_00050: 
-  name: RIGHT LESS THAN  25%
+  created_at: 2007-02-02 09:47:33 +03:00
+concept_00048: 
+  name: LEFT BASILAR
   updated_at: 2009-01-24 12:09:55 +03:00
   created_by: 1
   updated_by: 1
-  id: 50
+  id: 48
   description: ""
-  created_at: 2007-02-02 09:58:35 +03:00
-concept_00049: 
-  name: PLEURAL SCARRING
+  created_at: 2007-02-02 09:56:48 +03:00
+concept_00091: 
+  name: SMALL
   updated_at: 2009-01-24 12:09:55 +03:00
   created_by: 1
   updated_by: 1
-  id: 49
-  description: ""
-  created_at: 2007-02-02 09:57:11 +03:00
+  id: 91
+  description: size descriptor
+  created_at: 2009-01-16 10:51:37 +03:00
 concept_00092: 
   name: LARGE
   updated_at: 2009-01-24 12:09:55 +03:00
@@ -727,3 +703,35 @@ concept_00092:
   id: 92
   description: size descriptor
   created_at: 2009-01-16 10:52:23 +03:00
+concept_00049: 
+  name: PLEURAL SCARRING
+  updated_at: 2009-01-24 12:09:55 +03:00
+  created_by: 1
+  updated_by: 1
+  id: 49
+  description: ""
+  created_at: 2007-02-02 09:57:11 +03:00
+concept_00050: 
+  name: RIGHT LESS THAN  25%
+  updated_at: 2009-01-24 12:09:55 +03:00
+  created_by: 1
+  updated_by: 1
+  id: 50
+  description: ""
+  created_at: 2007-02-02 09:58:35 +03:00
+concept_00028: 
+  name: RIGHT HILAR
+  updated_at: 2009-01-24 12:09:55 +03:00
+  created_by: 1
+  updated_by: 1
+  id: 28
+  description: ""
+  created_at: 2007-02-02 09:47:49 +03:00
+concept_00071: 
+  name: BILATERAL
+  updated_at: 2009-01-24 12:09:55 +03:00
+  created_by: 1
+  updated_by: 1
+  id: 71
+  description: on both sides of the body
+  created_at: 2009-01-16 10:40:12 +03:00

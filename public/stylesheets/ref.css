@@ -158,6 +158,16 @@ h1 {
 	
 }
 
+#encounter tr {
+	font-size: 10px;
+}
+
+#encounter h2 {
+	font-size: medium;
+	margin: 0px;
+	top: 0px;
+}
+
 #encounter > #header {
   background: #5F8F08;
   color: #CDC759;
@@ -192,19 +202,19 @@ h1 {
 }
 
 #report > #impression {
-  padding: 5px;
+  padding: 2px;
   width: 200px;
-  height: 20px;
+  height: 200px;
   float: left;
   top: 0px;
 }
 
 #report > #observation {
+	padding: 2px;
 	width: 450px;
-	height: 20px;
+	height: 200px;
 	top: 0px;
 	float: left;
-	padding: 5px;
 }
 
 #header > #date_type {

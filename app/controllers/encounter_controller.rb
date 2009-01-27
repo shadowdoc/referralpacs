@@ -141,9 +141,12 @@ class EncounterController < ApplicationController
   
   def report
     # Process input from master reporting form.
-    
+        
     @encounter = Encounter.find(params[:id])
     @patient = @encounter.patient
+    @comparisons = @patient.encounters.sort! {|x, y| y.date <=> x.date }
+    # Limit @comparisions to 5
+    @comparisons = @comparisons.to(4)
     
     if request.post? 
       # We have a post request, let's process the record
@@ -249,6 +252,13 @@ class EncounterController < ApplicationController
   def status
     
     @encounters = Encounter.find_all_by_status(params[:requested_status], :limit => 20, :order => "date ASC")
+    
+    
+    if params[:requested_status] == "new"
+      encounter_temp = []
+      @encounters.each {|e| encounter_temp << e if e.images.count != 0 }
+      @encounters = encounter_temp
+    end
     
     if @encounters.length == 0
       render :text => "No encounters with status - #{params[:requested_status].humanize}", :layout => true

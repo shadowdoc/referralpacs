@@ -157,4 +157,10 @@
 </div>
 
 <%= submit_tag "Finalize Report" %>
-<%= button_to_function("Reopen Images", "imagepopup('#{@encounter.id}')") %>
+<%= button_to_function("Current Study", "imagepopup('#{@encounter.id}', 'image')") %>
+
+<% unless @comparisons.length == 0 -%> 
+  <% @comparisons.each do |comp| -%>
+    <%= button_to_function(comp.date.strftime("%d-%m-%y"), "imagepopup('#{comp.id}', 'comp')") %>
+  <% end -%>
+<% end -%>

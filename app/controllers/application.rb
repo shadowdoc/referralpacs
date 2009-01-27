@@ -21,5 +21,30 @@ class ApplicationController < ActionController::Base
       Thread.current['user'] = User.find(session[:user_id])
     end
   end
+  
+  def hl7_msh
+    # This code was devised to follow the description of an HL7 message listed here:
+    # http://openmrs.org/wiki/HL7
+    
+    # This is the Message Header (MSH segment)
+    
+    sending_facility = "REFPACS"
+    timestamp = Time.now.strftime("%Y%m%d%H%M%S")
+    
+    msh = HL7::Message::Segment::MSH.new
+    msh.enc_chars = "^~\&"
+    msh.sending_app = sending_facility
+    msh.sending_facility = "MTRH Radiology"
+    msh.recv_app = "HL7LISTENER"
+    msh.recv_facility = "AMRS"
+    msh.time = timestamp
+    msh.message_type = "ORU^RO1"
+    msh.message_control_id = sending_facility + timestamp
+    msh.processing_id = rand(10000).to_s
+    msh.version_id = "2.5"
+    msh.seq = 1
+    
+    return msh
+  end
 
 end

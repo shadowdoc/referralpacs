@@ -22,7 +22,9 @@ class PatientController < ApplicationController
   
     # We'll use this in this method, and also in the view to make
     # sure the links are correct
-    @current_user = User.find(session[:user_id])  
+    @current_user = User.find(session[:user_id])
+    
+    @patients = nil
   
     if request.post?
       
@@ -196,7 +198,7 @@ class PatientController < ApplicationController
     @msg = msg.to_s
     
     # This outputs our message in a text file where mirth can read it
-    File.open("c:/dev/mirth/inbound/ruby-test.txt", "w+") do |f|
+    File.open("/hl7-test.txt", "w+") do |f|
       f << msg
     end
     
