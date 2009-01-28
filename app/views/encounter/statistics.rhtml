@@ -1,10 +1,17 @@
 <% @page_title = "Statistics" -%>
 
-
+<h2>
 Total Patients: <%= @patients.length %><br/>
+Encounters during Period: <%= @encounters_during_range.length %><br/>
 Period: <%= @start_date + " to " + @end_date %><br/>
-Patient encounters for selected time period: <%= @encounters_during_range.length unless @encounters_during_range.nil? %><br/>
-Patient reports for selected time period: <%= @reports_during_range unless @reports_during_range.nil? %><br/>
+<br/>
+Final: <%= @final %><br/>
+New: <%= @new %><br/>
+Ready for Printing: <%= @ready_for_printing %><br/>
+Radiologist to read: <%= @radiologist_to_read %><br/>
+Archived: <%= @archived %>
+</h2>
+<br/>
 
 <% form_tag :action => "statistics"  do |form| %>
 

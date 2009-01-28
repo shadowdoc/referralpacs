@@ -6,13 +6,17 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :given_name, :family_name, :privilege_id, :title
   
   validates_uniqueness_of :email
-  validates_presence_of :email, :password, :family_name, :given_name
+  validates_presence_of :email, :family_name, :given_name
 
   before_destroy :dont_destroy_admin
   belongs_to :privilege
     
   def before_create
-    self.hashed_password = User.hash_password(self.password)
+    if self.password.nil?
+      errors.add("Must supply a password")
+    else
+      self.hashed_password = User.hash_password(self.password)      
+    end
   end
   
   def after_create

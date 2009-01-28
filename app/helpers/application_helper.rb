@@ -34,21 +34,22 @@ module ApplicationHelper
         # Here we put together the command list that will be at the top of every page
 
         find_patients = link_to('Find Patients', :controller => :patient, :action => :find)
-        #manage_users = link_to('Manage Users', :controller => :login, :action => :list_users)
-        #manage_providers = link_to('Manage Providers', :controller => :login, :action => :list_providers)
         manage_clients = link_to('Manage Clients', :controller => :login, :action => :list_clients)
         admin = link_to('Admin', :controller => :login, :action => :administration)
         stats = link_to('Statistics', :controller => :encounter, :action => :statistics)
         dictionary = link_to('Dictionary', :controller => :dictionary, :action => :list_concepts)
         radiologist_to_review = link_to('For Radiologist Review', :controller => :encounter, :action => :status, :requested_status => "radiologist_to_review")
         new = link_to('New Exams', :controller => :encounter, :action => :status, :requested_status => "new")
+        archived = link_to('Archived', :controller => :encounter, :action => :status, :requested_status => "archived")
         ready_to_print = link_to('Ready for Printing', :controller => :encounter, :action => :status, :requested_status => "ready_for_printing")
+
         @command_list = []
         
         case user.privilege.name
           when "admin"
             @command_list = [find_patients,
                              dictionary,
+                             archived,
                              new,
                              radiologist_to_review,
                              ready_to_print,
@@ -56,8 +57,10 @@ module ApplicationHelper
                              stats]
           when "radiologist"
             @command_list = [find_patients,
+                             archived,
                              new,
-                             radiologist_to_review]
+                             radiologist_to_review,
+                             ready_to_print]
           when "assistant"
             @command_list = [find_patients,
                              new,

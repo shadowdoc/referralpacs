@@ -144,9 +144,16 @@ class EncounterController < ApplicationController
         
     @encounter = Encounter.find(params[:id])
     @patient = @encounter.patient
-    @comparisons = @patient.encounters.sort! {|x, y| y.date <=> x.date }
+    array = @patient.encounters.sort! {|x, y| y.date <=> x.date }
+    @comparisons = []
+    
+    array.each do |comp|
+      if !comp.images.empty?
+        @comparisons << comp
+      end
+    end
     # Limit @comparisions to 5
-    @comparisons = @comparisons.to(4)
+    @comparisons = @comparisons.to(4).from(1)
     
     if request.post? 
       # We have a post request, let's process the record
@@ -195,7 +202,7 @@ class EncounterController < ApplicationController
       # Which would be Radiologist To Review for a rad and Triage for an assistant
       
       if @encounter.errors.count == 0
-        if @current_user.privilege.name == "assist"
+        if Encounter.find_all_by_status("radiologist_to_review").empty?
           redirect_to :action => "status", :requested_status => "new"
         else
           redirect_to :action => "status", :requested_status => "radiologist_to_review"
@@ -235,29 +242,42 @@ class EncounterController < ApplicationController
     @patients = Patient.find(:all)
 
     if request.get?
-      @start_date = Time.now.strftime("%Y-%m-%d")
-      @end_date = @start_date
-      @encounters_during_range = Encounter.find_range
+      @start_date = "2005-01-01"
+      @end_date = Time.now.strftime("%Y-%m-%d")
+      @encounters_during_range = Encounter.find_range(@start_date, @end_date)
     else
       @start_date = params[:report][:start_date]
       @end_date = params[:report][:end_date]
       @encounters_during_range = Encounter.find_range(params[:report][:start_date], params[:report][:end_date])
     end
     
-    @reports_during_range = 0
-    @encounters_during_range.each { |e| @reports_during_range += 1 if (e.status  == "final" || e.status == "ready_for_printing") }
+    @new = 0
+    
+    Encounter.find_all_by_status("new").each do |enc|
+      if !enc.images.empty?
+        @new += 1
+      end
+    end
+    
+    @ready_for_printing = Encounter.find_all_by_status("ready_for_printing").length
+    @radiologist_to_read = Encounter.find_all_by_status("radiologist_to_read").length
+    @final = Encounter.find_all_by_status("final").length
+    @archived = Encounter.find_all_by_status("archived").length
 
   end
   
   def status
     
-    @encounters = Encounter.find_all_by_status(params[:requested_status], :limit => 20, :order => "date ASC")
+    
     
     
     if params[:requested_status] == "new"
+      @encounters = Encounter.find_by_all_status("new")
       encounter_temp = []
       @encounters.each {|e| encounter_temp << e if e.images.count != 0 }
-      @encounters = encounter_temp
+      @encounters = encounter_temp.to(19)
+    else
+      @encounters = Encounter.find_all_by_status(params[:requested_status], :limit => 20, :order => "date ASC")
     end
     
     if @encounters.length == 0

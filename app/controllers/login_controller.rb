@@ -181,8 +181,9 @@ class LoginController < ApplicationController
       @provider = Provider.new(params[:provider])
       if @provider.save
         flash[:notice] = "Provider #{@provider.email} created."
-        redirect_to(:action => "list_providers")
-      end  
+        redirect_to(:controller => "login", :action => "list_providers")
+      end
+      
     end
   end
   
