@@ -1,0 +1,52 @@
+-- MySQL dump 10.11
+--
+-- Host: localhost    Database: ref_trunk_development
+-- ------------------------------------------------------
+-- Server version	5.0.51a-3ubuntu5.4
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `answers`
+--
+
+DROP TABLE IF EXISTS `answers`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `answers` (
+  `id` int(11) NOT NULL auto_increment,
+  `concept_id` int(11) default NULL,
+  `answer_id` int(11) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=97 DEFAULT CHARSET=utf8;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `answers`
+--
+
+LOCK TABLES `answers` WRITE;
+/*!40000 ALTER TABLE `answers` DISABLE KEYS */;
+INSERT INTO `answers` VALUES (4,9,1),(5,9,2),(17,1,11),(18,9,10),(19,12,5),(20,12,4),(21,12,3),(22,12,6),(23,12,7),(24,12,8),(25,14,13),(26,14,4),(28,14,5),(29,14,3),(30,14,15),(31,14,7),(32,14,8),(33,14,6),(34,2,6),(35,2,7),(36,2,8),(37,2,5),(38,2,4),(39,2,3),(42,16,17),(43,16,19),(44,16,18),(45,16,20),(46,25,28),(47,25,29),(49,25,27),(50,25,26),(51,30,31),(52,32,34),(53,32,33),(57,39,40),(58,39,41),(59,39,42),(60,49,43),(61,49,45),(62,49,44),(63,49,46),(64,49,47),(65,49,48),(66,54,51),(67,54,50),(69,54,52),(70,54,53),(71,55,34),(72,55,57),(73,55,58),(75,35,96),(76,100,34),(77,100,94),(78,100,57),(79,100,58),(80,1,67),(81,1,66),(82,1,68),(83,10,69),(84,10,66),(85,10,67),(86,10,11),(87,10,68),(88,39,69),(89,30,81),(90,30,34),(91,32,83),(92,79,69),(93,79,66),(94,79,67),(95,79,71),(96,35,99);
+/*!40000 ALTER TABLE `answers` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2009-07-27 13:31:02
