@@ -95,7 +95,7 @@ function init() {
 
 function imagepopup(encounter_id, window_name) {
   window.window_name = window.open('/encounter/openimages/' + encounter_id, window_name,
-                                 'height=800,width=800,scrollbars=1,status=no');
+                                 'height=800,width=800,scrollbars=1,resizeable=1,status=no');
   return false;
 }
 

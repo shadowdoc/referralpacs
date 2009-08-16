@@ -16,20 +16,20 @@ class Image < ActiveRecord::Base
   end
     
   def rotate(direction)
-    image = Magick::Image.read(full_path).first
+    image = Magick::Image.read(image_path).first
     if direction == "right"
       image = image.rotate(90)
     else
       image = image.rotate(-90)
     end
-    image.write(full_path)
+    image.write(image_path)
     create_thumbnail
   end
   
   def crop(x1, y1, width, height)
-    image = Magick::Image.read(full_path).first
+    image = Magick::Image.read(image_path).first
     image.crop!(x1, y1, width, height) 
-    image.write(full_path)
+    image.write(image_path)
     create_thumbnail
   end
   

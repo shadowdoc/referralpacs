@@ -268,11 +268,8 @@ class EncounterController < ApplicationController
   
   def status
     
-    
-    
-    
     if params[:requested_status] == "new"
-      @encounters = Encounter.find_by_all_status("new")
+      @encounters = Encounter.find_all_by_status("new")
       encounter_temp = []
       @encounters.each {|e| encounter_temp << e if e.images.count != 0 }
       @encounters = encounter_temp.to(19)

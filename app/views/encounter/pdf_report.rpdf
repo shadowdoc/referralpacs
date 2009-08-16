@@ -13,6 +13,7 @@ pdf.move_pointer(10)
 
 pdf.text "<b>Patient:</b> #{@patient.full_name}", :font_size => 14, :justification => :left
 pdf.text "<b>ID:</b> #{@patient.mrn_ampath}"
+pdf.text "<b>X-ray ID</b> #{@patient.mtrh_rad_id}"
 pdf.text "<b>Birthdate:</b> #{@patient.birthdate.strftime("%d-%m-%y")}"
 pdf.move_pointer(10)
 pdf.text "<b>Film Date:</b> #{@encounter.date.strftime("%d-%m-%y")}"

@@ -11,19 +11,19 @@
     <legend>Lungs</legend> 
       <fieldset>
       	<legend>Infiltrate</legend>
-		  <% question = "infiltrate" -%>
+		  <% question = "pulmonary_infiltrate" -%>
 		  <% choices = ["none", "right", "left", "perihilar", "diffuse"] -%>
 		  <%= fieldset_helper(question, choices) %>
       </fieldset>
 	  <fieldset>
 	  	<legend>Inflation</legend>
-		<% question = "inflation" -%>
+		<% question = "pulmonary_inflation" -%>
 		<% choices = "normal", "hyperinflated", "hypoinflated" -%>
 		<%= fieldset_helper(question, choices) %>
 	  </fieldset>
       <fieldset>
       	<legend>Cavitation</legend>
-		  <% question = "cavitation"-%>
+		  <% question = "pulmonary_cavitation" -%>
 		  <% choices = ["none", "right", "left", "bilateral"] -%>
 		  <%= fieldset_helper(question, choices) %>		  
       </fieldset>
@@ -68,7 +68,7 @@
 	    <fieldset>
 	        <legend>Aorta</legend>
 			<% question = "aorta" -%>
-			<% choices = ["normal", "unfolded", "aneurysm"] -%>
+			<% choices = ["normal", "unfolded", "aortic_aneurysm"] -%>
 			<%= fieldset_helper(question, choices) -%>
 	    </fieldset>
 	    <fieldset>
@@ -80,7 +80,7 @@
 	    <fieldset>
 	        <legend>Paratracheal Adenopathy</legend> 
 			<% question = "paratracheal_adenopathy" -%>
-			<% choices = ["none", "right"] -%>
+			<% choices = ["absent", "present"] -%>
 			<%= fieldset_helper(question, choices) %>
 	    </fieldset>
 	    <fieldset>
@@ -92,7 +92,7 @@
 	    <fieldset>
 	        <legend>Mediastinal Mass</legend>
 			<% question = "mediastinal_mass" -%>
-			<% choices = ["none", "yes"] %>
+			<% choices = ["absent", "present"] %>
 			<%= fieldset_helper(question, choices) %>
 	    </fieldset>
 	</fieldset>
@@ -146,7 +146,7 @@
 
     <fieldset>
         <legend>Bones</legend> 
-		<% question = "bones" -%>
+		<% question = "bone_findings_on_chest_xray?" -%>
 		<% choices = ["normal", "osteoporosis", "acute_fracture", "healed_fracture" ]-%>
 		<%= fieldset_helper(question, choices) %>
     </fieldset>
