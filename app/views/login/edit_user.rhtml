@@ -1,0 +1,8 @@
+<% @page_title = "Edit User" -%>
+<% setup_admin_layout %>
+
+<%= form_tag :action => "update_user", :id => @user %>
+    <%= render_partial 'form_user' %>
+    <%= submit_tag 'Save' %>
+</form>
+<%= link_to 'Back', :action => 'list_users' %>

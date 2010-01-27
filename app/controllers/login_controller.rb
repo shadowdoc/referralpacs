@@ -153,9 +153,10 @@ class LoginController < ApplicationController
       id = params[:id]
       @user = User.find(id)
     else
+      @user = User.find(params[:id])
       if @user.update_attributes(params[:user])
         flash[:notice] = 'User was successfully updated.'
-        return(redirect_to :action => 'list_users')
+        return(redirect_to :action => "list_users")
       end
       
     end  
