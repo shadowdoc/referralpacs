@@ -1,0 +1,13 @@
+tmp/
+log/
+log
+#*#
+*~
+*.swp
+.project
+.aptana
+.loadpath
+config/database.yml
+Capfile
+config/deploy.rb
+image_archive
