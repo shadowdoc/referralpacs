@@ -11,3 +11,5 @@ config/database.yml
 Capfile
 config/deploy.rb
 image_archive
+.idea
+public/javascripts/all.js
