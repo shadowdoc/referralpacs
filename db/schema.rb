@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 30) do
+ActiveRecord::Schema.define(:version => 31) do
 
   create_table "answers", :force => true do |t|
     t.integer "concept_id"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(:version => 30) do
     t.datetime "created_at"
     t.integer  "updated_by"
     t.datetime "updated_at"
+    t.integer  "openmrs_id"
   end
 
   create_table "encounter_types", :force => true do |t|

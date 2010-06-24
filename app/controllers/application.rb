@@ -21,8 +21,8 @@ class ApplicationController < ActionController::Base
       Thread.current['user'] = User.find(session[:user_id])
     end
   end
-  
-  def hl7_msh
+
+  def self.hl7_msh
     # This code was devised to follow the description of an HL7 message listed here:
     # http://openmrs.org/wiki/HL7
     
@@ -31,8 +31,9 @@ class ApplicationController < ActionController::Base
     sending_facility = "REFPACS"
     timestamp = Time.now.strftime("%Y%m%d%H%M%S")
     
+    HL7::Message::Segment::MSH.class_eval { add_field(:message_profile, :idx => 18) }
     msh = HL7::Message::Segment::MSH.new
-    msh.enc_chars = "^~\&"
+    msh.enc_chars = '^~\&'
     msh.sending_app = sending_facility
     msh.sending_facility = "MTRH Radiology"
     msh.recv_app = "HL7LISTENER"
@@ -40,10 +41,11 @@ class ApplicationController < ActionController::Base
     msh.time = timestamp
     msh.message_type = "ORU^RO1"
     msh.message_control_id = sending_facility + timestamp
-    msh.processing_id = rand(10000).to_s
+    msh.processing_id = 'P'
     msh.version_id = "2.5"
     msh.seq = 1
-    
+    msh.message_profile = '|||1^AMRS-ELDORET^http://schemas.openmrs.org/2006/FormEntry/formId^URI'
+
     return msh
   end
 

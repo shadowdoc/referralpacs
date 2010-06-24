@@ -29,7 +29,7 @@
       </fieldset>
       <fieldset>
       	<legend>Interstitial Disease</legend>
-      	  <% question = "interstitial_disease" -%>
+      	  <% question = "interstitial_lung_process" -%>
 		  <% choices = ["none", "right", "left", "perihilar", "diffuse"] -%>
  		  <%= fieldset_helper(question, choices) %>	
       </fieldset>
@@ -50,8 +50,8 @@
         </fieldset>
         <fieldset>
           <legend>Pulmonary Nodules</legend>
-	        <% question = "nodules" %>
-			<% choices = ["none", "solitary", "two_to_five", "more_than_five", "miliary"] %>
+	        <% question = "pulmonary_nodules" %>
+			<% choices = ["none", "solitary", "two_to_five", "more_than_five", "miliary_changes"] %>
 			<%= fieldset_helper(question, choices) %>
 	    </fieldset>
       </fieldset>

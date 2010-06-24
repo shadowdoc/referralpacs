@@ -1,737 +1,946 @@
 --- 
+concept_00106: 
+  name: PULMONARY CAVITATION
+  created_at: 2010-03-06 12:00:48 -05:00
+  openmrs_id: 6052
+  updated_at: 2010-06-20 01:14:01 -04:00
+  id: 106
+  created_by: 
+  updated_by: 
+  description: Formation of a cavity within the lung parenchyma
 concept_00030: 
   name: AORTA
-  updated_at: 2009-01-24 12:09:55 +03:00
+  created_at: 2007-02-02 01:50:06 -05:00
+  openmrs_id: 2409
+  updated_at: 2010-06-20 01:14:01 -04:00
+  id: 30
   created_by: 1
   updated_by: 1
-  id: 30
   description: ""
-  created_at: 2007-02-02 09:50:06 +03:00
 concept_00007: 
   name: LEFT MIDDLE LUNG ZONE
-  updated_at: 2009-01-24 12:09:55 +03:00
+  created_at: 2009-01-24 04:09:55 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
+  id: 7
   created_by: 
   updated_by: 
-  id: 7
   description: 
-  created_at: 2009-01-24 12:09:55 +03:00
 concept_00051: 
   name: RIGHT GREATER THAN 25%
-  updated_at: 2009-01-24 12:09:55 +03:00
+  created_at: 2007-02-02 01:58:55 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
+  id: 51
   created_by: 1
   updated_by: 1
-  id: 51
   description: ""
-  created_at: 2007-02-02 09:58:55 +03:00
 concept_00072: 
   name: LUNG SCARRING LOWER
-  updated_at: 2009-01-24 12:09:55 +03:00
-  created_by: 1
-  updated_by: 1
+  created_at: 2009-01-16 02:40:38 -05:00
+  openmrs_id: 2401
+  updated_at: 2010-06-20 01:14:01 -04:00
   id: 72
-  description: scarring in the lung base
-  created_at: 2009-01-16 10:40:38 +03:00
-concept_00010: 
-  name: INTERSTITIAL DISEASE
-  updated_at: 2009-01-24 12:09:55 +03:00
   created_by: 1
   updated_by: 1
+  description: scarring in the lung base
+concept_00010: 
+  name: INTERSTITIAL LUNG PROCESS
+  created_at: 2007-01-26 01:58:21 -05:00
+  openmrs_id: 2400
+  updated_at: 2010-06-20 01:14:01 -04:00
   id: 10
+  created_by: 1
+  updated_by: 1
   description: A "reticular" and sometimes nodular pattern.
-  created_at: 2007-01-26 09:58:21 +03:00
+concept_00107: 
+  name: AORTIC ANEURYSM
+  created_at: 2010-03-06 12:00:48 -05:00
+  openmrs_id: 2411
+  updated_at: 2010-06-20 01:14:01 -04:00
+  id: 107
+  created_by: 
+  updated_by: 
+  description: Enlargement of the mediastinium suggesting an abnormal bulge of the aorta
 concept_00008: 
   name: LEFT LOWER LUNG ZONE
-  updated_at: 2009-01-24 12:09:55 +03:00
+  created_at: 2009-01-24 04:09:55 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
+  id: 8
   created_by: 
   updated_by: 
-  id: 8
   description: 
-  created_at: 2009-01-24 12:09:55 +03:00
 concept_00031: 
-  name: UNFOLDED
-  updated_at: 2009-01-24 12:09:55 +03:00
+  name: UNFOLDED AORTA
+  created_at: 2007-02-02 01:50:19 -05:00
+  openmrs_id: 2410
+  updated_at: 2010-06-20 01:14:01 -04:00
+  id: 31
   created_by: 1
   updated_by: 1
-  id: 31
   description: Description of the aorta, implying an aneurysm.
-  created_at: 2007-02-02 09:50:19 +03:00
 concept_00052: 
   name: LEFT LESS THAN 25%
-  updated_at: 2009-01-24 12:09:55 +03:00
+  created_at: 2007-02-02 01:59:10 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
+  id: 52
   created_by: 1
   updated_by: 1
-  id: 52
   description: ""
-  created_at: 2007-02-02 09:59:10 +03:00
 concept_00029: 
   name: LEFT HILAR
-  updated_at: 2009-01-24 12:09:55 +03:00
-  created_by: 1
-  updated_by: 1
+  created_at: 2007-02-02 01:48:03 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
   id: 29
-  description: ""
-  created_at: 2007-02-02 09:48:03 +03:00
-concept_00073: 
-  name: NODULES
-  updated_at: 2009-01-24 12:09:55 +03:00
   created_by: 1
   updated_by: 1
+  description: ""
+concept_00073: 
+  name: PULMONARY NODULES
+  created_at: 2009-01-16 02:41:04 -05:00
+  openmrs_id: 2404
+  updated_at: 2010-06-20 01:14:01 -04:00
   id: 73
+  created_by: 1
+  updated_by: 1
   description: focal lesions
-  created_at: 2009-01-16 10:41:04 +03:00
 concept_00094: 
   name: OSTEOPOROSIS
-  updated_at: 2009-01-24 12:09:55 +03:00
-  created_by: 1
-  updated_by: 1
+  created_at: 2009-01-16 02:54:22 -05:00
+  openmrs_id: 1516
+  updated_at: 2010-06-20 01:14:01 -04:00
   id: 94
-  description: decreased bone mineral density
-  created_at: 2009-01-16 10:54:22 +03:00
-concept_00095: 
-  name: INFLATION
-  updated_at: 2009-01-26 10:47:01 +03:00
   created_by: 1
   updated_by: 1
-  id: 95
-  description: state of lung expansion
-  created_at: 2009-01-26 10:46:46 +03:00
+  description: decreased bone mineral density
+concept_00110: 
+  name: BONE FINDINGS ON CHEST XRAY?
+  created_at: 2010-03-06 12:00:48 -05:00
+  openmrs_id: 2425
+  updated_at: 2010-06-20 01:14:01 -04:00
+  id: 110
+  created_by: 
+  updated_by: 
+  description: Question to document bone findings on a chest xray
 concept_00011: 
   name: PERIHILAR
-  updated_at: 2009-01-24 12:09:55 +03:00
+  created_at: 2007-01-26 02:00:27 -05:00
+  openmrs_id: 2398
+  updated_at: 2010-06-20 01:14:01 -04:00
+  id: 11
   created_by: 1
   updated_by: 1
-  id: 11
   description: Disase emanating from the middle mediastinum
-  created_at: 2007-01-26 10:00:27 +03:00
+concept_00108: 
+  name: ABSENT
+  created_at: 2010-03-06 12:00:48 -05:00
+  openmrs_id: 2415
+  updated_at: 2010-06-20 01:14:01 -04:00
+  id: 108
+  created_by: 
+  updated_by: 
+  description: A form of negative finding
 concept_00032: 
   name: PULMONARY VASCULATURE
-  updated_at: 2009-01-24 12:09:55 +03:00
+  created_at: 2007-02-02 01:51:06 -05:00
+  openmrs_id: 2412
+  updated_at: 2010-06-20 01:14:01 -04:00
+  id: 32
   created_by: 1
   updated_by: 1
-  id: 32
   description: ""
-  created_at: 2007-02-02 09:51:06 +03:00
 concept_00009: 
   name: CHEST XRAY
-  updated_at: 2009-01-24 12:09:55 +03:00
+  created_at: 2007-01-26 01:57:16 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
+  id: 9
   created_by: 1
   updated_by: 1
-  id: 9
   description: A radiograph of the chest.
-  created_at: 2007-01-26 09:57:16 +03:00
 concept_00053: 
   name: LEFT GREATER THAN 25%
-  updated_at: 2009-01-24 12:09:55 +03:00
+  created_at: 2007-02-02 01:59:24 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
+  id: 53
   created_by: 1
   updated_by: 1
-  id: 53
   description: ""
-  created_at: 2007-02-02 09:59:24 +03:00
 concept_00074: 
   name: SOLITARY
-  updated_at: 2009-01-24 12:09:55 +03:00
+  created_at: 2009-01-16 02:41:33 -05:00
+  openmrs_id: 2405
+  updated_at: 2010-06-20 01:14:01 -04:00
+  id: 74
   created_by: 1
   updated_by: 1
-  id: 74
   description: singular
-  created_at: 2009-01-16 10:41:33 +03:00
+concept_00095: 
+  name: LUNG INFLATION
+  created_at: 2009-01-26 02:46:46 -05:00
+  openmrs_id: 0
+  updated_at: 2010-06-20 01:14:01 -04:00
+  id: 95
+  created_by: 1
+  updated_by: 1
+  description: state of lung expansion
+concept_00111: 
+  name: LUNG FINDINGS?
+  created_at: 2010-06-20 00:56:35 -04:00
+  openmrs_id: 2396
+  updated_at: 2010-06-20 01:14:01 -04:00
+  id: 111
+  created_by: 1
+  updated_by: 1
+  description: Question for chest radiographs and openMRS compatability.
 concept_00012: 
   name: "PARENCHYMAL SCARRING   "
-  updated_at: 2009-01-24 12:09:55 +03:00
+  created_at: 2007-01-31 01:25:42 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
+  id: 12
   created_by: 1
   updated_by: 1
-  id: 12
   description: Scarring in the lung.  Usually from prior infection
-  created_at: 2007-01-31 09:25:42 +03:00
+concept_00109: 
+  name: PRESENT
+  created_at: 2010-03-06 12:00:48 -05:00
+  openmrs_id: 2416
+  updated_at: 2010-06-20 01:14:01 -04:00
+  id: 109
+  created_by: 
+  updated_by: 
+  description: A form of positive finding
 concept_00033: 
   name: ENLARGED
-  updated_at: 2009-01-24 12:09:55 +03:00
+  created_at: 2007-02-02 01:51:26 -05:00
+  openmrs_id: 2185
+  updated_at: 2010-06-20 01:14:01 -04:00
+  id: 33
   created_by: 1
   updated_by: 1
-  id: 33
   description: ""
-  created_at: 2007-02-02 09:51:26 +03:00
 concept_00054: 
   name: PNEUMOTHORAX
-  updated_at: 2009-01-24 12:09:55 +03:00
+  created_at: 2007-02-02 01:59:41 -05:00
+  openmrs_id: 2424
+  updated_at: 2010-06-20 01:14:01 -04:00
+  id: 54
   created_by: 1
   updated_by: 1
-  id: 54
   description: ""
-  created_at: 2007-02-02 09:59:41 +03:00
 concept_00075: 
   name: TWO TO FIVE
-  updated_at: 2009-01-24 12:09:55 +03:00
+  created_at: 2009-01-16 02:41:56 -05:00
+  openmrs_id: 2406
+  updated_at: 2010-06-20 01:14:01 -04:00
+  id: 75
   created_by: 1
   updated_by: 1
-  id: 75
   description: qualitative description
-  created_at: 2009-01-16 10:41:56 +03:00
+concept_00112: 
+  name: PLEURAL FINDINGS?
+  created_at: 2010-06-20 00:57:02 -04:00
+  openmrs_id: 2419
+  updated_at: 2010-06-20 01:14:01 -04:00
+  id: 112
+  created_by: 1
+  updated_by: 1
+  description: Question for chest radiographs and openMRS compatability.
 concept_00013: 
   name: RIGHT DIFFUSE
-  updated_at: 2009-01-24 12:09:55 +03:00
+  created_at: 2007-01-31 01:27:36 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
+  id: 13
   created_by: 1
   updated_by: 1
-  id: 13
   description: ""
-  created_at: 2007-01-31 09:27:36 +03:00
 concept_00034: 
   name: NORMAL
-  updated_at: 2009-01-24 12:09:55 +03:00
+  created_at: 2007-02-02 01:51:41 -05:00
+  openmrs_id: 1115
+  updated_at: 2010-06-20 01:14:01 -04:00
+  id: 34
   created_by: 1
   updated_by: 1
-  id: 34
   description: ""
-  created_at: 2007-02-02 09:51:41 +03:00
 concept_00055: 
   name: BONES
-  updated_at: 2009-01-24 12:09:55 +03:00
+  created_at: 2007-02-02 02:01:03 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
+  id: 55
   created_by: 1
   updated_by: 1
-  id: 55
   description: ""
-  created_at: 2007-02-02 10:01:03 +03:00
 concept_00076: 
   name: MORE THAN FIVE
-  updated_at: 2009-01-24 12:09:55 +03:00
+  created_at: 2009-01-16 02:42:19 -05:00
+  openmrs_id: 2407
+  updated_at: 2010-06-20 01:14:01 -04:00
+  id: 76
   created_by: 1
   updated_by: 1
-  id: 76
   description: greater than five
-  created_at: 2009-01-16 10:42:19 +03:00
+concept_00113: 
+  name: MEDIASTINAL FINDINGS?
+  created_at: 2010-06-20 00:57:20 -04:00
+  openmrs_id: 2408
+  updated_at: 2010-06-20 01:14:01 -04:00
+  id: 113
+  created_by: 1
+  updated_by: 1
+  description: Question for chest radiographs and openMRS compatability.
 concept_00014: 
   name: ATELECTASIS
-  updated_at: 2009-01-24 12:09:55 +03:00
+  created_at: 2007-01-31 01:28:44 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
+  id: 14
   created_by: 1
   updated_by: 1
-  id: 14
   description: Collapsed lung
-  created_at: 2007-01-31 09:28:44 +03:00
 concept_00035: 
   name: MEDIASTINAL MASS
-  updated_at: 2009-01-24 12:09:55 +03:00
+  created_at: 2007-02-02 01:52:24 -05:00
+  openmrs_id: 2418
+  updated_at: 2010-06-20 01:14:01 -04:00
+  id: 35
   created_by: 1
   updated_by: 1
-  id: 35
   description: Mass lesion within the mediastinum
-  created_at: 2007-02-02 09:52:24 +03:00
 concept_00056: 
   name: OSTEOPENIA
-  updated_at: 2009-01-24 12:09:55 +03:00
-  created_by: 1
-  updated_by: 1
+  created_at: 2007-02-02 02:01:57 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
   id: 56
-  description: ""
-  created_at: 2007-02-02 10:01:57 +03:00
-concept_00077: 
-  name: MILIARY
-  updated_at: 2009-01-24 12:09:55 +03:00
   created_by: 1
   updated_by: 1
+  description: ""
+concept_00077: 
+  name: MILIARY CHANGES
+  created_at: 2009-01-16 02:42:37 -05:00
+  openmrs_id: 1137
+  updated_at: 2010-06-20 01:14:01 -04:00
   id: 77
+  created_by: 1
+  updated_by: 1
   description: multiple diffuse tiny nodlues
-  created_at: 2009-01-16 10:42:37 +03:00
 concept_00036: 
   name: ANTERIOR
-  updated_at: 2009-01-24 12:09:55 +03:00
+  created_at: 2007-02-02 01:52:44 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
+  id: 36
   created_by: 1
   updated_by: 1
-  id: 36
   description: Anatomic descriptor
-  created_at: 2007-02-02 09:52:44 +03:00
 concept_00057: 
   name: ACUTE FRACTURE
-  updated_at: 2009-01-24 12:09:55 +03:00
+  created_at: 2007-02-02 02:02:14 -05:00
+  openmrs_id: 2426
+  updated_at: 2010-06-20 01:14:01 -04:00
+  id: 57
   created_by: 1
   updated_by: 1
-  id: 57
   description: ""
-  created_at: 2007-02-02 10:02:14 +03:00
 concept_00078: 
   name: PARATRACHEAL ADENOPATHY
-  updated_at: 2009-01-24 12:09:55 +03:00
+  created_at: 2009-01-16 02:42:58 -05:00
+  openmrs_id: 2414
+  updated_at: 2010-06-20 01:14:01 -04:00
+  id: 78
   created_by: 1
   updated_by: 1
-  id: 78
   description: adenopathy in the paratracheal region
-  created_at: 2009-01-16 10:42:58 +03:00
+concept_00114: 
+  name: UPPER
+  created_at: 2010-06-20 00:58:50 -04:00
+  openmrs_id: 2402
+  updated_at: 2010-06-20 01:14:01 -04:00
+  id: 114
+  created_by: 1
+  updated_by: 1
+  description: Anatomic description
 concept_00015: 
   name: LEFT DIFFUSE
-  updated_at: 2009-01-24 12:09:55 +03:00
+  created_at: 2007-01-31 01:29:26 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
+  id: 15
   created_by: 1
   updated_by: 1
-  id: 15
   description: ""
-  created_at: 2007-01-31 09:29:26 +03:00
 concept_00080: 
   name: ECTATIC
-  updated_at: 2009-01-24 12:09:55 +03:00
+  created_at: 2009-01-16 02:44:35 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
+  id: 80
   created_by: 1
   updated_by: 1
-  id: 80
   description: twisted appearance of the aorta, frequently due to atherosclerotic disease
-  created_at: 2009-01-16 10:44:35 +03:00
 concept_00058: 
   name: HEALED FRACTURE
-  updated_at: 2009-01-24 12:09:55 +03:00
+  created_at: 2007-02-02 02:02:26 -05:00
+  openmrs_id: 2427
+  updated_at: 2010-06-20 01:14:01 -04:00
+  id: 58
   created_by: 1
   updated_by: 1
-  id: 58
   description: ""
-  created_at: 2007-02-02 10:02:26 +03:00
 concept_00079: 
   name: HILAR ADENOPATHY
-  updated_at: 2009-01-24 12:09:55 +03:00
+  created_at: 2009-01-16 02:44:05 -05:00
+  openmrs_id: 2417
+  updated_at: 2010-06-20 01:14:01 -04:00
+  id: 79
   created_by: 1
   updated_by: 1
-  id: 79
   description: adenopathy in the hilum of the lung
-  created_at: 2009-01-16 10:44:05 +03:00
+concept_00115: 
+  name: LOWER
+  created_at: 2010-06-20 00:59:02 -04:00
+  openmrs_id: 2403
+  updated_at: 2010-06-20 01:14:01 -04:00
+  id: 115
+  created_by: 1
+  updated_by: 1
+  description: Anatomic description
 concept_00016: 
   name: PULMONARY NODULE (OR MASS)
-  updated_at: 2009-01-24 12:09:55 +03:00
+  created_at: 2007-01-31 01:45:55 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
+  id: 16
   created_by: 1
   updated_by: 1
-  id: 16
   description: ""
-  created_at: 2007-01-31 09:45:55 +03:00
 concept_00037: 
   name: MIDDLE
-  updated_at: 2009-01-24 12:09:55 +03:00
+  created_at: 2007-02-02 01:53:03 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
+  id: 37
   created_by: 1
   updated_by: 1
-  id: 37
   description: Anatomic descriptor
-  created_at: 2007-02-02 09:53:03 +03:00
+concept_00116: 
+  name: EDIT_ME
+  created_at: 2010-06-20 01:05:36 -04:00
+  openmrs_id: 
+  updated_at: 2010-06-20 01:05:36 -04:00
+  id: 116
+  created_by: 1
+  updated_by: 1
+  description: Me too
 concept_00017: 
   name: RIGHT SINGLE
-  updated_at: 2009-01-24 12:09:55 +03:00
+  created_at: 2007-01-31 01:46:37 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
+  id: 17
   created_by: 1
   updated_by: 1
-  id: 17
   description: Only one, solitary.
-  created_at: 2007-01-31 09:46:37 +03:00
 concept_00060: 
   name: RIGHT SMALL
-  updated_at: 2009-01-24 12:09:55 +03:00
+  created_at: 2007-02-05 08:15:27 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
+  id: 60
   created_by: 5
   updated_by: 5
-  id: 60
   description: ""
-  created_at: 2007-02-05 16:15:27 +03:00
 concept_00038: 
   name: POSTERIOR
-  updated_at: 2009-01-24 12:09:55 +03:00
+  created_at: 2007-02-02 01:53:22 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
+  id: 38
   created_by: 1
   updated_by: 1
-  id: 38
   description: Anatomic descriptor
-  created_at: 2007-02-02 09:53:22 +03:00
 concept_00081: 
   name: ANEURYSM
-  updated_at: 2009-01-24 12:09:55 +03:00
+  created_at: 2009-01-16 02:45:17 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
+  id: 81
   created_by: 1
   updated_by: 1
-  id: 81
   description: focal dilation of a tubular structure
-  created_at: 2009-01-16 10:45:17 +03:00
 concept_00059: 
   name: PLEURAL EFFUSION
-  updated_at: 2009-01-24 12:09:55 +03:00
+  created_at: 2007-02-05 08:15:00 -05:00
+  openmrs_id: 1136
+  updated_at: 2010-06-20 01:14:01 -04:00
+  id: 59
   created_by: 5
   updated_by: 5
-  id: 59
   description: ""
-  created_at: 2007-02-05 16:15:00 +03:00
 concept_00040: 
   name: MILD
-  updated_at: 2009-01-24 12:09:55 +03:00
+  created_at: 2007-02-02 01:54:37 -05:00
+  openmrs_id: 1734
+  updated_at: 2010-06-20 01:14:01 -04:00
+  id: 40
   created_by: 1
   updated_by: 1
-  id: 40
   description: ""
-  created_at: 2007-02-02 09:54:37 +03:00
 concept_00039: 
   name: CARDIOMEGALY
-  updated_at: 2009-01-24 12:09:55 +03:00
+  created_at: 2007-02-02 01:54:17 -05:00
+  openmrs_id: 5158
+  updated_at: 2010-06-20 01:14:01 -04:00
+  id: 39
   created_by: 1
   updated_by: 1
-  id: 39
   description: Enlargement of the heart
-  created_at: 2007-02-02 09:54:17 +03:00
 concept_00061: 
   name: RIGHT MODERATE
-  updated_at: 2009-01-24 12:09:55 +03:00
+  created_at: 2007-02-05 08:16:51 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
+  id: 61
   created_by: 5
   updated_by: 5
-  id: 61
   description: ""
-  created_at: 2007-02-05 16:16:51 +03:00
 concept_00020: 
   name: MULTIPLE CALCIFIED
-  updated_at: 2009-01-24 12:09:55 +03:00
+  created_at: 2007-01-31 01:49:17 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
+  id: 20
   created_by: 1
   updated_by: 1
-  id: 20
   description: ""
-  created_at: 2007-01-31 09:49:17 +03:00
 concept_00018: 
   name: CALCIFIED
-  updated_at: 2009-01-24 12:09:55 +03:00
+  created_at: 2007-01-31 01:46:57 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
+  id: 18
   created_by: 1
   updated_by: 1
-  id: 18
   description: ""
-  created_at: 2007-01-31 09:46:57 +03:00
 concept_00041: 
   name: MODERATE
-  updated_at: 2009-01-24 12:09:55 +03:00
+  created_at: 2007-02-02 01:54:50 -05:00
+  openmrs_id: 1744
+  updated_at: 2010-06-20 01:14:01 -04:00
+  id: 41
   created_by: 1
   updated_by: 1
-  id: 41
   description: ""
-  created_at: 2007-02-02 09:54:50 +03:00
 concept_00062: 
   name: RIGHT LARGE
-  updated_at: 2009-01-24 12:09:55 +03:00
+  created_at: 2007-02-05 08:17:03 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
+  id: 62
   created_by: 5
   updated_by: 5
-  id: 62
   description: ""
-  created_at: 2007-02-05 16:17:03 +03:00
 concept_00083: 
   name: DECREASED
-  updated_at: 2009-01-24 12:09:55 +03:00
+  created_at: 2009-01-16 02:46:51 -05:00
+  openmrs_id: 2413
+  updated_at: 2010-06-20 01:14:01 -04:00
+  id: 83
   created_by: 1
   updated_by: 1
-  id: 83
   description: diminished
-  created_at: 2009-01-16 10:46:51 +03:00
 concept_00021: 
   name: RIGHT TWO-FIVE
-  updated_at: 2009-01-24 12:09:55 +03:00
+  created_at: 2007-02-02 01:12:52 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
+  id: 21
   created_by: 1
   updated_by: 1
-  id: 21
   description: ""
-  created_at: 2007-02-02 09:12:52 +03:00
 concept_00042: 
   name: SEVERE
-  updated_at: 2009-01-24 12:09:55 +03:00
+  created_at: 2007-02-02 01:55:01 -05:00
+  openmrs_id: 1745
+  updated_at: 2010-06-20 01:14:01 -04:00
+  id: 42
   created_by: 1
   updated_by: 1
-  id: 42
   description: ""
-  created_at: 2007-02-02 09:55:01 +03:00
 concept_00019: 
   name: LEFT SINGLE
-  updated_at: 2009-01-24 12:09:55 +03:00
+  created_at: 2007-01-31 01:47:52 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
+  id: 19
   created_by: 1
   updated_by: 1
-  id: 19
   description: ""
-  created_at: 2007-01-31 09:47:52 +03:00
 concept_00063: 
   name: LEFT SMALL
-  updated_at: 2009-01-24 12:09:55 +03:00
+  created_at: 2007-02-05 08:17:12 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
+  id: 63
   created_by: 5
   updated_by: 5
-  id: 63
   description: ""
-  created_at: 2007-02-05 16:17:12 +03:00
 concept_00084: 
   name: "YES"
-  updated_at: 2009-01-24 12:09:55 +03:00
-  created_by: 1
-  updated_by: 1
+  created_at: 2009-01-16 02:47:21 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
   id: 84
+  created_by: 1
+  updated_by: 1
   description: affirmative
-  created_at: 2009-01-16 10:47:21 +03:00
-concept_00001: 
-  name: INFILTRATE
-  updated_at: 2009-01-24 12:09:55 +03:00
-  created_by: 
-  updated_by: 
-  id: 1
-  description: Opacity, generally in a patchy, fluffy distribution
-  created_at: 2009-01-24 12:09:55 +03:00
-concept_00022: 
-  name: LEFT TWO-FIVE
-  updated_at: 2009-01-24 12:09:55 +03:00
-  created_by: 1
-  updated_by: 1
-  id: 22
-  description: ""
-  created_at: 2007-02-02 09:45:21 +03:00
-concept_00043: 
-  name: RIGHT APICAL
-  updated_at: 2009-01-24 12:09:55 +03:00
-  created_by: 1
-  updated_by: 1
-  id: 43
-  description: ""
-  created_at: 2007-02-02 09:55:49 +03:00
-concept_00064: 
-  name: LEFT MODERATE
-  updated_at: 2009-01-24 12:09:55 +03:00
-  created_by: 5
-  updated_by: 5
-  id: 64
-  description: ""
-  created_at: 2007-02-05 16:17:20 +03:00
 concept_00085: 
   name: "NO"
-  updated_at: 2009-01-24 12:09:55 +03:00
+  created_at: 2009-01-16 02:47:33 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
+  id: 85
   created_by: 1
   updated_by: 1
-  id: 85
   description: negative
-  created_at: 2009-01-16 10:47:33 +03:00
-concept_00002: 
-  name: CAVITATION
-  updated_at: 2009-01-24 12:09:55 +03:00
+concept_00022: 
+  name: LEFT TWO-FIVE
+  created_at: 2007-02-02 01:45:21 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
+  id: 22
+  created_by: 1
+  updated_by: 1
+  description: ""
+concept_00001: 
+  name: INFILTRATE
+  created_at: 2009-01-24 04:09:55 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
+  id: 1
   created_by: 
   updated_by: 
-  id: 2
-  description: Having a hollowed-out appearance
-  created_at: 2009-01-24 12:09:55 +03:00
-concept_00023: 
-  name: RIGHT MORE THAN FIVE
-  updated_at: 2009-01-24 12:09:55 +03:00
+  description: Opacity, generally in a patchy, fluffy distribution
+concept_00043: 
+  name: RIGHT APICAL
+  created_at: 2007-02-02 01:55:49 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
+  id: 43
   created_by: 1
   updated_by: 1
-  id: 23
   description: ""
-  created_at: 2007-02-02 09:45:46 +03:00
-concept_00044: 
-  name: RIGHT BASILAR
-  updated_at: 2009-01-24 12:09:55 +03:00
-  created_by: 1
-  updated_by: 1
-  id: 44
-  description: ""
-  created_at: 2007-02-02 09:56:00 +03:00
-concept_00065: 
-  name: LEFT LARGE
-  updated_at: 2009-01-24 12:09:55 +03:00
+concept_00064: 
+  name: LEFT MODERATE
+  created_at: 2007-02-05 08:17:20 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
+  id: 64
   created_by: 5
   updated_by: 5
-  id: 65
   description: ""
-  created_at: 2007-02-05 16:17:29 +03:00
+concept_00065: 
+  name: LEFT LARGE
+  created_at: 2007-02-05 08:17:29 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
+  id: 65
+  created_by: 5
+  updated_by: 5
+  description: ""
+concept_00044: 
+  name: RIGHT BASILAR
+  created_at: 2007-02-02 01:56:00 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
+  id: 44
+  created_by: 1
+  updated_by: 1
+  description: ""
+concept_00002: 
+  name: CAVITATION
+  created_at: 2009-01-24 04:09:55 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
+  id: 2
+  created_by: 
+  updated_by: 
+  description: Having a hollowed-out appearance
+concept_00023: 
+  name: RIGHT MORE THAN FIVE
+  created_at: 2007-02-02 01:45:46 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
+  id: 23
+  created_by: 1
+  updated_by: 1
+  description: ""
 concept_00086: 
   name: PLEURAL EFFUSION RIGHT
-  updated_at: 2009-01-24 12:09:55 +03:00
-  created_by: 1
-  updated_by: 1
+  created_at: 2009-01-16 02:47:44 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
   id: 86
+  created_by: 1
+  updated_by: 1
   description: fluid in the right pleural space
-  created_at: 2009-01-16 10:47:44 +03:00
-concept_00087: 
-  name: PLEURAL EFFUSION LEFT
-  updated_at: 2009-01-24 12:09:55 +03:00
-  created_by: 1
-  updated_by: 1
-  id: 87
-  description: fluid in the left pleural space
-  created_at: 2009-01-16 10:48:31 +03:00
-concept_00045: 
-  name: RIGHT LATERAL
-  updated_at: 2009-01-24 12:09:55 +03:00
-  created_by: 1
-  updated_by: 1
-  id: 45
-  description: ""
-  created_at: 2007-02-02 09:56:20 +03:00
-concept_00024: 
-  name: LEFT GREATER THAN FIVE
-  updated_at: 2009-01-24 12:09:55 +03:00
-  created_by: 1
-  updated_by: 1
-  id: 24
-  description: ""
-  created_at: 2007-02-02 09:46:18 +03:00
-concept_00003: 
-  name: RIGHT UPPER LUNG ZONE
-  updated_at: 2009-01-24 12:09:55 +03:00
-  created_by: 
-  updated_by: 
-  id: 3
-  description: 
-  created_at: 2009-01-24 12:09:55 +03:00
 concept_00066: 
   name: RIGHT
-  updated_at: 2009-01-24 12:09:55 +03:00
-  created_by: 1
-  updated_by: 1
+  created_at: 2009-01-16 02:34:12 -05:00
+  openmrs_id: 5141
+  updated_at: 2010-06-20 01:14:01 -04:00
   id: 66
+  created_by: 1
+  updated_by: 1
   description: anatomic descriptor
-  created_at: 2009-01-16 10:34:12 +03:00
-concept_00067: 
-  name: LEFT
-  updated_at: 2009-01-24 12:09:55 +03:00
+concept_00003: 
+  name: RIGHT UPPER LUNG ZONE
+  created_at: 2009-01-24 04:09:55 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
+  id: 3
+  created_by: 
+  updated_by: 
+  description: 
+concept_00024: 
+  name: LEFT GREATER THAN FIVE
+  created_at: 2007-02-02 01:46:18 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
+  id: 24
   created_by: 1
   updated_by: 1
-  id: 67
-  description: anatomic descriptor
-  created_at: 2009-01-16 10:34:27 +03:00
-concept_00046: 
-  name: LEFT APICAL
-  updated_at: 2009-01-24 12:09:55 +03:00
-  created_by: 1
-  updated_by: 1
-  id: 46
   description: ""
-  created_at: 2007-02-02 09:56:28 +03:00
-concept_00025: 
-  name: ADENOPATHY
-  updated_at: 2009-01-24 12:09:55 +03:00
+concept_00045: 
+  name: RIGHT LATERAL
+  created_at: 2007-02-02 01:56:20 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
+  id: 45
   created_by: 1
   updated_by: 1
-  id: 25
   description: ""
-  created_at: 2007-02-02 09:47:03 +03:00
+concept_00087: 
+  name: PLEURAL EFFUSION LEFT
+  created_at: 2009-01-16 02:48:31 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
+  id: 87
+  created_by: 1
+  updated_by: 1
+  description: fluid in the left pleural space
 concept_00004: 
   name: RIGHT MIDDLE LUNG ZONE
-  updated_at: 2009-01-24 12:09:55 +03:00
-  created_by: 
-  updated_by: 
+  created_at: 2009-01-24 04:09:55 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
   id: 4
-  description: 
-  created_at: 2009-01-24 12:09:55 +03:00
-concept_00090: 
-  name: PNEUMOTHORAX LEFT
-  updated_at: 2009-01-24 12:09:55 +03:00
-  created_by: 1
-  updated_by: 1
-  id: 90
-  description: gas in the left pleural space
-  created_at: 2009-01-16 10:51:09 +03:00
-concept_00005: 
-  name: RIGHT LOWER LUNG ZONE
-  updated_at: 2009-01-24 12:09:55 +03:00
   created_by: 
   updated_by: 
-  id: 5
   description: 
-  created_at: 2009-01-24 12:09:55 +03:00
-concept_00068: 
-  name: DIFFUSE
-  updated_at: 2009-01-24 12:09:55 +03:00
+concept_00025: 
+  name: ADENOPATHY
+  created_at: 2007-02-02 01:47:03 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
+  id: 25
   created_by: 1
   updated_by: 1
-  id: 68
-  description: description of disease pattern
-  created_at: 2009-01-16 10:34:41 +03:00
-concept_00047: 
-  name: LEFT LATERAL
-  updated_at: 2009-01-24 12:09:55 +03:00
-  created_by: 1
-  updated_by: 1
-  id: 47
   description: ""
-  created_at: 2007-02-02 09:56:37 +03:00
-concept_00026: 
-  name: RIGHT PARATRACHEAL
-  updated_at: 2009-01-24 12:09:55 +03:00
+concept_00046: 
+  name: LEFT APICAL
+  created_at: 2007-02-02 01:56:28 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
+  id: 46
   created_by: 1
   updated_by: 1
-  id: 26
   description: ""
-  created_at: 2007-02-02 09:47:15 +03:00
+concept_00067: 
+  name: LEFT
+  created_at: 2009-01-16 02:34:27 -05:00
+  openmrs_id: 5139
+  updated_at: 2010-06-20 01:14:01 -04:00
+  id: 67
+  created_by: 1
+  updated_by: 1
+  description: anatomic descriptor
+concept_00104: 
+  name: PULMONARY INFILTRATE
+  created_at: 2010-03-06 12:00:48 -05:00
+  openmrs_id: 2397
+  updated_at: 2010-06-20 01:14:01 -04:00
+  id: 104
+  created_by: 
+  updated_by: 
+  description: A process that causes an alveolar opacity on chest radiographs
 concept_00089: 
   name: PNEUMOTHORAX RIGHT
-  updated_at: 2009-01-24 12:09:55 +03:00
-  created_by: 1
-  updated_by: 1
+  created_at: 2009-01-16 02:50:52 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
   id: 89
-  description: gas in the right pleural space
-  created_at: 2009-01-16 10:50:52 +03:00
-concept_00070: 
-  name: LUNG SCARRING UPPER
-  updated_at: 2009-01-24 12:09:55 +03:00
   created_by: 1
   updated_by: 1
-  id: 70
-  description: upper lung field scarring
-  created_at: 2009-01-16 10:39:18 +03:00
-concept_00006: 
-  name: LEFT UPPER LUNG ZONE
-  updated_at: 2009-01-24 12:09:55 +03:00
+  description: gas in the right pleural space
+concept_00026: 
+  name: RIGHT PARATRACHEAL
+  created_at: 2007-02-02 01:47:15 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
+  id: 26
+  created_by: 1
+  updated_by: 1
+  description: ""
+concept_00047: 
+  name: LEFT LATERAL
+  created_at: 2007-02-02 01:56:37 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
+  id: 47
+  created_by: 1
+  updated_by: 1
+  description: ""
+concept_00068: 
+  name: DIFFUSE
+  created_at: 2009-01-16 02:34:41 -05:00
+  openmrs_id: 576
+  updated_at: 2010-06-20 01:14:01 -04:00
+  id: 68
+  created_by: 1
+  updated_by: 1
+  description: description of disease pattern
+concept_00005: 
+  name: RIGHT LOWER LUNG ZONE
+  created_at: 2009-01-24 04:09:55 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
+  id: 5
   created_by: 
   updated_by: 
-  id: 6
   description: 
-  created_at: 2009-01-24 12:09:55 +03:00
-concept_00069: 
-  name: NONE
-  updated_at: 2009-01-24 12:09:55 +03:00
+concept_00090: 
+  name: PNEUMOTHORAX LEFT
+  created_at: 2009-01-16 02:51:09 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
+  id: 90
   created_by: 1
   updated_by: 1
-  id: 69
-  description: word meaning nothing
-  created_at: 2009-01-16 10:35:44 +03:00
-concept_00027: 
-  name: LEFT PARATRACHEAL
-  updated_at: 2009-01-24 12:09:55 +03:00
-  created_by: 1
-  updated_by: 1
-  id: 27
-  description: ""
-  created_at: 2007-02-02 09:47:33 +03:00
-concept_00048: 
-  name: LEFT BASILAR
-  updated_at: 2009-01-24 12:09:55 +03:00
-  created_by: 1
-  updated_by: 1
-  id: 48
-  description: ""
-  created_at: 2007-02-02 09:56:48 +03:00
+  description: gas in the left pleural space
 concept_00091: 
   name: SMALL
-  updated_at: 2009-01-24 12:09:55 +03:00
-  created_by: 1
-  updated_by: 1
+  created_at: 2009-01-16 02:51:37 -05:00
+  openmrs_id: 2428
+  updated_at: 2010-06-20 01:14:01 -04:00
   id: 91
+  created_by: 1
+  updated_by: 1
   description: size descriptor
-  created_at: 2009-01-16 10:51:37 +03:00
-concept_00092: 
-  name: LARGE
-  updated_at: 2009-01-24 12:09:55 +03:00
+concept_00048: 
+  name: LEFT BASILAR
+  created_at: 2007-02-02 01:56:48 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
+  id: 48
   created_by: 1
   updated_by: 1
-  id: 92
-  description: size descriptor
-  created_at: 2009-01-16 10:52:23 +03:00
-concept_00049: 
-  name: PLEURAL SCARRING
-  updated_at: 2009-01-24 12:09:55 +03:00
-  created_by: 1
-  updated_by: 1
-  id: 49
   description: ""
-  created_at: 2007-02-02 09:57:11 +03:00
-concept_00050: 
-  name: RIGHT LESS THAN  25%
-  updated_at: 2009-01-24 12:09:55 +03:00
+concept_00027: 
+  name: LEFT PARATRACHEAL
+  created_at: 2007-02-02 01:47:33 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
+  id: 27
   created_by: 1
   updated_by: 1
-  id: 50
   description: ""
-  created_at: 2007-02-02 09:58:35 +03:00
-concept_00028: 
-  name: RIGHT HILAR
-  updated_at: 2009-01-24 12:09:55 +03:00
+concept_00069: 
+  name: NONE
+  created_at: 2009-01-16 02:35:44 -05:00
+  openmrs_id: 1107
+  updated_at: 2010-06-20 01:14:01 -04:00
+  id: 69
   created_by: 1
   updated_by: 1
-  id: 28
-  description: ""
-  created_at: 2007-02-02 09:47:49 +03:00
+  description: word meaning nothing
+concept_00006: 
+  name: LEFT UPPER LUNG ZONE
+  created_at: 2009-01-24 04:09:55 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
+  id: 6
+  created_by: 
+  updated_by: 
+  description: 
+concept_00070: 
+  name: LUNG SCARRING UPPER
+  created_at: 2009-01-16 02:39:18 -05:00
+  openmrs_id: 2401
+  updated_at: 2010-06-20 01:14:01 -04:00
+  id: 70
+  created_by: 1
+  updated_by: 1
+  description: upper lung field scarring
+concept_00105: 
+  name: PULMONARY INFLATION
+  created_at: 2010-03-06 12:00:48 -05:00
+  openmrs_id: 
+  updated_at: 2010-03-06 12:00:48 -05:00
+  id: 105
+  created_by: 
+  updated_by: 
+  description: Degree of lung inflation
 concept_00071: 
   name: BILATERAL
-  updated_at: 2009-01-24 12:09:55 +03:00
+  created_at: 2009-01-16 02:40:12 -05:00
+  openmrs_id: 2399
+  updated_at: 2010-06-20 01:14:01 -04:00
+  id: 71
   created_by: 1
   updated_by: 1
-  id: 71
   description: on both sides of the body
-  created_at: 2009-01-16 10:40:12 +03:00
+concept_00028: 
+  name: RIGHT HILAR
+  created_at: 2007-02-02 01:47:49 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
+  id: 28
+  created_by: 1
+  updated_by: 1
+  description: ""
+concept_00050: 
+  name: RIGHT LESS THAN  25%
+  created_at: 2007-02-02 01:58:35 -05:00
+  openmrs_id: 
+  updated_at: 2009-01-24 04:09:55 -05:00
+  id: 50
+  created_by: 1
+  updated_by: 1
+  description: ""
+concept_00049: 
+  name: PLEURAL SCARRING
+  created_at: 2007-02-02 01:57:11 -05:00
+  openmrs_id: 2421
+  updated_at: 2010-06-20 01:14:01 -04:00
+  id: 49
+  created_by: 1
+  updated_by: 1
+  description: ""
+concept_00092: 
+  name: LARGE
+  created_at: 2009-01-16 02:52:23 -05:00
+  openmrs_id: 2420
+  updated_at: 2010-06-20 01:14:01 -04:00
+  id: 92
+  created_by: 1
+  updated_by: 1
+  description: size descriptor

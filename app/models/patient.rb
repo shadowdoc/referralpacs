@@ -41,13 +41,13 @@ class Patient < ActiveRecord::Base
     # middle_name is not required, and can be nil
 
     name = dicom_name
-    name += "^^^"  # We don't use suffixes or prefixes
+    name += "^^"  # We don't use suffixes or prefixes
    
     return name
   end
   
   def dicom_name
-    # Createe a correctly formatted name for DICOM saves.
+    # Create a correctly formatted name for DICOM saves.
     
     name = family_name + "^" + given_name + "^"
     name += middle_name unless middle_name.nil?
@@ -136,7 +136,7 @@ class Patient < ActiveRecord::Base
     #    ^ City 
     #    ^ State 
     #    ^ Zip
-    pid.address = address1 + "^" + address2 + "^" + city_village + "^" + state_province
+    pid.address = address1 unless address1.nil? + "^" + address2 unless address2.nil? + "^" + city_village unless city_village.nil? + "^" + state_province unless state_province.nil?
 
     # The remaining pid fields are unused at the current time.
     
