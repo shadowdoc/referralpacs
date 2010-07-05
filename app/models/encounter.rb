@@ -93,17 +93,4 @@ class Encounter < ActiveRecord::Base
   end
   
 
-  private
-
-  # Currently unused
-  # TODO remove this.
-
-  def create_obx_ce(question_concept, answer_concept)
-    obx = HL7::Message::Segment::OBX.new
-    obx.value_type = 'CE'
-	obx.observation_id = question_concept.openmrs_id.to_s + '^' + question_concept.name + '^99DCT'
-	obx.observation_value = answer_concept.openmrs_id.to_s + '^' + answer_concept.name + '^99DCT'
-	return obx
-  end
-
 end

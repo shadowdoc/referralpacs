@@ -23,52 +23,52 @@ class Observation < ActiveRecord::Base
     if self.question_concept.name =~ /LUNG SCARRING UPPER/
       # First add the question and the first portion of the answer
       obx = HL7::Message::Segment::OBX.new
-      obx.value_type = 'CE'
+      obx.value_type = 'CWE'
       obx.observation_id = '2041^PARENCHYMAL SCARRING/ATELECTASIS^99DCT'
       obx.observation_value = '2042^UPPER^99DCT'
       segments << obx
 
       obx = HL7::Message::Segment::OBX.new
-      obx.value_type = 'CE'
+      obx.value_type = 'CWE'
       obx.observation_id = '2041^PARENCHYMAL SCARRING/ATELECTASIS^99DCT'
       obx.observation_value = self.hl7_observation_value
       segments << obx
 
     elsif self.question_concept.name =~ /LUNG SCARRING LOWER/
       obx = HL7::Message::Segment::OBX.new
-      obx.value_type = 'CE'
+      obx.value_type = 'CWE'
       obx.observation_id = '2041^PARENCHYMAL SCARRING/ATELECTASIS^99DCT'
       obx.observation_value = '2043^LOWER^99DCT'
       segments << obx
 
       obx = HL7::Message::Segment::OBX.new
-      obx.value_type = 'CE'
+      obx.value_type = 'CWE'
       obx.observation_id = '2041^PARENCHYMAL SCARRING/ATELECTASIS^99DCT'
       obx.observation_value = self.hl7_observation_value
       segments << obx
   
     elsif self.question_concept.name =~ /PLEURAL EFFUSION RIGHT/
       obx = HL7::Message::Segment::OBX.new
-      obx.value_type = 'CE'
+      obx.value_type = 'CWE'
       obx.observation_id = '1136^PLEURAL EFFUSION^99DCT'
       obx.observation_value = '5141^RIGHT^99DCT'
       segments << obx
 
       obx = HL7::Message::Segment::OBX.new
-      obx.value_type = 'CE'
+      obx.value_type = 'CWE'
       obx.observation_id = '1136^PLEURAL EFFUSION^99DCT'
       obx.observation_value = self.hl7_observation_value
       segments << obx
       
     elsif self.question_concept.name =~ /PLEURAL EFFUSION LEFT/
       obx = HL7::Message::Segment::OBX.new
-      obx.value_type = 'CE'
+      obx.value_type = 'CWE'
       obx.observation_id = '1136^PLEURAL EFFUSION^99DCT'
       obx.observation_value = '5139^LEFT^99DCT'
       segments << obx
 
       obx = HL7::Message::Segment::OBX.new
-      obx.value_type = 'CE'
+      obx.value_type = 'CWE'
       obx.observation_id = '1136^PLEURAL EFFUSION^99DCT'
       obx.observation_value = self.hl7_observation_value
       segments << obx
@@ -78,7 +78,7 @@ class Observation < ActiveRecord::Base
       # This first section puts on the laterality modifier
 
       obx = HL7::Message::Segment::OBX.new
-      obx.value_type = 'CE'
+      obx.value_type = 'CWE'
       obx.observation_id = '2421^PLEURAL SCARRING^99DCT'
 
       if self.value_concept.name =~ /LEFT/
@@ -92,7 +92,7 @@ class Observation < ActiveRecord::Base
       # This next section adds the location (apical, lateral, or basilar)
 
       obx = HL7::Message::Segment::OBX.new
-      obx.value_type = 'CE'
+      obx.value_type = 'CWE'
       obx.observation_id = '2421^PLEURAL SCARRING^99DCT'
 
       if self.value_concept.name =~ /APICAL/
@@ -106,26 +106,26 @@ class Observation < ActiveRecord::Base
 
     elsif self.question_concept.name =~ /PNEUMOTHORAX RIGHT/
       obx = HL7::Message::Segment::OBX.new
-      obx.value_type = 'CE'
+      obx.value_type = 'CWE'
       obx.observation_id = '2424^PNEUMOTHORAX^99DCT'
       obx.observation_value = '5141^RIGHT^99DCT'
       segments << obx
 
       obx = HL7::Message::Segment::OBX.new
-      obx.value_type = 'CE'
+      obx.value_type = 'CWE'
       obx.observation_id = '2424^PNEUMOTHORAX^99DCT'
       obx.observation_value = self.hl7_observation_value
       segments << obx
 
     elsif self.question_concept.name =~ /PNEUMOTHORAX LEFT/
       obx = HL7::Message::Segment::OBX.new
-      obx.value_type = 'CE'
+      obx.value_type = 'CWE'
       obx.observation_id = '2424^PNEUMOTHORAX^99DCT'
       obx.observation_value = '5139^LEFT^99DCT'
       segments << obx
 
       obx = HL7::Message::Segment::OBX.new
-      obx.value_type = 'CE'
+      obx.value_type = 'CWE'
       obx.observation_id = '2424^PNEUMOTHORAX^99DCT'
       obx.observation_value = self.hl7_observation_value
       segments << obx
@@ -134,7 +134,7 @@ class Observation < ActiveRecord::Base
       # This is the clause for observations that are not nested.
 
       obx = HL7::Message::Segment::OBX.new
-      obx.value_type = 'CE'
+      obx.value_type = 'CWE'
       obx.observation_id = self.hl7_question
 	  obx.observation_value = self.hl7_observation_value
       segments << obx
