@@ -7,8 +7,6 @@ else
   $dicom = false
 end
 
-# The following is a sample openmrs.config.rb file.
-
 ## config/dicom.conf.rb
 ##
 ## The following constants are used to identify the dcm4che utilities that
