@@ -136,7 +136,8 @@ class Patient < ActiveRecord::Base
     #    ^ City 
     #    ^ State 
     #    ^ Zip
-    pid.address = address1 unless address1.nil? + "^" + address2 unless address2.nil? + "^" + city_village unless city_village.nil? + "^" + state_province unless state_province.nil?
+    # We're not using this as we don't often have address information.  We're not the gold standard anyway!
+    #pid.address = address1 unless address1.nil? + "^" + address2 unless address2.nil? + "^" + city_village unless city_village.nil? + "^" + state_province unless state_province.nil?
 
     # The remaining pid fields are unused at the current time.
     
@@ -145,7 +146,7 @@ class Patient < ActiveRecord::Base
   end
   
   def birthdate_formatted
-    self.birthdate.strftime("%d %b %Y") unless birthdate.nil?
+    self.birthdate.strftime("%d %b %Y") unless self.birthdate.nil?
   end
   
   def uppercase
@@ -155,64 +156,53 @@ class Patient < ActiveRecord::Base
   end
   
   def Patient.search(params)
-    
+    # This Class method allows for specific searching of patients based on the several parameters
+    # The search returns a list of patients
+
+    patients = []
+
     # AMPATH mrn is the best identifier, so let's see if we have one of those first
     unless params[:patient][:mrn_ampath] == ""
             
-      # We were given an openmrs identifier, so we have a few taskss
-      # 1. Search locally to see if we already know this patient
-      #    - If so, make sure they have been verified against openmrs
-      # 2. If we don't already know this patient, we need to get the patient's demographics
-      #    from openmrs.
-      
-      local_patient = Patient.find(:first, :conditions => ['mrn_ampath = ?', params[:patient][:mrn_ampath]])
-      
-      
-      if local_patient.nil?
-        # This is the case where we didn't find the patient locally.
-        # So, we'll see if the openMRS server knows about this patient if we're integrated
-        
-        if $openmrs == true
-          @patients = find_openmrs_patient(params[:patient][:mrn_ampath])
-        end
+       if $openmrs
+         # This means we can search for patients using the REST service
+         # This method will find new patients, and will also verify existing OpenMRS patients
+         patients << Patient.find_openmrs_patient(params[:patient][:mrn_ampath])
+       else
+         # Have to look these patients up locally.
+         patients << Patient.find_by_mrn_ampath(params[:patient][:mrn_ampath])
+       end
 
-      else
-        # We found the patient locally, now we can simply return the patient
-        # As long as they have been verified.
-        unless local_patient.openmrs_verified
-          @patients = local_patient          
-        else
-          # TODO openmrs verifiation process will go here
-          @patients = local_patient
-        end
-      end
       
     else
       # If we don't have an AMPATH ID, what about a MTRH radiology id?
 
       unless params[:patient][:mtrh_rad_id] == ""
-        @patients = Patient.find(:all, 
+        patients = Patient.find(:all,
                     :conditions => ['mtrh_rad_id = ?', params[:patient][:mtrh_rad_id]])
       else
         # We're left to search names or filter encounters by date to get patient names
         unless params[:patient][:name] == ""
-          @patients = Patient.find(:all, 
+          patients = Patient.find(:all,
                       :conditions => ['LOWER(CONCAT(given_name, " ", family_name)) LIKE ?', '%' + params[:patient][:name].downcase + '%'])
         end
       end
     end
     
-    return @patients
+    return patients
     
   end
   
   def Patient.find_openmrs_patient(mrn_openmrs)
-    # This method communicates with the OpenMRS REST interface on the server
+    # This method takes an OpenMRS identifier, communicates with the OpenMRS REST interface and then
     # uses REXML to process the response.
+    #
     # All of the globals below are set in config/openmrs.conf.rb
-    
-    # This came from a browser, so let's sanitize it
-    mrn_openmrs = CGI.escape(mrn_openmrs)
+
+    # We were given an openmrs identifier, so we have a few tasks
+    # Find a local patient with this mrn
+    # Search the openmrs server for patients with this mrn
+    # Either update the existing patient with the new demographic information OR create a new patient object
     
     if $openmrs_ssl
       url = "https://"
@@ -233,39 +223,57 @@ class Patient < ActiveRecord::Base
     
     http.use_ssl = $openmrs_ssl
     
-    
     begin
       result = http.request(req)
     rescue
-      raise "Server: #{$openmrs_server_name} down."
+      $openmrs_down = true
     end
-    
-    doc = REXML::Document.new(result.read_body)
-    @patients = Patient.save_xml_to_patient_object(doc) unless doc.elements["//identifier"].nil?
+
+    doc = REXML::Document.new(result.read_body) unless result.nil?
+
+    # Find any local patient that belongs to the given identifier
+    patient = Patient.find_by_mrn_ampath(mrn_openmrs)
+
+    # Let's see if we got a good result from openmrs
+
+    unless doc.nil? || doc.elements["//identifier"].nil?
+      $openmrs_server_status = "up"
+
+      # We got a good result - let's see if we already know this patient
+
+      if patient.nil?
+        # This is a new patient, so let's create a new patient object
+        patient = Patient.new
+        patient.update_via_xml(doc)
+        patient.save!
+      else
+        # Update the patient record with the latest info from openmrs server
+        patient.update_via_xml(doc)
+        patient.save!
+      end
+    end
+
+    return patient
 
   end
   
-  def Patient.save_xml_to_patient_object(doc)
-    # This method takes a REXML document and returns a patient object.
-    
-    new_patient = Patient.new()
-    new_patient.mrn_ampath = doc.elements["//identifier"].text unless doc.elements["//identifier"].nil?
-    new_patient.given_name = doc.elements["//givenName"].text unless doc.elements["//givenName"].nil?
-    new_patient.middle_name = doc.elements["//middleName"].text unless doc.elements["//middleName"].nil?
-    new_patient.family_name = doc.elements["//familyName"].text unless doc.elements["//familyName"].nil?
-    new_patient.birthdate = DateTime.parse(doc.elements["//@birthdate"].to_s) unless doc.elements["//@birthdate"].nil?
-    new_patient.birthdate_estimated = doc.elements["//@birthdateEstimated"] unless doc.elements["//@birthdateEstimated"].nil?
-    new_patient.address1 = doc.elements["//address1"].text unless doc.elements["//address1"].nil?
-    new_patient.address2 = doc.elements["//address2"].text unless doc.elements["//address2"].nil?
-    new_patient.city_village = doc.elements["//cityVillage"].text unless doc.elements["//cityVillage"].nil?
-    new_patient.state_province = doc.elements["//stateProvince"].text unless doc.elements["//stateProvince"].nil?
-    new_patient.country = doc.elements["//country"].text unless doc.elements["//country"].nil?
-    new_patient.mtrh_rad_id = nil
-    new_patient.openmrs_verified = true
-    new_patient.save!
-    
-    return new_patient
-    
+  def update_via_xml(doc)
+    # This method takes a REXML document and updates a patient object
+
+    mrn_ampath = doc.elements["//identifier"].text unless doc.elements["//identifier"].nil?
+    given_name = doc.elements["//givenName"].text unless doc.elements["//givenName"].nil?
+    middle_name = doc.elements["//middleName"].text unless doc.elements["//middleName"].nil?
+    family_name = doc.elements["//familyName"].text unless doc.elements["//familyName"].nil?
+    birthdate = DateTime.parse(doc.elements["//@birthdate"].to_s) unless doc.elements["//@birthdate"].nil?
+    birthdate_estimated = doc.elements["//@birthdateEstimated"] unless doc.elements["//@birthdateEstimated"].nil?
+    address1 = doc.elements["//address1"].text unless doc.elements["//address1"].nil?
+    address2 = doc.elements["//address2"].text unless doc.elements["//address2"].nil?
+    city_village = doc.elements["//cityVillage"].text unless doc.elements["//cityVillage"].nil?
+    state_province = doc.elements["//stateProvince"].text unless doc.elements["//stateProvince"].nil?
+    country = doc.elements["//country"].text unless doc.elements["//country"].nil?
+    mtrh_rad_id = nil
+    openmrs_verified = true
+
   end
   
   def validate

@@ -29,19 +29,15 @@ class PatientController < ApplicationController
     if request.post?
       
       # We first search based on patient demographics supplied by the user.
-      
-      begin
-        @patients = Patient.search(params).to_a
-        if @patients.length == 0 
-          @patients = nil
-        end
-      rescue
-        openmrs_down = true
+
+      @patients = Patient.search(params)
+
+      if @patients.length == 0 
         @patients = nil
       end
-      
+
       if @patients.nil? && params[:encounter][:date] != "" && params[:encounter][:location] != ""
-        # if we havent found any patients and someone listed by date and location
+        # if we haven't found any patients and someone listed by date and location
         @encounters = Encounter.find(:all,:conditions => ['date LIKE ?', '%' + params[:encounter][:date] + '%']) 
         @encounters.each do |enc| 
         
@@ -77,11 +73,10 @@ class PatientController < ApplicationController
          render :update do |page|
 
            #TODO Shouldn't this be in an RJS template?
-           #TODO Can the current user add patients?  If so, let's give them the opportunity.
            
            response_string = ""
            
-           if openmrs_down
+           if $openmrs_down
              response_string = "Connection with OpenMRS Server <i>#{$openmrs_server_name}</i> is down, please contact the administrator.<br/><br/>"
            end
            

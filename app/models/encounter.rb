@@ -49,6 +49,7 @@ class Encounter < ActiveRecord::Base
       msg << oru
 
       obr.identifier = '2395^CHEST X-RAY FINDINGS BY RADIOLOGY^99DCT'
+      obr.filler_order_number = self.id      
       msg << obr
 
 
