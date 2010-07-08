@@ -164,15 +164,16 @@ class Patient < ActiveRecord::Base
     # AMPATH mrn is the best identifier, so let's see if we have one of those first
     unless params[:patient][:mrn_ampath] == ""
             
-       if $openmrs
-         # This means we can search for patients using the REST service
-         # This method will find new patients, and will also verify existing OpenMRS patients
-         patients << Patient.find_openmrs_patient(params[:patient][:mrn_ampath])
-       else
-         # Have to look these patients up locally.
-         patients << Patient.find_by_mrn_ampath(params[:patient][:mrn_ampath])
-       end
+      if OPENMRS_URL_BASE
+       # This means we can search for patients using the REST service
+       # This method will find new patients, and will also verify existing OpenMRS patients
+       patients << Patient.find_openmrs_patient(params[:patient][:mrn_ampath])
+      end
 
+      if patients.length == 0
+        # The find_openmrs_patient method fails, let's try a local search
+        patients << Patient.find_by_mrn_ampath(params[:patient][:mrn_ampath])
+      end
       
     else
       # If we don't have an AMPATH ID, what about a MTRH radiology id?
@@ -203,30 +204,26 @@ class Patient < ActiveRecord::Base
     # Find a local patient with this mrn
     # Search the openmrs server for patients with this mrn
     # Either update the existing patient with the new demographic information OR create a new patient object
-    
-    if $openmrs_ssl
-      url = "https://"
-    else
-      url = "http://"
-    end
 
-    url += "#{$openmrs_server}/amrs/moduleServlet/restmodule/api/patient/#{mrn_openmrs}"
+
+    url = OPENMRS_URL_BASE + mrn_openmrs
     
     # Create a URI object from our url string.
     url = URI.parse(url)
 
     # Create a request object from our url and attach the authorization data.
     req = Net::HTTP::Get.new(url.path)
-    req.basic_auth($openmrs_user, $openmrs_password)
+    req.basic_auth(OPENMRS_USERNAME, OPENMRS_PASSWORD)
     
     http = Net::HTTP.new(url.host, url.port)
     
-    http.use_ssl = $openmrs_ssl
+    http.use_ssl = true
     
     begin
       result = http.request(req)
     rescue
       $openmrs_down = true
+      puts "openmrs down"
     end
 
     doc = REXML::Document.new(result.read_body) unless result.nil?
@@ -237,7 +234,9 @@ class Patient < ActiveRecord::Base
     # Let's see if we got a good result from openmrs
 
     unless doc.nil? || doc.elements["//identifier"].nil?
-      $openmrs_server_status = "up"
+      $openmrs_down = false
+
+      puts "openmrs up"
 
       # We got a good result - let's see if we already know this patient
 

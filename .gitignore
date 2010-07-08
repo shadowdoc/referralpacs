@@ -8,6 +8,7 @@ log
 .aptana
 .loadpath
 config/database.yml
+config/openmrs.yml
 Capfile
 config/deploy.rb
 image_archive
