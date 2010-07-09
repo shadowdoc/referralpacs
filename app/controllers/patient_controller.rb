@@ -149,55 +149,6 @@ class PatientController < ApplicationController
     end
     redirect_to :action => "find"    
   end
-
-  def hl7test
-    
-    msg = HL7::Message.new
-    
-    # This code was devised to follow the description of an HL7 message listed here:
-    # http://openmrs.org/wiki/HL7
-    
-    # This is the Message Header (MSH segment)
-    
-    sending_facility = "REFPACS"
-    timestamp = Time.now.strftime("%Y%m%d%H%M%S")
-    
-    msh = HL7::Message::Segment::MSH.new
-    msh.enc_chars = "^~\&"
-    msh.sending_app = sending_facility
-    msh.sending_facility = "MTRH Radiology"
-    msh.recv_app = "HL7LISTENER"
-    msh.recv_facility = "AMRS"
-    msh.time = timestamp
-    msh.message_type = "ORU^RO1"
-    msh.message_control_id = sending_facility + timestamp
-    msh.processing_id = rand(10000).to_s
-    msh.version_id = "2.5"
-    msh.seq = 1
-    
-    # Add the header to our message.
-    msg << msh
-    
-    # Now we'll build on an PID (patient identifier)
-    
-    # Put in a dummy patient object for testing
-    patient = Patient.find(params[:id])
-    
-    pid = patient.hl7_pid
-        
-    # Add the pid to our message
-    msg << pid
-    
-    # Make a string from the message to display in the web browser for debug
-    # purposes.
-    @msg = msg.to_s
-    
-    # This outputs our message in a text file where mirth can read it
-    File.open("/hl7-test.txt", "w+") do |f|
-      f << msg
-    end
-    
-  end
   
   def unreported
     
