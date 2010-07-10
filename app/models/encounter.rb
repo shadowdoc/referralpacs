@@ -86,9 +86,15 @@ class Encounter < ActiveRecord::Base
         msg << obx
       end
 
-      tango = File.open("#{RAILS_ROOT}/public/hl7_development/hl7stream.txt", "a")
-      tango.puts(msg.to_s) # string version of the message
-      tango.puts("\n\n")
+
+      # First we create the directory
+      path = File.join(RAILS_ROOT, OPENMRS_HL7_PATH, self.date.year.to_s, self.date.month.to_s, self.date.day.to_s)
+      filename = File.join(path, self.date.strftime("%Y-%m-%d") + "-" + self.id.to_s + ".hl7")
+
+      FileUtils.mkdir_p path
+
+      tango = File.new(filename, "w+")
+      tango.puts(msg.to_s) # string version of the hl7 message
       tango.close
     end
   end

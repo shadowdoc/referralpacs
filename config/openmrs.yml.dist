@@ -2,8 +2,10 @@ development:
   :url: https://192.168.242.128:8443/amrs/moduleServlet/restmodule/api/patient/
   :username: username
   :password: password
+  :hl7path: hl7                              # relative to RAILS_ROOT
 
 production:
   :url: https://192.168.242.128:8443/amrs/moduleServlet/restmodule/api/patient/
   :username: username
   :password: password
+  :hl7path: hl7                              # relative to RAILS_ROOT

@@ -14,3 +14,4 @@ config/deploy.rb
 image_archive
 .idea
 public/javascripts/all.js
+hl7/
