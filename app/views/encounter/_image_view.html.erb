@@ -1,4 +1,23 @@
 <div class="img-container">
+    <% encounter = @image.encounter -%>
     <%= image_tag "/image/view/#{@image.id}.jpg", :width => "100%" %>
-	Study Date: <%= @image.encounter.date.strftime("%d-%m-%y") %>
+</div>
+<div class="img_container_text">
+    <div class="img_container_header">
+      Study Date: <br/>
+    </div>
+    <%= encounter.date.strftime("%d-%m-%y") %>
+
+    <% if encounter.status == "final" -%>
+      <div class="img_container_header">
+            Observations: <br/>
+      </div>
+      <% encounter.observations.each do |obs| -%>
+         <%= obs.question_concept.name + "-" + obs.value_concept.name %><br/>
+      <% end -%>
+    <div class="img_container_header">
+      Radiologist: <br/>
+    </div>
+    <%= encounter.provider.full_name %>
+    <% end -%>
 </div>

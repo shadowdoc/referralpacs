@@ -422,3 +422,12 @@ div.report_form label {
 div.report_form fieldset fieldset label {
 margin-left:23px;
 }
+
+/* Image Display styles */
+div.img_container_text {
+    text-align: left;
+}
+
+div.img_container_header {
+    font-weight:bold;
+}
