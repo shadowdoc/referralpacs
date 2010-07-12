@@ -167,7 +167,7 @@ class Patient < ActiveRecord::Base
       if OPENMRS_URL_BASE
        # This means we can search for patients using the REST service
        # This method will find new patients, and will also verify existing OpenMRS patients
-       patients << Patient.find_openmrs_patient(params[:patient][:mrn_ampath])
+       patients << Patient.find_openmrs(params[:patient][:mrn_ampath])
       end
 
       if patients.length == 0
@@ -194,7 +194,7 @@ class Patient < ActiveRecord::Base
     
   end
   
-  def Patient.find_openmrs_patient(mrn_openmrs)
+  def Patient.find_openmrs(mrn_openmrs)
     # This method takes an OpenMRS identifier, communicates with the OpenMRS REST interface and then
     # uses REXML to process the response.
     #
@@ -228,28 +228,43 @@ class Patient < ActiveRecord::Base
 
     doc = REXML::Document.new(result.read_body) unless result.nil?
 
-    # Find any local patient that belongs to the given identifier
-    patient = Patient.find_by_mrn_ampath(mrn_openmrs)
-
     # Let's see if we got a good result from openmrs
 
     unless doc.nil? || doc.elements["//identifier"].nil?
       $openmrs_down = false
 
-      puts "openmrs up"
+      xml_openmrs_mrn = doc.elements["//identifier[@type='AMRS Medical Record Number']"].text
+      xml_openmrs_universal_id = doc.elements["//identifier[@type='AMRS Universal ID']"].text
 
-      # We got a good result - let's see if we already know this patient
+      # We got a good result - let's see if we already know this patient by either their Universal ID
+      # or their Ampath MRN
 
-      if patient.nil?
-        # This is a new patient, so let's create a new patient object
-        patient = Patient.new
-        patient.update_via_xml(doc)
-        patient.save!
+      # Let's see if we have patient objects for either the openmrs_mrn or universal_id
+      patient_universal = Patient.find_by_mrn_ampath(xml_openmrs_universal_id)
+      patient_old_mrn = Patient.find_by_mrn_ampath(xml_openmrs_mrn)
+
+      if patient_universal
+        patient = patient_universal
       else
-        # Update the patient record with the latest info from openmrs server
-        patient.update_via_xml(doc)
-        patient.save!
+        if patient_old_mrn
+          # Update the patient record with the latest info from openmrs server
+          # Also, this will change the patient's MRN to the Universal ID if it's available.
+
+          patient = patient_old_mrn
+          patient.update_via_xml(doc)
+          patient.save!
+
+        else
+          # This is a new patient, so let's create a new patient object
+          patient = Patient.new
+          patient.update_via_xml(doc)
+          patient.save!
+        end
+
       end
+    else
+      # Find any local patient that belongs to the given identifier
+      patient = Patient.find_by_mrn_ampath(mrn_openmrs)
     end
 
     return patient
@@ -259,7 +274,15 @@ class Patient < ActiveRecord::Base
   def update_via_xml(doc)
     # This method takes a REXML document and updates a patient object
 
-    self.mrn_ampath = doc.elements["//identifier"].text unless doc.elements["//identifier"].nil?
+
+    # Here is our preference to store the Universal ID
+
+    unless doc.elements["//identifier[@type='AMRS Universal ID']"].nil?
+      self.mrn_ampath = doc.elements["//identifier[@type='AMRS Universal ID']"].text
+    else
+      self.mrn_ampath = doc.elements["//identifier[@type='AMRS Medical Record Number']"].text
+    end
+
     self.given_name = doc.elements["//givenName"].text unless doc.elements["//givenName"].nil?
     self.middle_name = doc.elements["//middleName"].text unless doc.elements["//middleName"].nil?
     self.family_name = doc.elements["//familyName"].text unless doc.elements["//familyName"].nil?
