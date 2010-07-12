@@ -259,20 +259,21 @@ class Patient < ActiveRecord::Base
   def update_via_xml(doc)
     # This method takes a REXML document and updates a patient object
 
-    mrn_ampath = doc.elements["//identifier"].text unless doc.elements["//identifier"].nil?
-    given_name = doc.elements["//givenName"].text unless doc.elements["//givenName"].nil?
-    middle_name = doc.elements["//middleName"].text unless doc.elements["//middleName"].nil?
-    family_name = doc.elements["//familyName"].text unless doc.elements["//familyName"].nil?
-    birthdate = DateTime.parse(doc.elements["//@birthdate"].to_s) unless doc.elements["//@birthdate"].nil?
-    birthdate_estimated = doc.elements["//@birthdateEstimated"] unless doc.elements["//@birthdateEstimated"].nil?
-    address1 = doc.elements["//address1"].text unless doc.elements["//address1"].nil?
-    address2 = doc.elements["//address2"].text unless doc.elements["//address2"].nil?
-    city_village = doc.elements["//cityVillage"].text unless doc.elements["//cityVillage"].nil?
-    state_province = doc.elements["//stateProvince"].text unless doc.elements["//stateProvince"].nil?
-    country = doc.elements["//country"].text unless doc.elements["//country"].nil?
-    mtrh_rad_id = nil
-    openmrs_verified = true
-
+    self.mrn_ampath = doc.elements["//identifier"].text unless doc.elements["//identifier"].nil?
+    self.given_name = doc.elements["//givenName"].text unless doc.elements["//givenName"].nil?
+    self.middle_name = doc.elements["//middleName"].text unless doc.elements["//middleName"].nil?
+    self.family_name = doc.elements["//familyName"].text unless doc.elements["//familyName"].nil?
+    self.birthdate = DateTime.parse(doc.elements["//@birthdate"].to_s) unless doc.elements["//@birthdate"].nil?
+    self.birthdate_estimated = doc.elements["//@birthdateEstimated"] unless doc.elements["//@birthdateEstimated"].nil?
+    self.address1 = doc.elements["//address1"].text unless doc.elements["//address1"].nil?
+    self.address2 = doc.elements["//address2"].text unless doc.elements["//address2"].nil?
+    self.city_village = doc.elements["//cityVillage"].text unless doc.elements["//cityVillage"].nil?
+    self.state_province = doc.elements["//stateProvince"].text unless doc.elements["//stateProvince"].nil?
+    self.country = doc.elements["//country"].text unless doc.elements["//country"].nil?
+    self.mtrh_rad_id = nil
+    self.openmrs_verified = true
+    self.save!
+    
   end
   
   def validate
