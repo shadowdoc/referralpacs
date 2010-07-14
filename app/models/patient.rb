@@ -1,5 +1,5 @@
 class Patient < ActiveRecord::Base
-  has_many :encounters
+  has_many :encounters, :dependent => :destroy
   belongs_to :tribe
   
   validates_presence_of :given_name, :family_name
