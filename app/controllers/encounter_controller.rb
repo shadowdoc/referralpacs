@@ -129,35 +129,6 @@ class EncounterController < ApplicationController
     @encounter.save
     render :layout => false
   end
-
-  def process_form(form_parameters)
-    form_parameters.each_pair do |key, value|
-      unless value == "none"  || value == "normal"  || value == "no"  || key == "impression"
-        unless ["id", "commit", "action", "controller"].include? key
-          unless key.include?("pleural_scarring")
-            question_concept = Concept.find_by_name(key.humanize.upcase)
-
-            if question_concept.nil?
-              raise "concept #{key.humanize.upcase} not found"
-            end
-
-            value_concept = Concept.find_by_name(value.humanize.upcase)
-
-          else
-            question_concept = Concept.find_by_name("PLEURAL SCARRING")
-            value_concept = Concept.find_by_name(key.split(" ")[1].humanize.upcase)
-          end
-
-          if value_concept.nil?
-            raise "value #{value.humanize.upcase} not found"
-          end
-
-          @encounter.observations << Observation.new(:question_concept_id => question_concept.id,
-                                                     :value_concept_id => value_concept.id)
-        end
-      end
-    end
-  end
   
   def report
     # Process input from master reporting form.
@@ -232,10 +203,17 @@ class EncounterController < ApplicationController
   end
 
   def reject
+    @encounter = Encounter.find(params["id"])
+
+    # Clear out any existing observations
+    @encounter.observations.each {|obs| obs.destroy }
+    @encounter.impression = ""
+
     process_form(params)
     @encounter.status = "rejected"
     @encounter.save
-    redirect_to :status, :requested_status => "new"
+
+    redirect_to :action => :status, :requested_status => "rejected"
   end
 
   
@@ -304,6 +282,37 @@ class EncounterController < ApplicationController
       redirect_to :action => "status", :requested_status => "new"
     end
     
+  end
+
+  private
+    
+  def process_form(form_parameters)
+    form_parameters.each_pair do |key, value|
+      unless value == "none"  || value == "normal"  || value == "no"  || key == "impression"
+        unless ["id", "commit", "action", "controller"].include? key
+          unless key.include?("pleural_scarring")
+            question_concept = Concept.find_by_name(key.humanize.upcase)
+
+            if question_concept.nil?
+              raise "concept #{key.humanize.upcase} not found"
+            end
+
+            value_concept = Concept.find_by_name(value.humanize.upcase)
+
+          else
+            question_concept = Concept.find_by_name("PLEURAL SCARRING")
+            value_concept = Concept.find_by_name(key.split(" ")[1].humanize.upcase)
+          end
+
+          if value_concept.nil?
+            raise "value #{value.humanize.upcase} not found"
+          end
+
+          @encounter.observations << Observation.new(:question_concept_id => question_concept.id,
+                                                     :value_concept_id => value_concept.id)
+        end
+      end
+    end
   end
 
 end

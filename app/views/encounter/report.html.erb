@@ -1,6 +1,6 @@
 <% @onload = "imagepopup(#{@encounter.id})" %>
 
-<%= form_tag :action => "report", :id => @encounter.id %>
+<% form_tag :action => "report", :id => @encounter.id do -%>
 
 <div class="report_form">
   <fieldset>
@@ -165,19 +165,21 @@
   <% end -%>
 <% end -%>
 <br/>
+<% end -%>
 
-
-<%= form_tag :action => "reject", :id => @encounter.id %>
+<% form_tag :action => "reject", :id => @encounter.id  do -%>
 <div class="report_form">
     <fieldset>
       <legend>Rejection Categories</legend>
 
         <fieldset>
-        <legend>Demographics</legend>
-            <% question = "Demographics" -%>
-            <% choices = ["complete_mismatch", "id_mismatch", "date_mismatch"] -%>
+        <legend>Demographics Mismatch</legend>
+            <% question = "Demographic Mismatch" -%>
+            <% choices = ["name_and_id_mismatch", "id_mismatch", "date_mismatch"] -%>
             <%= fieldset_helper(question,choices) %>
         </fieldset>
     </fieldset>
 </div>
 <%= submit_tag "Reject Encounter" %>
+
+<% end -%>
