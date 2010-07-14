@@ -32,6 +32,24 @@ class Image < ActiveRecord::Base
     image.write(image_path)
     create_thumbnail
   end
+
+  def change_encounter_date(old_date)
+    # Directory names change - file names remain the same
+
+
+    old_short_path = File.join("#{old_date.year}", "#{old_date.month}", "#{old_date.day}")
+    old_image_path = File.join(BASEDIRECTORY, old_short_path, filename)
+    old_thumb_path = File.join(BASEDIRECTORY, old_short_path, thumb_filename)
+    old_dicom_filename = File.join(BASEDIRECTORY, old_short_path, file_root + ".dcm")
+    old_config_filename = File.join(BASEDIRECTORY, old_short_path, file_root + ".cfg")
+
+    create_directory
+    
+    FileUtils.move(old_image_path, self.image_path) if File.exists?(old_image_path)
+    FileUtils.move(old_thumb_path, self.thumb_path) if File.exists?(old_thumb_path)
+    FileUtils.move(old_dicom_filename, self.dicom_filename) if File.exists?(old_dicom_filename)
+    FileUtils.move(old_config_filename, self.config_filename) if File.exists?(old_config_filename)
+  end
   
   def filename(suffix = 'full')
     "#{file_root}-#{suffix}.#{self.extension}"
