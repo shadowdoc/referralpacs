@@ -42,6 +42,7 @@ module ApplicationHelper
         new = link_to('New Exams', :controller => :encounter, :action => :status, :requested_status => "new")
         archived = link_to('Archived', :controller => :encounter, :action => :status, :requested_status => "archived")
         ready_to_print = link_to('Ready for Printing', :controller => :encounter, :action => :status, :requested_status => "ready_for_printing")
+        rejected = link_to('Rejected', :controller => :encounter, :action => :status, :requested_status => "rejected")
 
         @command_list = []
         
@@ -53,6 +54,7 @@ module ApplicationHelper
                              new,
                              radiologist_to_review,
                              ready_to_print,
+                             rejected,
                              admin,
                              stats]
           when "radiologist"

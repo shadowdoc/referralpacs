@@ -164,3 +164,20 @@
     <%= button_to_function(comp.date.strftime("%d-%m-%y"), "imagepopup('#{comp.id}', 'comp')") %>
   <% end -%>
 <% end -%>
+<br/>
+
+
+<%= form_tag :action => "reject", :id => @encounter.id %>
+<div class="report_form">
+    <fieldset>
+      <legend>Rejection Categories</legend>
+
+        <fieldset>
+        <legend>Demographics</legend>
+            <% question = "Demographics" -%>
+            <% choices = ["complete_mismatch", "id_mismatch", "date_mismatch"] -%>
+            <%= fieldset_helper(question,choices) %>
+        </fieldset>
+    </fieldset>
+</div>
+<%= submit_tag "Reject Encounter" %>

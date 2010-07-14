@@ -117,7 +117,7 @@ class EncounterController < ApplicationController
     # This action is only called via javascript openimages(encounter_id) in 
     # Application.js
     @encounter = Encounter.find(params[:id])
-    render :layout => false
+    render :layout => "images"
   end
 
   def pdf_report
@@ -129,14 +129,34 @@ class EncounterController < ApplicationController
     @encounter.save
     render :layout => false
   end
-  
-  def remove_observation
-    # Removes a specific observation from an encounter.
-    @observation = Observation.find(params[:id])
-    @observation.destroy
-    render :update do |page|
-        page.remove "observation-#{params[:id]}"
-    end    
+
+  def process_form(form_parameters)
+    form_parameters.each_pair do |key, value|
+      unless value == "none"  || value == "normal"  || value == "no"  || key == "impression"
+        unless ["id", "commit", "action", "controller"].include? key
+          unless key.include?("pleural_scarring")
+            question_concept = Concept.find_by_name(key.humanize.upcase)
+
+            if question_concept.nil?
+              raise "concept #{key.humanize.upcase} not found"
+            end
+
+            value_concept = Concept.find_by_name(value.humanize.upcase)
+
+          else
+            question_concept = Concept.find_by_name("PLEURAL SCARRING")
+            value_concept = Concept.find_by_name(key.split(" ")[1].humanize.upcase)
+          end
+
+          if value_concept.nil?
+            raise "value #{value.humanize.upcase} not found"
+          end
+
+          @encounter.observations << Observation.new(:question_concept_id => question_concept.id,
+                                                     :value_concept_id => value_concept.id)
+        end
+      end
+    end
   end
   
   def report
@@ -160,35 +180,9 @@ class EncounterController < ApplicationController
       # First let's clear the previous observations
       
       @encounter.observations.each {|obs| obs.destroy }
-      
-      params.each_pair do |key, value|
-        unless value == "none"  || value == "normal"  || value == "no"  || key == "impression"
-          unless ["id", "commit", "action", "controller"].include? key
-            unless key.include?("pleural_scarring")
-              question_concept = Concept.find_by_name(key.humanize.upcase)
-              
-              if question_concept.nil?
-                raise "concept #{key.humanize.upcase} not found"
-              end
-              
-              value_concept = Concept.find_by_name(value.humanize.upcase)
-              
-            else
-              question_concept = Concept.find_by_name("PLEURAL SCARRING")    
-              value_concept = Concept.find_by_name(key.split(" ")[1].humanize.upcase)
-            end
-            
-            if value_concept.nil? 
-              raise "value #{value.humanize.upcase} not found"
-            end
-            
-            @encounter.observations << Observation.new(:question_concept_id => question_concept.id,
-                                                       :value_concept_id => value_concept.id)
-          end
-        end 
-      end
-      
-      
+
+      process_form(params)
+
       if @encounter.observations.count == 0 && params[:impression] == ""
         flash[:notice] = "A valid report must contain either checked observations, or an impression"
       else
@@ -236,6 +230,14 @@ class EncounterController < ApplicationController
     end
 
   end
+
+  def reject
+    process_form(params)
+    @encounter.status = "rejected"
+    @encounter.save
+    redirect_to :status, :requested_status => "new"
+  end
+
   
   def statistics
 
@@ -263,6 +265,7 @@ class EncounterController < ApplicationController
     @radiologist_to_read = Encounter.find_all_by_status("radiologist_to_read").length
     @final = Encounter.find_all_by_status("final").length
     @archived = Encounter.find_all_by_status("archived").length
+    @rejected = Encounter.find_all_by_status("rejected").length
 
   end
   
