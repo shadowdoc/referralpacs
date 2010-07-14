@@ -240,8 +240,8 @@ class Patient < ActiveRecord::Base
       # or their Ampath MRN
 
       # Let's see if we have patient objects for either the openmrs_mrn or universal_id
-      patient_universal = Patient.find_by_mrn_ampath(xml_openmrs_universal_id)
-      patient_old_mrn = Patient.find_by_mrn_ampath(xml_openmrs_mrn)
+      patient_universal = Patient.find_by_mrn_ampath(xml_openmrs_universal_id) unless xml_openmrs_universal_id.nil?
+      patient_old_mrn = Patient.find_by_mrn_ampath(xml_openmrs_mrn) unless xml_openmrs_mrn.nil?
 
       if patient_universal
         patient = patient_universal
