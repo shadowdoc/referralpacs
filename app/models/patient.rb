@@ -165,9 +165,12 @@ class Patient < ActiveRecord::Base
     unless params[:patient][:mrn_ampath] == ""
             
       if OPENMRS_URL_BASE
-       # This means we can search for patients using the REST service
-       # This method will find new patients, and will also verify existing OpenMRS patients
-       patients << Patient.find_openmrs(params[:patient][:mrn_ampath])
+        # This means we can search for patients using the REST service
+        # This method will find new patients, and will also verify existing OpenMRS patients
+        openmrs_patient = Patient.find_openmrs(params[:patient][:mrn_ampath])
+        unless openmrs_patient.nil?
+           patients << openmrs_patient
+        end
       end
 
       if patients.length == 0
