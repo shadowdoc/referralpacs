@@ -1,6 +1,7 @@
 require "digest/md5"
   
 class User < ActiveRecord::Base
+  unloadable
 
   attr_accessor :password
   attr_accessible :email, :password, :given_name, :family_name, :privilege_id, :title
@@ -71,9 +72,9 @@ class User < ActiveRecord::Base
 end
 
 class Provider < User
-  
+  unloadable
 end
 
 class Client < User
-
+  unloadable
 end
