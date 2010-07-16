@@ -32,10 +32,6 @@ class PatientController < ApplicationController
 
       @patients = Patient.search(params)
 
-      if @patients.length == 0 
-        @patients = nil
-      end
-
       if @patients.nil? && params[:encounter][:date] != "" && params[:encounter][:location] != ""
         # if we haven't found any patients and someone listed by date and location
         @encounters = Encounter.find(:all,:conditions => ['date LIKE ?', '%' + params[:encounter][:date] + '%']) 

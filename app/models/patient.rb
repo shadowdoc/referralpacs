@@ -172,11 +172,6 @@ class Patient < ActiveRecord::Base
            patients << openmrs_patient
         end
       end
-
-      if patients.length == 0
-        # The find_openmrs_patient method fails, let's try a local search
-        patients << Patient.find_by_mrn_ampath(params[:patient][:mrn_ampath])
-      end
       
     else
       # If we don't have an AMPATH ID, what about a MTRH radiology id?
@@ -191,6 +186,10 @@ class Patient < ActiveRecord::Base
                       :conditions => ['LOWER(CONCAT(given_name, " ", family_name)) LIKE ?', '%' + params[:patient][:name].downcase + '%'])
         end
       end
+    end
+
+    if patients.length == 0 || patients[0].nil?
+      patients = nil
     end
     
     return patients
@@ -217,7 +216,7 @@ class Patient < ActiveRecord::Base
     # Create a request object from our url and attach the authorization data.
     req = Net::HTTP::Get.new(url.path)
     req.basic_auth(OPENMRS_USERNAME, OPENMRS_PASSWORD)
-    
+
     http = Net::HTTP.new(url.host, url.port)
     
     http.use_ssl = true
@@ -233,18 +232,29 @@ class Patient < ActiveRecord::Base
 
     # Let's see if we got a good result from openmrs
 
+
+    # We got a good result - let's see if we already know this patient by either their Universal ID
+    # or their Ampath MRN
+
+    # Let's see if we have patient objects for either the openmrs_mrn or universal_id
+
     unless doc.nil? || doc.elements["//identifier"].nil?
       $openmrs_down = false
 
-      xml_openmrs_mrn = doc.elements["//identifier[@type='AMRS Medical Record Number']"].text
-      xml_openmrs_universal_id = doc.elements["//identifier[@type='AMRS Universal ID']"].text
+      if doc.elements["//identifier[@type='ACTG Study ID']"]
+        xml_actg_study = doc.elements["//identifier[@type='ACTG Study ID']"].text
+        patient_actg_study = Patient.find_by_mrn_ampath(xml_actg_study)
+      end
 
-      # We got a good result - let's see if we already know this patient by either their Universal ID
-      # or their Ampath MRN
+      if doc.elements["//identifier[@type='AMRS Medical Record Number']"]
+        xml_openmrs_mrn = doc.elements["//identifier[@type='AMRS Medical Record Number']"].text
+        patient_old_mrn = Patient.find_by_mrn_ampath(xml_openmrs_mrn)
+      end
 
-      # Let's see if we have patient objects for either the openmrs_mrn or universal_id
-      patient_universal = Patient.find_by_mrn_ampath(xml_openmrs_universal_id) unless xml_openmrs_universal_id.nil?
-      patient_old_mrn = Patient.find_by_mrn_ampath(xml_openmrs_mrn) unless xml_openmrs_mrn.nil?
+      if doc.elements["//identifier[@type='AMRS Universal ID']"]
+        xml_openmrs_universal_id = doc.elements["//identifier[@type='AMRS Universal ID']"].text
+        patient_universal = Patient.find_by_mrn_ampath(xml_openmrs_universal_id)
+      end
 
       if patient_universal
         patient = patient_universal
@@ -255,21 +265,25 @@ class Patient < ActiveRecord::Base
 
           patient = patient_old_mrn
           patient.update_via_xml(doc)
-          patient.save!
 
         else
-          # This is a new patient, so let's create a new patient object
-          patient = Patient.new
-          patient.update_via_xml(doc)
-          patient.save!
+          if patient_actg_study
+            patient = patient_actg_study
+            patient.update_via_xml(doc)
+          else
+            # This is a new patient, so let's create a new patient object
+            patient = Patient.new
+            patient.update_via_xml(doc)
+          end
         end
 
       end
+
     else
       # Find any local patient that belongs to the given identifier
       patient = Patient.find_by_mrn_ampath(mrn_openmrs)
     end
-
+    
     return patient
 
   end
@@ -283,7 +297,11 @@ class Patient < ActiveRecord::Base
     unless doc.elements["//identifier[@type='AMRS Universal ID']"].nil?
       self.mrn_ampath = doc.elements["//identifier[@type='AMRS Universal ID']"].text
     else
-      self.mrn_ampath = doc.elements["//identifier[@type='AMRS Medical Record Number']"].text
+      unless doc.elements["//identifier[@type='AMRS Medical Record Number']"].nil?
+        self.mrn_ampath = doc.elements["//identifier[@type='AMRS Medical Record Number']"].text
+      else
+        self.mrn_ampath = doc.elements["//identifier[@type='ACTG Study ID']"].text
+      end
     end
 
     self.given_name = doc.elements["//givenName"].text unless doc.elements["//givenName"].nil?
