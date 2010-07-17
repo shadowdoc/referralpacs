@@ -3,7 +3,6 @@ class Image < ActiveRecord::Base
   
   belongs_to :encounter
 
-  BASEDIRECTORY = $image_folder # set in environment.rb
   THUMB_MAX_SIZE = [125,125]
   
   after_save :process

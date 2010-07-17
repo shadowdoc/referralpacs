@@ -79,4 +79,4 @@ require 'ruby-hl7'
 # Specify location where image files are housed
 #$image_folder = "#{RAILS_ROOT}/image_archive"
 
-$image_folder = "#{RAILS_ROOT}/image_archive"
+BASEDIRECTORY = "#{RAILS_ROOT}/image_archive"
