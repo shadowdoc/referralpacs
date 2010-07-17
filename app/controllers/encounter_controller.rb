@@ -263,6 +263,19 @@ class EncounterController < ApplicationController
     end
     
   end
+
+  def study_fixed
+    # This method is called from the Encounter Details page
+    # It takes an ID and removes the observations that correspond with the rejection
+    # of the encounter and moves it back to the new list
+
+    @encounter = Encounter.find(params[:id])
+    @encounter.observations.each {|obs| obs.destroy }
+    @encounter.status = "new"
+    @encounter.save
+
+    redirect_to :controller => :encounter, :action => :status, :requested_status => "new"
+  end
   
   def triage
     # If we have a get, just return the encounter for the view.

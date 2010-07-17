@@ -208,7 +208,7 @@ class Patient < ActiveRecord::Base
     # Either update the existing patient with the new demographic information OR create a new patient object
 
 
-    url = OPENMRS_URL_BASE + mrn_openmrs
+    url = OPENMRS_URL_BASE + "patient/" + mrn_openmrs
     
     # Create a URI object from our url string.
     url = URI.parse(url)

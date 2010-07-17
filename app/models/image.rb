@@ -88,7 +88,11 @@ class Image < ActiveRecord::Base
   
   def thumb_path
     File.join(BASEDIRECTORY, short_path, thumb_filename)
-  end  
+  end
+
+  def uuenc_thumb
+    [File.open(thumb_path).read].pack("u")
+  end
   
   private
   
