@@ -102,8 +102,15 @@ class Encounter < ActiveRecord::Base
 
   def send_hl7
 
-    if self.status == "ready_for_printing" && openmrs_verified
-      rest_hl7(hl7_message)
+    if self.status == "ready_for_printing" && self.patient.openmrs_verified?
+      if OPENMRS_HL7_PATH
+        file_write_hl7(hl7_message)
+      end
+
+      if OPENMRS_HL7_REST
+        rest_hl7(hl7_message)
+      end
+      
     end
 
   end
@@ -112,9 +119,6 @@ class Encounter < ActiveRecord::Base
     # URL Specification
     # http://myhost:serverport/openmrs/moduleServlet/restmodule/api/hl7?message=my_hl7_message_string&source=myHl7SourceName
     # from: http://openmrs.org/wiki/REST_Module
-    require 'cgi'
-
-#    msg = CGI.escape(msg)
 
     url = OPENMRS_URL_BASE + "hl7/"
 

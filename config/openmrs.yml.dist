@@ -2,10 +2,12 @@ development:
   :url: https://192.168.242.128:8443/amrs/moduleServlet/restmodule/api/patient/
   :username: username
   :password: password
-  :hl7path: hl7                              # relative to RAILS_ROOT
+  :hl7path: hl7                              # relative to RAILS_ROOT, set to false if you don't want to write to disk
+  :hl7rest: false
 
 production:
   :url: https://192.168.242.128:8443/amrs/moduleServlet/restmodule/api/patient/
   :username: username
   :password: password
-  :hl7path: hl7                              # relative to RAILS_ROOT
+  :hl7path: hl7                              # relative to RAILS_ROOT, set to false if you don't want to write to disk
+  :hl7rest: false

@@ -8,6 +8,7 @@ if RAILS_ENV != "test" && File.exists?("#{RAILS_ROOT}/config/openmrs.yml")
   OPENMRS_USERNAME = settings[:username]
   OPENMRS_PASSWORD = settings[:password]
   OPENMRS_HL7_PATH = settings[:hl7path]
+  OPENMRS_HL7_REST = settings[:hl7rest]
 else
   # set OPENMRS_SETTINGS to nil
   OPENMRS_URL_BASE = nil
