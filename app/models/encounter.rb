@@ -103,12 +103,14 @@ class Encounter < ActiveRecord::Base
   def send_hl7
 
     if self.status == "ready_for_printing" && self.patient.openmrs_verified?
+      msg = self.hl7_message
+
       if OPENMRS_HL7_PATH
-        file_write_hl7(hl7_message)
+        file_write_hl7(msg)
       end
 
       if OPENMRS_HL7_REST
-        rest_hl7(hl7_message)
+        rest_hl7(msg)
       end
       
     end
@@ -160,11 +162,8 @@ class Encounter < ActiveRecord::Base
     super
   end
 
-  def file_write_hl7
+  def file_write_hl7(msg)
     if self.status == "ready_for_printing"
-      # This method generates complete HL7 message stored in RAILS ROOT/public/hl7_development
-
-      send_hl7(msg)
 
       # First we create the directory
       path = File.join(RAILS_ROOT, OPENMRS_HL7_PATH)
