@@ -73,8 +73,10 @@ end
 
 class Provider < User
   unloadable
+  has_many :encounters
 end
 
 class Client < User
   unloadable
+  has_many :encounters
 end
