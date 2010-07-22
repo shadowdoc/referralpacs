@@ -1,0 +1,21 @@
+development:
+  :enable_starttls_auto: true
+  :address: mail-relay.iu.edu
+  :port: 587
+  :authentication: :plain
+  :user_name: 
+  :password: 
+  :domain: indyrad.iupui.edu
+  :tls: true
+
+
+production:
+  :enable_starttls_auto: true
+  :address: mail-relay.iu.edu
+  :port: 587
+  :authentication: :plain
+  :user_name: 
+  :password: 
+  :domain: indyrad.iupui.edu
+  :tls: true
+

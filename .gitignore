@@ -10,6 +10,7 @@ log
 config/database.yml
 config/openmrs.yml
 Capfile
+config/email.yml
 config/deploy.rb
 image_archive
 .idea
