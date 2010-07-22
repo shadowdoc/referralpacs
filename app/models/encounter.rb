@@ -100,7 +100,14 @@ class Encounter < ActiveRecord::Base
 
   def send_hl7
 
+      unless self.patient.openmrs_verified?
+        # Calling the find_openmrs method will search based on this patient's current mrn_ampath
+        # If the method finds a new patient, the current patient object will be updated.
+        Patient.find_openmrs(self.patient.mrn_ampath)
+      end
+
     if self.status == "ready_for_printing" && self.patient.openmrs_verified?
+
       msg = self.hl7_message
 
       if OPENMRS_HL7_PATH
