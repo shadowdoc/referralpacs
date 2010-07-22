@@ -76,9 +76,7 @@ class Encounter < ActiveRecord::Base
       msg << obx
     end
 
-    # Now, let's add the OBX that includes the uuencoded thumbnail
-
-    
+    #TODO Now, let's add the OBX that includes the uuencoded thumbnail
 
     # Add the impression OBX to the message
 
@@ -140,7 +138,16 @@ class Encounter < ActiveRecord::Base
       #result = http.request(req)
     rescue
       $openmrs_down = true
-      puts "openmrs down"
+
+      puts "****************OPEN MRS DOWN*********************"
+
+      # Let's save the message into a folder so they can be queued
+      path = File.join(RAILS_ROOT, OPENMRS_HL7_PATH, "queue")
+      filename = File.join(path, self.date.strftime("%Y-%m-%d") + "-" + self.id.to_s + ".hl7")
+
+      tango = File.new(filename, "w+")
+      tango.puts(msg.to_s) # string version of the hl7 message
+      tango.close
     end
 
   end

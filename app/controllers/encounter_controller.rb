@@ -314,7 +314,7 @@ class EncounterController < ApplicationController
 
           else
             question_concept = Concept.find_by_name("PLEURAL SCARRING")
-            value_concept = Concept.find_by_name(key.split(" ")[1].humanize.upcase)
+            value_concept = Concept.find_by_name(key.split("+")[1].humanize.upcase)
           end
 
           if value_concept.nil?
