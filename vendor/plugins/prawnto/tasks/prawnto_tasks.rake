@@ -1,4 +1,4 @@
 # desc "Explaining what the task does"
-# task :railspdf do
+# task :prawnto do
 #   # Task goes here
 # end
