@@ -18,33 +18,6 @@ class EncounterController < ApplicationController
 
   public
   
-  def add_observation
-    
-    #TODO This code could be removed now that we're using the report form
-    #rather than adding single observations.
-    
-    # Adds an observation to an encounter.
-    
-    @id = params[:encounter_id]
-    @encounter = Encounter.find(@id)
-    question_concept = Concept.find(:first, :conditions => ["name = ?", params[:concept_name]])
-    value_concept = Concept.find(:first, :conditions => ["name = ?", params[:value_concept_name]])
-    @observation = Observation.new(:encounter_id => @encounter.id,
-                                   :patient_id => @encounter.patient.id,
-                                   :question_concept_id => question_concept.id,
-                                   :value_concept_id => value_concept.id)
-    @observation.save
-    
-    if @encounter.observations.length < 2
-      # If there is only one observation, would should call the save method to make sure
-      # that the reported status changes.
-      @encounter.save    
-    end
-    
-    
-    render :partial => "add_observation", :object => @observation
-  end
-
   def details
     @encounter = Encounter.find(params[:id])
     @observation = Observation.new(:encounter_id => @encounter.id)
@@ -57,7 +30,7 @@ class EncounterController < ApplicationController
   
     if params[:id].nil?
       @encounter = Encounter.new(params[:encounter])
-      @encounter.status = "new"
+      @encounter.status = "ordered"
       @encounter.save
     else
       @encounter = Encounter.find(params[:id])
@@ -231,32 +204,18 @@ class EncounterController < ApplicationController
       @encounters_during_range = Encounter.find_range(params[:report][:start_date], params[:report][:end_date])
     end
     
-    @new = 0
-    
-    Encounter.find_all_by_status("new").each do |enc|
-      if !enc.images.empty?
-        @new += 1
-      end
-    end
-    
+    @new = Encounter.find_all_by_status("new").length    
     @ready_for_printing = Encounter.find_all_by_status("ready_for_printing").length
     @radiologist_to_read = Encounter.find_all_by_status("radiologist_to_read").length
     @final = Encounter.find_all_by_status("final").length
     @archived = Encounter.find_all_by_status("archived").length
     @rejected = Encounter.find_all_by_status("rejected").length
-
+    @ordered = Encounter.find_all_by_status("ordered").length
   end
   
   def status
     
-    if params[:requested_status] == "new"
-      @encounters = Encounter.find_all_by_status("new")
-      encounter_temp = []
-      @encounters.each {|e| encounter_temp << e if e.images.count != 0 }
-      @encounters = encounter_temp.to(19)
-    else
-      @encounters = Encounter.find_all_by_status(params[:requested_status], :limit => 20, :order => "date ASC")
-    end
+   @encounters = Encounter.find_all_by_status(params[:requested_status], :limit => 20, :order => "date ASC")
     
     if @encounters.length == 0
       render :text => "No encounters with status - #{params[:requested_status].humanize}", :layout => true
