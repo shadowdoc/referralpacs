@@ -1,5 +1,6 @@
 begin_time = Time.now.midnight - 1.month
 end_time = Time.now.midnight
+recipients = ["mkohli@iupui.edu", "kelvin.ogot@gmail.com", "abuyajm@yahoo.com", "pwamboye@yahoo.com", "wanenegl@yahoo.com", "matjohns@iupui.edu", "dagarwal@iupui.edu"]
 
 patients = Patient.count
 new = Encounter.find_all_by_status("new").length
@@ -27,4 +28,4 @@ monthly_encounters.each do |enc|
   end
 end
 
-StatisticsMailer.deliver_monthly(begin_time, end_time, active_providers, patients, new, ready_for_printing, radiologist_to_read, final, archived, rejected, ordered)
+StatisticsMailer.deliver_monthly(begin_time, end_time, recipients, active_providers, patients, new, ready_for_printing, radiologist_to_read, final, archived, rejected, ordered)
