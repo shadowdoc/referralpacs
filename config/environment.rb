@@ -66,12 +66,6 @@ ActiveSupport::CoreExtensions::Date::Conversions::DATE_FORMATS.merge!(
   :default => '%Y-%m-%d'
 )
 
-# Requried to use railspdf and .rpdf views , currently used by registrars
-# to generate reports.
-#gem 'pdf-writer'
-gem 'pdf-writer'
-ActionView::Template.register_template_handler 'rpdf', RailsPDF::PDFRender
-
 # migrating to prawn for pdf support
 require 'prawn'
 
