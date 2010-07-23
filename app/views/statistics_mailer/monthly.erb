@@ -1,4 +1,4 @@
-Time Period: <%= @begin_time %> to <%= @end_time %>
+Time Period: <%= @begin_time.strftime("%d-%m-%y") %> to <%= @end_time.strftime("%d-%m-%y") %>
 
 Total Patients: <%= @patients %>
 Final: <%= @final %>
