@@ -1,3 +1,5 @@
+Time Period: <%= @begin_time %> to <%= @end_time %>
+
 Total Patients: <%= @patients %>
 Final: <%= @final %>
 New: <%= @new %>
@@ -6,3 +8,10 @@ Ready for Printing: <%= @ready_for_printing %>
 Radiologist to read: <%= @radiologist_to_read %>
 Archived: <%= @archived %>
 Rejected: <%= @rejected %>
+
+
+<% @active_providers.each do |key,value| -%>
+Radiologist: <%= key %>
+Count: <%= value %>
+
+<% end -%>
