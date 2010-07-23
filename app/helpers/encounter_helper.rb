@@ -20,7 +20,7 @@ module EncounterHelper
       
       # Only show the print link if there is an available report
       if encounter.status == "final" || encounter.status == "ready_for_printing"
-        @links << link_to('Print Report', :action => 'pdf_report', :id => encounter.id)
+        @links << link_to('Print Report', :action => 'pdf_report', :id => encounter.id, :format => :pdf)
       end
 
       @links << link_to('Delete', 

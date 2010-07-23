@@ -1,6 +1,5 @@
 class EncounterController < ApplicationController
   layout "ref"
-  require "railspdf"
   before_filter :authorize_login
   before_filter :security, :except => [:find, :show] # make sure to check permission for all except find and show
   
@@ -97,9 +96,17 @@ class EncounterController < ApplicationController
     @encounter = Encounter.find(params[:id])
     @observations = @encounter.observations.sort! {|x, y| y.question_concept.name <=> x.question_concept.name }
     @patient = @encounter.patient
-    @rails_pdf_name = "#{@encounter.date.strftime("%d-%m-%y")}-#{@patient.full_name}.pdf"
     @encounter.status = "final"
     @encounter.save
+
+   prawnto :prawn => {
+      :page_size => 'A4',
+      :left_margin => 50,
+      :right_margin => 50,
+      :top_margin => 24,
+      :bottom_margin => 24},
+      :filename => "#{@encounter.date.strftime("%d-%m-%y")}-#{@patient.full_name}.pdf"
+
     render :layout => false
   end
   
