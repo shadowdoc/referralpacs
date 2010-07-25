@@ -193,7 +193,7 @@ class EncounterController < ApplicationController
     @encounter.status = "rejected"
     @encounter.save
 
-    redirect_to :action => :status, :requested_status => "rejected"
+    redirect_to :action => :status, :requested_status => "new"
   end
 
   
