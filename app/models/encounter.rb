@@ -142,7 +142,7 @@ class Encounter < ActiveRecord::Base
     http.use_ssl = true
     
     begin
-      #result = http.request(req)
+      result = http.request(req)
     rescue
       $openmrs_down = true
 
