@@ -291,7 +291,7 @@ class Patient < ActiveRecord::Base
   def update_via_xml(doc)
     # This method takes a REXML document and updates a patient object
 
-
+    old_mrn = self.mrn_ampath
     # Here is our preference to store the Universal ID
 
     unless doc.elements["//identifier[@type='AMRS Universal ID']"].nil?
@@ -320,14 +320,17 @@ class Patient < ActiveRecord::Base
     # Now that we have a new patient object that is updated.  Let's see if a patient already exists with this new
     # preferred identifier.
 
-    existing_patient = Patient.find_by_mrn_ampath(self.mrn_ampath)
+    existing_patient = Patient.find_by_mrn_ampath(old_mrn)
 
     if existing_patient
       # In this case, we have two patients that we need to merge.
       self.encounters << existing_patient.encounters
       existing_patient.destroy
       self.save!
+    else
+      self.save!
     end
+
 
   end
   
