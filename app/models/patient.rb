@@ -316,8 +316,19 @@ class Patient < ActiveRecord::Base
     self.country = doc.elements["//country"].text unless doc.elements["//country"].nil?
     self.mtrh_rad_id = nil
     self.openmrs_verified = true
-    self.save!
-    
+
+    # Now that we have a new patient object that is updated.  Let's see if a patient already exists with this new
+    # preferred identifier.
+
+    existing_patient = Patient.find_by_mrn_ampath(self.mrn_ampath)
+
+    if existing_patient
+      # In this case, we have two patients that we need to merge.
+      self.encounters << existing_patient.encounters
+      existing_patient.destroy
+      self.save!
+    end
+
   end
   
   def validate
