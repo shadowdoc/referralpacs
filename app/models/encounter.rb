@@ -72,7 +72,7 @@ class Encounter < ActiveRecord::Base
     self.images.each do |image|
       obx = HL7::Message::Segment::OBX.new
       obx.value_type = "RP"
-      obx.observation_value = image.id + "^REFPACS^#{self.encounter_type.modality}"
+      obx.observation_value = image.id.to_s + "^REFPACS^#{self.encounter_type.modality}"
       msg << obx
     end
 
