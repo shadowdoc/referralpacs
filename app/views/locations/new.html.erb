@@ -1,0 +1,16 @@
+<h1>New location</h1>
+
+<% form_for(@location) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+      Site Name: <%= f.text_field :name %>
+  </p>
+
+
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', locations_path %>

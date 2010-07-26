@@ -90,7 +90,7 @@ class Image < ActiveRecord::Base
   end
 
   def uuenc_thumb
-    [File.open(thumb_path).read].pack("u")
+    "begin 644 #{self.thumb_filename}\n" + [File.open(thumb_path).read].pack("u") + "end"
   end
   
   private
