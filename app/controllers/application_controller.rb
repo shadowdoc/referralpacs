@@ -39,7 +39,7 @@ class ApplicationController < ActionController::Base
     msh.recv_app = "HL7LISTENER"
     msh.recv_facility = "AMRS"
     msh.time = timestamp
-    msh.message_type = "ORU^RO1"
+    msh.message_type = "ORU^R01"
     msh.message_control_id = sending_facility + timestamp
     msh.processing_id = 'P'
     msh.version_id = "2.5"
