@@ -101,7 +101,15 @@ module ApplicationHelper
     @all_providers = Provider.find(:all)
     @all_clients = Client.find(:all)
     @all_locations = Location.find(:all)
+
+    @statuses = []
+    Struct.new("Status", :id, :name)
+    status_array = ["ordered", "new", "ready_for_printing", "final", "rejected", "archived", ]
+
+    status_array.each {|s| @statuses << Struct::Status.new(s, s) }
+      
   end
+
   
   def javascript(url)
     content_for :javascript do
