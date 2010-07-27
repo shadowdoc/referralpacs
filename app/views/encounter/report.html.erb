@@ -5,7 +5,7 @@
 <div class="report_form">
   <fieldset>
   	<legend>Clinical Summary</legend>
-	<%= text_area_tag "clinical_summary", "Location: #{@encounter.location.name} Indication: #{@encounter.indication}", :disabled => "true", :size => "100x5" %>
+	<%= text_area_tag "clinical_summary", "Location: #{@encounter.location.name} \n\n Indication: #{@encounter.indication}", :disabled => "true", :size => "100x5" %>
   </fieldset>
   <fieldset>
     <legend>Lungs</legend> 
