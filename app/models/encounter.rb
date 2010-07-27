@@ -121,15 +121,15 @@ class Encounter < ActiveRecord::Base
     # http://myhost:serverport/openmrs/moduleServlet/restmodule/api/hl7?message=my_hl7_message_string&source=myHl7SourceName
     # from: http://openmrs.org/wiki/REST_Module
 
-    url = OPENMRS_URL_BASE + "hl7/"
+    url = OPENMRS_BASE_URL + "hl7/"      # The trailing slash here is critical.
 
     # Create a URI object from our url string.
     url = URI.parse(url)
 
     # Create a request object from our url and attach the authorization data.
-    req = Net::HTTP::Put.new(url.path)
+    req = Net::HTTP::Post.new(url.path)
     req.basic_auth(OPENMRS_USERNAME, OPENMRS_PASSWORD)
-    req.set_form_data({'MESSAGE' => msg.to_s, 'SOURCE' => 'REFPACS'})
+    req.set_form_data({'message' => msg.to_s, 'source' => msg[0].sending_facility})
     
     http = Net::HTTP.new(url.host, url.port)
 
@@ -137,6 +137,7 @@ class Encounter < ActiveRecord::Base
     
     begin
       result = http.request(req)
+      puts result
     rescue
       $openmrs_down = true
 

@@ -27,20 +27,19 @@ class ApplicationController < ActionController::Base
     # http://openmrs.org/wiki/HL7
     
     # This is the Message Header (MSH segment)
-    
-    sending_facility = "REFPACS"
+
     timestamp = Time.now.strftime("%Y%m%d%H%M%S")
     
     HL7::Message::Segment::MSH.class_eval { add_field(:message_profile, :idx => 18) }
     msh = HL7::Message::Segment::MSH.new
     msh.enc_chars = '^~\&'
-    msh.sending_app = sending_facility
-    msh.sending_facility = "MTRH Radiology"
+    msh.sending_app = OPENMRS_SENDING_FACILITY
+    msh.sending_facility = OPENMRS_SENDING_FACILITY
     msh.recv_app = "HL7LISTENER"
-    msh.recv_facility = "AMRS"
+    msh.recv_facility = OPENMRS_RECV_FACILITY
     msh.time = timestamp
     msh.message_type = "ORU^R01"
-    msh.message_control_id = sending_facility + timestamp
+    msh.message_control_id = OPENMRS_SENDING_FACILITY + timestamp
     msh.processing_id = 'P'
     msh.version_id = "2.5"
     msh.seq = 1

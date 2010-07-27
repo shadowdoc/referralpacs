@@ -4,6 +4,8 @@ development:
   :password: password
   :hl7path: hl7                              # relative to RAILS_ROOT, set to false if you don't want to write to disk
   :hl7rest: false
+  :hl7sending_facility: LOCAL                # A matching entry needs to be in the OpenMRS hl7_sources table
+  :hl7recv_facility: AMRS
 
 production:
   :url: https://192.168.242.128:8443/amrs/moduleServlet/restmodule/api/patient/
@@ -11,3 +13,5 @@ production:
   :password: password
   :hl7path: hl7                              # relative to RAILS_ROOT, set to false if you don't want to write to disk
   :hl7rest: false
+  :hl7sending_facility: LOCAL                # A matching entry needs to be in the OpenMRS hl7_sources table
+  :hl7recv_facility: AMRS                    
