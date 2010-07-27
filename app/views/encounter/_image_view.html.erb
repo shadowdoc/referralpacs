@@ -15,6 +15,10 @@
       <% encounter.observations.each do |obs| -%>
          <%= obs.question_concept.name + "-" + obs.value_concept.name %><br/>
       <% end -%>
+      <div class = "img_container_header">
+        <%= encounter.impression unless encounter.impression.nil? %>
+      </div>
+
     <div class="img_container_header">
       Radiologist: <br/>
     </div>
