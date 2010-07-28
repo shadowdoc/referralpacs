@@ -137,12 +137,9 @@ class Encounter < ActiveRecord::Base
     
     begin
       result = http.request(req)
-      puts result
     rescue
       $openmrs_down = true
-
-      puts "****************OPEN MRS DOWN*********************"
-
+      
       # Let's save the message into a folder so they can be queued
       path = File.join(RAILS_ROOT, OPENMRS_HL7_PATH, "queue")
       filename = File.join(path, self.date.strftime("%Y-%m-%d") + "-" + self.id.to_s + ".hl7")
