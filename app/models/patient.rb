@@ -90,7 +90,7 @@ class Patient < ActiveRecord::Base
     pid = HL7::Message::Segment::PID.new    
 
     # Split the AMPATH MRN into it's ID and check digit
-    ampath_id, check_digit = mrn_ampath.split("-")
+    # ampath_id, check_digit = mrn_ampath.split("-")
     
     # Patient Id List
     # 1MT^0^M10| 
@@ -99,7 +99,7 @@ class Patient < ActiveRecord::Base
     #    ^ Check Digit Scheme (M10) 
     #    ^ Assigning Authority (hopefully won't have to use.. but if we need multiples) 
     #    // a ~ would separate multiple occurrences of PIDs
-    pid.patient_id_list = ampath_id + "^" + check_digit + "^M10"
+    pid.patient_id_list = self.mrn_ampath + "^M10^AMRS^MR"
     
     # Patient Name
     # Patient^Jonny^Dee^^DR| 
@@ -123,12 +123,12 @@ class Patient < ActiveRecord::Base
     #    Date/Time of Birth (YYYYMMDDHHMMSS) 
     #    ^ Degree of Precision (for our purposes Y = estimated, and null = actual)
     
-    pid.patient_dob = hl7_birthday
+    #pid.patient_dob = hl7_birthday
     
     # M| 
     #    Administrative Sex (M) .. M, F, O, U, A, N possible answers
     # Will set to unkown for now, we don't have good verification to these types.
-    pid.admin_sex = hl7_sex
+    #pid.admin_sex = hl7_sex
     
     # 555 Johnson Road^Apt. 555^Indianapolis^IN^46202^USA| 
     #    Street Address 
