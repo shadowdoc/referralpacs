@@ -19,6 +19,10 @@ class ImageController < ApplicationController
 
   public
   def view
+
+    # This method is called when the browser needs to display an image.  This is important
+    # for security purposes, ensuring that someone is logged in, not just guessing URLs
+
     @image = Image.find(params[:id])
     @encounter = @image.encounter
     
@@ -31,6 +35,9 @@ class ImageController < ApplicationController
   end
   
   def thumb
+    # This method is called when the browser needs to display a thumbnail.  This is important
+    # for security purposes, ensuring that someone is logged in, not just guessing URLs
+
     @image = Image.find(params[:id])
     respond_to do |format|
       format.jpg { send_file(@image.thumb_path, :type => 'image/jpeg', :disposition => 'inline') }
@@ -38,7 +45,6 @@ class ImageController < ApplicationController
   end
   
   def upload_image
-      
     # Given an encounter, this creates a new image object and links the two.
     @encounter = Encounter.find(params[:id])
     
@@ -47,11 +53,20 @@ class ImageController < ApplicationController
   end
 
   def add_image
+    # This method is called by the upload_image view, it takes the image data
+    # and adds it to the newly created image object
+
     @image = Image.create(params[:image])
+
+    # Since we now have an image, let's set the encounter status to new so it shows up on the worklist.
+    # This will also bring it back on the worklist if a new image is added after the report has been
+    # finalized
+
+    @image.encounter.status = "new"
     flash[:notice] = 'File uploaded'
     redirect_to(:controller => "encounter", :action => 'details', :id => @image.encounter.id)
   end
-  
+
   def remove_image
     # Destroys an image given an id
     
