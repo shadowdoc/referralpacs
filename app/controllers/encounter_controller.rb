@@ -11,7 +11,7 @@ class EncounterController < ApplicationController
     
     unless @current_user.privilege.modify_encounter
       flash[:notice] = "Not enough privilege to modify encounter."
-      return(redirect_to :controller => "patient", :action => "find")
+      redirect_to :controller => "patient", :action => "find"
     end 
   end
 
@@ -62,14 +62,15 @@ class EncounterController < ApplicationController
     @patient = Patient.find(params[:id])
     @encounter = Encounter.new()  
     @encounter.patient_id = @patient.id
-    @encounter.status = "new"
+    @encounter.status = "ordered" # New exams are just "ordered" until they have an image.
     @observation = Observation.new(:encounter_id => @encounter.id, :patient_id => @encounter.patient.id)
     
   end
   
   def delete
-    
-    # This method will permenantly delete an encounter
+    # Given an encounter id
+    # This method will delete an encounter
+    # and return a message to its view.
     
     @id = params[:encounter_id] 
     @encounter = Encounter.find(params[:id])
@@ -99,7 +100,7 @@ class EncounterController < ApplicationController
     @encounter.status = "final"
     @encounter.save
 
-   prawnto :prawn => {
+    prawnto :prawn => {
       :page_size => 'A4',
       :left_margin => 50,
       :right_margin => 50,
@@ -144,7 +145,7 @@ class EncounterController < ApplicationController
       end
       
       # If there are no errors, let's send the user back to the worklist
-      # Which would be Radiologist To Review for a rad and Triage for an assistant
+      # Which would be Radiologist To Review or new for a rad and Triage for an assistant
       
       if @encounter.errors.count == 0
         if Encounter.find_all_by_status("radiologist_to_review").empty?
