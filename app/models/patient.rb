@@ -55,7 +55,7 @@ class Patient < ActiveRecord::Base
   end
   
   def dicom_birthday
-    return birthdate.strftime("%Y%m%d")
+    birthdate.strftime("%Y%m%d")
   end
   
   def hl7_birthday
@@ -68,7 +68,7 @@ class Patient < ActiveRecord::Base
       precision = ""
     end
     
-    return birthdate.strftime("%Y%m%d%H%M%S") + "^" + precision
+    birthdate.strftime("%Y%m%d%H%M%S") + "^" + precision
     
   end
   
@@ -90,7 +90,7 @@ class Patient < ActiveRecord::Base
     pid = HL7::Message::Segment::PID.new    
 
     # Split the AMPATH MRN into it's ID and check digit
-    # ampath_id, check_digit = mrn_ampath.split("-")
+    ampath_id, check_digit = mrn_ampath.split("-")
     
     # Patient Id List
     # 1MT^0^M10| 
@@ -99,7 +99,7 @@ class Patient < ActiveRecord::Base
     #    ^ Check Digit Scheme (M10) 
     #    ^ Assigning Authority (hopefully won't have to use.. but if we need multiples) 
     #    // a ~ would separate multiple occurrences of PIDs
-    pid.patient_id_list = self.mrn_ampath + "^M10^AMRS^MR"
+    pid.patient_id_list = self.mrn_ampath + "^" + check_digit + "^M10^AMRS Universal ID^PT"
     
     # Patient Name
     # Patient^Jonny^Dee^^DR| 
@@ -117,18 +117,20 @@ class Patient < ActiveRecord::Base
     #    ^ Second / Middle Name (Thee) 
     #    ^ Suffix () 
     #    ^ Prefix (MS)
-    #pid.mothers_maiden_name = 
+    #pid.mothers_maiden_name =
     
     # 20040101000000| 
     #    Date/Time of Birth (YYYYMMDDHHMMSS) 
     #    ^ Degree of Precision (for our purposes Y = estimated, and null = actual)
     
     #pid.patient_dob = hl7_birthday
-    
+    pid.patient_dob = ""
+
     # M| 
     #    Administrative Sex (M) .. M, F, O, U, A, N possible answers
-    # Will set to unkown for now, we don't have good verification to these types.
+    # Will set to unknown for now, we don't have good verification to these types.
     #pid.admin_sex = hl7_sex
+    pid.admin_sex = ""
     
     # 555 Johnson Road^Apt. 555^Indianapolis^IN^46202^USA| 
     #    Street Address 
@@ -138,6 +140,7 @@ class Patient < ActiveRecord::Base
     #    ^ Zip
     # We're not using this as we don't often have address information.  We're not the gold standard anyway!
     #pid.address = address1 unless address1.nil? + "^" + address2 unless address2.nil? + "^" + city_village unless city_village.nil? + "^" + state_province unless state_province.nil?
+    pid.address = ""
 
     # The remaining pid fields are unused at the current time.
     

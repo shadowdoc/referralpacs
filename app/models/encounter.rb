@@ -95,7 +95,7 @@ class Encounter < ActiveRecord::Base
       msg << obx
     end
 
-     return msg
+    msg  # This returns the fully formed message
   end
 
   def send_hl7
@@ -121,7 +121,7 @@ class Encounter < ActiveRecord::Base
     # http://myhost:serverport/openmrs/moduleServlet/restmodule/api/hl7?message=my_hl7_message_string&source=myHl7SourceName
     # from: http://openmrs.org/wiki/REST_Module
 
-    url = OPENMRS_BASE_URL + "hl7/"      # The trailing slash here is critical.
+    url = OPENMRS_URL_BASE + "hl7/"      # The trailing slash here is critical.
 
     # Create a URI object from our url string.
     url = URI.parse(url)
