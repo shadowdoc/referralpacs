@@ -1,12 +1,14 @@
 <div class="img-container">
     <% encounter = @image.encounter -%>
-    <%= image_tag "/image/view/#{@image.id}.jpg", :width => "100%" %>
+    <%= image_tag @image.url, :width => "100%" %>
+
 </div>
 <div class="img_container_text">
     <div class="img_container_header">
       Study Date: <br/>
     </div>
     <%= encounter.date.strftime("%d-%m-%y") %>
+    Name: <%= @patient.full_name -%> MRN: <%= @patient.mrn_ampath -%>
 
     <% if encounter.status == "final" || encounter.status == "ready_for_printing" -%>
       <div class="img_container_header">

@@ -78,7 +78,7 @@ class Image < ActiveRecord::Base
   end
   
   def dicom_filename
-    File.join(BASEDIRECTORY, short_path, file_root + ".dcm")
+    File.join(BASEDIRECTORY, file_root + ".dcm")
   end
   
   def image_path
@@ -92,7 +92,21 @@ class Image < ActiveRecord::Base
   def uuenc_thumb
     "begin 644 #{self.thumb_filename}\n" + [File.open(thumb_path).read].pack("u") + "end"
   end
-  
+
+  def url
+    # This method returns the basic URL for an image hosted on our system, or returns the
+    # WADO url for an image hosted on dcm4chee
+
+    if self.instance_uid == ""
+      "/image/view/#{self.id}.jpg"
+    else
+      # We unfortunately have to grab the SeriesUID from the dcm4chee database because our
+      # Data model does not include series.
+      series  = Dcm4cheeInstance.find(self.instance_uid).dcm4chee_series
+      DCM4CHEE_URL_BASE + "wado?requestType=WADO&studyUID=#{self.encounter.study_uid}&seriesUID=#{series.series_iuid}&objectUID=#{self.instance_uid}"
+    end
+  end
+
   private
   
   def process
@@ -174,7 +188,13 @@ class Image < ActiveRecord::Base
 # Series Instance UID
 #0020,000E:
 # Series Number
-00200011:1"
+00200011:1
+
+# SOP Common Module Attributes
+# SOP Class UID
+00080016:1.2.840.10008.5.1.4.1.1.7
+# SOP Instance UID
+#00080018"
     end
   end
 

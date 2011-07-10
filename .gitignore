@@ -8,6 +8,7 @@ log
 .aptana
 .loadpath
 config/database.yml
+config/dcm4chee.yml
 config/openmrs.yml
 Capfile
 config/email.yml

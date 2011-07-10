@@ -66,6 +66,51 @@ class EncounterController < ApplicationController
     @observation = Observation.new(:encounter_id => @encounter.id, :patient_id => @encounter.patient.id)
     
   end
+
+  def new_dcm4chee(dcm_study)
+    # This method is called from the script that reads from the dcm4chee database.
+    # It recieves a dcm4chee_study object, and then does several actions including
+    # finding or creating a new patient.
+
+    # Right now we are only accepting CXRs so we will only accept images from that SOP class
+
+
+    if dcm_study.dcm4chee_series[0].dcm4chee_instances[0].sop_cuid == "1.2.840.10008.5.1.4.1.1.7"  # TODO this needs to be set for the POC sop class.
+
+      dcm_patient = dcm_study.dcm4chee_patient
+      dcm_mrn = dcm_patient.pat_id
+
+      patient = Patient.find_openmrs(dcm_mrn)
+
+      if patient.nil?
+        # We have a new patient, but the OpenMRS server appears to be down.
+        patient = Patient.new
+
+        patient.family_name, patient.given_name, patient.middle_name = dcm_patient.pat_name.split("^") # Standard HL7 names are used in DICOM
+        patient.birthdate = dcm_patient.pat_birthdate
+        patient.save!
+      end
+
+      enc = Encounter.new
+      enc.patient_id = patient.id
+      enc.date = dcm_study.study_datetime
+      enc.status = "new"
+      enc.study_uid = dcm_study.study_iuid
+      enc.encounter_type_id = 1 # These are all CXRs
+      enc.save!
+
+      # Loop through each series to make sure we get all of the CXRs
+
+      dcm_study.dcm4chee_series.each do |s|
+        s.dcm4chee_instances.each do |i|
+          image = Image.new
+          image.encounter_id = enc.id
+          image.instance_uid = i.sop_iuid
+          image.save!
+        end
+      end
+    end
+  end
   
   def delete
     # Given an encounter id
