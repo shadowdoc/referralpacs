@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110708090903) do
+ActiveRecord::Schema.define(:version => 20110710092108) do
 
   create_table "answers", :force => true do |t|
     t.integer "concept_id"
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(:version => 20110708090903) do
     t.boolean  "teachingfile",       :default => false
     t.string   "teachingfilereason"
     t.integer  "location_id"
+    t.string   "study_uid"
   end
 
   add_index "encounters", ["patient_id"], :name => "patient_id_ix"
@@ -66,6 +67,7 @@ ActiveRecord::Schema.define(:version => 20110708090903) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "extension",    :limit => 5, :default => "jpg"
+    t.string   "instance_uid"
   end
 
   add_index "images", ["encounter_id"], :name => "encounter_id_ix"

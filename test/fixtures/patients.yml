@@ -18,3 +18,13 @@ stanley:
   tribe_id:    1
   birthdate:   2008-09-24 00:00:00.0
   gender:      Male
+
+blackstar:
+  id: 3
+  given_name:  BLACKSTAR
+  family_name: KOHLI
+  mtrh_rad_id: 94857
+  mrn_ampath:  96874787365-9
+  tribe_id:    2
+  birthdate:   2011-07-10 00:00:00.0
+  gender:      Male

@@ -198,9 +198,10 @@ class Patient < ActiveRecord::Base
     return patients
     
   end
-  
+
+
   def Patient.find_openmrs(mrn_openmrs)
-    # This method takes an OpenMRS identifier, communicates with the OpenMRS REST interface and then
+    # It takes an OpenMRS identifier, communicates with the OpenMRS REST interface and then
     # uses REXML to process the response.
     #
     # All of the globals below are set in config/openmrs.conf.rb
@@ -210,81 +211,85 @@ class Patient < ActiveRecord::Base
     # Search the openmrs server for patients with this mrn
     # Either update the existing patient with the new demographic information OR create a new patient object
 
+    if OPENMRS_URL_BASE.nil?
+      # Not integrated with an OpenMRS install.  Find any local patient that belongs to the given identifier
+      patient = Patient.find_by_mrn_ampath(mrn_openmrs)
+    else
+      url = OPENMRS_URL_BASE + "patient/" + mrn_openmrs
 
-    url = OPENMRS_URL_BASE + "patient/" + mrn_openmrs
-    
-    # Create a URI object from our url string.
-    url = URI.parse(url)
+      # Create a URI object from our url string.
+      url = URI.parse(url)
 
-    # Create a request object from our url and attach the authorization data.
-    req = Net::HTTP::Get.new(url.path)
-    req.basic_auth(OPENMRS_USERNAME, OPENMRS_PASSWORD)
+      # Create a request object from our url and attach the authorization data.
+      req = Net::HTTP::Get.new(url.path)
+      req.basic_auth(OPENMRS_USERNAME, OPENMRS_PASSWORD)
 
-    http = Net::HTTP.new(url.host, url.port)
-    
-    http.use_ssl = true
-    
-    begin
-      result = http.request(req)
-    rescue
-      $openmrs_down = true
-      puts "openmrs down"
-    end
+      http = Net::HTTP.new(url.host, url.port)
 
-    doc = REXML::Document.new(result.read_body) unless result.nil?
+      http.use_ssl = true
 
-    # Let's see if we got a good result from openmrs
-
-
-    # We got a good result - let's see if we already know this patient by either their Universal ID
-    # or their Ampath MRN
-
-    # Let's see if we have patient objects for either the openmrs_mrn or universal_id
-
-    unless doc.nil? || doc.elements["//identifier"].nil?
-      $openmrs_down = false
-
-      if doc.elements["//identifier[@type='ACTG Study ID']"]
-        xml_actg_study = doc.elements["//identifier[@type='ACTG Study ID']"].text
-        patient_actg_study = Patient.find_by_mrn_ampath(xml_actg_study)
+      begin
+        result = http.request(req)
+      rescue
+        $openmrs_down = true
+        puts "openmrs down"
       end
 
-      if doc.elements["//identifier[@type='AMRS Medical Record Number']"]
-        xml_openmrs_mrn = doc.elements["//identifier[@type='AMRS Medical Record Number']"].text
-        patient_old_mrn = Patient.find_by_mrn_ampath(xml_openmrs_mrn)
-      end
+      doc = REXML::Document.new(result.read_body) unless result.nil?
 
-      if doc.elements["//identifier[@type='AMRS Universal ID']"]
-        xml_openmrs_universal_id = doc.elements["//identifier[@type='AMRS Universal ID']"].text
-        patient_universal = Patient.find_by_mrn_ampath(xml_openmrs_universal_id)
-      end
+      # Let's see if we got a good result from openmrs
 
-      if patient_universal
-        patient = patient_universal
-      else
-        if patient_old_mrn
-          # Update the patient record with the latest info from openmrs server
-          # Also, this will change the patient's MRN to the Universal ID if it's available.
 
-          patient = patient_old_mrn
-          patient.update_via_xml(doc)
+      # We got a good result - let's see if we already know this patient by either their Universal ID
+      # or their Ampath MRN
 
-        else
-          if patient_actg_study
-            patient = patient_actg_study
-            patient.update_via_xml(doc)
-          else
-            # This is a new patient, so let's create a new patient object
-            patient = Patient.new
-            patient.update_via_xml(doc)
-          end
+      # Let's see if we have patient objects for either the openmrs_mrn or universal_id
+
+      unless doc.nil? || doc.elements["//identifier"].nil?
+        $openmrs_down = false
+
+        if doc.elements["//identifier[@type='ACTG Study ID']"]
+          xml_actg_study = doc.elements["//identifier[@type='ACTG Study ID']"].text
+          patient_actg_study = Patient.find_by_mrn_ampath(xml_actg_study)
         end
 
+        if doc.elements["//identifier[@type='AMRS Medical Record Number']"]
+          xml_openmrs_mrn = doc.elements["//identifier[@type='AMRS Medical Record Number']"].text
+          patient_old_mrn = Patient.find_by_mrn_ampath(xml_openmrs_mrn)
+        end
+
+        if doc.elements["//identifier[@type='AMRS Universal ID']"]
+          xml_openmrs_universal_id = doc.elements["//identifier[@type='AMRS Universal ID']"].text
+          patient_universal = Patient.find_by_mrn_ampath(xml_openmrs_universal_id)
+        end
+
+        if patient_universal
+          patient = patient_universal
+        else
+          if patient_old_mrn
+            # Update the patient record with the latest info from openmrs server
+            # Also, this will change the patient's MRN to the Universal ID if it's available.
+
+            patient = patient_old_mrn
+            patient.update_via_xml(doc)
+
+          else
+            if patient_actg_study
+              patient = patient_actg_study
+              patient.update_via_xml(doc)
+            else
+              # This is a new patient, so let's create a new patient object
+              patient = Patient.new
+              patient.update_via_xml(doc)
+            end
+          end
+
+        end
+      else
+        # The OpenMRS server doesn't know the patient, let's see if we have a local patient or not.
+        patient = Patient.find_by_mrn_ampath(mrn_openmrs)
       end
 
-    else
-      # Find any local patient that belongs to the given identifier
-      patient = Patient.find_by_mrn_ampath(mrn_openmrs)
     end
     
     return patient
