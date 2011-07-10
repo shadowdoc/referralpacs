@@ -151,22 +151,6 @@ class Encounter < ActiveRecord::Base
 
   end
 
-  def update
-    # This code will move images from one encounter date to another, making the change much easier.
-
-    old_date = Encounter.find(self.id).date
-
-    super
-
-    if old_date != self.date    
-      if self.images.length != 0
-        self.images.each do |image|
-          image.change_encounter_date(old_date)
-        end
-      end
-    end
-    super
-  end
 
   def file_write_hl7(msg)
     if self.status == "ready_for_printing"
@@ -181,6 +165,22 @@ class Encounter < ActiveRecord::Base
     end
 
   end
-  
+
+  def update
+    # This code will move images from one encounter date to another, making the change much easier.
+
+    old_date = Encounter.find(self.id).date
+
+    super
+
+    if old_date != self.date
+      if self.images.length != 0
+        self.images.each do |image|
+          image.change_encounter_date(old_date)
+        end
+      end
+    end
+    super
+  end
 
 end
