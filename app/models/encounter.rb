@@ -1,7 +1,6 @@
 class Encounter < ActiveRecord::Base
 
   validates_presence_of :date, :encounter_type
-  validates_uniqueness_of :study_uid
   belongs_to :patient
   belongs_to :encounter_type
   belongs_to :location
