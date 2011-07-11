@@ -6,10 +6,12 @@
 <div class="img_container_text">
     <div class="img_container_header">
       Study Date: <br/>
+      <%= encounter.date.strftime("%d-%m-%y") %>
+      Name: <br/>
+      <%= @patient.full_name -%><br/>
+      MRN: <br/>
+      <%= @patient.mrn_ampath -%>
     </div>
-    <%= encounter.date.strftime("%d-%m-%y") %>
-    Name: <%= @patient.full_name -%> MRN: <%= @patient.mrn_ampath -%>
-
     <% if encounter.status == "final" || encounter.status == "ready_for_printing" -%>
       <div class="img_container_header">
             Observations: <br/>
