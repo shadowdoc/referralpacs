@@ -99,7 +99,7 @@ class Patient < ActiveRecord::Base
     #    ^ Check Digit Scheme (M10) 
     #    ^ Assigning Authority (hopefully won't have to use.. but if we need multiples) 
     #    // a ~ would separate multiple occurrences of PIDs
-    pid.patient_id_list = self.mrn_ampath + "^" + check_digit + "^M10^AMRS Universal ID^PT"
+    pid.patient_id_list = ampath_id + "^" + check_digit + "^M10^AMRS Universal ID^PT"
     
     # Patient Name
     # Patient^Jonny^Dee^^DR| 
@@ -226,7 +226,10 @@ class Patient < ActiveRecord::Base
 
       http = Net::HTTP.new(url.host, url.port)
 
-      http.use_ssl = true
+
+      if OPENMRS_URL_BASE.slice(4,1) == "s"
+        http.use_ssl = true
+      end
 
       begin
         result = http.request(req)

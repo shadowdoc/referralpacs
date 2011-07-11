@@ -106,21 +106,23 @@ class Encounter < ActiveRecord::Base
       msg = self.hl7_message
 
       if OPENMRS_HL7_PATH
-        file_write_hl7(msg)
+        file_write_hl7
       end
 
       if OPENMRS_HL7_REST
-        rest_hl7(msg)
+        rest_hl7
       end
       
     end
 
   end
 
-  def rest_hl7(msg)
+  def rest_hl7
     # URL Specification
     # http://myhost:serverport/openmrs/moduleServlet/restmodule/api/hl7?message=my_hl7_message_string&source=myHl7SourceName
     # from: http://openmrs.org/wiki/REST_Module
+
+    msg = self.hl7_message
 
     url = OPENMRS_URL_BASE + "hl7/"      # The trailing slash here is critical.
 
@@ -134,12 +136,16 @@ class Encounter < ActiveRecord::Base
     
     http = Net::HTTP.new(url.host, url.port)
 
-    http.use_ssl = true
-    
+    if OPENMRS_URL_BASE.slice(4,1) == "s"
+      http.use_ssl = true
+    end
+
+
     begin
       result = http.request(req)
     rescue
       $openmrs_down = true
+      p "OpenMRS server down"
       
       # Let's save the message into a folder so they can be queued
       path = File.join(RAILS_ROOT, OPENMRS_HL7_PATH, "queue")
@@ -149,12 +155,16 @@ class Encounter < ActiveRecord::Base
       tango.puts(msg.to_s) # string version of the hl7 message
       tango.close
     end
-
+    result
   end
 
 
-  def file_write_hl7(msg)
+  def file_write_hl7
+
+
     if self.status == "ready_for_printing"
+
+      msg = self.hl7_message
 
       # First we create the directory
       path = File.join(RAILS_ROOT, OPENMRS_HL7_PATH)
