@@ -1,3 +1,5 @@
+require 'thread'
+
 # Be sure to restart your web server when you modify this file.
 
 # Uncomment below to force Rails into production mode when 
