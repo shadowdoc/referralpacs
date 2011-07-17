@@ -165,12 +165,13 @@ class EncounterController < ApplicationController
     @comparisons = []
     
     array.each do |comp|
-      if !comp.images.empty?
+      if !comp.images.empty? && comp.id != @encounter.id
         @comparisons << comp
       end
     end
-    # Limit @comparisions to 5
-    @comparisons = @comparisons.to(4).from(1)
+
+    # Limit @comparisons to 5
+    @comparisons = @comparisons.to(4).from(1) if @comparisons.length > 5
     
     if request.post? 
       # We have a post request, let's process the record
@@ -268,7 +269,7 @@ class EncounterController < ApplicationController
   
   def status
     
-   @encounters = Encounter.find_all_by_status(params[:requested_status], :limit => 20, :order => "date ASC")
+   @encounters = Encounter.find_all_by_status(params[:requested_status], :limit => 10, :order => "date ASC")
     
     if @encounters.length == 0
       render :text => "No encounters with status - #{params[:requested_status].humanize}", :layout => true
