@@ -156,6 +156,7 @@ class Patient < ActiveRecord::Base
     write_attribute :family_name, family_name.upcase
     write_attribute :middle_name, middle_name.upcase unless middle_name.nil?
     write_attribute :given_name, given_name.upcase
+    write_attribute :mrn_ampath, mrn_ampath.upcase
   end
   
   def Patient.search(params)
