@@ -299,6 +299,20 @@ class Patient < ActiveRecord::Base
     return patient
 
   end
+
+  def Patient.merge(p1,p2)
+    # This takes two patient objects (p1 and p2) and combines the encounters that
+    # belong to p2 into p1 and then deletes the p2 object.
+
+    enc2 = p2.encounters
+
+    enc2.each do |e|
+      e.patient_id = p1.id
+      e.save
+    end
+
+    p2.destroy
+  end
   
   def update_via_xml(doc)
     # This method takes a REXML document and updates a patient object
