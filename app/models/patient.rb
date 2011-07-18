@@ -308,7 +308,7 @@ class Patient < ActiveRecord::Base
 
     enc2.each do |e|
       e.patient_id = p1.id
-      e.save
+      e.save!
     end
     p1.save # This will make sure that the mrn_ampath gets upcased.
     p2.destroy
