@@ -310,7 +310,7 @@ class Patient < ActiveRecord::Base
       e.patient_id = p1.id
       e.save!
     end
-    p1.save # This will make sure that the mrn_ampath gets upcased.
+    p1.save! # This will make sure that the mrn_ampath gets upcased.
     p2.destroy
   end
   
