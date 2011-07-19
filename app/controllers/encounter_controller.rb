@@ -72,10 +72,9 @@ class EncounterController < ApplicationController
     # It recieves a dcm4chee_study object, and then does several actions including
     # finding or creating a new patient.
 
-    # Right now we are only accepting CXRs so we will only accept images from that SOP class
+    # Right now we are only accepting CRs so we will only accept images from that SOP class
 
-
-    if dcm_study.dcm4chee_series[0].dcm4chee_instances[0].sop_cuid == "1.2.840.10008.5.1.4.1.1.7"  # TODO this needs to be set for the POC sop class.
+    if dcm_study.dcm4chee_series[0].dcm4chee_instances[0].sop_cuid == "1.2.840.10008.5.1.4.1.1.1"
 
       dcm_patient = dcm_study.dcm4chee_patient
       dcm_mrn = dcm_patient.pat_id
@@ -83,7 +82,7 @@ class EncounterController < ApplicationController
       patient = Patient.find_openmrs(dcm_mrn)
 
       if patient.nil?
-        # We have a new patient, but the OpenMRS server appears to be down.
+        # We have a new patient, but the OpenMRS server appears to be down or doesn't know the patient.
         patient = Patient.new
 
         patient.family_name, patient.given_name, patient.middle_name = dcm_patient.pat_name.split("^") # Standard HL7 names are used in DICOM
