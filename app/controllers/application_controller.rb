@@ -43,7 +43,7 @@ class ApplicationController < ActionController::Base
     msh.processing_id = 'P'
     msh.version_id = "2.5"
     msh.seq = 1
-    msh.message_profile = '|||1^AMRS-ELDORET^http://schemas.openmrs.org/2006/FormEntry/formId^URI'
+    msh.message_profile = '|||1^AMRS.ELD.FORMID'
 
     return msh
   end

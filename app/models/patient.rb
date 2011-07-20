@@ -99,7 +99,7 @@ class Patient < ActiveRecord::Base
     #    ^ Check Digit Scheme (M10) 
     #    ^ Assigning Authority (hopefully won't have to use.. but if we need multiples) 
     #    // a ~ would separate multiple occurrences of PIDs
-    pid.patient_id_list = ampath_id + "^" + check_digit + "^M10^AMRS Universal ID^PT"
+    pid.patient_id_list = mrn_ampath + "^" + check_digit + "^M10^AMRS^MR"
     
     # Patient Name
     # Patient^Jonny^Dee^^DR| 
@@ -124,13 +124,13 @@ class Patient < ActiveRecord::Base
     #    ^ Degree of Precision (for our purposes Y = estimated, and null = actual)
     
     #pid.patient_dob = hl7_birthday
-    pid.patient_dob = ""
+    #pid.patient_dob = ""
 
     # M| 
     #    Administrative Sex (M) .. M, F, O, U, A, N possible answers
     # Will set to unknown for now, we don't have good verification to these types.
     #pid.admin_sex = hl7_sex
-    pid.admin_sex = ""
+    #pid.admin_sex = ""
     
     # 555 Johnson Road^Apt. 555^Indianapolis^IN^46202^USA| 
     #    Street Address 
@@ -140,7 +140,7 @@ class Patient < ActiveRecord::Base
     #    ^ Zip
     # We're not using this as we don't often have address information.  We're not the gold standard anyway!
     #pid.address = address1 unless address1.nil? + "^" + address2 unless address2.nil? + "^" + city_village unless city_village.nil? + "^" + state_province unless state_province.nil?
-    pid.address = ""
+    #pid.address = ""
 
     # The remaining pid fields are unused at the current time.
     
@@ -311,9 +311,9 @@ class Patient < ActiveRecord::Base
       e.save!
     end
 
-    p1.save! # This will make sure that the mrn_ampath gets upcased.
+    p1.save!     # This will make sure that the mrn_ampath gets upcased.
 
-    p2.reload # This breaks the associations with the already-pulled encounters
+    p2.reload    # This breaks the associations with the already-pulled encounters
     p2.destroy
 
   end
