@@ -85,6 +85,7 @@ class EncounterController < ApplicationController
         # We have a new patient, but the OpenMRS server appears to be down or doesn't know the patient.
         patient = Patient.new
 
+        patient.mrn_ampath = dcm_mrn
         patient.family_name, patient.given_name, patient.middle_name = dcm_patient.pat_name.split("^") # Standard HL7 names are used in DICOM
         patient.birthdate = dcm_patient.pat_birthdate
         patient.save!
