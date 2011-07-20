@@ -102,15 +102,25 @@ class Image < ActiveRecord::Base
     else
       # We unfortunately have to grab the SeriesUID from the dcm4chee database because our
       # Data model does not include series.
-      series  = Dcm4cheeInstance.find(self.instance_uid).dcm4chee_series
-      DCM4CHEE_URL_BASE + "wado?requestType=WADO&studyUID=#{self.encounter.study_uid}&seriesUID=#{series.series_iuid}&objectUID=#{self.instance_uid}"
+      wado_url_base
     end
+
+  end
+
+  def wado?
+    true if instance_uid
+  end
+
+  def wado_url_base
+    series  = Dcm4cheeInstance.find(self.instance_uid).dcm4chee_series
+    DCM4CHEE_URL_BASE + "wado?requestType=WADO&studyUID=#{self.encounter.study_uid}&seriesUID=#{series.series_iuid}&objectUID=#{self.instance_uid}"
   end
 
   private
   
   def process
     if @file_data
+      # This is an digital camera image uploaded from a browser
       create_directory
       cleanup
       save_fullsize
@@ -120,6 +130,42 @@ class Image < ActiveRecord::Base
         create_dicom
       end
       @file_data = nil
+    end
+
+    if wado?
+      # We have a wado image.  Let's grab the local thumbnail and save it
+      create_directory
+      write_attribute 'path', short_path
+
+      require 'net/http'
+
+      url = wado_url_base + "&columns=#{THUMB_MAX_SIZE[0]}"
+      p url
+
+      # Create a URI object from our url string.
+      url = URI.parse(url)
+
+      # Create a request object from our url and attach the authorization data.
+      req = Net::HTTP::Get.new(url.path)
+
+#      Not using authentication - yet.
+#      req.basic_auth(OPENMRS_USERNAME, OPENMRS_PASSWORD)
+
+      http = Net::HTTP.new(url.host, url.port)
+      http.use_ssl = true
+
+      begin
+        result = http.request(req)
+
+        open(thumb_path, 'wb') do |file|
+          file << result.read_body
+        end
+      rescue
+        puts "dcm4chee wado request failed - #{url}"
+      end
+
+
+
     end
   end
   
