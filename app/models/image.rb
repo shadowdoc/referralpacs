@@ -140,13 +140,12 @@ class Image < ActiveRecord::Base
       require 'net/http'
 
       url = wado_url_base + "&columns=#{THUMB_MAX_SIZE[0]}"
-      p url
 
       # Create a URI object from our url string.
       url = URI.parse(url)
 
       # Create a request object from our url and attach the authorization data.
-      req = Net::HTTP::Get.new(url.path)
+      req = Net::HTTP::Get.new(url.path + "?" + url.query)
 
 #      Not using authentication - yet.
 #      req.basic_auth(OPENMRS_USERNAME, OPENMRS_PASSWORD)
@@ -158,7 +157,7 @@ class Image < ActiveRecord::Base
         result = http.request(req)
 
         open(thumb_path, 'wb') do |file|
-          file << result.read_body
+          file << result.body
         end
       rescue
         puts "dcm4chee wado request failed - #{url}"
