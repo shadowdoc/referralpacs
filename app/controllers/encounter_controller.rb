@@ -307,7 +307,10 @@ class EncounterController < ApplicationController
       
       redirect_to :action => "status", :requested_status => "new"
     end
-    
+
+    # The tag_hash needs to be populated in order for the rejection categories to work correctly.
+    @tag_hash = {"pleural_scarring" => {}}
+
   end
 
   private
