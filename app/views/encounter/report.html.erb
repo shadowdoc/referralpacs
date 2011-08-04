@@ -167,19 +167,5 @@
 <br/>
 <% end -%>
 
-<% form_tag :action => "reject", :id => @encounter.id  do -%>
-<div class="report_form">
-    <fieldset>
-      <legend>Rejection Categories</legend>
-
-        <fieldset>
-        <legend>Demographics Mismatch</legend>
-            <% question = "Demographic Mismatch" -%>
-            <% choices = ["name_and_id_mismatch", "id_mismatch", "date_mismatch"] -%>
-            <%= fieldset_helper(question,choices) %>
-        </fieldset>
-    </fieldset>
-</div>
-<%= submit_tag "Reject Encounter" %>
-
-<% end -%>
+<%= render :partial => "rejection",
+           :locals => {:encounter => @encounter} %>
