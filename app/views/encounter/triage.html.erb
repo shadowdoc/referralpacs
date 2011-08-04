@@ -8,7 +8,7 @@
 
 <!-- Give the user two choices -->
 
-<%= form_tag :action => "triage", :id => @encounter.id %>
+<% form_tag :action => "triage", :id => @encounter.id do -%>
 
 <div id="buttons">
 	<%= submit_tag "Normal" %>
@@ -16,6 +16,8 @@
 </div>
 
 <br/><br/>
+
+<% end -%>
 
 <%= render :partial => "rejection",
            :locals => {:encounter => @encounter} %>
