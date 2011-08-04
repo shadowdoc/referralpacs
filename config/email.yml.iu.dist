@@ -7,6 +7,7 @@ development:
   :password: 
   :domain: indyrad.iupui.edu
   :tls: true
+  :recipients: [user1@email.com, user2@email.com]
 
 
 production:
@@ -18,4 +19,4 @@ production:
   :password: 
   :domain: indyrad.iupui.edu
   :tls: true
-
+  :recipients: [user1@email.com, user2@email.com]

@@ -1,6 +1,6 @@
 begin_time = Time.now.midnight - 1.month
 end_time = Time.now.midnight
-recipients = ["mkohli@iupui.edu", "kelvin.ogot@gmail.com", "abuyajm@yahoo.com", "pwamboye@yahoo.com", "wanenegl@yahoo.com", "matjohns@iupui.edu", "dagarwal@iupui.edu"]
+recipients = STATISTICS_EMAIL_LIST
 
 patients = Patient.count
 new = Encounter.find_all_by_status("new").length
