@@ -99,7 +99,7 @@ class Patient < ActiveRecord::Base
     #    ^ Check Digit Scheme (M10) 
     #    ^ Assigning Authority (hopefully won't have to use.. but if we need multiples) 
     #    // a ~ would separate multiple occurrences of PIDs
-    pid.patient_id_list = mrn_ampath + "^" + check_digit + "^M10^AMRS^MR"
+    pid.patient_id_list = mrn_ampath + "^^^AMRS Universal ID^"
     
     # Patient Name
     # Patient^Jonny^Dee^^DR| 

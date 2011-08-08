@@ -67,11 +67,11 @@ class Encounter < ActiveRecord::Base
 
     end
 
-    # Now we will add the OBX|RP segments for pointers to the images
+    # Now we will add the OBX|RE segments observations
 
     self.images.each do |image|
       obx = HL7::Message::Segment::OBX.new
-      obx.value_type = "RP"
+      obx.value_type = "RE"
       obx.observation_value = image.id.to_s + "^REFPACS^#{self.encounter_type.modality}"
       msg << obx
     end
@@ -131,7 +131,7 @@ class Encounter < ActiveRecord::Base
     # Create a request object from our url and attach the authorization data.
     req = Net::HTTP::Post.new(url.path)
     req.basic_auth(OPENMRS_USERNAME, OPENMRS_PASSWORD)
-    req.set_form_data({'message' => msg.to_s.html_safe!, 'source' => msg[0].sending_facility})
+    req.set_form_data({'message' => msg.to_s.gsub(/\n/, "\r"), 'source' => msg[0].sending_facility})
     
     http = Net::HTTP.new(url.host, url.port)
 
