@@ -305,10 +305,13 @@ class EncounterController < ApplicationController
   end
   
   def triage
-    # If we have a get, just return the encounter for the view.
     @encounter = Encounter.find(params[:id])
-    
-    if request.post?
+
+    if request.get?
+      # Set the encounter status to opened
+      @encounter.status = "opened"
+      @encounter.save!
+    elsif request.post?
       if params[:commit] == "Normal"
         @encounter.impression = "Normal"
         @encounter.status = "ready_for_printing"
