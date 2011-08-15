@@ -104,7 +104,7 @@ module ApplicationHelper
 
     @statuses = []
     Struct.new("Status", :id, :name)
-    status_array = ["ordered", "new", "ready_for_printing", "final", "rejected", "archived", ]
+    status_array = ["ordered", "new", "opened", "ready_for_printing", "final", "rejected", "archived"]
 
     status_array.each {|s| @statuses << Struct::Status.new(s, s) }
       

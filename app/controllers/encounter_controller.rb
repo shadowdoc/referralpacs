@@ -161,19 +161,36 @@ class EncounterController < ApplicationController
         
     @encounter = Encounter.find(params[:id])
     @patient = @encounter.patient
-    array = @patient.encounters.sort! {|x, y| y.date <=> x.date }
-    @comparisons = []
-    
-    array.each do |comp|
-      if !comp.images.empty? && comp.id != @encounter.id
-        @comparisons << comp
-      end
-    end
 
-    # Limit @comparisons to 5
-    @comparisons = @comparisons.to(4).from(1) if @comparisons.length > 5
-    
-    if request.post? 
+    # We use a hash with question_concept, value_concept pairs to
+    # transfer data to the form, where it's processed by helpers
+
+    @tag_hash = {"pleural_scarring" => {}}
+
+
+    if request.get?
+
+      # Pull an array of the comparison exams, sorted by date.
+
+      array = @patient.encounters.sort! {|x, y| y.date <=> x.date }
+      @comparisons = []
+      array.each do |comp|
+        if !comp.images.empty? && comp.id != @encounter.id
+          @comparisons << comp
+        end
+      end
+
+      # Limit @comparisons to 5
+      @comparisons = @comparisons.to(4).from(1) if @comparisons.length > 5
+
+      # Let's set the status to "opened" so that this encounter doesn't
+      # show up on the "new" list.  This is our attempt at avoiding concurrent
+      # reports
+
+      @encounter.status = "opened"
+      @encounter.save!
+
+    elsif request.post?
       # We have a post request, let's process the record
       # First let's clear the previous observations
       
@@ -200,31 +217,28 @@ class EncounterController < ApplicationController
           redirect_to :action => "status", :requested_status => "radiologist_to_review"
         end
       end
-    end
-    
-    @observations = @encounter.observations
-  
-    # We use a hash with question_concept, value_concept pairs to
-    # transfer data to the form, where it's processed by helpers
-    
-    @tag_hash = {"pleural_scarring" => {}}
 
-    @observations.each do |obs|
-      # Since pleural scarring can have multiple results
-      # we need to deal with it separately
-      if obs.question_concept.html_name == "pleural_scarring"
-        @tag_hash["pleural_scarring"].merge!({obs.value_concept.html_name => true})
-      else
-        @tag_hash.merge!({obs.question_concept.html_name => obs.value_concept.html_name})
-      end
-    end
     
-    # @impression is the variable that will populate the free-text impression
-    # it defaults to normal
-    if @encounter.status != "new"
-      @impression = @encounter.impression
-    else
-      @impression = "Normal"
+      @observations = @encounter.observations
+
+      @observations.each do |obs|
+        # Since pleural scarring can have multiple results
+        # we need to deal with it separately
+        if obs.question_concept.html_name == "pleural_scarring"
+          @tag_hash["pleural_scarring"].merge!({obs.value_concept.html_name => true})
+        else
+          @tag_hash.merge!({obs.question_concept.html_name => obs.value_concept.html_name})
+        end
+      end
+
+      # @impression is the variable that will populate the free-text impression
+      # it defaults to normal
+      if @encounter.status != "new"
+        @impression = @encounter.impression
+      else
+        @impression = "Normal"
+      end
+
     end
 
   end
