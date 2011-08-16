@@ -183,12 +183,39 @@ class EncounterController < ApplicationController
       # Limit @comparisons to 5
       @comparisons = @comparisons.to(4).from(1) if @comparisons.length > 5
 
+      # @impression is the variable that will populate the free-text impression
+      # it defaults to normal
+
+
+      case @encounter.status
+        when "ready_for_printing"
+          @impression = @encounter.impression
+        when "new"
+          @impression = "Normal"
+      end
+
+
       # Let's set the status to "opened" so that this encounter doesn't
       # show up on the "new" list.  This is our attempt at avoiding concurrent
       # reports
 
       @encounter.status = "opened"
       @encounter.save!
+
+      # Here we load all of the existing observations to fill out the form.
+
+      @observations = @encounter.observations
+
+      @observations.each do |obs|
+        # Since pleural scarring can have multiple results
+        # we need to deal with it separately
+        if obs.question_concept.html_name == "pleural_scarring"
+          @tag_hash["pleural_scarring"].merge!({obs.value_concept.html_name => true})
+        else
+          @tag_hash.merge!({obs.question_concept.html_name => obs.value_concept.html_name})
+        end
+      end
+
 
     elsif request.post?
       # We have a post request, let's process the record
@@ -216,27 +243,6 @@ class EncounterController < ApplicationController
         else
           redirect_to :action => "status", :requested_status => "radiologist_to_review"
         end
-      end
-
-    
-      @observations = @encounter.observations
-
-      @observations.each do |obs|
-        # Since pleural scarring can have multiple results
-        # we need to deal with it separately
-        if obs.question_concept.html_name == "pleural_scarring"
-          @tag_hash["pleural_scarring"].merge!({obs.value_concept.html_name => true})
-        else
-          @tag_hash.merge!({obs.question_concept.html_name => obs.value_concept.html_name})
-        end
-      end
-
-      # @impression is the variable that will populate the free-text impression
-      # it defaults to normal
-      if @encounter.status != "new"
-        @impression = @encounter.impression
-      else
-        @impression = "Normal"
       end
 
     end
