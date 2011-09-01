@@ -96,19 +96,24 @@ class LoginController < ApplicationController
     # new user and return to the user list.
 
     @all_privileges = Privilege.find(:all)
+
     if request.get?
       @user = User.new
       # Sets the default privilege level to "Client"
       @user.privilege_id = 2
-    elsif params[:new][:password1] != params[:user][:password]
+    elsif request.post?
       @user = User.new(params[:user])
-      flash[:notice] = "Passwords must match"
-      redirect_to(:action => "add_user")
-    else
-      @user = User.new(params[:user])
-      if @user.save
-        flash[:notice] = "User #{@user.email} created."
-        redirect_to(:action => 'list_users')
+      if params[:new][:password1] == params[:user][:password]
+
+        if @user.save
+          flash[:notice] = "User #{@user.email} created."
+          redirect_to(:action => 'list_users')
+        end
+      else
+        @user.password = nil
+        params[:user][:password] = nil
+        params[:new][:password1] = nil
+        flash[:notice] = "Passwords must match"
       end
     end
   end
