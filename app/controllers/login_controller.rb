@@ -1,7 +1,24 @@
 class LoginController < ApplicationController
 
   before_filter :authorize_login, :except => [:login, :logout] # Make sure an authorized user is logged in.
+  before_filter :security, :except => [:login, :logout] # Make sure current user can edit user data
   layout "ref"
+
+  protected
+  def security
+    # First we make sure the current user can update user
+    # records
+
+    @current_user = User.find(session[:user_id])
+
+    unless @current_user.privilege.update_user
+      flash[:notice] = "Not enough privilege to manage users"
+      redirect_to(:controller => "patient", :action => "find")
+    end
+
+  end
+
+  public
 
   def login
     # The login function verifies credentials and sets the toolbar for the session.
@@ -74,29 +91,20 @@ class LoginController < ApplicationController
   
   def add_user
     
-    # After checking to see if the current user has the privilege to 
-    # Add new users, if the requst is of the GET type, return the add_user
+    # If the request is of the GET type, return the add_user
     # form.  Otherwise, we have a POST request, attempt to add the
     # new user and return to the user list.
-
-
-    @current_user = User.find(session[:user_id])
-    
-    # Check to see if the current user can add another user.  If not, bounce back
-    # to list_users
-
-    unless @current_user.privilege.add_user
-      flash[:notice] = "Not enough privilege to add users."
-      return(redirect_to :controller => "patient", :action => "find")
-    end
-
 
     @all_privileges = Privilege.find(:all)
     if request.get?
       @user = User.new
       # Sets the default privilege level to "Client"
       @user.privilege_id = 2
-    else 
+    elsif params[:new][:password1] != params[:user][:password]
+      @user = User.new(params[:user])
+      flash[:notice] = "Passwords must match"
+      redirect_to(:action => "add_user")
+    else
       @user = User.new(params[:user])
       if @user.save
         flash[:notice] = "User #{@user.email} created."
@@ -109,13 +117,7 @@ class LoginController < ApplicationController
   # The model raises an exception if we attempt to delete
   # the special user.
   def delete_user
-    @current_user = User.find(session[:user_id])
     id = params[:id]
-
-    unless @current_user.privilege.delete_user
-      flash[:notice] = "Not enough privilege to delete users"
-      return(redirect_to(:controller => "patient", :action => "find"))
-    end
     
     if id == session[:user_id]
       return flash[:notice] = "Can't delete self"
@@ -134,16 +136,6 @@ class LoginController < ApplicationController
   end
     
   def edit_user
-    
-    # First we make sure the current user can update user
-    # records    
-        
-    @current_user = User.find(session[:user_id])
-
-    unless @current_user.privilege.update_user
-      flash[:notice] = "Not enough privilege to edit users"
-      return(redirect_to(:controller => "patient", :action => "find"))
-    end
         
     # Now we see if the request is a get and if so, send back a form
     # populated with the user data to be modified.
@@ -161,6 +153,33 @@ class LoginController < ApplicationController
       
     end  
   end
+
+  def set_password
+    # Grab the user that we want to modify
+    @user = User.find(params[:id])
+
+    if request.get?
+      # We don't do anything here, just display the view
+      # We already pulled the user in question so that the
+      # ID can be re-posted.
+
+    elsif request.post?
+      #Now we check to make sure that the entered passwords match.
+      if params[:new][:password0] == params[:new][:password1]
+
+        @user.password = params['new'][:password0]
+        @user.save
+        flash[:notice] = 'Password updated'
+        redirect_to(:controller => :login, :action => :list_users)
+
+        else
+          flash[:notice] = 'Requested passwords must match'
+      end
+
+    end
+
+  end
+
   
   def list_providers
     @all_providers = Provider.find(:all)
