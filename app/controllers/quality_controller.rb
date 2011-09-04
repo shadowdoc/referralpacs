@@ -18,13 +18,12 @@ class QualityController < ApplicationController
   public
   def list
     #Find all quality checks that are marked "for list"
-    @checks = QualityCheck.find_all_by_status("for_review")
+    @checks = QualityCheck.find(:all, :conditions => "status = 'for_review' AND NOT provider_id ='#{@current_user.id}'")
   end
 
   def review
     @check = QualityCheck.find(params[:id], :include => [:encounter, :provider])
     @check.reviewer = User.find(session[:user_id])
-
 
     if request.post?
       # Here we update the QualityCheck with the parameters from the browser.
