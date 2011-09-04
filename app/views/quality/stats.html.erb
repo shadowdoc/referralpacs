@@ -1,0 +1,13 @@
+<% @page_title = "Quality Summary" -%>
+
+<%  @provider_quality_summary.each do |provider_hash|  -%>
+  <%  provider_hash.each do |provider, score_array| -%>
+     <h3><%= provider %></h3>
+     <% score_array.each do |score_hash| -%>
+       <% score_hash.each do |score,count| %>
+         <%= score %> - <%= count %><br/>
+       <% end -%>
+     <% end -%>
+  <% end -%>
+<% end -%>
+<br/>

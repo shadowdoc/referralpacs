@@ -1,7 +1,7 @@
 class EncounterController < ApplicationController
   layout "ref"
   before_filter :authorize_login
-  before_filter :security, :except => [:find, :show] # make sure to check permission for all except find and show
+  before_filter :security, :except => [:find] # make sure to check permission for all except find and show
   
   protected
   def security
@@ -34,7 +34,6 @@ class EncounterController < ApplicationController
     else
       @encounter = Encounter.find(params[:id])
       @encounter.update_attributes(params[:encounter])
-      @encounter.save
     end
     
     render :partial => 'edit_encounter', :object => @encounter
@@ -219,8 +218,9 @@ class EncounterController < ApplicationController
 
     elsif request.post?
       # We have a post request, let's process the record
+
+
       # First let's clear the previous observations
-      
       @encounter.observations.each {|obs| obs.destroy }
 
       process_form(params)
@@ -233,6 +233,10 @@ class EncounterController < ApplicationController
         @encounter.status = "ready_for_printing"
         @encounter.save        
       end
+
+      # This is a private method in this controller
+      # That creates quality checks for encounters.
+      add_quality_check
       
       # If there are no errors, let's send the user back to the worklist
       # Which would be Radiologist To Review or new for a rad and Triage for an assistant
@@ -314,7 +318,9 @@ class EncounterController < ApplicationController
     @encounter = Encounter.find(params[:id])
 
     if request.get?
-      # Set the encounter status to opened
+      # Set the encounter status to opened this aims to prevent
+      # two concurrent users reading the same film
+
       @encounter.status = "opened"
       @encounter.save!
     elsif request.post?
@@ -327,7 +333,11 @@ class EncounterController < ApplicationController
         @encounter.status = "radiologist_to_review"
         @encounter.save
       end
-      
+
+      # This is a private method in this controller
+      # That creates quality checks for encounters.
+      add_quality_check
+
       redirect_to :action => "status", :requested_status => "new"
     end
 
@@ -365,6 +375,19 @@ class EncounterController < ApplicationController
         end
       end
     end
+  end
+
+  def add_quality_check
+      # This is where we randomly add reports to the QC queue
+      if rand(50) == 1
+        # Each encounter has a 1/50 chance to create a QCs
+        QualityCheck.new do |q|
+          q.status = "for_review"
+          q.encounter = @encounter
+          q.provider = @encounter.provider
+          q.save
+        end
+      end
   end
 
 end

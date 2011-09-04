@@ -8,6 +8,7 @@ class Encounter < ActiveRecord::Base
   belongs_to :client
   has_many :images, :dependent => :delete_all
   has_many :observations, :dependent => :delete_all
+  has_many :quality_checks
   after_save :send_hl7
   
   attr_protected :created_at, :created_by, :updated_at, :updated_by

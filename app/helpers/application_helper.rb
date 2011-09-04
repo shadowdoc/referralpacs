@@ -41,8 +41,10 @@ module ApplicationHelper
         radiologist_to_review = link_to('For Radiologist Review', :controller => :encounter, :action => :status, :requested_status => "radiologist_to_review")
         new = link_to('New Exams', :controller => :encounter, :action => :status, :requested_status => "new")
         archived = link_to('Archived', :controller => :encounter, :action => :status, :requested_status => "archived")
+        quality = link_to('Quality', :controller => :quality, :action => :list)
         ready_to_print = link_to('Ready for Printing', :controller => :encounter, :action => :status, :requested_status => "ready_for_printing")
         rejected = link_to('Rejected', :controller => :encounter, :action => :status, :requested_status => "rejected")
+
 
         @command_list = []
         
@@ -55,6 +57,7 @@ module ApplicationHelper
                              radiologist_to_review,
                              ready_to_print,
                              rejected,
+                             quality,
                              admin,
                              stats]
           when "radiologist"
@@ -62,6 +65,13 @@ module ApplicationHelper
                              archived,
                              new,
                              radiologist_to_review,
+                             ready_to_print]
+          when "super_radiologist"
+            @command_list = [find_patients,
+                             archived,
+                             new,
+                             radiologist_to_review,
+                             quality,
                              ready_to_print]
           when "assistant"
             @command_list = [find_patients,

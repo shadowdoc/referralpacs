@@ -1,0 +1,24 @@
+<% @page_title = "Quality Review" %>
+<%= link_to "Quality Stat Report", :action => "stats" %>
+
+<% if @checks.nil? || @checks.length == 0 -%>
+No pending quality checks.
+<% else -%>
+<h2>Quality Checks ToDo (<%= @checks.length %>)</h2>
+<table>
+  <tr>
+    <th>Encounter Date</th>
+    <th>Provider</th>
+  </tr>
+
+  <% @checks.each do |check| -%>
+    <tr>
+      <td><%= check.encounter.date.strftime("%d/%m/%Y") %></td>
+      <td><%= check.provider.full_name %></td>
+      <td><%= link_to('Review', :controller => :quality, :action => :review, :id => check.id) %></td>
+    </tr>
+  <% end -%>
+</table>
+
+<% end -%>
+<br/>

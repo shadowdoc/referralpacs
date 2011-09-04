@@ -1,0 +1,36 @@
+<!-- Included to make the banner work correctly -->
+<% @patient = @check.encounter.patient -%>
+<% @page_title = "Quality Review" -%>
+<% @onload = "imagepopup(#{@check.encounter.id})" %>
+
+
+<div class="report_form">
+  <% form_tag :action => :review, :id => @check.id do %>
+     <fieldset>
+       <legend>1 - Concur with interpretation</legend>
+          <%= radio_button :check, :score, "1", :checked => true %>1<br/>
+     </fieldset>
+     <fieldset>
+       <legend>2 - Discrepancy in interpretation/not ordinarily expected to be made (understandable miss)</legend>
+         <%= radio_button :check, :score, "2a" %>2a - Unlikely Clinically Significant<br/>
+         <%= radio_button :check, :score, "2b" %>2b - Likely Clinically Significant<br/>
+     </fieldset>
+      <fieldset>
+        <legend>3 - Discrepancy in interpretation/should be made most of the time</legend>
+          <%= radio_button :check, :score, "3a" %>3a - Unlikely Clinically Significant<br/>
+          <%= radio_button :check, :score, "3b" %>3b - Likely Clinically Significant<br/>
+      </fieldset>
+      <fieldset>
+        <legend>4 - Discrepancy in interpretation/should be made almost every time - misinterpretation of finding</legend>
+          <%= radio_button :check, :score, "4a" %>4a - Unlikely Clinically Significant<br/>
+          <%= radio_button :check, :score, "4b" %>4b - Likely Clinically Significant<br/>
+      </fieldset>
+    <fieldset>
+      <legend>Comment</legend>
+      <%= text_area :check, :comment, :size => "100x10" %>
+    </fieldset>
+      <!-- This sets the new status so that the quality review drops off the worklist -->
+    <%= hidden_field_tag "check[status]", "reviewed" %>
+    <%= submit_tag "Submit" %>
+  <% end -%>
+</div>

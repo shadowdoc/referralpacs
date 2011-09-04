@@ -1,4 +1,6 @@
-<% @page_title = "Statistics" -%>
+<% @page_title = "Reporting Statistics" -%>
+
+<%= link_to 'Quality Control Statistics', :controller => :quality, :action => :stats %>
 
 <h2>
 Total Patients: <%= @patients.length %><br/>
@@ -25,3 +27,5 @@ Rejected: <%= @rejected %>
   </p>
   <%= submit_tag "Stats" %>
 <% end -%>
+
+

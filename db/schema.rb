@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110710092108) do
+ActiveRecord::Schema.define(:version => 20110831222222) do
 
   create_table "answers", :force => true do |t|
     t.integer "concept_id"
@@ -129,6 +129,18 @@ ActiveRecord::Schema.define(:version => 20110710092108) do
     t.boolean "modify_encounter"
     t.boolean "merge_patients"
     t.boolean "update_user",      :default => false
+    t.boolean "quality_control"
+  end
+
+  create_table "quality_checks", :force => true do |t|
+    t.string   "score"
+    t.string   "status"
+    t.text     "comment"
+    t.integer  "encounter_id"
+    t.integer  "provider_id"
+    t.integer  "reviewer_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "tribes", :force => true do |t|
