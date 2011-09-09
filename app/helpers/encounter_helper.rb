@@ -7,7 +7,7 @@ module EncounterHelper
     # Only users who can modify encounters should see the details and delete links
     if @current_user.privilege.modify_encounter
       if encounter.status != "final"
-        if @current_user.privilege.name  == "radiologist" || @current_user.privilege.name == "admin"
+        if @current_user.privilege.name  == "radiologist" || @current_user.privilege.name == "admin" || @current_user.privilege.name == "super_radiologist"
           @links << link_to('Create Report', :action => 'report', :id => encounter.id)
         end
         
