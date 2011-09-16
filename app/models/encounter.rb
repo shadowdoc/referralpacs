@@ -19,7 +19,7 @@ class Encounter < ActiveRecord::Base
     Encounter.find(:all, :conditions => ['date between ? and ?', start_date, end_date])
   end
 
-  def hl7_message
+  def self.hl7_message
     # These fields are customizations for OpenMRS HL7 formatting
     HL7::Message::Segment::OBR.class_eval { add_field(:identifier, :idx => 4) }
     HL7::Message::Segment::ORU.class_eval { add_field(:order_control, :idx => 1) }
