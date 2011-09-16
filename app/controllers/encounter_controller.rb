@@ -191,6 +191,12 @@ class EncounterController < ApplicationController
           @impression = @encounter.impression
         when "new"
           @impression = "Normal"
+        when "opened"
+          if @encounter.impression.nil?
+            @impression = "Normal"
+          else
+            @impression = @encounter.impression
+          end
       end
 
 
@@ -220,14 +226,14 @@ class EncounterController < ApplicationController
       # We have a post request, let's process the record
 
 
-      # First let's clear the previous observations
-      @encounter.observations.each {|obs| obs.destroy }
-
-      process_form(params)
-
       if @encounter.observations.count == 0 && params[:impression] == ""
-        flash[:notice] = "A valid report must contain either checked observations, or an impression"
+        flash[:notice] = "A valid report must contain either checked observations, and an impression"
       else
+        # First let's clear the previous observations
+        @encounter.observations.each {|obs| obs.destroy }
+
+        process_form(params)
+
         @encounter.impression = params[:impression]
         @encounter.provider = @current_user
         @encounter.status = "ready_for_printing"
@@ -241,12 +247,14 @@ class EncounterController < ApplicationController
       # If there are no errors, let's send the user back to the worklist
       # Which would be Radiologist To Review or new for a rad and Triage for an assistant
       
-      if @encounter.errors.count == 0
+      if @encounter.errors.count == 0 && flash[:notice].nil?
         if Encounter.find_all_by_status("radiologist_to_review").empty?
           redirect_to :action => "status", :requested_status => "new"
         else
           redirect_to :action => "status", :requested_status => "radiologist_to_review"
         end
+      else
+        redirect_to(:action => "report", :id => @encounter)
       end
 
     end
