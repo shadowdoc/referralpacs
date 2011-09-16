@@ -11,7 +11,4 @@ enc_controller = EncounterController.new
 dcm_studies.each do |dcm_study|
 
   enc_controller.new_dcm4chee(dcm_study)
-
-  dcm_study.study_status = 1
-  dcm_study.save!
 end

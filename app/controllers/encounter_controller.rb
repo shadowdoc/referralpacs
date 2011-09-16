@@ -87,27 +87,45 @@ class EncounterController < ApplicationController
         patient.mrn_ampath = dcm_mrn
         patient.family_name, patient.given_name, patient.middle_name = dcm_patient.pat_name.split("^") # Standard HL7 names are used in DICOM
         patient.birthdate = dcm_patient.pat_birthdate
-        patient.save!
-      end
 
-      enc = Encounter.new
-      enc.patient_id = patient.id
-      enc.date = dcm_study.study_datetime
-      enc.status = "new"
-      enc.study_uid = dcm_study.study_iuid
-      enc.encounter_type_id = 1 # These are all CXRs
-      enc.save!
+        unless patient.save!
+          # We have an error creating the patient.  Let's write it out to a log file
+          # and set the study_status in the dcm4chee to -1
+          logfile = File.join(RAILS_ROOT, "log", "dicom_patient_errors.log")
+          File.open(logfile, 'a+') do |f|
+            f.write("Invalid Patient: #{patient} Accession Number: #{dcm_study.accession_no}")
+          end
 
-      # Loop through each series to make sure we get all of the CXRs
-
-      dcm_study.dcm4chee_series.each do |s|
-        s.dcm4chee_instances.each do |i|
-          image = Image.new
-          image.encounter_id = enc.id
-          image.instance_uid = i.sop_iuid
-          image.save!
+          dcm_study.study_status = -1
+          dcm_study.save
         end
       end
+
+      unless dcm_study.study_status == -1
+        enc = Encounter.new
+        enc.patient_id = patient.id
+        enc.date = dcm_study.study_datetime
+        enc.status = "new"
+        enc.study_uid = dcm_study.study_iuid
+        enc.encounter_type_id = 1 # These are all CXRs
+        enc.save!
+
+        # Loop through each series to make sure we get all of the CXRs
+
+        dcm_study.dcm4chee_series.each do |s|
+          s.dcm4chee_instances.each do |i|
+            image = Image.new
+            image.encounter_id = enc.id
+            image.instance_uid = i.sop_iuid
+            image.save!
+          end
+        end
+
+        dcm_study.study_status = 1
+        dcm_study.save!
+
+      end
+
     end
   end
   
@@ -227,7 +245,7 @@ class EncounterController < ApplicationController
 
 
       if @encounter.observations.count == 0 && params[:impression] == ""
-        flash[:notice] = "A valid report must contain either checked observations, and an impression"
+        flash[:notice] = "A valid report must contain checked observations and an impression"
       else
         # First let's clear the previous observations
         @encounter.observations.each {|obs| obs.destroy }
