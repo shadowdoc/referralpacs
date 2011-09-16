@@ -19,7 +19,7 @@ class Encounter < ActiveRecord::Base
     Encounter.find(:all, :conditions => ['date between ? and ?', start_date, end_date])
   end
 
-  def self.hl7_message
+  def hl7_message
     # These fields are customizations for OpenMRS HL7 formatting
     HL7::Message::Segment::OBR.class_eval { add_field(:identifier, :idx => 4) }
     HL7::Message::Segment::ORU.class_eval { add_field(:order_control, :idx => 1) }
@@ -120,7 +120,7 @@ class Encounter < ActiveRecord::Base
     # http://myhost:serverport/openmrs/moduleServlet/restmodule/api/hl7?message=my_hl7_message_string&source=myHl7SourceName
     # from: http://openmrs.org/wiki/REST_Module
 
-    msg = self.hl7_message
+    msg = hl7_message
 
     url = OPENMRS_URL_BASE + "hl7/"      # The trailing slash here is critical.
 
@@ -159,10 +159,9 @@ class Encounter < ActiveRecord::Base
 
   def file_write_hl7
 
-
     if self.status == "ready_for_printing"
 
-      msg = self.hl7_message
+      msg = hl7_message
 
       # First we create the directory
       path = File.join(RAILS_ROOT, OPENMRS_HL7_PATH)
