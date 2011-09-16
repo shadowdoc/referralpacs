@@ -103,8 +103,6 @@ class Encounter < ActiveRecord::Base
 
     if self.status == "ready_for_printing" && self.patient.openmrs_verified?
 
-      msg = self.hl7_message
-
       if OPENMRS_HL7_PATH
         file_write_hl7
       end
