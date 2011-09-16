@@ -37,7 +37,16 @@ class Encounter < ActiveRecord::Base
     pv1.patient_class = 'O'
     pv1.assigned_location = '^^^^^^^^^?^MTRHRADIOLOGY'
     pv1.admission_type = '2'
-    pv1.attending_doctor = '1^' + client.hl7_name + '^^^^8^M10^^MTRHRAD'
+
+
+    # Encounters generated from DICOM messages don't have valid clients.
+    if client
+      client_name = client.hl7_name
+    else
+      client_name = ""
+    end
+
+    pv1.attending_doctor = '1^' + client_name + '^^^^8^M10^^MTRHRAD'
     pv1.admit_date = date.strftime("%Y%m%d%H%M%S")
     pv1.visit_indicator = 'V'
     msg << pv1
