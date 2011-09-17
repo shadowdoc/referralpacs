@@ -96,7 +96,7 @@ class EncounterController < ApplicationController
 
           logfile = File.join(RAILS_ROOT, "log", "dicom_patient_errors.log")
           File.open(logfile, 'a+') do |f|
-          f.write("Invalid Patient: #{patient} Accession Number: #{dcm_study.accession_no}")
+            f.write("Invalid Patient: #{patient.hl7_name} OpenMRS MRN: #{patient.mrn_ampath} Accession Number: #{dcm_study.accession_no}\n")
           end
 
           dcm_study.study_status = -1
