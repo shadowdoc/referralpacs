@@ -88,17 +88,19 @@ class EncounterController < ApplicationController
         patient.family_name, patient.given_name, patient.middle_name = dcm_patient.pat_name.split("^") # Standard HL7 names are used in DICOM
         patient.birthdate = dcm_patient.pat_birthdate
 
-        unless patient.save!
-          # We have an error creating the patient.  Let's write it out to a log file
-          # and set the study_status in the dcm4chee to -1
-          logfile = File.join(RAILS_ROOT, "log", "dicom_patient_errors.log")
-          File.open(logfile, 'a+') do |f|
-            f.write("Invalid Patient: #{patient} Accession Number: #{dcm_study.accession_no}")
-          end
+      begin
+        patient.save!
+      rescue
+        # We have an error creating the patient.  Let's write it out to a log file
+        # and set the study_status in the dcm4chee to -1
 
-          dcm_study.study_status = -1
-          dcm_study.save
+        logfile = File.join(RAILS_ROOT, "log", "dicom_patient_errors.log")
+        File.open(logfile, 'a+') do |f|
+        f.write("Invalid Patient: #{patient} Accession Number: #{dcm_study.accession_no}")
         end
+
+        dcm_study.study_status = -1
+        dcm_study.save
       end
 
       unless dcm_study.study_status == -1
