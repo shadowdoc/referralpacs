@@ -6,7 +6,6 @@ class DictionaryController < ApplicationController
   in_place_edit_for :concept, :description
   
   def concepts_for_lookup
-    
     # TODO: Currently, all of the concepts are listed by the autocomplete
     # Would like only the answers for the selected concept to show up under 
     # answers
@@ -17,6 +16,7 @@ class DictionaryController < ApplicationController
   end
  
   def show_concept
+    @load_concepts_js_array = true # Triggers the layout to read the autocomplete array
     if params[:id].nil?
       @concept = Concept.new
       @concept.name = "Edit_me"
