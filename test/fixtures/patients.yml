@@ -9,16 +9,6 @@ baxter:
   birthdate:   2008-09-24 00:00:00.0
   gender:      Male
 
-stanley:
-  id: 2
-  given_name:  STANLEY
-  family_name: KOHLI
-  mtrh_rad_id: 54321
-  mrn_ampath:  9328KP-9
-  tribe_id:    1
-  birthdate:   2008-09-24 00:00:00.0
-  gender:      Male
-
 blackstar:
   id: 3
   given_name:  BLACKSTAR
@@ -28,3 +18,25 @@ blackstar:
   tribe_id:    2
   birthdate:   2011-07-10 00:00:00.0
   gender:      Male
+
+openmrs1:
+  id: 2
+  given_name:  JOHN
+  family_name: PATIENT
+  mtrh_rad_id: 54321
+  mrn_ampath:  100-8
+  openmrs_verified: true
+  tribe_id:    1
+  birthdate:   2008-09-24 00:00:00.0
+  gender:      Male
+
+openmrs2:
+  id:           4
+  birthdate:    1941-05-01 00:00:00.0
+  family_name:  HORNBLOWER
+  given_name:   HORATIO
+  middle_name:  L
+  mrn_ampath:   101-6
+  openmrs_verified: true
+  tribe_id:     1
+  gender:       Male
