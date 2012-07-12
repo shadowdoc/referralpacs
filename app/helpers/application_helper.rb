@@ -97,11 +97,11 @@ module ApplicationHelper
     end
   end
     
-  def getBirthDateStart()
+  def getBirthDateStart
     Time.now.year - 100
   end
 
-  def getBirthDateEnd()
+  def getBirthDateEnd
     Time.now.year
   end
   
