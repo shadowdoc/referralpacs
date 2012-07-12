@@ -30,13 +30,13 @@ class Encounter < ActiveRecord::Base
     msg << ApplicationController.hl7_msh
     msg << patient.hl7_pid
     pv1 = HL7::Message::Segment::PV1.new
-    oru = HL7::Message::Segment::ORU.new
+    orc = HL7::Message::Segment::ORU.new
     obr = HL7::Message::Segment::OBR.new
 
-    pv1.set_id = '1'
+    #pv1.set_id = '1'     # I don't think this field is used.'
     pv1.patient_class = 'O'
-    pv1.assigned_location = '^^^^^^^^^?^MTRHRADIOLOGY'
-    pv1.admission_type = '2'
+    pv1.assigned_location = '1^Unknown Location'
+    #pv1.admission_type = '2'   # This is not used either
 
 
     # Encounters generated from DICOM messages don't have valid clients.
@@ -46,15 +46,16 @@ class Encounter < ActiveRecord::Base
       client_name = ""
     end
 
-    pv1.attending_doctor = '1^' + client_name + '^^^^8^M10^^MTRHRAD'
+    pv1.attending_doctor = '1^' + client_name
     pv1.admit_date = date.strftime("%Y%m%d%H%M%S")
     pv1.visit_indicator = 'V'
     msg << pv1
 
-    oru.order_control = 'RE'
-    oru.transaction_date_time = self.date.strftime("%Y%m%d%H%M%S")
-    oru.entered_by = '1^' + provider.hl7_name + '^^^^8^M10^^MTRHRAD'
-    msg << oru
+    orc.e0 = "ORC" # For some reason the ruby-hl7 names this ORU rather than ORC - typo??
+    orc.order_control = 'RE'
+    orc.transaction_date_time = self.date.strftime("%Y%m%d%H%M%S")
+    orc.entered_by = '1^' + provider.hl7_name
+    msg << orc
 
     obr.identifier = '2395^CHEST X-RAY FINDINGS BY RADIOLOGY^99DCT'
     obr.filler_order_number = self.id
@@ -93,7 +94,7 @@ class Encounter < ActiveRecord::Base
     unless self.impression.nil?
       obx = HL7::Message::Segment::OBX.new
       obx.value_type = 'ST'
-      obx.observation_id = '????^CHEST X-RAY IMPRESSION^99DCT'
+      obx.observation_id = '6115^CHEST X-RAY IMPRESSION^99DCT'
       impression_temp = impression
       # stipulated character substitutions, backslash needs to be first
       impression_temp = impression_temp.gsub( /\\/, '\E\\' )
@@ -139,7 +140,7 @@ class Encounter < ActiveRecord::Base
     # Create a request object from our url and attach the authorization data.
     req = Net::HTTP::Post.new(url.path)
     req.basic_auth(OPENMRS_USERNAME, OPENMRS_PASSWORD)
-    req.set_form_data({'message' => msg.to_s.gsub(/\n/, "\r"), 'source' => msg[0].sending_facility})
+    req.set_form_data({'message' => msg.to_s.gsub(/\n/, "\r"), 'source' => 'LOCAL'})
     
     http = Net::HTTP.new(url.host, url.port)
 
