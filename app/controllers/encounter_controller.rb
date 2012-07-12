@@ -193,19 +193,6 @@ class EncounterController < ApplicationController
 
     if request.get?
 
-      # Pull an array of the comparison exams, sorted by date.
-
-      array = @patient.encounters.sort! {|x, y| y.date <=> x.date }
-      @comparisons = []
-      array.each do |comp|
-        if !comp.images.empty? && comp.id != @encounter.id
-          @comparisons << comp
-        end
-      end
-
-      # Limit @comparisons to 5
-      @comparisons = @comparisons.to(4).from(1) if @comparisons.length > 5
-
       # @impression is the variable that will populate the free-text impression
       # it defaults to normal
 
@@ -325,7 +312,7 @@ class EncounterController < ApplicationController
   
   def status
     
-   @encounters = Encounter.find_all_by_status(params[:requested_status], :limit => 10, :order => "date ASC")
+   @encounters = Encounter.find_all_by_status(params[:requested_status], :limit => 10, :order => "date DESC")
     
     if @encounters.length == 0
       render :text => "No encounters with status - #{params[:requested_status].humanize}", :layout => true
