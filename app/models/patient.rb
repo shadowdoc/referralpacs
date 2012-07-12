@@ -13,9 +13,15 @@ class Patient < ActiveRecord::Base
   
   #Provide a concatenated name for cleaner display.
   def full_name
+
     unless self.given_name.nil? || self.family_name.nil?
-      self.given_name + " " + self.family_name
+      if self.middle_name.nil?
+        self.given_name + " " + self.family_name
+      else
+        self.given_name + " " + self.family_name + " "+ self.middle_name
+      end
     end
+
   end
   
   def current_age
