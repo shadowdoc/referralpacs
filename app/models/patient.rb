@@ -427,4 +427,28 @@ class Patient < ActiveRecord::Base
     end
   end
 
+  def recent_encounters
+    # This returns an array of the last 5 encounters
+    # this method is used in the image display to provide easy access
+    # to prior encounters
+
+    # Pull an array of the comparison exams, sorted by date.
+
+    array = self.encounters.sort! {|x, y| y.date <=> x.date }
+    recent = []
+
+
+    # Only include encounters that have images.
+    array.each do |comp|
+      if !comp.images.empty?
+        recent << comp
+      end
+    end
+
+    # Limit @comparisons to 5
+    recent = recent.to(4).from(1) if recent.length > 5
+
+    recent
+  end
+
 end

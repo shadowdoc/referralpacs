@@ -159,12 +159,13 @@
 <%= submit_tag "Finalize Report" %>
 <%= button_to_function("Current Study", "imagepopup('#{@encounter.id}', 'image')") %>
 
-<% unless @comparisons.length == 0 -%> 
-  <% @comparisons.each do |comp| -%>
+<% unless @patient.recent_encounters.length == 0 -%>
+  <% @patient.recent_encounters.each do |comp| -%>
     <%= button_to_function(comp.date.strftime("%d-%m-%y"), "imagepopup('#{comp.id}', 'comp')") %>
   <% end -%>
 <% end -%>
 <br/>
+
 <% end -%>
 
 <%= render :partial => "rejection",
