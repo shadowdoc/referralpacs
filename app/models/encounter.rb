@@ -64,11 +64,13 @@ class Encounter < ActiveRecord::Base
 
     #Now we'll build the OBX segments for the observations that we have
 
+    current_sub_id = 1 # Start with a sub_id of 1 and increment with each observation
+
     self.observations(true).each do |obs|
       # First we create an array that has all of the obx segment objects for this observation.
 
       tmp = []
-      tmp = tmp | obs.obx
+      tmp = tmp | obs.obx(current_sub_id)
 
       # Now we'll go through each of the segments and add them to the message
       # This is necessary for the times when the create_obx method returns
@@ -76,16 +78,20 @@ class Encounter < ActiveRecord::Base
 
       tmp.each { |obx| msg << obx }
 
+      current_sub_id += 1 # increment the sub_id
+
     end
 
-    # Now we will add the OBX|RE segments observations
+    # Now we will add the OBX|RP segments observations
 
-    self.images.each do |image|
-      obx = HL7::Message::Segment::OBX.new
-      obx.value_type = "RE"
-      obx.observation_value = image.id.to_s + "^REFPACS^#{self.encounter_type.modality}"
-      msg << obx
-    end
+    #TODO This is commeneted out because the 1.8 openmrs HL7 processor does not yet accept RP
+
+    #self.images.each do |image|
+    #  obx = HL7::Message::Segment::OBX.new
+    #  obx.value_type = "RP"
+    #  obx.observation_value = image.id.to_s + "^REFPACS^#{self.encounter_type.modality}"
+    #  msg << obx
+    #end
 
     #TODO Now, let's add the OBX that includes the uuencoded thumbnail
 
