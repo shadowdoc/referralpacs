@@ -19,6 +19,7 @@ class Observation < ActiveRecord::Base
       o = HL7::Message::Segment::OBX.new
       o.value_type = 'CWE'
       o.e4 = @segment_id
+      o.e11 = 'F' # Set result status to final
       o
     end
 

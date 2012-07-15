@@ -101,6 +101,7 @@ class Encounter < ActiveRecord::Base
       obx = HL7::Message::Segment::OBX.new
       obx.value_type = 'ST'
       obx.observation_id = '6115^CHEST X-RAY IMPRESSION^99DCT'
+      obx.e11 = 'F'
       impression_temp = impression
       # stipulated character substitutions, backslash needs to be first
       impression_temp = impression_temp.gsub( /\\/, '\E\\' )
