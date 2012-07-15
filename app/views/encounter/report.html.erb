@@ -161,7 +161,9 @@
 
 <% unless @patient.recent_encounters.length == 0 -%>
   <% @patient.recent_encounters.each do |comp| -%>
-    <%= button_to_function(comp.date.strftime("%d-%m-%y"), "imagepopup('#{comp.id}', 'comp')") %>
+    <% unless comp.id == @encounter.id -%>
+        <%= button_to_function(comp.date.strftime("%d-%m-%y"), "imagepopup('#{comp.id}', 'comp')") %>
+    <% end -%>
   <% end -%>
 <% end -%>
 <br/>
