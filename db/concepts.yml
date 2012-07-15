@@ -1,1369 +1,1357 @@
 --- 
 - !ruby/object:Concept 
   attributes: 
-    description: Opacity, generally in a patchy, fluffy distribution
-    created_by: 
-    updated_by: 
-    created_at: 
-    id: "1"
-    openmrs_id: "6049"
     name: INFILTRATE
+    created_at: 2012-07-14 03:23:31
+    openmrs_id: "6049"
     updated_at: 2012-07-10 21:28:53
+    created_by: 
+    id: "1"
+    updated_by: 
+    description: Opacity, generally in a patchy, fluffy distribution
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: Having a hollowed-out appearance
-    created_by: 
-    updated_by: 
-    created_at: 
-    id: "2"
-    openmrs_id: 
     name: CAVITATION
-    updated_at: 
+    created_at: 2012-07-14 03:23:31
+    openmrs_id: 
+    updated_at: 2012-07-14 03:23:31
+    created_by: 
+    id: "2"
+    updated_by: 
+    description: Having a hollowed-out appearance
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: 
-    created_by: 
-    updated_by: 
-    created_at: 
-    id: "3"
-    openmrs_id: 
     name: RIGHT UPPER LUNG ZONE
-    updated_at: 
+    created_at: 2012-07-14 03:23:31
+    openmrs_id: 
+    updated_at: 2012-07-14 03:23:31
+    created_by: 
+    id: "3"
+    updated_by: 
+    description: 
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: 
-    created_by: 
-    updated_by: 
-    created_at: 
-    id: "4"
-    openmrs_id: 
     name: RIGHT MIDDLE LUNG ZONE
-    updated_at: 
+    created_at: 2012-07-14 03:23:31
+    openmrs_id: 
+    updated_at: 2012-07-14 03:23:31
+    created_by: 
+    id: "4"
+    updated_by: 
+    description: 
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: 
-    created_by: 
-    updated_by: 
-    created_at: 
-    id: "5"
-    openmrs_id: 
     name: RIGHT LOWER LUNG ZONE
-    updated_at: 
+    created_at: 2012-07-14 03:23:31
+    openmrs_id: 
+    updated_at: 2012-07-14 03:23:31
+    created_by: 
+    id: "5"
+    updated_by: 
+    description: 
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: 
-    created_by: 
-    updated_by: 
-    created_at: 
-    id: "6"
-    openmrs_id: 
     name: LEFT UPPER LUNG ZONE
-    updated_at: 
+    created_at: 2012-07-14 03:23:31
+    openmrs_id: 
+    updated_at: 2012-07-14 03:23:31
+    created_by: 
+    id: "6"
+    updated_by: 
+    description: 
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: 
-    created_by: 
-    updated_by: 
-    created_at: 
-    id: "7"
-    openmrs_id: 
     name: LEFT MIDDLE LUNG ZONE
-    updated_at: 
-  attributes_cache: {}
-
-- !ruby/object:Concept 
-  attributes: 
+    created_at: 2012-07-14 03:23:31
+    openmrs_id: 
+    updated_at: 2012-07-14 03:23:31
+    created_by: 
+    id: "7"
+    updated_by: 
     description: 
-    created_by: 
-    updated_by: 
-    created_at: 
-    id: "8"
-    openmrs_id: 
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
     name: LEFT LOWER LUNG ZONE
-    updated_at: 
+    created_at: 2012-07-14 03:23:31
+    openmrs_id: 
+    updated_at: 2012-07-14 03:23:31
+    created_by: 
+    id: "8"
+    updated_by: 
+    description: 
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: A radiograph of the chest.
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2007-01-26 09:57:16
-    id: "9"
-    openmrs_id: 
     name: CHEST XRAY
+    created_at: 2007-01-26 09:57:16
+    openmrs_id: 
     updated_at: 2007-01-26 09:57:32
+    created_by: "1"
+    id: "9"
+    updated_by: "1"
+    description: A radiograph of the chest.
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: A "reticular" and sometimes nodular pattern.
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2007-01-26 09:58:21
-    id: "10"
-    openmrs_id: "2400"
     name: INTERSTITIAL LUNG PROCESS
+    created_at: 2007-01-26 09:58:21
+    openmrs_id: "2400"
     updated_at: 2010-07-09 18:21:42
+    created_by: "1"
+    id: "10"
+    updated_by: "1"
+    description: A "reticular" and sometimes nodular pattern.
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: Disase emanating from the middle mediastinum
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2007-01-26 10:00:27
-    id: "11"
-    openmrs_id: "2398"
     name: PERIHILAR
+    created_at: 2007-01-26 10:00:27
+    openmrs_id: "2398"
     updated_at: 2010-07-09 18:21:42
+    created_by: "1"
+    id: "11"
+    updated_by: "1"
+    description: Disase emanating from the middle mediastinum
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: Scarring in the lung.  Usually from prior infection
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2007-01-31 09:25:42
-    id: "12"
-    openmrs_id: "2401"
     name: "PARENCHYMAL SCARRING   "
+    created_at: 2007-01-31 09:25:42
+    openmrs_id: "2401"
     updated_at: 2010-07-25 10:34:45
+    created_by: "1"
+    id: "12"
+    updated_by: "1"
+    description: Scarring in the lung.  Usually from prior infection
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: ""
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2007-01-31 09:27:36
-    id: "13"
-    openmrs_id: 
     name: RIGHT DIFFUSE
+    created_at: 2007-01-31 09:27:36
+    openmrs_id: 
     updated_at: 2007-01-31 09:28:25
+    created_by: "1"
+    id: "13"
+    updated_by: "1"
+    description: ""
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: Collapsed lung
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2007-01-31 09:28:44
-    id: "14"
-    openmrs_id: 
     name: ATELECTASIS
+    created_at: 2007-01-31 09:28:44
+    openmrs_id: 
     updated_at: 2007-01-31 09:28:57
+    created_by: "1"
+    id: "14"
+    updated_by: "1"
+    description: Collapsed lung
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: ""
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2007-01-31 09:29:26
-    id: "15"
-    openmrs_id: 
     name: LEFT DIFFUSE
+    created_at: 2007-01-31 09:29:26
+    openmrs_id: 
     updated_at: 2007-01-31 09:38:10
+    created_by: "1"
+    id: "15"
+    updated_by: "1"
+    description: ""
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: ""
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2007-01-31 09:45:55
-    id: "16"
-    openmrs_id: 
     name: PULMONARY NODULE (OR MASS)
+    created_at: 2007-01-31 09:45:55
+    openmrs_id: 
     updated_at: 2007-01-31 09:46:26
+    created_by: "1"
+    id: "16"
+    updated_by: "1"
+    description: ""
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: Only one, solitary.
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2007-01-31 09:46:37
-    id: "17"
-    openmrs_id: 
     name: RIGHT SINGLE
+    created_at: 2007-01-31 09:46:37
+    openmrs_id: 
     updated_at: 2007-01-31 09:47:49
+    created_by: "1"
+    id: "17"
+    updated_by: "1"
+    description: Only one, solitary.
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: ""
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2007-01-31 09:46:57
-    id: "18"
-    openmrs_id: 
     name: CALCIFIED
+    created_at: 2007-01-31 09:46:57
+    openmrs_id: 
     updated_at: 2007-02-02 09:12:37
+    created_by: "1"
+    id: "18"
+    updated_by: "1"
+    description: ""
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: ""
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2007-01-31 09:47:52
-    id: "19"
-    openmrs_id: 
     name: LEFT SINGLE
+    created_at: 2007-01-31 09:47:52
+    openmrs_id: 
     updated_at: 2007-01-31 09:48:01
+    created_by: "1"
+    id: "19"
+    updated_by: "1"
+    description: ""
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: ""
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2007-01-31 09:49:17
-    id: "20"
-    openmrs_id: 
     name: MULTIPLE CALCIFIED
+    created_at: 2007-01-31 09:49:17
+    openmrs_id: 
     updated_at: 2007-01-31 09:49:27
+    created_by: "1"
+    id: "20"
+    updated_by: "1"
+    description: ""
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: ""
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2007-02-02 09:12:52
-    id: "21"
-    openmrs_id: 
     name: RIGHT TWO-FIVE
+    created_at: 2007-02-02 09:12:52
+    openmrs_id: 
     updated_at: 2007-02-02 09:45:15
+    created_by: "1"
+    id: "21"
+    updated_by: "1"
+    description: ""
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: ""
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2007-02-02 09:45:21
-    id: "22"
-    openmrs_id: 
     name: LEFT TWO-FIVE
+    created_at: 2007-02-02 09:45:21
+    openmrs_id: 
     updated_at: 2007-02-02 09:45:35
+    created_by: "1"
+    id: "22"
+    updated_by: "1"
+    description: ""
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: ""
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2007-02-02 09:45:46
-    id: "23"
-    openmrs_id: 
     name: RIGHT MORE THAN FIVE
+    created_at: 2007-02-02 09:45:46
+    openmrs_id: 
     updated_at: 2007-02-02 09:46:11
+    created_by: "1"
+    id: "23"
+    updated_by: "1"
+    description: ""
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: ""
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2007-02-02 09:46:18
-    id: "24"
-    openmrs_id: 
     name: LEFT GREATER THAN FIVE
+    created_at: 2007-02-02 09:46:18
+    openmrs_id: 
     updated_at: 2007-02-02 09:46:32
+    created_by: "1"
+    id: "24"
+    updated_by: "1"
+    description: ""
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: ""
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2007-02-02 09:47:03
-    id: "25"
-    openmrs_id: 
     name: ADENOPATHY
+    created_at: 2007-02-02 09:47:03
+    openmrs_id: 
     updated_at: 2007-02-02 09:48:21
+    created_by: "1"
+    id: "25"
+    updated_by: "1"
+    description: ""
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: ""
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2007-02-02 09:47:15
-    id: "26"
-    openmrs_id: 
     name: RIGHT PARATRACHEAL
+    created_at: 2007-02-02 09:47:15
+    openmrs_id: 
     updated_at: 2007-02-02 09:47:29
+    created_by: "1"
+    id: "26"
+    updated_by: "1"
+    description: ""
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: ""
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2007-02-02 09:47:33
-    id: "27"
-    openmrs_id: 
     name: LEFT PARATRACHEAL
+    created_at: 2007-02-02 09:47:33
+    openmrs_id: 
     updated_at: 2007-02-02 09:47:43
+    created_by: "1"
+    id: "27"
+    updated_by: "1"
+    description: ""
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: ""
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2007-02-02 09:47:49
-    id: "28"
-    openmrs_id: 
     name: RIGHT HILAR
+    created_at: 2007-02-02 09:47:49
+    openmrs_id: 
     updated_at: 2007-02-02 09:47:58
+    created_by: "1"
+    id: "28"
+    updated_by: "1"
+    description: ""
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: ""
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2007-02-02 09:48:03
-    id: "29"
-    openmrs_id: 
     name: LEFT HILAR
+    created_at: 2007-02-02 09:48:03
+    openmrs_id: 
     updated_at: 2007-02-02 09:48:12
+    created_by: "1"
+    id: "29"
+    updated_by: "1"
+    description: ""
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: ""
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2007-02-02 09:50:06
-    id: "30"
-    openmrs_id: "2409"
     name: AORTA
+    created_at: 2007-02-02 09:50:06
+    openmrs_id: "2409"
     updated_at: 2010-07-09 18:21:42
+    created_by: "1"
+    id: "30"
+    updated_by: "1"
+    description: ""
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: Description of the aorta, implying an aneurysm.
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2007-02-02 09:50:19
-    id: "31"
-    openmrs_id: "2410"
     name: UNFOLDED AORTA
+    created_at: 2007-02-02 09:50:19
+    openmrs_id: "2410"
     updated_at: 2010-07-09 18:21:42
+    created_by: "1"
+    id: "31"
+    updated_by: "1"
+    description: Description of the aorta, implying an aneurysm.
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: ""
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2007-02-02 09:51:06
-    id: "32"
-    openmrs_id: "2412"
     name: PULMONARY VASCULATURE
+    created_at: 2007-02-02 09:51:06
+    openmrs_id: "2412"
     updated_at: 2010-07-25 10:43:16
+    created_by: "1"
+    id: "32"
+    updated_by: "1"
+    description: ""
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: ""
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2007-02-02 09:51:26
-    id: "33"
-    openmrs_id: "2185"
     name: ENLARGED
+    created_at: 2007-02-02 09:51:26
+    openmrs_id: "2185"
     updated_at: 2010-07-09 18:21:42
+    created_by: "1"
+    id: "33"
+    updated_by: "1"
+    description: ""
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: ""
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2007-02-02 09:51:41
-    id: "34"
-    openmrs_id: "1115"
     name: NORMAL
+    created_at: 2007-02-02 09:51:41
+    openmrs_id: "1115"
     updated_at: 2010-07-09 18:21:42
+    created_by: "1"
+    id: "34"
+    updated_by: "1"
+    description: ""
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: Mass lesion within the mediastinum
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2007-02-02 09:52:24
-    id: "35"
-    openmrs_id: "2418"
     name: MEDIASTINAL MASS
+    created_at: 2007-02-02 09:52:24
+    openmrs_id: "2418"
     updated_at: 2010-07-09 18:21:42
+    created_by: "1"
+    id: "35"
+    updated_by: "1"
+    description: Mass lesion within the mediastinum
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: Anatomic descriptor
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2007-02-02 09:52:44
-    id: "36"
-    openmrs_id: 
     name: ANTERIOR
+    created_at: 2007-02-02 09:52:44
+    openmrs_id: 
     updated_at: 2007-02-02 09:52:58
+    created_by: "1"
+    id: "36"
+    updated_by: "1"
+    description: Anatomic descriptor
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: Anatomic descriptor
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2007-02-02 09:53:03
-    id: "37"
-    openmrs_id: 
     name: MIDDLE
+    created_at: 2007-02-02 09:53:03
+    openmrs_id: 
     updated_at: 2007-02-02 09:53:17
-  attributes_cache: {}
-
-- !ruby/object:Concept 
-  attributes: 
+    created_by: "1"
+    id: "37"
+    updated_by: "1"
     description: Anatomic descriptor
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2007-02-02 09:53:22
-    id: "38"
-    openmrs_id: 
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
     name: POSTERIOR
+    created_at: 2007-02-02 09:53:22
+    openmrs_id: 
     updated_at: 2007-02-02 09:53:32
+    created_by: "1"
+    id: "38"
+    updated_by: "1"
+    description: Anatomic descriptor
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: Enlargement of the heart
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2007-02-02 09:54:17
-    id: "39"
-    openmrs_id: "5158"
     name: CARDIOMEGALY
+    created_at: 2007-02-02 09:54:17
+    openmrs_id: "5158"
     updated_at: 2010-07-09 18:21:42
+    created_by: "1"
+    id: "39"
+    updated_by: "1"
+    description: Enlargement of the heart
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: ""
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2007-02-02 09:54:37
-    id: "40"
-    openmrs_id: "1734"
     name: MILD
+    created_at: 2007-02-02 09:54:37
+    openmrs_id: "1734"
     updated_at: 2010-07-09 18:21:42
+    created_by: "1"
+    id: "40"
+    updated_by: "1"
+    description: ""
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: ""
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2007-02-02 09:54:50
-    id: "41"
-    openmrs_id: "1744"
     name: MODERATE
+    created_at: 2007-02-02 09:54:50
+    openmrs_id: "1744"
     updated_at: 2010-07-09 18:21:42
+    created_by: "1"
+    id: "41"
+    updated_by: "1"
+    description: ""
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: ""
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2007-02-02 09:55:01
-    id: "42"
-    openmrs_id: "1745"
     name: SEVERE
+    created_at: 2007-02-02 09:55:01
+    openmrs_id: "1745"
     updated_at: 2010-07-09 18:21:42
+    created_by: "1"
+    id: "42"
+    updated_by: "1"
+    description: ""
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: ""
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2007-02-02 09:55:49
-    id: "43"
-    openmrs_id: 
     name: RIGHT APICAL
+    created_at: 2007-02-02 09:55:49
+    openmrs_id: 
     updated_at: 2007-02-02 09:55:58
+    created_by: "1"
+    id: "43"
+    updated_by: "1"
+    description: ""
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: ""
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2007-02-02 09:56:00
-    id: "44"
-    openmrs_id: 
     name: RIGHT BASILAR
+    created_at: 2007-02-02 09:56:00
+    openmrs_id: 
     updated_at: 2007-02-02 09:56:17
+    created_by: "1"
+    id: "44"
+    updated_by: "1"
+    description: ""
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: ""
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2007-02-02 09:56:20
-    id: "45"
-    openmrs_id: 
     name: RIGHT LATERAL
+    created_at: 2007-02-02 09:56:20
+    openmrs_id: 
     updated_at: 2007-02-02 09:56:26
+    created_by: "1"
+    id: "45"
+    updated_by: "1"
+    description: ""
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: ""
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2007-02-02 09:56:28
-    id: "46"
-    openmrs_id: 
     name: LEFT APICAL
+    created_at: 2007-02-02 09:56:28
+    openmrs_id: 
     updated_at: 2007-02-02 09:56:36
+    created_by: "1"
+    id: "46"
+    updated_by: "1"
+    description: ""
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: ""
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2007-02-02 09:56:37
-    id: "47"
-    openmrs_id: 
     name: LEFT LATERAL
+    created_at: 2007-02-02 09:56:37
+    openmrs_id: 
     updated_at: 2007-02-02 09:56:46
+    created_by: "1"
+    id: "47"
+    updated_by: "1"
+    description: ""
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: ""
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2007-02-02 09:56:48
-    id: "48"
-    openmrs_id: 
     name: LEFT BASILAR
+    created_at: 2007-02-02 09:56:48
+    openmrs_id: 
     updated_at: 2007-02-02 09:56:57
+    created_by: "1"
+    id: "48"
+    updated_by: "1"
+    description: ""
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: ""
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2007-02-02 09:57:11
-    id: "49"
-    openmrs_id: "2421"
     name: PLEURAL SCARRING
+    created_at: 2007-02-02 09:57:11
+    openmrs_id: "2421"
     updated_at: 2010-07-25 10:37:21
+    created_by: "1"
+    id: "49"
+    updated_by: "1"
+    description: ""
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: ""
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2007-02-02 09:58:35
-    id: "50"
-    openmrs_id: 
     name: RIGHT LESS THAN  25%
+    created_at: 2007-02-02 09:58:35
+    openmrs_id: 
     updated_at: 2007-02-02 09:58:53
+    created_by: "1"
+    id: "50"
+    updated_by: "1"
+    description: ""
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: ""
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2007-02-02 09:58:55
-    id: "51"
-    openmrs_id: 
     name: RIGHT GREATER THAN 25%
+    created_at: 2007-02-02 09:58:55
+    openmrs_id: 
     updated_at: 2007-02-02 09:59:08
+    created_by: "1"
+    id: "51"
+    updated_by: "1"
+    description: ""
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: ""
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2007-02-02 09:59:10
-    id: "52"
-    openmrs_id: 
     name: LEFT LESS THAN 25%
+    created_at: 2007-02-02 09:59:10
+    openmrs_id: 
     updated_at: 2007-02-02 09:59:20
+    created_by: "1"
+    id: "52"
+    updated_by: "1"
+    description: ""
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: ""
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2007-02-02 09:59:24
-    id: "53"
-    openmrs_id: 
     name: LEFT GREATER THAN 25%
+    created_at: 2007-02-02 09:59:24
+    openmrs_id: 
     updated_at: 2007-02-02 09:59:34
+    created_by: "1"
+    id: "53"
+    updated_by: "1"
+    description: ""
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: ""
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2007-02-02 09:59:41
-    id: "54"
-    openmrs_id: "2424"
     name: PNEUMOTHORAX
+    created_at: 2007-02-02 09:59:41
+    openmrs_id: "2424"
     updated_at: 2010-07-09 18:21:42
+    created_by: "1"
+    id: "54"
+    updated_by: "1"
+    description: ""
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: ""
-    created_by: "1"
-    updated_by: "1"
+    name: BONES
     created_at: 2007-02-02 10:01:03
-    id: "55"
     openmrs_id: 
-    name: BONES
     updated_at: 2007-02-02 10:01:49
+    created_by: "1"
+    id: "55"
+    updated_by: "1"
+    description: ""
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: ""
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2007-02-02 10:01:57
-    id: "56"
-    openmrs_id: 
     name: OSTEOPENIA
+    created_at: 2007-02-02 10:01:57
+    openmrs_id: 
     updated_at: 2007-02-02 10:02:06
+    created_by: "1"
+    id: "56"
+    updated_by: "1"
+    description: ""
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: ""
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2007-02-02 10:02:14
-    id: "57"
-    openmrs_id: "2426"
     name: ACUTE FRACTURE
+    created_at: 2007-02-02 10:02:14
+    openmrs_id: "2426"
     updated_at: 2010-07-09 18:21:42
+    created_by: "1"
+    id: "57"
+    updated_by: "1"
+    description: ""
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: ""
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2007-02-02 10:02:26
-    id: "58"
-    openmrs_id: "2427"
     name: HEALED FRACTURE
+    created_at: 2007-02-02 10:02:26
+    openmrs_id: "2427"
     updated_at: 2010-07-09 18:21:42
+    created_by: "1"
+    id: "58"
+    updated_by: "1"
+    description: ""
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: ""
-    created_by: "5"
-    updated_by: "5"
-    created_at: 2007-02-05 16:15:00
-    id: "59"
-    openmrs_id: "1136"
     name: PLEURAL EFFUSION
+    created_at: 2007-02-05 16:15:00
+    openmrs_id: "1136"
     updated_at: 2010-07-09 18:21:42
+    created_by: "5"
+    id: "59"
+    updated_by: "5"
+    description: ""
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: ""
-    created_by: "5"
-    updated_by: "5"
-    created_at: 2007-02-05 16:15:27
-    id: "60"
-    openmrs_id: 
     name: RIGHT SMALL
+    created_at: 2007-02-05 16:15:27
+    openmrs_id: 
     updated_at: 2007-02-05 16:16:44
+    created_by: "5"
+    id: "60"
+    updated_by: "5"
+    description: ""
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: ""
-    created_by: "5"
-    updated_by: "5"
-    created_at: 2007-02-05 16:16:51
-    id: "61"
-    openmrs_id: 
     name: RIGHT MODERATE
+    created_at: 2007-02-05 16:16:51
+    openmrs_id: 
     updated_at: 2007-02-05 16:17:02
+    created_by: "5"
+    id: "61"
+    updated_by: "5"
+    description: ""
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: ""
-    created_by: "5"
-    updated_by: "5"
-    created_at: 2007-02-05 16:17:03
-    id: "62"
-    openmrs_id: 
     name: RIGHT LARGE
+    created_at: 2007-02-05 16:17:03
+    openmrs_id: 
     updated_at: 2007-02-05 16:17:09
+    created_by: "5"
+    id: "62"
+    updated_by: "5"
+    description: ""
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: ""
-    created_by: "5"
-    updated_by: "5"
-    created_at: 2007-02-05 16:17:12
-    id: "63"
-    openmrs_id: 
     name: LEFT SMALL
+    created_at: 2007-02-05 16:17:12
+    openmrs_id: 
     updated_at: 2007-02-05 16:17:19
+    created_by: "5"
+    id: "63"
+    updated_by: "5"
+    description: ""
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: ""
-    created_by: "5"
-    updated_by: "5"
-    created_at: 2007-02-05 16:17:20
-    id: "64"
-    openmrs_id: 
     name: LEFT MODERATE
+    created_at: 2007-02-05 16:17:20
+    openmrs_id: 
     updated_at: 2007-02-05 16:17:27
-  attributes_cache: {}
-
-- !ruby/object:Concept 
-  attributes: 
-    description: ""
     created_by: "5"
+    id: "64"
     updated_by: "5"
-    created_at: 2007-02-05 16:17:29
-    id: "65"
-    openmrs_id: 
+    description: ""
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
     name: LEFT LARGE
+    created_at: 2007-02-05 16:17:29
+    openmrs_id: 
     updated_at: 2007-02-05 16:20:52
+    created_by: "5"
+    id: "65"
+    updated_by: "5"
+    description: ""
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: anatomic descriptor
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2009-01-16 10:34:12
-    id: "66"
-    openmrs_id: "5141"
     name: RIGHT
+    created_at: 2009-01-16 10:34:12
+    openmrs_id: "5141"
     updated_at: 2010-07-09 18:21:42
-  attributes_cache: {}
-
-- !ruby/object:Concept 
-  attributes: 
+    created_by: "1"
+    id: "66"
+    updated_by: "1"
     description: anatomic descriptor
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2009-01-16 10:34:27
-    id: "67"
-    openmrs_id: "5139"
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
     name: LEFT
+    created_at: 2009-01-16 10:34:27
+    openmrs_id: "5139"
     updated_at: 2010-07-09 18:21:42
+    created_by: "1"
+    id: "67"
+    updated_by: "1"
+    description: anatomic descriptor
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: description of disease pattern
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2009-01-16 10:34:41
-    id: "68"
-    openmrs_id: "576"
     name: DIFFUSE
+    created_at: 2009-01-16 10:34:41
+    openmrs_id: "576"
     updated_at: 2010-07-09 18:21:42
+    created_by: "1"
+    id: "68"
+    updated_by: "1"
+    description: description of disease pattern
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: word meaning nothing
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2009-01-16 10:35:44
-    id: "69"
-    openmrs_id: "1107"
     name: NONE
+    created_at: 2009-01-16 10:35:44
+    openmrs_id: "1107"
     updated_at: 2010-07-09 18:21:42
+    created_by: "1"
+    id: "69"
+    updated_by: "1"
+    description: word meaning nothing
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: upper lung field scarring
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2009-01-16 10:39:18
-    id: "70"
-    openmrs_id: "2401"
     name: LUNG SCARRING UPPER
-    updated_at: 2010-07-09 18:21:42
-  attributes_cache: {}
-
-- !ruby/object:Concept 
-  attributes: 
-    description: on both sides of the body
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2009-01-16 10:40:12
-    id: "71"
-    openmrs_id: "2399"
-    name: BILATERAL
-    updated_at: 2010-07-09 18:21:42
-  attributes_cache: {}
-
-- !ruby/object:Concept 
-  attributes: 
-    description: scarring in the lung base
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2009-01-16 10:40:38
-    id: "72"
+    created_at: 2009-01-16 10:39:18
     openmrs_id: "2401"
+    updated_at: 2010-07-09 18:21:42
+    created_by: "1"
+    id: "70"
+    updated_by: "1"
+    description: upper lung field scarring
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
+    name: BILATERAL
+    created_at: 2009-01-16 10:40:12
+    openmrs_id: "2399"
+    updated_at: 2010-07-09 18:21:42
+    created_by: "1"
+    id: "71"
+    updated_by: "1"
+    description: on both sides of the body
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
     name: LUNG SCARRING LOWER
+    created_at: 2009-01-16 10:40:38
+    openmrs_id: "2401"
     updated_at: 2010-07-09 18:21:42
+    created_by: "1"
+    id: "72"
+    updated_by: "1"
+    description: scarring in the lung base
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: focal lesions
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2009-01-16 10:41:04
-    id: "73"
-    openmrs_id: "2404"
     name: PULMONARY NODULES
+    created_at: 2009-01-16 10:41:04
+    openmrs_id: "2404"
     updated_at: 2010-07-09 18:21:42
+    created_by: "1"
+    id: "73"
+    updated_by: "1"
+    description: focal lesions
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: singular
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2009-01-16 10:41:33
-    id: "74"
-    openmrs_id: "2405"
     name: SOLITARY
+    created_at: 2009-01-16 10:41:33
+    openmrs_id: "2405"
     updated_at: 2010-07-09 18:21:42
+    created_by: "1"
+    id: "74"
+    updated_by: "1"
+    description: singular
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: qualitative description
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2009-01-16 10:41:56
-    id: "75"
-    openmrs_id: "2406"
     name: TWO TO FIVE
+    created_at: 2009-01-16 10:41:56
+    openmrs_id: "2406"
     updated_at: 2010-07-09 18:21:42
+    created_by: "1"
+    id: "75"
+    updated_by: "1"
+    description: qualitative description
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: greater than five
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2009-01-16 10:42:19
-    id: "76"
-    openmrs_id: "2407"
     name: MORE THAN FIVE
+    created_at: 2009-01-16 10:42:19
+    openmrs_id: "2407"
     updated_at: 2010-07-09 18:21:42
+    created_by: "1"
+    id: "76"
+    updated_by: "1"
+    description: greater than five
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: multiple diffuse tiny nodlues
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2009-01-16 10:42:37
-    id: "77"
-    openmrs_id: "1137"
     name: MILIARY CHANGES
+    created_at: 2009-01-16 10:42:37
+    openmrs_id: "1137"
     updated_at: 2010-07-09 18:21:42
+    created_by: "1"
+    id: "77"
+    updated_by: "1"
+    description: multiple diffuse tiny nodlues
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: adenopathy in the paratracheal region
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2009-01-16 10:42:58
-    id: "78"
-    openmrs_id: "2414"
     name: PARATRACHEAL ADENOPATHY
+    created_at: 2009-01-16 10:42:58
+    openmrs_id: "2414"
     updated_at: 2010-07-09 18:21:42
+    created_by: "1"
+    id: "78"
+    updated_by: "1"
+    description: adenopathy in the paratracheal region
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: adenopathy in the hilum of the lung
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2009-01-16 10:44:05
-    id: "79"
-    openmrs_id: "2417"
     name: HILAR ADENOPATHY
+    created_at: 2009-01-16 10:44:05
+    openmrs_id: "2417"
     updated_at: 2010-07-09 18:21:42
+    created_by: "1"
+    id: "79"
+    updated_by: "1"
+    description: adenopathy in the hilum of the lung
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: twisted appearance of the aorta, frequently due to atherosclerotic disease
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2009-01-16 10:44:35
-    id: "80"
-    openmrs_id: 
     name: ECTATIC
+    created_at: 2009-01-16 10:44:35
+    openmrs_id: 
     updated_at: 2009-01-16 10:45:10
+    created_by: "1"
+    id: "80"
+    updated_by: "1"
+    description: twisted appearance of the aorta, frequently due to atherosclerotic disease
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: focal dilation of a tubular structure
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2009-01-16 10:45:17
-    id: "81"
-    openmrs_id: 
     name: ANEURYSM
+    created_at: 2009-01-16 10:45:17
+    openmrs_id: 
     updated_at: 2009-01-16 10:45:45
+    created_by: "1"
+    id: "81"
+    updated_by: "1"
+    description: focal dilation of a tubular structure
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: diminished
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2009-01-16 10:46:51
-    id: "83"
-    openmrs_id: "2413"
     name: DECREASED
+    created_at: 2009-01-16 10:46:51
+    openmrs_id: "2413"
     updated_at: 2010-07-09 18:21:42
+    created_by: "1"
+    id: "83"
+    updated_by: "1"
+    description: diminished
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: affirmative
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2009-01-16 10:47:21
-    id: "84"
-    openmrs_id: 
     name: "YES"
+    created_at: 2009-01-16 10:47:21
+    openmrs_id: 
     updated_at: 2009-01-16 10:47:32
+    created_by: "1"
+    id: "84"
+    updated_by: "1"
+    description: affirmative
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: negative
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2009-01-16 10:47:33
-    id: "85"
-    openmrs_id: 
     name: "NO"
+    created_at: 2009-01-16 10:47:33
+    openmrs_id: 
     updated_at: 2009-01-16 10:47:40
+    created_by: "1"
+    id: "85"
+    updated_by: "1"
+    description: negative
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: fluid in the right pleural space
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2009-01-16 10:47:44
-    id: "86"
-    openmrs_id: 
     name: PLEURAL EFFUSION RIGHT
+    created_at: 2009-01-16 10:47:44
+    openmrs_id: 
     updated_at: 2009-01-16 10:48:28
+    created_by: "1"
+    id: "86"
+    updated_by: "1"
+    description: fluid in the right pleural space
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: fluid in the left pleural space
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2009-01-16 10:48:31
-    id: "87"
-    openmrs_id: 
     name: PLEURAL EFFUSION LEFT
+    created_at: 2009-01-16 10:48:31
+    openmrs_id: 
     updated_at: 2009-01-16 10:48:43
+    created_by: "1"
+    id: "87"
+    updated_by: "1"
+    description: fluid in the left pleural space
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: gas in the right pleural space
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2009-01-16 10:50:52
-    id: "89"
-    openmrs_id: 
     name: PNEUMOTHORAX RIGHT
+    created_at: 2009-01-16 10:50:52
+    openmrs_id: 
     updated_at: 2009-01-16 10:51:05
+    created_by: "1"
+    id: "89"
+    updated_by: "1"
+    description: gas in the right pleural space
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: gas in the left pleural space
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2009-01-16 10:51:09
-    id: "90"
-    openmrs_id: 
     name: PNEUMOTHORAX LEFT
+    created_at: 2009-01-16 10:51:09
+    openmrs_id: 
     updated_at: 2009-01-16 10:51:23
+    created_by: "1"
+    id: "90"
+    updated_by: "1"
+    description: gas in the left pleural space
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: size descriptor
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2009-01-16 10:51:37
-    id: "91"
-    openmrs_id: "2428"
     name: SMALL
+    created_at: 2009-01-16 10:51:37
+    openmrs_id: "2428"
     updated_at: 2010-07-09 18:21:42
-  attributes_cache: {}
-
-- !ruby/object:Concept 
-  attributes: 
+    created_by: "1"
+    id: "91"
+    updated_by: "1"
     description: size descriptor
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2009-01-16 10:52:23
-    id: "92"
-    openmrs_id: "2420"
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
     name: LARGE
+    created_at: 2009-01-16 10:52:23
+    openmrs_id: "2420"
     updated_at: 2010-07-09 18:21:42
+    created_by: "1"
+    id: "92"
+    updated_by: "1"
+    description: size descriptor
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: bones
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2009-01-16 10:53:12
-    id: "93"
-    openmrs_id: 
-    name: BONES
-    updated_at: 2009-01-16 10:53:39
-  attributes_cache: {}
-
-- !ruby/object:Concept 
-  attributes: 
-    description: decreased bone mineral density
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2009-01-16 10:54:22
-    id: "94"
-    openmrs_id: "1516"
     name: OSTEOPOROSIS
+    created_at: 2009-01-16 10:54:22
+    openmrs_id: "1516"
     updated_at: 2010-07-09 18:21:42
+    created_by: "1"
+    id: "94"
+    updated_by: "1"
+    description: decreased bone mineral density
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: overinflation of the lungs
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2009-01-23 12:02:44
-    id: "95"
-    openmrs_id: 
     name: HYPERINFLATED
-    updated_at: 2009-01-23 12:03:02
+    created_at: 2009-01-23 12:02:44
+    openmrs_id: "7910"
+    updated_at: 2012-07-15 09:06:50
+    created_by: "1"
+    id: "95"
+    updated_by: "1"
+    description: overinflation of the lungs
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: low lung volumes
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2009-01-23 12:03:09
-    id: "96"
-    openmrs_id: 
     name: HYPOINFLATED
-    updated_at: 2009-01-23 12:03:19
+    created_at: 2009-01-23 12:03:09
+    openmrs_id: "7911"
+    updated_at: 2012-07-15 09:06:04
+    created_by: "1"
+    id: "96"
+    updated_by: "1"
+    description: low lung volumes
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: degree of expansion of the lungs
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2009-01-26 10:48:23
-    id: "97"
-    openmrs_id: 
     name: PULMONARY INFLATION
-    updated_at: 2010-07-22 11:14:16
+    created_at: 2009-01-26 10:48:23
+    openmrs_id: "7912"
+    updated_at: 2012-07-15 09:05:16
+    created_by: "1"
+    id: "97"
+    updated_by: "1"
+    description: degree of expansion of the lungs
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: cavity formation within the lungs
-    created_by: "13"
-    updated_by: "1"
-    created_at: 2010-01-07 15:45:15
-    id: "98"
-    openmrs_id: "6052"
     name: PULMONARY CAVITATION
+    created_at: 2010-01-07 15:45:15
+    openmrs_id: "6052"
     updated_at: 2010-07-09 18:21:42
-  attributes_cache: {}
-
-- !ruby/object:Concept 
-  attributes: 
-    description: a negative - not present
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2010-02-25 19:12:38
-    id: "99"
-    openmrs_id: "2415"
-    name: ABSENT
-    updated_at: 2010-07-09 18:21:42
-  attributes_cache: {}
-
-- !ruby/object:Concept 
-  attributes: 
-    description: positive finding
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2010-02-25 19:13:16
-    id: "100"
-    openmrs_id: "2416"
-    name: PRESENT
-    updated_at: 2010-07-09 18:21:42
-  attributes_cache: {}
-
-- !ruby/object:Concept 
-  attributes: 
-    description: A process that causes an alveolar opacity on chest radiographs
-    created_by: 
-    updated_by: 
-    created_at: 2010-03-10 14:24:54
-    id: "101"
-    openmrs_id: "2397"
-    name: PULMONARY INFILTRATE
-    updated_at: 2010-07-09 18:21:42
-  attributes_cache: {}
-
-- !ruby/object:Concept 
-  attributes: 
-    description: Degree of lung inflation
-    created_by: 
-    updated_by: "1"
-    created_at: 2010-03-10 14:24:54
-    id: "102"
-    openmrs_id: "0"
-    name: LUNG INFLATION
-    updated_at: 2010-07-09 18:21:42
-  attributes_cache: {}
-
-- !ruby/object:Concept 
-  attributes: 
-    description: Enlargement of the mediastinium suggesting an abnormal bulge of the aorta
-    created_by: 
-    updated_by: 
-    created_at: 2010-03-10 14:24:54
-    id: "103"
-    openmrs_id: "2411"
-    name: AORTIC ANEURYSM
-    updated_at: 2010-07-09 18:21:42
-  attributes_cache: {}
-
-- !ruby/object:Concept 
-  attributes: 
-    description: Question to document bone findings on a chest xray
-    created_by: 
-    updated_by: 
-    created_at: 2010-03-10 14:24:54
-    id: "104"
-    openmrs_id: "2425"
-    name: BONE FINDINGS ON CHEST XRAY?
-    updated_at: 2010-07-09 18:21:42
-  attributes_cache: {}
-
-- !ruby/object:Concept 
-  attributes: 
-    description: anatomic descripter
     created_by: "13"
+    id: "98"
     updated_by: "1"
-    created_at: 2010-03-11 11:46:59
-    id: "105"
-    openmrs_id: "2403"
+    description: cavity formation within the lungs
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
+    name: ABSENT
+    created_at: 2010-02-25 19:12:38
+    openmrs_id: "2415"
+    updated_at: 2010-07-09 18:21:42
+    created_by: "1"
+    id: "99"
+    updated_by: "1"
+    description: a negative - not present
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
+    name: PRESENT
+    created_at: 2010-02-25 19:13:16
+    openmrs_id: "2416"
+    updated_at: 2010-07-09 18:21:42
+    created_by: "1"
+    id: "100"
+    updated_by: "1"
+    description: positive finding
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
+    name: PULMONARY INFILTRATE
+    created_at: 2010-03-10 14:24:54
+    openmrs_id: "2397"
+    updated_at: 2010-07-09 18:21:42
+    created_by: 
+    id: "101"
+    updated_by: 
+    description: A process that causes an alveolar opacity on chest radiographs
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
+    name: LUNG INFLATION
+    created_at: 2010-03-10 14:24:54
+    openmrs_id: "0"
+    updated_at: 2010-07-09 18:21:42
+    created_by: 
+    id: "102"
+    updated_by: "1"
+    description: Degree of lung inflation
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
+    name: AORTIC ANEURYSM
+    created_at: 2010-03-10 14:24:54
+    openmrs_id: "2411"
+    updated_at: 2010-07-09 18:21:42
+    created_by: 
+    id: "103"
+    updated_by: 
+    description: Enlargement of the mediastinium suggesting an abnormal bulge of the aorta
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
+    name: BONE FINDINGS ON CHEST XRAY?
+    created_at: 2010-03-10 14:24:54
+    openmrs_id: "2425"
+    updated_at: 2010-07-09 18:21:42
+    created_by: 
+    id: "104"
+    updated_by: 
+    description: Question to document bone findings on a chest xray
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
     name: LOWER
+    created_at: 2010-03-11 11:46:59
+    openmrs_id: "2403"
     updated_at: 2010-07-09 18:21:42
+    created_by: "13"
+    id: "105"
+    updated_by: "1"
+    description: anatomic descripter
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: anatomic descripter
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2010-07-09 17:48:22
-    id: "106"
-    openmrs_id: "2402"
     name: UPPER
+    created_at: 2010-07-09 17:48:22
+    openmrs_id: "2402"
     updated_at: 2010-07-09 18:21:42
+    created_by: "1"
+    id: "106"
+    updated_by: "1"
+    description: anatomic descripter
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: anatomic descripter
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2010-07-09 17:49:30
-    id: "107"
-    openmrs_id: "2422"
     name: APICAL
+    created_at: 2010-07-09 17:49:30
+    openmrs_id: "2422"
     updated_at: 2010-07-09 18:21:42
+    created_by: "1"
+    id: "107"
+    updated_by: "1"
+    description: anatomic descripter
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: anatomic descripter
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2010-07-09 17:50:01
-    id: "108"
-    openmrs_id: "542"
     name: LATERAL
+    created_at: 2010-07-09 17:50:01
+    openmrs_id: "542"
     updated_at: 2010-07-09 18:21:42
-  attributes_cache: {}
-
-- !ruby/object:Concept 
-  attributes: 
+    created_by: "1"
+    id: "108"
+    updated_by: "1"
     description: anatomic descripter
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2010-07-09 17:50:31
-    id: "109"
-    openmrs_id: "2423"
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
     name: BASILAR
+    created_at: 2010-07-09 17:50:31
+    openmrs_id: "2423"
     updated_at: 2010-07-09 18:21:42
+    created_by: "1"
+    id: "109"
+    updated_by: "1"
+    description: anatomic descripter
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: Necessary for OpenMRS integration
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2010-07-09 17:54:21
-    id: "110"
-    openmrs_id: "2396"
     name: LUNG FINDINGS?
+    created_at: 2010-07-09 17:54:21
+    openmrs_id: "2396"
     updated_at: 2010-07-09 18:21:42
-  attributes_cache: {}
-
-- !ruby/object:Concept 
-  attributes: 
-    description: Me too
     created_by: "1"
+    id: "110"
     updated_by: "1"
-    created_at: 2010-07-09 17:54:47
-    id: "111"
-    openmrs_id: "2419"
-    name: PLEURAL FINDINGS?
-    updated_at: 2010-07-09 18:21:42
-  attributes_cache: {}
-
-- !ruby/object:Concept 
-  attributes: 
     description: Necessary for OpenMRS integration
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2010-07-09 18:21:05
-    id: "112"
-    openmrs_id: "2408"
-    name: MEDIASTINAL FINDINGS?
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
+    name: PLEURAL FINDINGS?
+    created_at: 2010-07-09 17:54:47
+    openmrs_id: "2419"
     updated_at: 2010-07-09 18:21:42
+    created_by: "1"
+    id: "111"
+    updated_by: "1"
+    description: Me too
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: Question concept for rejection
+    name: MEDIASTINAL FINDINGS?
+    created_at: 2010-07-09 18:21:05
+    openmrs_id: "2408"
+    updated_at: 2010-07-09 18:21:42
     created_by: "1"
+    id: "112"
     updated_by: "1"
-    created_at: 2010-07-17 17:26:22
-    id: "113"
-    openmrs_id: 
+    description: Necessary for OpenMRS integration
+  attributes_cache: {}
+
+- !ruby/object:Concept 
+  attributes: 
     name: DEMOGRAPHIC MISMATCH
+    created_at: 2010-07-17 17:26:22
+    openmrs_id: 
     updated_at: 2010-07-17 17:26:54
+    created_by: "1"
+    id: "113"
+    updated_by: "1"
+    description: Question concept for rejection
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: rejection category where the name looks correct, but the ID does not look correct
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2010-07-17 17:26:57
-    id: "114"
-    openmrs_id: 
     name: ID MISMATCH
+    created_at: 2010-07-17 17:26:57
+    openmrs_id: 
     updated_at: 2010-07-17 17:27:28
+    created_by: "1"
+    id: "114"
+    updated_by: "1"
+    description: rejection category where the name looks correct, but the ID does not look correct
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: rejection category suggesting a completely wrong film
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2010-07-17 17:27:31
-    id: "115"
-    openmrs_id: 
     name: NAME AND ID MISMATCH
+    created_at: 2010-07-17 17:27:31
+    openmrs_id: 
     updated_at: 2010-07-17 17:27:50
+    created_by: "1"
+    id: "115"
+    updated_by: "1"
+    description: rejection category suggesting a completely wrong film
   attributes_cache: {}
 
 - !ruby/object:Concept 
   attributes: 
-    description: Rejection category where the name and ID are correct, but the date is incorrect
-    created_by: "1"
-    updated_by: "1"
-    created_at: 2010-07-17 17:27:52
-    id: "116"
-    openmrs_id: 
     name: DATE MISMATCH
+    created_at: 2010-07-17 17:27:52
+    openmrs_id: 
     updated_at: 2010-07-17 17:28:13
+    created_by: "1"
+    id: "116"
+    updated_by: "1"
+    description: Rejection category where the name and ID are correct, but the date is incorrect
   attributes_cache: {}
 
