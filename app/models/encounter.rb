@@ -84,7 +84,7 @@ class Encounter < ActiveRecord::Base
 
     # Now we will add the OBX|RP segments observations
 
-    #TODO This is commeneted out because the 1.8 openmrs HL7 processor does not yet accept RP
+    #TODO This is commented out because the 1.8 openmrs HL7 processor does not yet accept RP
 
     #self.images.each do |image|
     #  obx = HL7::Message::Segment::OBX.new
