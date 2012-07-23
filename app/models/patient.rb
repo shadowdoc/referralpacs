@@ -105,7 +105,7 @@ class Patient < ActiveRecord::Base
     #    ^ Check Digit Scheme (M10) 
     #    ^ Assigning Authority (hopefully won't have to use.. but if we need multiples) 
     #    // a ~ would separate multiple occurrences of PIDs
-    pid.patient_id_list = mrn_ampath + "^^^AMRS Universal ID^"
+    pid.patient_id_list = mrn_ampath + "^" + check_digit + "^M10^AMRS Universal ID^"
     
     # Patient Name
     # Patient^Jonny^Dee^^DR| 
@@ -130,7 +130,7 @@ class Patient < ActiveRecord::Base
     #    ^ Degree of Precision (for our purposes Y = estimated, and null = actual)
     
     #pid.patient_dob = hl7_birthday
-    #pid.patient_dob = ""
+    pid.patient_dob = ""
 
     # M| 
     #    Administrative Sex (M) .. M, F, O, U, A, N possible answers
