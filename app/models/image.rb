@@ -104,7 +104,7 @@ class Image < ActiveRecord::Base
       # Data model does not include series.
 
       # This limits the maximum width of the image decreasing bandwidth requirements.
-      wado_url_base + "&width=1750"
+      wado_url_base + "&columns=1750"
     end
 
   end
