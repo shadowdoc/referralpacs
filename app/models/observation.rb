@@ -15,131 +15,89 @@ class Observation < ActiveRecord::Base
 
     def new_obx
       # Shortcut to create a new OBX segment
+      # This sets up all of the static default segments
 
       o = HL7::Message::Segment::OBX.new
       o.value_type = 'CWE'
+      o.observation_id = '2395^CHEST X-RAY FINDINGS BY RADIOLOGY^99DCT'
       o.e4 = @segment_id
       o.e11 = 'F' # Set result status to final
       o
     end
 
-    # There are several special cases where we will need to return more than one obx together.
-    # This must return an array because sometimes more than one OBX segment will be returned.
+    obs_array = []
 
-    segments = []
+    # There are several cases where our system has a single concept that maps
+    # to several concepts in OpenMRS.  We need to pull those out and treat them specifically
 
-    # The first case where we need more than one OBX is
+    # The first case where we need more than one OpenMRS concept is
     # PARENCHYMAL SCARRING/ATELECTASIS (OpenMRS Concept 2401)
     # This is represented in our system as LUNG SCARRING UPPER and LUNG SCARRING LOWER
 
     if self.question_concept.name =~ /LUNG SCARRING UPPER/
       # First add the question and the first portion of the answer
 
-      obx = new_obx
-      obx.observation_id = '2041^PARENCHYMAL SCARRING/ATELECTASIS^99DCT'
-      obx.observation_value = '2042^UPPER^99DCT'
-      segments << obx
-
-      obx = new_obx
-      obx.observation_id = '2041^PARENCHYMAL SCARRING/ATELECTASIS^99DCT'
-      obx.observation_value = self.hl7_observation_value
-      segments << obx
+      obs_array = ['2041^PARENCHYMAL SCARRING/ATELECTASIS^99DCT', '2043^LOWER^99DCT', self.hl7_observation_value]
 
     elsif self.question_concept.name =~ /LUNG SCARRING LOWER/
 
-      obx = new_obx
-      obx.observation_id = '2041^PARENCHYMAL SCARRING/ATELECTASIS^99DCT'
-      obx.observation_value = '2043^LOWER^99DCT'
-      segments << obx
-
-      obx = new_obx
-      obx.observation_id = '2041^PARENCHYMAL SCARRING/ATELECTASIS^99DCT'
-      obx.observation_value = self.hl7_observation_value
-      segments << obx
+      obs_array = ['2041^PARENCHYMAL SCARRING/ATELECTASIS^99DCT', '2042^UPPER^99DCT', self.hl7_observation_value]
   
     elsif self.question_concept.name =~ /PLEURAL EFFUSION RIGHT/
-      obx = new_obx
-      obx.observation_id = '1136^PLEURAL EFFUSION^99DCT'
-      obx.observation_value = '5141^RIGHT^99DCT'
-      segments << obx
 
-      obx = new_obx
-      obx.observation_id = '1136^PLEURAL EFFUSION^99DCT'
-      obx.observation_value = self.hl7_observation_value
-      segments << obx
-      
+      obs_array = ['1136^PLEURAL EFFUSION^99DCT', '5141^RIGHT^99DCT', self.hl7_observation_value]
+
     elsif self.question_concept.name =~ /PLEURAL EFFUSION LEFT/
-      obx = new_obx
-      obx.observation_id = '1136^PLEURAL EFFUSION^99DCT'
-      obx.observation_value = '5139^LEFT^99DCT'
-      segments << obx
 
-      obx = new_obx
-      obx.observation_id = '1136^PLEURAL EFFUSION^99DCT'
-      obx.observation_value = self.hl7_observation_value
-      segments << obx
+      obs_array = ['1136^PLEURAL EFFUSION^99DCT', '5139^LEFT^99DCT', self.hl7_observation_value]
 
     elsif self.question_concept.name =~ /PLEURAL SCARRING/
 
       # This first section puts on the laterality modifier
+      puts "made it here"
 
-      obx = new_obx
-      obx.observation_id = '2421^PLEURAL SCARRING^99DCT'
+      obs_array = ['2421^PLEURAL SCARRING^99DCT']
+
       if self.value_concept.name =~ /LEFT/
-        obx.observation_value = '5139^LEFT^99DCT'
+        obs_array << '5139^LEFT^99DCT'
       else
-        obx.observation_value = '5141^RIGHT^99DCT'
+        obs_array << '5141^RIGHT^99DCT'
       end
-      segments << obx
 
       # This next section adds the location (apical, lateral, or basilar)
 
-      obx = new_obx
-      obx.observation_id = '2421^PLEURAL SCARRING^99DCT'
-
       if self.value_concept.name =~ /APICAL/
-        obx.observation_value = '2422^APICAL^99DCT'
+        obs_array << '2422^APICAL^99DCT'
       elsif self.value_concept.name =~ /LATERAL/
-        obx.observation_value = '542^LATERAL^99DCT'
+        obs_array << '542^LATERAL^99DCT'
       else
-        obx.observation_value = '2423^BASILAR^99DCT'
+        obs_array << '2423^BASILAR^99DCT'
       end
-      segments << obx
 
     elsif self.question_concept.name =~ /PNEUMOTHORAX RIGHT/
-      obx = new_obx
-      obx.observation_id = '2424^PNEUMOTHORAX^99DCT'
-      obx.observation_value = '5141^RIGHT^99DCT'
-      segments << obx
 
-      obx = new_obx
-      obx.observation_id = '2424^PNEUMOTHORAX^99DCT'
-      obx.observation_value = self.hl7_observation_value
-      segments << obx
+      obs_array <<  '2424^PNEUMOTHORAX^99DCT'
+      obs_array <<  '5141^RIGHT^99DCT'
+      obs_array << self.hl7_observation_value
 
     elsif self.question_concept.name =~ /PNEUMOTHORAX LEFT/
-      obx = new_obx
-      obx.observation_id = '2424^PNEUMOTHORAX^99DCT'
-      obx.observation_value = '5139^LEFT^99DCT'
-      segments << obx
 
-      obx = new_obx
-      obx.observation_id = '2424^PNEUMOTHORAX^99DCT'
-      obx.observation_value = self.hl7_observation_value
-      segments << obx
+      obs_array <<  '2424^PNEUMOTHORAX^99DCT'
+      obs_array << '5139^LEFT^99DCT'
+      obs_array << self.hl7_observation_value
+
     else
 
       # This is the clause for observations that are not nested.
-
-      obx = new_obx
-      obx.observation_id = self.hl7_question
-	  obx.observation_value = self.hl7_observation_value
-      segments << obx
+      obs_array << self.hl7_question
+	    obs_array << self.hl7_observation_value
 
     end
 
+	  obx = new_obx
+    obx.observation_value = obs_array.join('~')
 
-	return segments
+    [obx]
   end
 
   def hl7_question
