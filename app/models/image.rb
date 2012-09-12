@@ -1,9 +1,9 @@
 class Image < ActiveRecord::Base
-  require 'RMagick'
+  require 'mini_magick'
   
   belongs_to :encounter
 
-  THUMB_MAX_SIZE = [125,125]
+  THUMB_MAX_SIZE = '125x125'
   
   after_save :process
   after_destroy :cleanup
@@ -15,7 +15,7 @@ class Image < ActiveRecord::Base
   end
     
   def rotate(direction)
-    image = Magick::Image.read(image_path).first
+    image = MiniMagick::Image.read(image_path).first
     if direction == "right"
       image = image.rotate(90)
     else
@@ -26,7 +26,7 @@ class Image < ActiveRecord::Base
   end
   
   def crop(x1, y1, width, height)
-    image = Magick::Image.read(image_path).first
+    image = MiniMagick::Image.read(image_path).first
     image.crop!(x1, y1, width, height) 
     image.write(image_path)
     create_thumbnail
@@ -179,9 +179,9 @@ class Image < ActiveRecord::Base
   end
   
   def create_thumbnail
-    image = Magick::Image.read(image_path).first
-    thumbnail = image.thumbnail(*THUMB_MAX_SIZE)
-    thumbnail.write thumb_path
+    image = MiniMagick::Image.open(image_path)
+    image.resize(THUMB_MAX_SIZE)
+    image.write(thumb_path)
   end
   
   def cleanup
