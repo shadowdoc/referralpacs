@@ -3,7 +3,7 @@ class Image < ActiveRecord::Base
   
   belongs_to :encounter
 
-  THUMB_MAX_SIZE = '125x125'
+  THUMB_MAX_SIZE = '125'
   
   after_save :process
   after_destroy :cleanup
@@ -15,7 +15,7 @@ class Image < ActiveRecord::Base
   end
     
   def rotate(direction)
-    image = MiniMagick::Image.read(image_path).first
+    image = MiniMagick::Image.open(image_path)
     if direction == "right"
       image = image.rotate(90)
     else
@@ -26,8 +26,8 @@ class Image < ActiveRecord::Base
   end
   
   def crop(x1, y1, width, height)
-    image = MiniMagick::Image.read(image_path).first
-    image.crop!(x1, y1, width, height) 
+    image = MiniMagick::Image.open(image_path)
+    image.crop("#{x1}x#{y1}+#{width}+#{height}")
     image.write(image_path)
     create_thumbnail
   end
@@ -141,7 +141,7 @@ class Image < ActiveRecord::Base
 
       require 'net/http'
 
-      url = wado_url_base + "&columns=#{THUMB_MAX_SIZE[0]}"
+      url = wado_url_base + "&columns=#{THUMB_MAX_SIZE}"
 
       # Create a URI object from our url string.
       url = URI.parse(url)
@@ -180,7 +180,7 @@ class Image < ActiveRecord::Base
   
   def create_thumbnail
     image = MiniMagick::Image.open(image_path)
-    image.resize(THUMB_MAX_SIZE)
+    image.adaptive_resize(THUMB_MAX_SIZE)
     image.write(thumb_path)
   end
   
