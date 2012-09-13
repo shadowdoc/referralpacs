@@ -4,6 +4,7 @@ class Image < ActiveRecord::Base
   belongs_to :encounter
 
   THUMB_MAX_SIZE = '125'
+  SMALL_IMAGE_WIDTH = '1250'
   
   after_save :process
   after_destroy :cleanup
@@ -15,37 +16,35 @@ class Image < ActiveRecord::Base
   end
     
   def rotate(direction)
-    image = MiniMagick::Image.open(image_path)
+    image = MiniMagick::Image.open(full_image_file)
     if direction == "right"
       image = image.rotate(90)
     else
       image = image.rotate(-90)
     end
-    image.write(image_path)
+    image.write(full_image_file)
     create_thumbnail
   end
   
   def crop(x1, y1, width, height)
-    image = MiniMagick::Image.open(image_path)
+    image = MiniMagick::Image.open(full_image_file)
     image.crop("#{x1}x#{y1}+#{width}+#{height}")
-    image.write(image_path)
+    image.write(full_image_file)
     create_thumbnail
   end
 
   def change_encounter_date(old_date)
     # Directory names change - file names remain the same
-
-
     old_short_path = File.join("#{old_date.year}", "#{old_date.month}", "#{old_date.day}")
     old_image_path = File.join(BASEDIRECTORY, old_short_path, filename)
-    old_thumb_path = File.join(BASEDIRECTORY, old_short_path, thumb_filename)
+    old_thumb_path = File.join(BASEDIRECTORY, old_short_path, file_root + '-thumb' + self.extension)
     old_dicom_filename = File.join(BASEDIRECTORY, old_short_path, file_root + ".dcm")
     old_config_filename = File.join(BASEDIRECTORY, old_short_path, file_root + ".cfg")
 
     create_directory
     
-    FileUtils.move(old_image_path, self.image_path) if File.exists?(old_image_path)
-    FileUtils.move(old_thumb_path, self.thumb_path) if File.exists?(old_thumb_path)
+    FileUtils.move(old_image_path, self.full_image_file) if File.exists?(old_image_path)
+    FileUtils.move(old_thumb_path, self.thumb_file) if File.exists?(old_thumb_path)
     FileUtils.move(old_dicom_filename, self.dicom_filename) if File.exists?(old_dicom_filename)
     FileUtils.move(old_config_filename, self.config_filename) if File.exists?(old_config_filename)
   end
@@ -56,10 +55,6 @@ class Image < ActiveRecord::Base
   
   def file_root
     "#{self.encounter.id}-#{self.id}"
-  end
-  
-  def thumb_filename
-    filename('thumb')
   end
   
   def all_versions_path
@@ -81,16 +76,20 @@ class Image < ActiveRecord::Base
     File.join(BASEDIRECTORY, file_root + ".dcm")
   end
   
-  def image_path
+  def full_image_file
     File.join(BASEDIRECTORY, short_path, filename)
   end
-  
-  def thumb_path
-    File.join(BASEDIRECTORY, short_path, thumb_filename)
+
+  def small_image_file
+    File.join(BASEDIRECTORY, short_path, file_root + '-small.' + self.extension)
+  end
+
+  def thumb_file
+    File.join(BASEDIRECTORY, short_path, file_root + '-thumb.' + self.extension)
   end
 
   def uuenc_thumb
-    "begin 644 #{self.thumb_filename}\n" + [File.open(thumb_path).read].pack("u") + "end"
+    "begin 644 #{file_root + '-thumb' + self.extension}\n" + [File.open(thumb_file).read].pack("u") + "end"
   end
 
   def url
@@ -98,13 +97,24 @@ class Image < ActiveRecord::Base
     # WADO url for an image hosted on dcm4chee
 
     if self.instance_uid.nil?
-      "/image/view/#{self.id}.jpg"
+      # This means that we have a digital camera (local) jpg
+
+      if SMALL_IMAGE_WIDTH
+        # If DEFAULT_IMAGE_WIDTH is set then we need to check if we have a resized version stored
+        if !File.exists?(small_image_file)
+          # The small version does not exist.  We need to create it first
+          create_small
+        end
+        "/image/small/#{self.id}.jpg"
+      else
+        "/image/view/#{self.id}.jpg"
+      end
     else
       # We unfortunately have to grab the SeriesUID from the dcm4chee database because our
       # Data model does not include series.
 
       # This limits the maximum width of the image decreasing bandwidth requirements.
-      wado_url_base + "&columns=1750"
+      wado_url_base + "&columns=#{SMALL_IMAGE_WIDTH}"
     end
 
   end
@@ -158,7 +168,7 @@ class Image < ActiveRecord::Base
       begin
         result = http.request(req)
 
-        open(thumb_path, 'wb') do |file|
+        open(thumb_file, 'wb') do |file|
           file << result.body
         end
       rescue
@@ -169,7 +179,7 @@ class Image < ActiveRecord::Base
   end
   
   def save_fullsize
-    File.open(image_path, 'wb') do |file|
+    File.open(full_image_file, 'wb') do |file|
       file.puts @file_data.read
     end
   end
@@ -177,11 +187,23 @@ class Image < ActiveRecord::Base
   def create_directory
     FileUtils.mkdir_p File.join(BASEDIRECTORY,short_path)
   end
+
+  def create_small
+    image = resize(SMALL_IMAGE_WIDTH)
+    image.write(small_image_file)
+  end
   
   def create_thumbnail
-    image = MiniMagick::Image.open(image_path)
-    image.adaptive_resize(THUMB_MAX_SIZE)
-    image.write(thumb_path)
+    image = resize(THUMB_MAX_SIZE)
+    image.write(thumb_file)
+  end
+
+  def resize(width)
+    # This method creates a new image object from the original file using
+    # The adaptive_resize method.
+    image = MiniMagick::Image.open(full_image_file)
+    image.adaptive_resize(width)
+    image
   end
   
   def cleanup
@@ -246,7 +268,7 @@ class Image < ActiveRecord::Base
   def create_dicom  
     
     begin
-      result = %x{ #{$jpg2dcm} -C #{config_filename} #{image_path} #{dicom_filename}}
+      result = %x{ #{$jpg2dcm} -C #{config_filename} #{full_image_file} #{dicom_filename}}
     rescue 
       raise "Dicom save failed: #{result}"
     end

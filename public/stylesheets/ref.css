@@ -426,6 +426,8 @@ margin-left:23px;
 /* Image Display styles */
 div.img_container_text {
     text-align: left;
+    width: 100%;
+    float: left;
 }
 
 div.img_container_header {
