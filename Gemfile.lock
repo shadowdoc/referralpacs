@@ -1,0 +1,53 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    Ascii85 (1.0.1)
+    actionmailer (2.3.5)
+      actionpack (= 2.3.5)
+    actionpack (2.3.5)
+      activesupport (= 2.3.5)
+      rack (~> 1.0.0)
+    activerecord (2.3.5)
+      activesupport (= 2.3.5)
+    activeresource (2.3.5)
+      activesupport (= 2.3.5)
+    activesupport (2.3.5)
+    hashery (2.0.1)
+    json_pure (1.7.5)
+    mini_magick (3.6.0)
+      subexec (~> 0.2.1)
+    mysql (2.8.1)
+    pdf-reader (1.2.0)
+      Ascii85 (~> 1.0.0)
+      hashery (~> 2.0)
+      ruby-rc4
+    prawn (0.12.0)
+      pdf-reader (>= 0.9.0)
+      ttfunk (~> 1.0.2)
+    rack (1.0.1)
+    rails (2.3.5)
+      actionmailer (= 2.3.5)
+      actionpack (= 2.3.5)
+      activerecord (= 2.3.5)
+      activeresource (= 2.3.5)
+      activesupport (= 2.3.5)
+      rake (>= 0.8.3)
+    rake (10.0.3)
+    ruby-hl7 (1.0.3)
+      rake (>= 0.8.7)
+      rubyforge (>= 2.0.4)
+    ruby-rc4 (0.1.5)
+    rubyforge (2.0.4)
+      json_pure (>= 1.1.7)
+    subexec (0.2.3)
+    ttfunk (1.0.3)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  mini_magick
+  mysql
+  prawn
+  rails (= 2.3.5)
+  ruby-hl7

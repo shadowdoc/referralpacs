@@ -68,13 +68,12 @@ ActiveSupport::CoreExtensions::Date::Conversions::DATE_FORMATS.merge!(
   :default => '%Y-%m-%d'
 )
 
-# migrating to prawn for pdf support
-require 'prawn'
-
-# If you want to output HL7 messages, include the ruby-hl7
-require 'ruby-hl7'
-
 # Specify location where image files are housed
 #$image_folder = "#{RAILS_ROOT}/image_archive"
 
 BASEDIRECTORY = "#{RAILS_ROOT}/image_archive"
+
+# Ruby standard library requires
+require "digest/md5"
+require "net/http"
+require "net/https"

@@ -27,20 +27,39 @@ class ImageController < ApplicationController
     @encounter = @image.encounter
     
     respond_to do |format|
-      format.jpg {send_file(@image.image_path, :type => 'image/jpeg', :disposition => 'inline')}
+
+      # Pick which image to send based on the file name submitted in the URL
+
+      format.jpg {send_file(@image.full_image_file, :type => 'image/jpeg', :disposition => 'inline')}
       format.html
       format.xml {render :xml => @image.to_xml}
     end
 
   end
-  
+
+  def small
+
+    # This method is called when the browser needs to display an image.  This is important
+    # for security purposes, ensuring that someone is logged in, not just guessing URLs
+
+    @image = Image.find(params[:id])
+
+    respond_to do |format|
+
+      # Pick which image to send based on the file name submitted in the URL
+
+      format.jpg {send_file(@image.small_image_file, :type => 'image/jpeg', :disposition => 'inline')}
+    end
+
+  end
+
   def thumb
     # This method is called when the browser needs to display a thumbnail.  This is important
     # for security purposes, ensuring that someone is logged in, not just guessing URLs
 
     @image = Image.find(params[:id])
     respond_to do |format|
-      format.jpg { send_file(@image.thumb_path, :type => 'image/jpeg', :disposition => 'inline') }
+      format.jpg { send_file(@image.thumb_file, :type => 'image/jpeg', :disposition => 'inline') }
     end
   end
   
