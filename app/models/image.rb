@@ -1,5 +1,4 @@
 class Image < ActiveRecord::Base
-  require 'mini_magick'
   
   belongs_to :encounter
 
@@ -148,8 +147,6 @@ class Image < ActiveRecord::Base
       # We have a wado image.  Let's grab the local thumbnail and save it
       create_directory
       write_attribute 'path', short_path
-
-      require 'net/http'
 
       url = wado_url_base + "&columns=#{THUMB_MAX_SIZE}"
 

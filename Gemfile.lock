@@ -12,25 +12,11 @@ GEM
     activeresource (2.3.5)
       activesupport (= 2.3.5)
     activesupport (2.3.5)
-    capistrano (2.13.3)
-      highline
-      net-scp (>= 1.0.0)
-      net-sftp (>= 2.0.0)
-      net-ssh (>= 2.0.14)
-      net-ssh-gateway (>= 1.1.0)
     hashery (2.0.1)
-    highline (1.6.14)
     json_pure (1.7.5)
-    mini_magick (3.4)
+    mini_magick (3.6.0)
       subexec (~> 0.2.1)
     mysql (2.8.1)
-    net-scp (1.0.4)
-      net-ssh (>= 1.99.1)
-    net-sftp (2.0.5)
-      net-ssh (>= 2.0.9)
-    net-ssh (2.5.2)
-    net-ssh-gateway (1.1.0)
-      net-ssh (>= 1.99.1)
     pdf-reader (1.2.0)
       Ascii85 (~> 1.0.0)
       hashery (~> 2.0)
@@ -46,21 +32,20 @@ GEM
       activeresource (= 2.3.5)
       activesupport (= 2.3.5)
       rake (>= 0.8.3)
-    rake (0.9.2.2)
+    rake (10.0.3)
     ruby-hl7 (1.0.3)
       rake (>= 0.8.7)
       rubyforge (>= 2.0.4)
     ruby-rc4 (0.1.5)
     rubyforge (2.0.4)
       json_pure (>= 1.1.7)
-    subexec (0.2.2)
+    subexec (0.2.3)
     ttfunk (1.0.3)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  capistrano
   mini_magick
   mysql
   prawn

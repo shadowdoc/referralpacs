@@ -1,20 +1,20 @@
-source 'https://rubygems.org'
+# A sample Gemfile
+source "https://rubygems.org"
 
-gem 'rails', '2.3.5'
+gem "rails", "2.3.5"
+gem "mysql"
+gem "prawn"
+gem "ruby-hl7"
+gem "mini_magick"
 
-gem 'mysql'
 
-# Deploy with Capistrano
-gem 'capistrano'
+group :development do
+  # bundler requires these gems in development
+  # gem 'rails-footnotes'
+end
 
-# To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'
-
-# to process images
-gem 'mini_magick'
-
-# Prawn is for .pdf report file generation
-gem 'prawn'
-
-# Helper for HL7 message creation.
-gem 'ruby-hl7'
+group :test do
+  # bundler requires these gems while running tests
+  # gem 'rspec'
+  # gem 'faker'
+end
