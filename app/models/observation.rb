@@ -22,6 +22,7 @@ class Observation < ActiveRecord::Base
       o.observation_id = '2395^CHEST X-RAY FINDINGS BY RADIOLOGY^99DCT'
       o.e4 = @segment_id
       o.e11 = 'F' # Set result status to final
+      o.time = self.encounter.date.strftime("%Y%m%d%H%M%S")
       o
     end
 
@@ -37,11 +38,11 @@ class Observation < ActiveRecord::Base
     if self.question_concept.name =~ /LUNG SCARRING UPPER/
       # First add the question and the first portion of the answer
 
-      obs_array = ['2041^PARENCHYMAL SCARRING/ATELECTASIS^99DCT', '2043^LOWER^99DCT', self.hl7_observation_value]
+      obs_array = ['2401^PARENCHYMAL SCARRING/ATELECTASIS^99DCT', '2403^LOWER^99DCT', self.hl7_observation_value]
 
     elsif self.question_concept.name =~ /LUNG SCARRING LOWER/
 
-      obs_array = ['2041^PARENCHYMAL SCARRING/ATELECTASIS^99DCT', '2042^UPPER^99DCT', self.hl7_observation_value]
+      obs_array = ['2401^PARENCHYMAL SCARRING/ATELECTASIS^99DCT', '2402^UPPER^99DCT', self.hl7_observation_value]
   
     elsif self.question_concept.name =~ /PLEURAL EFFUSION RIGHT/
 
@@ -52,9 +53,6 @@ class Observation < ActiveRecord::Base
       obs_array = ['1136^PLEURAL EFFUSION^99DCT', '5139^LEFT^99DCT', self.hl7_observation_value]
 
     elsif self.question_concept.name =~ /PLEURAL SCARRING/
-
-      # This first section puts on the laterality modifier
-      puts "made it here"
 
       obs_array = ['2421^PLEURAL SCARRING^99DCT']
 

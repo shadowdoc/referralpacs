@@ -8,7 +8,15 @@ class ApplicationController < ActionController::Base
 #  TODO include SslRequirement
   
   ENCOUNTERS_PER_PAGE = 10
-  
+
+  # Make changes to the ruby-HL7 framework to address our needs
+  # These fields are customizations for OpenMRS HL7 formatting
+  HL7::Message::Segment::OBR.class_eval { add_field(:identifier, :idx => 4) }
+  HL7::Message::Segment::ORU.class_eval { add_field(:order_control, :idx => 1) }
+  HL7::Message::Segment::ORU.class_eval { add_field(:transaction_date_time, :idx => 9) }
+  HL7::Message::Segment::ORU.class_eval { add_field(:entered_by, :idx => 10) }
+  HL7::Message::Segment::OBX.class_eval { add_field(:time, :idx => 14)}
+
   def authorize_login
     unless session[:user_id] 
       flash[:notice] = "Please log in."
