@@ -123,7 +123,7 @@ class Image < ActiveRecord::Base
   end
 
   def wado_url_base
-    series  = Dcm4cheeInstance.find(self.instance_uid).dcm4chee_series
+    series  = Dcm4cheeInstance.find_by_sop_iuid(self.instance_uid).dcm4chee_series
     DCM4CHEE_URL_BASE + "wado?requestType=WADO&studyUID=#{self.encounter.study_uid}&seriesUID=#{series.series_iuid}&objectUID=#{self.instance_uid}"
   end
 
