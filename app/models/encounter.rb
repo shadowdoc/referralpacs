@@ -20,11 +20,6 @@ class Encounter < ActiveRecord::Base
   end
 
   def hl7_message
-    # These fields are customizations for OpenMRS HL7 formatting
-    HL7::Message::Segment::OBR.class_eval { add_field(:identifier, :idx => 4) }
-    HL7::Message::Segment::ORU.class_eval { add_field(:order_control, :idx => 1) }
-    HL7::Message::Segment::ORU.class_eval { add_field(:transaction_date_time, :idx => 9) }
-    HL7::Message::Segment::ORU.class_eval { add_field(:entered_by, :idx => 10) }
 
     msg = HL7::Message.new
     msg << ApplicationController.hl7_msh
@@ -102,6 +97,8 @@ class Encounter < ActiveRecord::Base
       obx.value_type = 'ST'
       obx.observation_id = '6115^CHEST X-RAY IMPRESSION^99DCT'
       obx.e11 = 'F'
+      obx.time = self.date.strftime("%Y%m%d%H%M%S")
+
       impression_temp = impression
       # stipulated character substitutions, backslash needs to be first
       impression_temp = impression_temp.gsub( /\\/, '\E\\' )
