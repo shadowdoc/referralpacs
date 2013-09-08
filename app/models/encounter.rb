@@ -13,6 +13,7 @@ class Encounter < ActiveRecord::Base
   
   attr_protected :created_at, :created_by, :updated_at, :updated_by
 
+
   def self.find_range(start_date = Time.now.strftime("%y-%m-%d"), end_date = Time.now.strftime("%y-%m-%d"))
     #This method returns encounters between the given dates
     #If no dates are given, these default to today
@@ -204,5 +205,77 @@ class Encounter < ActiveRecord::Base
     end
     super
   end
+
+
+  def self.new_dcm4chee(dcm_study)
+    # This method is called from the script that reads from the dcm4chee database.
+    # It recieves a dcm4chee_study object, and then does several actions including
+    # finding or creating a new patient.
+
+    # Right now we are only accepting CRs so we will only accept images from that SOP class
+
+    if dcm_study.dcm4chee_series[0].dcm4chee_instances[0].sop_cuid == "1.2.840.10008.5.1.4.1.1.1"
+
+      dcm_patient = dcm_study.dcm4chee_patient
+      dcm_mrn = dcm_patient.pat_id
+
+      patient = Patient.find_openmrs(dcm_mrn)
+
+      if patient.nil?
+        # We have a new patient, but the OpenMRS server appears to be down or doesn't know the patient.
+        patient = Patient.new
+
+        patient.mrn_ampath = dcm_mrn
+        patient.family_name, patient.given_name, patient.middle_name = dcm_patient.pat_name.split("^") # Standard HL7 names are used in DICOM
+        patient.birthdate = dcm_patient.pat_birthdate
+
+        begin
+          patient.save!
+        rescue
+          # We have an error creating the patient.  Let's write it out to a log file
+          # and set the study_status in the dcm4chee to -1
+
+          logfile = File.join(RAILS_ROOT, "log", "dicom_patient_errors.log")
+          File.open(logfile, 'a+') do |f|
+            f.write("Invalid Patient: #{patient.hl7_name} OpenMRS MRN: #{patient.mrn_ampath} Accession Number: #{dcm_study.accession_no}\n")
+          end
+
+          dcm_study.study_status = -1
+          dcm_study.save
+        end
+
+      end
+
+      unless dcm_study.study_status == -1
+        enc = Encounter.new
+        enc.patient_id = patient.id
+        enc.date = dcm_study.study_datetime
+        enc.status = "new"
+        enc.study_uid = dcm_study.study_iuid
+        enc.encounter_type_id = 1 # These are all CXRs
+        enc.save!
+
+        # Loop through each series to make sure we get all of the CXRs
+
+        dcm_study.dcm4chee_series.each do |s|
+          s.dcm4chee_instances.each do |i|
+            image = Image.new
+            image.encounter_id = enc.id
+            image.instance_uid = i.sop_iuid
+            image.save!
+          end
+        end
+
+        # We successfully loaded this encounter, let's set our status to 1
+
+        dcm_study.study_status = 1
+        dcm_study.save!
+
+      end
+
+    end
+  end 
+
+
 
 end
