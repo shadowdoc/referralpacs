@@ -95,7 +95,7 @@ class Image < ActiveRecord::Base
     # This method returns the basic URL for an image hosted on our system, or returns the
     # WADO url for an image hosted on dcm4chee
 
-    if self.instance_uid.nil?
+    if !wado?
       # This means that we have a digital camera (local) jpg
 
       if SMALL_IMAGE_WIDTH
@@ -109,8 +109,7 @@ class Image < ActiveRecord::Base
         "/image/view/#{self.id}.jpg"
       end
     else
-      # We unfortunately have to grab the SeriesUID from the dcm4chee database because our
-      # Data model does not include series.
+      # Here is where we find the wado URL
 
       # This limits the maximum width of the image decreasing bandwidth requirements.
       wado_url_base + "&columns=#{SMALL_IMAGE_WIDTH}"
@@ -123,6 +122,7 @@ class Image < ActiveRecord::Base
   end
 
   def wado_url_base
+    # We have to grab the SeriesUID for a complete wado request.
     series  = Dcm4cheeInstance.find_by_sop_iuid(self.instance_uid).dcm4chee_series
     DCM4CHEE_URL_BASE + "wado?requestType=WADO&studyUID=#{self.encounter.study_uid}&seriesUID=#{series.series_iuid}&objectUID=#{self.instance_uid}"
   end
