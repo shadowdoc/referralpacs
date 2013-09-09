@@ -11,6 +11,8 @@ gem "mini_magick"
 group :development do
   # bundler requires these gems in development
   # gem 'rails-footnotes'
+  gem 'capistrano'
+  gem 'rvm-capistrano'
 end
 
 group :test do
