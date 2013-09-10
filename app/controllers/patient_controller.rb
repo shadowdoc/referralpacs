@@ -3,8 +3,6 @@ class PatientController < ApplicationController
   before_filter :authorize_login # Make sure an authorized user is logged in.
   before_filter :security, :except => :find
 
-  require 'rexml/document'
-
   protected
   def security
     # This method is called before any method that
