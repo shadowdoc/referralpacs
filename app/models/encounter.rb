@@ -250,6 +250,7 @@ class Encounter < ActiveRecord::Base
         enc = Encounter.new
         enc.patient_id = patient.id
         enc.date = dcm_study.study_datetime
+        enc.indication = "#{dcm_study.study_custom1} #{dcm_study.study_custom2}".strip
         enc.status = "new"
         enc.study_uid = dcm_study.study_iuid
         enc.encounter_type_id = 1 # These are all CXRs
@@ -274,6 +275,7 @@ class Encounter < ActiveRecord::Base
       end
 
     end
+    enc
   end 
 
 

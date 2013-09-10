@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dcm4chee-attribute-filter SYSTEM "dcm4chee-attribute-filter.dtd">
+<dcm4chee-attribute-filter>
+	<!-- 
+		This file is part of the configuration for the dcm4chee archive.  It's included here to make sure that
+		the attribute configuration that allows us to harvest:
+
+		0010,21b0 - AdditionalPatientHistory
+		0018,0010 - Contrast_BolusAgent 
+
+		to communicate the patient history (and maybe film location) from the CR reader.
+	-->
+
+    <soundex class="org.dcm4che2.soundex.Soundex" trailing-wildcard="false"/>
+    <!--
+    <soundex class="org.dcm4che2.soundex.ESoundex"/>
+    <soundex class="org.dcm4che2.soundex.ESoundex2"/>
+    <soundex class="org.dcm4che2.soundex.KPhonetik"/>
+    <soundex class="org.dcm4che2.soundex.Metaphone"/>
+    <soundex class="org.dcm4che2.soundex.Phonem"/>
+    -->
+    <patient>
+        <attr tag="00080005"/> <!-- Specific Character Set -->
+        <attr tag="00100010" case-sensitive="false"/> <!-- Patient's Name -->
+        <attr tag="00100020"/> <!-- Patient ID -->A
+        <attr tag="00100021"/> <!-- Issuer of Patient ID -->
+        <attr tag="00100030"/> <!-- Patient's Birth Date -->
+        <attr tag="00100040"/> <!-- Patient's Sex -->
+        <attr tag="00101002"/> <!-- Other Patient IDs Sequence -->
+        <attr tag="00104000"/> <!-- Patient Comments -->
+    </patient>
+    <exclude-patient exclude="true" tsuid="1.2.840.10008.1.2.1.99">
+        <attr tag="00081120"/> <!-- Referenced Patient Sequence -->
+        <attr tag="00100010"/> <!-- Patient's Name -->
+        <attr tag="00100020"/> <!-- Patient ID -->
+        <attr tag="00100021"/> <!-- Issuer of Patient ID -->
+        <attr tag="00100030"/> <!-- Patient's Birth Date -->
+        <attr tag="00100040"/> <!-- Patient's Sex -->
+        <attr tag="00101002"/> <!-- Other Patient IDs Sequence -->
+        <attr tag="00104000"/> <!-- Patient Comments -->
+    </exclude-patient>
+    <study>
+        <attr tag="00080005"/> <!-- Specific Character Set -->
+        <attr tag="00080020"/> <!-- Study Date -->
+        <attr tag="00080030"/> <!-- Study Time -->
+        <attr tag="00080050"/> <!-- Accession Number -->
+        <attr tag="00080051"/> <!-- Issuer of Accession Number Sequence -->
+        <attr tag="00080090" case-sensitive="false"/> <!-- Referring Physician Name -->
+        <attr tag="00081030" case-sensitive="false"/> <!-- Study Description -->
+        <attr tag="00081032"/> <!-- Procedure Code Seq -->
+        <attr tag="0020000D" coerce="false"/> <!-- Study Instance UID -->
+        <attr tag="00200010"/> <!-- Study ID -->
+        <attr tag="0032000A"/> <!-- Study Status ID -->
+        <attr tag="001021b0" field="studyCustomAttribute1"/><!-- Additional Patient History -->
+        <attr tag="00180010" field="studyCustomAttribute2"/><!-- Contrast Bolus/Agent -->
+    </study>
+    <series>
+        <attr tag="00080005"/> <!-- Specific Character Set -->
+        <attr tag="00080021"/> <!-- Series Date -->
+        <attr tag="00080031"/> <!-- Series Time -->
+        <attr tag="00080060"/> <!-- Modality -->
+        <attr tag="00080070"/> <!-- Manufacturer -->
+        <attr tag="00080080" case-sensitive="false"/> <!-- Institution Name -->
+        <attr tag="00080082"/> <!-- Institution Code Sequence -->
+        <attr tag="00081010" case-sensitive="false"/> <!-- Station Name -->
+        <attr tag="0008103E" case-sensitive="false"/> <!-- Series Description -->
+        <attr tag="00081040" case-sensitive="false"/> <!-- Institutional Department Name -->
+        <attr tag="00081050" case-sensitive="false"/> <!-- Performing Physician Name -->
+        <attr tag="00081090"/> <!-- Manufacturer Model Name -->
+        <attr tag="00081111"/> <!-- Referenced Performed Procedure Step Sequence -->
+        <attr tag="00180015"/> <!-- Body Part Examined -->
+        <attr tag="0020000E" coerce="false"/> <!-- Series Instance UID -->
+        <attr tag="00200011"/> <!-- Series Number -->
+        <attr tag="00200060"/> <!-- Laterality -->
+        <attr tag="00400244"/> <!-- Performed Procedure Step Start Date -->
+        <attr tag="00400245"/> <!-- Performed Procedure Step Start Time -->
+        <attr tag="00400275"/> <!-- Request Attributes Sequence -->
+        <attr seq="00400275" tag="00321032" case-sensitive="false"/> <!-- Requesting Physician -->
+        <attr seq="00400275" tag="00321033" case-sensitive="true"/> <!-- Requesting Service -->
+        <attr seq="00400275" tag="00400009" case-sensitive="true"/> <!-- Scheduled Procedure Step ID -->
+        <attr seq="00400275" tag="00401001" case-sensitive="true"/> <!-- Requested Procedure ID -->
+    </series>
+    <instance>
+        <attr tag="00080005"/> <!-- Specific Character Set -->
+        <attr tag="00080008"/> <!-- Image Type -->
+        <attr tag="00080016"/> <!-- SOP Class UID -->
+        <attr tag="00080018"/> <!-- SOP Instance UID -->
+        <attr tag="00080022"/> <!-- Acquisition Date -->
+        <attr tag="00080023"/> <!-- Content Date -->
+        <attr tag="0008002A"/> <!-- Acquisition Datetime -->
+        <attr tag="00080032"/> <!-- Acquisition Time -->
+        <attr tag="00080033"/> <!-- Content Time -->
+        <attr tag="00081115"/> <!-- Referenced Series Sequence -->
+        <attr tag="00200013"/> <!-- Instance Number -->
+        <attr tag="00280004"/> <!-- Photometric Interpretation -->
+        <attr tag="00280008"/> <!-- Number of Frames -->
+        <attr tag="00280010"/> <!-- Rows -->
+        <attr tag="00280011"/> <!-- Columns -->
+        <attr tag="00280100"/> <!-- Bits Allocated -->
+        <attr tag="0040A032"/> <!-- Observation DateTime -->
+        <attr tag="0040A043"/> <!-- Concept Name Code Sequence -->
+        <attr tag="0040A073"/> <!-- Verifying Observer Sequence -->
+        <attr seq="0040A073" tag="0040A075" case-sensitive="false"/> <!-- Verifying Observer Name -->
+        <attr tag="0040A370"/> <!-- Referenced Request Sequence -->
+        <attr tag="0040A375"/> <!-- Current Requested Procedure Evidence Sequence -->
+        <attr tag="0040A385"/> <!-- Pertinent Other Evidence Sequence -->
+        <attr tag="0040A491"/> <!-- Completion Flag -->
+        <attr tag="0040A493"/> <!-- Verification Flag -->
+        <attr tag="0040A525"/> <!-- Identical Documents Sequence -->
+        <attr tag="00420010"/> <!-- Document Title-->
+        <attr tag="00420012"/> <!-- MIME Type of Encapsulated Document -->
+        <attr tag="00700080"/> <!-- Content Label -->
+        <attr tag="00700081"/> <!-- Content Description -->
+        <attr tag="00700082"/> <!-- Presentation Creation Date -->
+        <attr tag="00700083"/> <!-- Presentation Creation Time -->
+        <attr tag="00700084"/> <!-- Content Creator s Name -->
+        <attr tag="04000561"/> <!-- Original Attributes Sequence -->
+    </instance>
+</dcm4chee-attribute-filter>
