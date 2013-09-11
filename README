@@ -24,11 +24,7 @@ generate HL7 messages based on the structured report as well as concepts in the 
 This is very much a work in progress, your comments/forks are welcome.
 
 Requirements
-Rails 2.0.2
+Rails 2.8.13
 ImageMagick
 
-Gems
-RMagick
-pdf-writer
-ruby-hl7
-
+Gems - See Gemfile
