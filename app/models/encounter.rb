@@ -145,7 +145,7 @@ class Encounter < ActiveRecord::Base
     # Create a request object from our url and attach the authorization data.
     req = Net::HTTP::Post.new(url.path)
     req.basic_auth(OPENMRS_USERNAME, OPENMRS_PASSWORD)
-    req.set_form_data({'message' => msg.to_s.gsub(/\n/, "\r"), 'source' => 'LOCAL'})
+    req.set_form_data({'message' => msg.to_s.gsub(/\n/, "\r"), 'source' => OPENMRS_SENDING_FACILITY})
     
     http = Net::HTTP.new(url.host, url.port)
 
