@@ -275,6 +275,7 @@ class Encounter < ActiveRecord::Base
       end
 
     end
+    # return the created encounter
     enc
   end 
 
