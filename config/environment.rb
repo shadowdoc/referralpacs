@@ -77,3 +77,4 @@ BASEDIRECTORY = "#{RAILS_ROOT}/image_archive"
 require "digest/md5"
 require "net/http"
 require "net/https"
+require 'rexml/document'
