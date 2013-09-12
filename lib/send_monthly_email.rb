@@ -28,4 +28,9 @@ monthly_encounters.each do |enc|
   end
 end
 
-StatisticsMailer.deliver_monthly(begin_time, end_time, recipients, active_providers, patients, new, ready_for_printing, radiologist_to_read, final, archived, rejected, ordered)
+StatisticsMailer.monthly(begin_time, end_time, 
+	                     recipients, active_providers, 
+	                     patients, new, 
+	                     ready_for_printing, radiologist_to_read, 
+	                     final, archived, 
+	                     rejected, ordered).deliver
