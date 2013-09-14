@@ -1,9 +1,9 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-
-    require "user"
   helper :date
   before_filter :set_current_user
+
+  require "user"
   
 #  TODO include SslRequirement
   

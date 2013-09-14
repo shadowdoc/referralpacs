@@ -1,2 +1,0 @@
-page.replace_html "patient-list", :partial => "list_patients", :object => @patients
-page.visual_effect :highlight, "patient-list"
