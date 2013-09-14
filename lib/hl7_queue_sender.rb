@@ -1,7 +1,7 @@
 # This script reads the .hl7 files in the hl7/queue folder and attempts to send them via the REST interface.
 # This is meant to be run by ruby script/runner by a cron job periodically
 
-hl7_dir = File.join(RAILS_ROOT, OPENMRS_HL7_PATH, "queue/*.hl7")
+hl7_dir = Rails.root.join(OPENMRS_HL7_PATH, "queue/*.hl7")
 
 def get_hl7_message_from_file(filename)
   msg = ''

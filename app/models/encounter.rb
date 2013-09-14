@@ -161,7 +161,7 @@ class Encounter < ActiveRecord::Base
       p "OpenMRS server down"
       
       # Let's save the message into a folder so they can be queued
-      path = File.join(RAILS_ROOT, OPENMRS_HL7_PATH, "queue")
+      path = Rails.root.join(OPENMRS_HL7_PATH, "queue")
       filename = File.join(path, self.date.strftime("%Y-%m-%d") + "-" + self.id.to_s + ".hl7")
 
       tango = File.new(filename, "w+")
@@ -179,7 +179,7 @@ class Encounter < ActiveRecord::Base
       msg = hl7_message
 
       # First we create the directory
-      path = File.join(RAILS_ROOT, OPENMRS_HL7_PATH)
+      path = Rails.root.join(OPENMRS_HL7_PATH)
       filename = File.join(path, self.date.strftime("%Y-%m-%d") + "-" + self.id.to_s + ".hl7")
 
       tango = File.new(filename, "w+")
@@ -235,7 +235,7 @@ class Encounter < ActiveRecord::Base
           # We have an error creating the patient.  Let's write it out to a log file
           # and set the study_status in the dcm4chee to -1
 
-          logfile = File.join(RAILS_ROOT, "log", "dicom_patient_errors.log")
+          logfile = Rails.root.join("log", "dicom_patient_errors.log")
           File.open(logfile, 'a+') do |f|
             f.write("Invalid Patient: #{patient.hl7_name} OpenMRS MRN: #{patient.mrn_ampath} Accession Number: #{dcm_study.accession_no}\n")
           end
