@@ -1,7 +1,7 @@
-# Filters added to this controller will be run for all controllers in the application.
-# Likewise, all the methods added will be available for all controllers.
 class ApplicationController < ActionController::Base
-  require "user"
+  protect_from_forgery
+
+    require "user"
   helper :date
   before_filter :set_current_user
   
@@ -55,5 +55,4 @@ class ApplicationController < ActionController::Base
 
     return msh
   end
-
 end

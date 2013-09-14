@@ -12,9 +12,9 @@
 <div id='answers'>
     <%= render :partial => "answer", :collection => @concept.answers %>
 </div>
-<% form_remote_tag(:url => {:action => "add_answer", :id => @concept},
-                   :update => 'answers',
-                   :position => :bottom) do %>
+<%= form_tag(:url => {:action => "add_answer", :id => @concept},
+                     :update => 'answers',
+                     :position => :bottom, :remote => true) %>
     <label for="concept_lookup" >Concept Search</label>
     <input type="text" id="concept_lookup" name="concept_lookup" />
         <div class="auto_complete" id="concept_lookup_auto_complete" ></div>

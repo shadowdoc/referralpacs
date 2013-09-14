@@ -1,3 +1,6 @@
+# This mixin extends ActiveRecord so that the users who are logged in when a
+# particular record is created or updated are stored in the database.
+
 module ActiveRecord
 
   module UserMonitor

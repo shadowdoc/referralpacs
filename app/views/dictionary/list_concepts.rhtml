@@ -4,14 +4,14 @@
 <% for con in @concepts %>
     <div id="concept">
       <div id="<%=cycle "ListLine0", "ListLine1" %>">
-        <%=h con.name %>
+        <%= con.name %>
       </div>
       <div id="description">
-        <%=h con.description %>
+        <%= con.description %>
       </div>
       <% for answer in con.answers %>
         <div id="answer">
-           <%=h answer.concept.name %>
+           <%= answer.concept.name %>
         </div>
       <% end %>
       <div id="link">

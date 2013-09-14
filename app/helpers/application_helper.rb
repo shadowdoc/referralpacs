@@ -1,5 +1,3 @@
-# Methods added to this helper will be available to all templates in the application.
-
 module ApplicationHelper
 
   def setup_layout
@@ -126,5 +124,5 @@ module ApplicationHelper
       javascript_include_tag url
     end
   end
-  
+
 end

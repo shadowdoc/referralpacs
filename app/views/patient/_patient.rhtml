@@ -1,9 +1,9 @@
 <tr>
-    <td class="search-box"><%=h patient.mrn_ampath unless patient.mrn_ampath.nil? %></td>
-    <td class="search-box"><%=h patient.mtrh_rad_id unless patient.mtrh_rad_id.nil? %></td>
-    <td class="search-box"><%=h patient.full_name %></td>
-	<td class="search-box"><%=h patient.last_location %></td>
-    <td class="search-box"><%=h patient.encounters.last.date.strftime("%Y-%m-%d") unless patient.encounters.last.nil? %></td>
+    <td class="search-box"><%= patient.mrn_ampath unless patient.mrn_ampath.nil? %></td>
+    <td class="search-box"><%= patient.mtrh_rad_id unless patient.mtrh_rad_id.nil? %></td>
+    <td class="search-box"><%= patient.full_name %></td>
+	<td class="search-box"><%= patient.last_location %></td>
+    <td class="search-box"><%= patient.encounters.last.date.strftime("%Y-%m-%d") unless patient.encounters.last.nil? %></td>
     <td class="search-box">
         <% patient_link_helper(patient) -%>
 		<% @links.each do |link| %>

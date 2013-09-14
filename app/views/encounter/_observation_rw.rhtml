@@ -1,5 +1,5 @@
 <tr id="observation-<%= @observation.id %>">
-  <td><%=h @observation.question_concept.name %></td>
-  <td><%=h @observation.value_concept.name %><td>
-  <td><%= link_to_remote "Remove", :url => {:action => :remove_observation, :id => @observation.id} %>
+  <td><%= @observation.question_concept.name %></td>
+  <td><%= @observation.value_concept.name %><td>
+  <td><%= link_to("Remove", :url => {:action => :remove_observation, :id => @observation.id}, :remote => true) %>
 </tr>

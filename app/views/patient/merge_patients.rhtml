@@ -20,13 +20,14 @@
 
 
 <div id="form-patient-0">
-  <%= form_remote_tag :url => url_for(:action => "set_patient"),
-                      :html => {:id => "form-patient"} %>
+  <%= form_tag :url => url_for(:action => "set_patient"),
+                      :html => {:id => "form-patient"},
+                      :remote => true %>
   <%= hidden_field_tag :which_patient, 0 %>
   MTRH Radiology ID:
   <%= text_field_tag :mtrh_rad_id %>
   <%= submit_tag "Set Patient 1" %>
-  </form>
+  <% end -%>
 </div>
 
 <h2>Patient #2 - Will be deleted</h2>
@@ -46,10 +47,11 @@
 </table>
 
 <div id="form-patient-1">
-  <%= form_remote_tag :url => url_for(:action => "set_patient"),
-                      :html => {:id => "form-patient"} %>
+  <%= form_tag :url => url_for(:action => "set_patient"),
+                      :html => {:id => "form-patient"},
+                      :remote => true %>
   MTRH Radiology ID:
   <%= text_field_tag :mtrh_rad_id %>
   <%= submit_tag "Set Patient 2" %>
-  </form>
+  <% end -%>
 </div>

@@ -3,7 +3,7 @@
     <% @encounter.images.each do |i|%>
         <div id="thumbnail-<%= i.id %>" class="thumbnail" >
             <%= link_to(image_tag("/image/thumb/#{i.id}.jpg"), :controller => :image, :action => "view", :id => i) %><br/>
-            <%= link_to_remote "remove", :url => {:controller => :image, :action => 'remove_image', :id => i} %>&nbsp;
+            <%= link_to("remove", :url => {:controller => :image, :action => 'remove_image', :id => i}, :remote => true) %>&nbsp;
             <%= link_to('edit', {:controller => :image, :action => "edit_image", :id => i}) %>
         </div>
     <% end %>

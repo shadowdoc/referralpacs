@@ -5,9 +5,9 @@
 <table>
   <% for user in @users %>
     <tr valign="top" id="<%= cycle("ListLine1", "ListLine0") %>">
-      <td><%=h user.full_name %></td>
-      <td><%=h user.email %></td>
-      <td><%=h user.privilege.name %></td>
+      <td><%= user.full_name %></td>
+      <td><%= user.email %></td>
+      <td><%= user.privilege.name %></td>
       <td>
         <%= link_to("edit", :action => :edit_user, :id => user.id)%>&nbsp;
         <%= link_to "password", :action => :set_password, :id => user.id %>&nbsp;

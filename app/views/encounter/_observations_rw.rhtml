@@ -5,10 +5,11 @@
                 <%= render :partial => "observation_rw" %>
             <% end %>
     </table>
-    <% form_remote_tag :url => {:action => "add_observation"},
+    <%= form_tag :url => {:action => "add_observation"},
                        :loading => 'Form.disable("observation-form")',
                        :complete => 'Form.enable("observation-form")',
-                       :html => {:id => "observation-form"} do %>
+                       :html => {:id => "observation-form"},
+                       :remote => true %>
         <%= hidden_field_tag :encounter_id, @encounter.id %>
         <%= hidden_field_tag :patient_id, @encounter.patient.id %>
         <p>

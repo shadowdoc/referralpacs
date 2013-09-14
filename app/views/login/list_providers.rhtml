@@ -3,10 +3,10 @@
 <table>
   <% for provider in @all_providers %>
     <tr valign="top" id="<%= cycle("ListLine1", "ListLine0") %>">
-      <td><%=h provider.full_name %></td>
-      <td><%=h provider.email %></td>
-      <td><%=h provider.privilege.name %></td>
-      <td><%=h provider.title %></td>
+      <td><%= provider.full_name %></td>
+      <td><%= provider.email %></td>
+      <td><%= provider.privilege.name %></td>
+      <td><%= provider.title %></td>
       <td><%= link_to(" edit ", :action => :edit_provider, :id => provider.id) %></td>
     </tr>
     

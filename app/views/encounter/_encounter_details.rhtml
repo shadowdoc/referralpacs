@@ -2,11 +2,12 @@
 
 <div id="encounter-detail">
     <h2>Encounter Details</h2>
-    <% form_remote_for :encounter,
+    <% form_for :encounter,
                        :url => {:controller => "encounter", :action => "edit", :id => @encounter.id},
                        :loading => 'Form.disable("encounter-form")',
                        :complete => 'Form.enable("encounter-form")',
                        :html => {:id => "encounter-form"},
+                       :remote => true,
                        :builder => TaggedBuilder do |form| %>
         <%= hidden_field :encounter, :patient_id %>                       
         <%= form.date_select :date %>

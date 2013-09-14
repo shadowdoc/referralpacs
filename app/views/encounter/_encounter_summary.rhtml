@@ -6,7 +6,7 @@
 	
     <div id="header">
         <div id="date_type">
-            <%=h encounter_summary.patient.full_name + " : " + encounter_summary.date.strftime("%d %b %Y") + " : " + encounter_summary.encounter_type.name %>
+            <%= encounter_summary.patient.full_name + " : " + encounter_summary.date.strftime("%d %b %Y") + " : " + encounter_summary.encounter_type.name %>
         </div>
         <div id="links">
         	<% encounter_links_helper(encounter_summary) %>
