@@ -1,9 +1,9 @@
 # Load OpenMRS settings from file config/openmrs.yml
-if RAILS_ENV != "test" && File.exists?("#{RAILS_ROOT}/config/openmrs.yml")
+if (Rails.env.development? || Rails.env.production?) && File.exists?(Rails.root.join("config/openmrs.yml"))
 
-  settings = YAML::load(File.open("#{RAILS_ROOT}/config/openmrs.yml"))
+  settings = YAML::load(File.open(Rails.root.join("config/openmrs.yml")))
 
-  settings = settings[RAILS_ENV]
+  settings = settings[Rails.env]
   OPENMRS_URL_BASE = settings[:url]
   OPENMRS_USERNAME = settings[:username]
   OPENMRS_PASSWORD = settings[:password]
@@ -13,7 +13,7 @@ if RAILS_ENV != "test" && File.exists?("#{RAILS_ROOT}/config/openmrs.yml")
   OPENMRS_RECV_FACILITY = settings[:hl7recv_facility]
 
   if OPENMRS_HL7_PATH
-    FileUtils.mkdir_p(File.join RAILS_ROOT, OPENMRS_HL7_PATH, "queue")
+    FileUtils.mkdir_p(Rails.root.join(OPENMRS_HL7_PATH, "queue"))
   end
 
 else

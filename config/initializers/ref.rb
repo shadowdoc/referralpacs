@@ -17,11 +17,9 @@ end
 # For the date calendering stuff
 # From http://www.methods.co.nz/rails_date_kit/rails_date_kit.html
 
-ActiveSupport::CoreExtensions::Date::Conversions::DATE_FORMATS.merge!(
-  :default => '%Y-%m-%d'
-)
+Date::DATE_FORMATS.merge!(:default => "%Y-%m-%d")
 
 # Specify location where image files are housed
 #$image_folder = "#{RAILS_ROOT}/image_archive"
 
-BASEDIRECTORY = "#{RAILS_ROOT}/image_archive"
+BASEDIRECTORY = Rails.root.join("image_archive")
