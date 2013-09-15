@@ -2,7 +2,13 @@
 <% @patient = @encounter.patient %>
 <% fillCollections %>
 
-<% error_messages_for('encounter') %>
+<% if @encounter.errors.any? %>
+  <ul>
+    <% @encounter.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
 
 <%= render :partial => "encounter_details",
            :locals => {:encounter => @encounter,

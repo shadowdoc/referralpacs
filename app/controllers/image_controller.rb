@@ -97,12 +97,10 @@ class ImageController < ApplicationController
 
   def remove_image
     # Destroys an image given an id
+    # This is called via AJAX
     
     @image = Image.find(params[:id])
     @image.destroy
-    render :update do |page|
-      page.remove "thumbnail-#{params[:id]}"
-    end
   end
   
   def edit_image  

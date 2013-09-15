@@ -1,7 +1,7 @@
 <div id="upload">
-    <% form_for :image, 
+    <%= form_for :image, 
                 :url => {:controller => "image", :action => 'add_image'}, 
-                :html => {:multipart => true, :id => 'image-form'} do |f| %>
+                :html => {:multipart => true, :id => 'image-form'} do |f| -%>
     
       <label for='image_file_data'>File location: </label>
       <%= f.file_field :file_data %><br/>

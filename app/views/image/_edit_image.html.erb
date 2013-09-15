@@ -22,7 +22,7 @@
 
 </div>
 
-<%= form_tag :action => "crop", :id => @image.id %>
+<%= form_tag :action => "crop", :id => @image.id do -%>
     <%= hidden_field_tag 'x1' %>
     <%= hidden_field_tag 'y1' %>
     <%= hidden_field_tag 'x2' %>
@@ -30,7 +30,7 @@
     <%= hidden_field_tag 'width' %>
     <%= hidden_field_tag 'height' %>
     <%= submit_tag "Crop"%>
-</form>
+<% end -%>
 
 <%= link_to("Rotate Left", {:action => :rotate, :direction => "left", :id => @image.id}, :post => true) %>
 <%= link_to("Rotate Right", {:action => :rotate, :direction => "right", :id => @image.id }, :post => true) %><br/>

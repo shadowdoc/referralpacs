@@ -19,7 +19,6 @@ class EncounterController < ApplicationController
   
   def details
     @encounter = Encounter.find(params[:id])
-    @observation = Observation.new(:encounter_id => @encounter.id)
   end
   
   def edit

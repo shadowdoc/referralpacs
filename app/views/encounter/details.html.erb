@@ -1,16 +1,15 @@
 <% @patient = @encounter.patient %>
 <% @page_title = @patient.full_name %>
 
-
 <% fillCollections %>
 
-<% error_messages_for('encounter') %>
+<%= errors_for(@encounter) %>
 
 <%= render :partial => "encounter_details",
            :locals => {:encounter => @encounter,
                        :all_encounter_types => @all_encounter_types} %>
 					   
-<div id="break"><hr></div>
+<div id="break"><hr/></div>
 
 <%= render :partial => "image/thumbnails_rw", 
            :locals => {:encounter => @encounter} %>

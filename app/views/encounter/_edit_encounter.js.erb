@@ -1,0 +1,9 @@
+<% if @encounter.errors.empty? -%>
+	$('#encounter-detail').html('<%= escape_javascript(render :partial => "encounter_details", :object => @patients) %>');
+	$('#encounter-detail').fadeOut(200).fadeIn(200);
+	$('#encounter-indicator').html('Saved....');
+	$('#thumbnails').html('<%= escape_javascript(render :partial => "image/thumbnails_rw", :object => @encounter) %>');
+	$('#upload').html('<%= escape_javascript(render :partial => "image/upload_image", :object => @encounter) %>');
+<% else -%>
+	alert("The Encounter could not be updated for the following reasons: <%= @encounter.errors.full_messages.join('\n') %>");
+<% end -%>
