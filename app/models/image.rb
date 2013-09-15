@@ -1,4 +1,6 @@
 class Image < ActiveRecord::Base
+
+  attr_accessible :encounter_id, :file_data
   
   belongs_to :encounter
 
