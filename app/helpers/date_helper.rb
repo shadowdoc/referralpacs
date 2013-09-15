@@ -27,8 +27,8 @@ module DateHelper
     end
     months = Date::MONTHNAMES[1..12].collect { |m| "'#{m}'" }
     months = '[' + months.join(',') + ']'
-    options = {:onfocus => "this.select();calendar_open(this,{format:'#{format}',images_dir:'/images',month_names:#{months}})",
-               :onclick => "event.cancelBubble=true;this.select();calendar_open(this,{format:'#{format}',images_dir:'/images',month_names:#{months}})",
+    options = {:onfocus => "this.select();calendar_open(this,{format:'#{format}',images_dir:'/assets',month_names:#{months}})",
+               :onclick => "event.cancelBubble=true;this.select();calendar_open(this,{format:'#{format}',images_dir:'/assets',month_names:#{months}})",
               }.merge(options);
     text_field object_name, method, options
   end
