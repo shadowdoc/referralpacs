@@ -114,6 +114,72 @@ class Encounter < ActiveRecord::Base
     msg  # This returns the fully formed message
   end
 
+  def pdf_report
+    pdf = Prawn::Document.new({:page_size => 'A4',
+                              :left_margin => 50,
+                              :right_margin => 50,
+                              :top_margin => 24,
+                              :bottom_margin => 24})
+
+
+    pdf.instance_eval do
+       def separator
+          text " "
+          stroke {y=@y-25; line [1,y], [bounds.width,y]}
+          text " "
+       end
+    end
+
+
+    header_image = File.open(Rails.root.join("app/assets/images/mtrhlogo.jpg"))
+    pdf.image(header_image, :scale => 0.25, :align => :center)
+    header_image.close
+
+
+    pdf.text "PO Box 3, 3100 Eldoret Tel: +254-053-2033471/4", :size => 14, :align => :center
+    pdf.text "Chest X-ray Report", :size => 18, :align => :center
+    pdf.move_down(5)
+    pdf.separator
+    pdf.move_down(10)
+
+    pdf.text "Patient: #{patient.full_name}", :size => 14, :justification => :left
+    pdf.text "ID: #{patient.mrn_ampath}"
+    pdf.text "X-ray ID #{patient.mtrh_rad_id}"
+    pdf.text "Birthdate: #{patient.birthdate.strftime("%d-%m-%y")}"
+    pdf.move_down(10)
+    pdf.text "Film Date: #{date.strftime("%d-%m-%y")}"
+    pdf.text "Report Date: #{updated_at.strftime("%d-%m-%y")}"
+    pdf.move_down(5)
+    pdf.separator
+    pdf.move_down(10)
+
+    pdf.text "Clinical History:", :size => 14
+    pdf.text "#{indication}", :size => 12
+    pdf.move_down(5)
+    pdf.separator
+    pdf.move_down(10)
+
+
+    pdf.text "Observations", :size => 15
+    observations.each do |o|
+
+      pdf.text "#{o.question_concept.name} - #{o.value_concept.name}"
+
+    end
+
+    pdf.move_down(5)
+    pdf.separator
+    pdf.move_down(10)
+
+    pdf.text("Impression:", :size => 15)
+    pdf.text(impression)
+    pdf.move_down(20)
+    pdf.text "Reported and Signed by: #{provider.full_name}"
+    
+    pdf.render
+
+  end
+
   def send_hl7
 
     if self.status == "ready_for_printing" && self.patient.openmrs_verified?

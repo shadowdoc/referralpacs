@@ -94,19 +94,11 @@ class EncounterController < ApplicationController
   def pdf_report
     @encounter = Encounter.find(params[:id])
     @observations = @encounter.observations.sort! {|x, y| y.question_concept.name <=> x.question_concept.name }
-    @patient = @encounter.patient
     @encounter.status = "final"
     @encounter.save
 
-    prawnto :prawn => {
-      :page_size => 'A4',
-      :left_margin => 50,
-      :right_margin => 50,
-      :top_margin => 24,
-      :bottom_margin => 24},
-      :filename => "#{@encounter.date.strftime("%d-%m-%y")}-#{@patient.full_name}.pdf"
+    send_data(@encounter.pdf_report, :filename => "#{@encounter.date.strftime("%d-%m-%y")}-#{@encounter.patient.full_name}.pdf", :type => "application/pdf")
 
-    render :layout => false
   end
   
   def report
@@ -125,7 +117,6 @@ class EncounterController < ApplicationController
 
       # @impression is the variable that will populate the free-text impression
       # it defaults to normal
-
 
       case @encounter.status
         when "ready_for_printing"
