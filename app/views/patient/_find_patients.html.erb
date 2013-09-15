@@ -1,26 +1,22 @@
  <div id="find_patients">
-    <%= form_tag :url => {:action => 'find'},
-                       :loading => 'Form.disable("patient-form")',
-                       :complete => 'Form.enable("patient-form")',
-                       :html => {:id => "patient-form"},
-                       :remote => true %>
+    <%= form_tag('find', {:id => "patient-form", :remote => true}) do -%>
         <table>
-           <tr>
+          <tr>
              <th>AMPATH ID</th>
              <th>MTRH Radiology ID</th>
              <th>Patient Name</th>
-			 <th>Film Location</th>
+			       <th>Film Location</th>
              <th>Date</th>
-           </tr>
-           <tr>
+          </tr>
+          <tr>
             <td class="search-box"><%= text_field :patient, 'mrn_ampath', {:class => "search-box"} %></td>
             <td class="search-box"><%= text_field :patient, 'mtrh_rad_id', {:class => "search-box"} %></td>
             <td class="search-box"><%= text_field :patient, 'name', {:class => "search-box"} %></td>
-			<td class="search-box"><%= text_field :encounter, 'location', {:class => "search-box"}%></td> 
+      			<td class="search-box"><%= text_field :encounter, 'location', {:class => "search-box"}%></td> 
             <td class="search-box"><%= date_field :encounter, 'date', {:class => "search-box"} %></td> 
-			<td class="search-box"><%= submit_tag "Go" %></td>
-           </tr>
+			      <td class="search-box"><%= submit_tag "Go" %></td>
+          </tr>
         </table>
-    <% end %>
+    <% end -%>
     <div id="patient-list">Fill in the boxes above and click go.</div>
 </div>
