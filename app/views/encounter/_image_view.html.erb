@@ -1,6 +1,7 @@
 <div class="img-container">
-    <% encounter = @image.encounter -%>
-    <%= image_tag @image.url, :width => "100%" %>
+    <% encounter = image.encounter -%>
+    <% patient = encounter.patient -%>
+    <%= image_tag image.url, :width => "100%" %>
 
 </div>
 <div class="img_container_text">
@@ -11,11 +12,11 @@
     <div class="img_container_header">
       Name: <br/>
     </div>
-      <%= @patient.full_name -%><br/>
+      <%= patient.full_name -%><br/>
     <div class="img_container_header">
       MRN: <br/>
     </div>
-      <%= @patient.mrn_ampath -%><br/>
+      <%= patient.mrn_ampath -%><br/>
 
     <% if encounter.status == "final" || encounter.status == "ready_for_printing" -%>
       <div class="img_container_header">

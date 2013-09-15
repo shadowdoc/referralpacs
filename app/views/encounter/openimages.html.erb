@@ -1,7 +1,5 @@
 <!- Note - this view uses the openimages layout. ->
 
-<% @patient = @encounter.patient -%>
-
-<% @encounter.images.each do |@image| -%>
-  <%= render(:partial => "image_view") %>
+<% @encounter.images.each do |image| -%>
+  <%= render(:partial => "image_view", :locals => {image: image} ) %>
 <% end -%>
