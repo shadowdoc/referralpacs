@@ -1,5 +1,16 @@
 module ApplicationHelper
 
+  def errors_for(obj)
+    html = ""
+    if obj.errors.any?
+      html << "<ul>"
+        obj.errors.full_messages.each do |msg|
+          html << "<li>#{msg}</li>"
+        end
+      html << "</ul>"
+    end
+  end
+
   def setup_layout
     # This method is called by the layout view to make sure that the patient 
     # being displayed is correct.
@@ -22,13 +33,9 @@ module ApplicationHelper
   
   def set_current_user_banner_and_command_list
     unless session[:user_id].nil?
-      user = User.find(session[:user_id])
-      unless user.nil?
-        
-        # First we set up the string that displays the current user.
-        
-        @current_user_banner = "Logged in as: " + user.email.to_s + " | " + link_to("Log Off", :controller => :login, :action => :logout)
-        
+      @user = User.find(session[:user_id])
+      unless @user.nil?
+                
         # Here we put together the command list that will be at the top of every page
 
         find_patients = link_to('Find Patients', :controller => :patient, :action => :find)
@@ -46,7 +53,7 @@ module ApplicationHelper
 
         @command_list = []
         
-        case user.privilege.name
+        case @user.privilege.name
           when "admin"
             @command_list = [find_patients,
                              dictionary,
@@ -118,7 +125,6 @@ module ApplicationHelper
       
   end
 
-  
   def javascript(url)
     content_for :javascript do
       javascript_include_tag url

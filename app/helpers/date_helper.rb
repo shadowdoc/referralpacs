@@ -20,7 +20,7 @@ module DateHelper
   #
   def date_field(object_name, method, options={})
     format = options.delete(:format) ||
-             ActiveSupport::CoreExtensions::Date::Conversions::DATE_FORMATS[:default] ||
+             Date::DATE_FORMATS[:default] ||
              '%d %b %Y'
     if options[:value].is_a?(Date)
       options[:value] = options[:value].to_s
