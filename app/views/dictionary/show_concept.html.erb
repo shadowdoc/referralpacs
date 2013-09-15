@@ -14,14 +14,14 @@
 </div>
 <%= form_tag(:url => {:action => "add_answer", :id => @concept},
                      :update => 'answers',
-                     :position => :bottom, :remote => true) %>
+                     :position => :bottom, :remote => true) do -%>
     <label for="concept_lookup" >Concept Search</label>
     <input type="text" id="concept_lookup" name="concept_lookup" />
         <div class="auto_complete" id="concept_lookup_auto_complete" ></div>
         <%= javascript_tag("new Autocompleter.Local('concept_lookup', 'concept_lookup_auto_complete', concepts,
                                                     {fullSearch: true, frequency: 0, minChars: 1});") %>
     <%= submit_tag "Add Answer" %>
-<% end %>
+<% end -%>
 </p>
 
 <%= link_to "Return to concept list", :action => "list_concepts" %>
