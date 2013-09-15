@@ -13,11 +13,7 @@
 
 </head>
 
-<% if @onload -%>
-<%= "<body onload='" + @onload + "'>" %>
-<% else %>
-<body>
-<% end %>
+<%= (@onload ? "<body onload='" + @onload + "'>" : "<body>").html_safe  -%>
 
 <% setup_layout -%>
     <div id="banner">

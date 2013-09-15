@@ -38,17 +38,16 @@ module EncounterHelper
     else
       test = @tag_hash[value_concept] == answer_concept
     end
-    return "<label>" + radio_button_tag(value_concept, answer_concept, test) + answer_concept.humanize + "</label>"      
+    return_string = "<label>" + radio_button_tag(value_concept, answer_concept, test) + answer_concept.humanize + "</label>"
+    return_string.html_safe
   end
   
   def fieldset_helper(question, choices)
-    return_string = ""
-    
+    return_string = ""    
     choices.each do |choice|
       return_string += radio_tag_helper(question, choice) + "\n"
     end
-    
-    return return_string
+    return_string.html_safe
   end
   
   def checkbox_helper(question, choices)
@@ -57,7 +56,7 @@ module EncounterHelper
     choices.each do |choice|
       return_string += "<label>" + check_box_tag(question + "+" + choice, true, @tag_hash[question][choice]) + choice.humanize + "</label>" + "\n"
     end
-    return return_string
+    return_string.html_safe
   end
   
 end
