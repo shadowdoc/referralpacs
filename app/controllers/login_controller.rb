@@ -41,6 +41,7 @@ class LoginController < ApplicationController
         
       else
         flash[:notice] = "Invalid user/password combination"
+        redirect_to(:action => "login")
       end
     end
   end
@@ -144,7 +145,7 @@ class LoginController < ApplicationController
         
     # Now we see if the request is a get and if so, send back a form
     # populated with the user data to be modified.
-    @all_privileges = Privilege.find(:all)
+    @all_privileges = Privilege.all
 
     if request.get?
       id = params[:id]
