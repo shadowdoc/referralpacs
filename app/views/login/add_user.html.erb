@@ -1,7 +1,6 @@
 <% @page_title = "Add User" -%>
 
-<%= error_messages_for  'user' %>
-<% form_tag :action => "add_user", :id => @user do -%>
+<%= form_tag :action => "add_user", :id => @user do -%>
     <%= render :partial => 'form_user'%>
 
 <!-- We add the password fields here because they're not part of the standard edit form.-->

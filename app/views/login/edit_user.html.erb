@@ -1,7 +1,9 @@
 <% @page_title = "Edit User" -%>
 <% setup_layout %>
 
-<% form_tag :action => "edit_user", :id => @user do %>
+<%= errors_for(@user) %>
+
+<%= form_tag :action => "edit_user", :id => @user do -%>
     <%= render :partial => 'form_user' %>
     <%= submit_tag 'Save' %>
 <% end -%>

@@ -1,4 +1,10 @@
-<%= error_messages_for 'user' %>
+<% if @user.errors.any? %>
+  <ul>
+    <% @user.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
 
 <!--[form:user]-->
 <p><label for="user_given_name">Given Name</label><br/>

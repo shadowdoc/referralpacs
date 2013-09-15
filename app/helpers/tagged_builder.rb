@@ -7,10 +7,9 @@ class TaggedBuilder < ActionView::Helpers::FormBuilder
   def self.create_tagged_field(method_name)
     define_method(method_name) do |label, *args|
       @template.content_tag("p" ,
-        @template.content_tag("label" , 
+        @template.content_tag("label", 
                               label.to_s.humanize,
-                              :for => "#{@object_name}_#{label}" ) + "<br/>" +
-        super)
+                              :for => "#{@object_name}_#{label}" ) + @template.tag("br") + super(label, *args))
     end
   end
   
@@ -18,7 +17,7 @@ class TaggedBuilder < ActionView::Helpers::FormBuilder
     create_tagged_field(name)
   end 
   
-  [ :date_select, :collection_select].each do |name|
+  [:date_select, :collection_select].each do |name|
     create_tagged_field(name)
   end
   

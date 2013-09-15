@@ -1,19 +1,19 @@
 <% @page_title = "Add Provider" -%>
 <% fillCollections -%>
 
-<%= error_messages_for  'provider' %>
+<%= errors_for(@provider) %>
 
-<% form_for :provider,
+<%= form_for @provider,
             :url => {:action => "add_provider" },
-            :builder => TaggedBuilder  do |form|%>
-    <%= form.text_field :given_name %>
-    <%= form.text_field :family_name %>
-    <%= form.text_field :email %>
-    <%= form.collection_select(:privilege_id, @all_privileges, :id, :name) %>
-    <%= form.text_field :title %>
-    <%= form.text_field 'password' %>
+            :builder => TaggedBuilder  do |f| -%>
+    <%= f.text_field :given_name %>
+    <%= f.text_field :family_name %>
+    <%= f.text_field :email %>
+    <%= f.collection_select(:privilege_id, @all_privileges, :id, :name) %>
+    <%= f.text_field :title %>
+    <%= f.text_field 'password' %>
     <br/>
     <%= submit_tag 'Save' %>
-<% end %>
+<% end -%>
 <br/>
 <%= link_to 'Back', :action => 'list_users' %>

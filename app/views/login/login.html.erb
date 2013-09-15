@@ -1,6 +1,9 @@
 <% @page_title = "Login" -%>
-<%= error_messages_for  'user' %>
-<%= form_tag %>
+
+<%= errors_for(@user) %>
+
+<%= form_tag 'login/login' do -%>
+
 <table>
     <tr>
         <td>E-mail: </td> 
@@ -15,4 +18,5 @@
         <td><input type="submit" value=" LOGIN " /></td>
     </tr>
 </table>
-</form>
+
+<% end -%>
