@@ -17,7 +17,7 @@ Rejected: <%= @rejected %>
 </h2>
 <br/>
 
-<% form_tag :action => "statistics"  do -%>
+<%= form_tag :action => "statistics"  do -%>
 
   <p><label for="stats_start_date">Start Date</label><br/>
     <%= date_field "report", :start_date %>
