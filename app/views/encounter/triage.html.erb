@@ -2,22 +2,20 @@
 
 <!-- Display the images associated with this Encounter -->
 
-<% @encounter.images.each do |@image| -%>
-  <%= render(:partial => "image_view") %>
+<% @encounter.images.each do |image| -%>
+  <%= render(:partial => "image_view", :locals => {image: image}) %>
 <% end -%>
 
 <!-- Give the user two choices -->
 
-<% form_tag :action => "triage", :id => @encounter.id do -%>
+<%= form_tag :action => "triage", :id => @encounter.id do -%>
 
 <div id="buttons">
 	<%= submit_tag "Normal" %>
 	<%= submit_tag "Send to Radiologist" %>
 </div>
-
-<br/><br/>
-
 <% end -%>
+<br/><br/>
 
 <%= render :partial => "rejection",
            :locals => {:encounter => @encounter} %>
