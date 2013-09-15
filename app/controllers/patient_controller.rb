@@ -65,33 +65,20 @@ class PatientController < ApplicationController
       # Our patients arrays should be set now.  If not, no one was found.
       
       if @patients.nil? || @patients.empty?
-
-         render :update do |page|
-
-           #TODO Shouldn't this be in an RJS template?
-           
-           response_string = ""
+          
+           @response_string = ""
            
            if $openmrs_down
-             response_string = "Connection with OpenMRS Server <i>#{$openmrs_server_name}</i> is down, please contact the administrator.<br/><br/>"
+             @response_string = "Connection with OpenMRS Server <i>#{OPENMRS_SERVER_NAME}</i> is down, please contact the administrator.<br/><br/>"
            end
            
-           unless @current_user.privilege.add_patient
-             response_string += "No patients found, please search again"
-           else
-             response_string += "No patients found. <br/><br/>" + link_to("New Patient", :controller => :patient, :action => :new)
-           end
+           @response_string += "No patients found"
 
-           page.replace_html "patient-list", response_string
-           page.visual_effect :highlight, "patient-list"
-           
-           page.form.reset 'patient-form'
-           
-         end
+           render "find_error"
+
+      else
          
-       else
-         
-         render :partial => "ajax_list_patients"
+        render "ajax_list_patients", :formats => [:js]
          
       end
     end
