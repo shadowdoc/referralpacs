@@ -18,7 +18,7 @@ class QualityController < ApplicationController
   public
   def list
     #Find all quality checks that are marked "for list"
-    @checks = QualityCheck.find(:all, :conditions => "status = 'for_review' AND NOT provider_id ='#{@current_user.id}'")
+    @checks = QualityCheck.where("status = ? && provider_id != ?", 'for_review', @current_user.id)
   end
 
   def review
@@ -37,17 +37,17 @@ class QualityController < ApplicationController
     @provider_quality_summary = []
 
 
-    Provider.find(:all).each do |provider|
+    Provider.all.each do |provider|
       provider_array = []
 
       ["1", "2a", "2b", "3a", "3b", "4a", "4b"].each do |score|
 
-        checks = QualityCheck.find(:all, :conditions => "provider_id = '#{provider.id}' AND score = '#{score}'")
+        checks = QualityCheck.where("provider_id = ? && score = ?", provider.id, score)
 
-        provider_array << {score, checks.length}
+        provider_array << {score => checks.length}
       end
 
-      @provider_quality_summary << {provider.full_name, provider_array}
+      @provider_quality_summary << {provider.full_name => provider_array}
     end
 
   end

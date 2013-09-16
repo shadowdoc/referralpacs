@@ -5,7 +5,7 @@
 
 
 <div class="report_form">
-  <% form_tag :action => :review, :id => @check.id do %>
+  <%= form_tag :action => :review, :id => @check.id do -%>
      <fieldset>
        <legend>1 - Concur with interpretation</legend>
           <%= radio_button :check, :score, "1", :checked => true %>1<br/>
