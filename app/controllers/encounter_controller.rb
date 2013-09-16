@@ -58,10 +58,12 @@ class EncounterController < ApplicationController
     # it to the view for manipulation.
   
     @patient = Patient.find(params[:id])
-    @encounter = Encounter.new()  
+    @encounter = Encounter.new 
     @encounter.patient_id = @patient.id
     @encounter.status = "ordered" # New exams are just "ordered" until they have an image.
-    @observation = Observation.new(:encounter_id => @encounter.id, :patient_id => @encounter.patient.id)
+    @observation = Observation.new
+    @observation.encounter = @encounter
+    @observation.patient = @patient
     
   end
   
