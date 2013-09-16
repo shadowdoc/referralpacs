@@ -68,7 +68,7 @@ class PatientController < ApplicationController
           
            @response_string = ""
            
-           if $openmrs_down
+           if OPENMRS_URL_BASE && $openmrs_down
              @response_string = "Connection with OpenMRS Server <i>#{OPENMRS_SERVER_NAME}</i> is down, please contact the administrator.<br/><br/>"
            end
            
