@@ -1,7 +1,5 @@
 <% @page_title = "Manage Patients" %>
 
-<%= error_messages_for 'patient' %>
-
 <h2>Patient #1 - Will remain intact</h2>
 <table>
     <tr>
@@ -22,7 +20,7 @@
 <div id="form-patient-0">
   <%= form_tag :url => url_for(:action => "set_patient"),
                       :html => {:id => "form-patient"},
-                      :remote => true %>
+                      :remote => true do -%>
   <%= hidden_field_tag :which_patient, 0 %>
   MTRH Radiology ID:
   <%= text_field_tag :mtrh_rad_id %>
@@ -49,7 +47,7 @@
 <div id="form-patient-1">
   <%= form_tag :url => url_for(:action => "set_patient"),
                       :html => {:id => "form-patient"},
-                      :remote => true %>
+                      :remote => true do -%>
   MTRH Radiology ID:
   <%= text_field_tag :mtrh_rad_id %>
   <%= submit_tag "Set Patient 2" %>

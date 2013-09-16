@@ -1,3 +1,0 @@
-page.replace_html "patient-#{@which_patient}", :partial => 'patient', :locals => {:patient => @patient}
-page.visual_effect :highlight, "patient-#{@which_patient}"
-page.form.reset "form-patient"
