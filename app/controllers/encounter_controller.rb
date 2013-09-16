@@ -210,25 +210,20 @@ class EncounterController < ApplicationController
   
   def statistics
 
-    @patients = Patient.find(:all)
+    @patients = Patient.all
 
     if request.get?
       @start_date = "2005-01-01"
       @end_date = Time.now.strftime("%Y-%m-%d")
-      @encounters_during_range = Encounter.find_range(@start_date, @end_date)
     else
       @start_date = params[:report][:start_date]
       @end_date = params[:report][:end_date]
-      @encounters_during_range = Encounter.find_range(params[:report][:start_date], params[:report][:end_date])
     end
-    
-    @new = Encounter.find_all_by_status("new").length    
-    @ready_for_printing = Encounter.find_all_by_status("ready_for_printing").length
-    @radiologist_to_read = Encounter.find_all_by_status("radiologist_to_read").length
-    @final = Encounter.find_all_by_status("final").length
-    @archived = Encounter.find_all_by_status("archived").length
-    @rejected = Encounter.find_all_by_status("rejected").length
-    @ordered = Encounter.find_all_by_status("ordered").length
+
+    @encounters_during_range = Encounter.where(date: @start_date..@end_date)
+
+    @stat_hash = Encounter.group(:status).count
+
   end
   
   def status
