@@ -1,1 +1,0 @@
-$('#patient-list').html '<%= j render :partial => 'list_patients', :object => @patients %>'
