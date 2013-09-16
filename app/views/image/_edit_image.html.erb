@@ -33,6 +33,6 @@
 <% end -%>
 
 <%= link_to("Rotate Left", {:action => :rotate, :direction => "left", :id => @image.id}, :post => true) %>
-<%= link_to("Rotate Right", {:action => :rotate, :direction => "right", :id => @image.id }, :post => true) %><br/>
-<br/>
-<%= link_to("Return to Encounter", {:controller => :encounter, :action => :show, :id => @encounter.id }) %>
+<%= link_to("Rotate Right", {:action => :rotate, :direction => "right", :id => @image.id }, :post => true) %>
+<br/><br/>
+<%= link_to("Return to Encounter", {:controller => :encounter, :action => :details, :id => @encounter.id }) %>
