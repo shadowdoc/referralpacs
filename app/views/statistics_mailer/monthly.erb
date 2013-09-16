@@ -1,17 +1,16 @@
-Time Period: <%= @begin_time.strftime("%d-%m-%y") %> to <%= @end_time.strftime("%d-%m-%y") %>
-
 Total Patients: <%= @patients %>
-Final: <%= @final %>
-New: <%= @new %>
-Ordered: <%= @ordered %>
-Ready for Printing: <%= @ready_for_printing %>
-Radiologist to read: <%= @radiologist_to_read %>
-Archived: <%= @archived %>
-Rejected: <%= @rejected %>
+Number of Final Reports: <%= @stat_hash["final"] %>
 
+New X-rays waiting to be read: <%= @stat_hash["new"] || 0 %>
+Triaged X-rays waiting for radiologist to read: <%= @stat_hash["radiologist_to_read"] || 0 %>
+X-rays waiting for reports to be printed: <%= @stat_hash["ready_for_printing"] || 0%>
+X-rays with demographic problems waiting to be fixed: <%= @stat_hash["rejected"] || 0%>
+
+Studies read over the following time period: <%= @begin_time.strftime("%d-%m-%y") %> to <%= @end_time.strftime("%d-%m-%y") %>
 
 <% @active_providers.each do |key,value| -%>
-Radiologist: <%= key %>
+	<% unless key.nil? -%>
+Radiologist: <%= key.full_name %>
 Count: <%= value %>
-
+	<% end -%>
 <% end -%>
