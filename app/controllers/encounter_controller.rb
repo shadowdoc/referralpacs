@@ -286,19 +286,19 @@ class EncounterController < ApplicationController
   def process_form(form_parameters)
     form_parameters.each_pair do |key, value|
       unless value == "none"  || value == "normal"  || value == "no"  || key == "impression"
-        unless ["id", "commit", "action", "controller"].include? key
+        unless ["id", "commit", "action", "controller", "utf8", "authenticity_token"].include? key
           unless key.include?("pleural_scarring")
-            question_concept = Concept.find_by_name(key.humanize.upcase)
+            question_concept = Concept.where(name: key.humanize.upcase).first
 
             if question_concept.nil?
               raise "concept #{key.humanize.upcase} not found"
             end
 
-            value_concept = Concept.find_by_name(value.humanize.upcase)
+            value_concept = Concept.where(name: value.humanize.upcase).first
 
           else
-            question_concept = Concept.find_by_name("PLEURAL SCARRING")
-            value_concept = Concept.find_by_name(key.split("+")[1].humanize.upcase)
+            question_concept = Concept.where(name: "PLEURAL SCARRING").first
+            value_concept = Concept.where(name: key.split("+")[1].humanize.upcase).first
           end
 
           if value_concept.nil?

@@ -8,6 +8,8 @@ class Observation < ActiveRecord::Base
              :class_name => "Concept",
              :foreign_key => "value_concept_id"
 
+  attr_accessible :question_concept_id, :value_concept_id
+
 
   def obx(segment_id)
 
