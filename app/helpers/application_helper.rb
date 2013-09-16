@@ -9,6 +9,7 @@ module ApplicationHelper
         end
       html << "</ul>"
     end
+    html.html_safe
   end
 
   def setup_layout
