@@ -138,20 +138,6 @@ h1 {
   display: table;
 }
 
-/* Global pagination */
-
-#page_nav {
-
-}
-
-#left {
-  float: left;
-}
-
-#right {
-  float: right;
-}
-
 /* Styles for encounters/find */
 #encounter {
 	height: 200px;
