@@ -22,7 +22,7 @@ class QualityController < ApplicationController
   end
 
   def review
-    @check = QualityCheck.find(params[:id], :include => [:encounter, :provider])
+    @check = QualityCheck.find(params[:id])
     @check.reviewer = User.find(session[:user_id])
 
     if request.post?
@@ -34,8 +34,8 @@ class QualityController < ApplicationController
   end
 
   def stats
-    @provider_quality_summary = []
 
+    @provider_quality_summary = []
 
     Provider.all.each do |provider|
       provider_array = []

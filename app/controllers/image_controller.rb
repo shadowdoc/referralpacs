@@ -103,8 +103,7 @@ class ImageController < ApplicationController
     @image.destroy
   end
   
-  def edit_image  
-    
+  def edit_image
     # Finds the image to edit and returns the image and encounter objects
     # to the view
 

@@ -34,8 +34,7 @@ class User < ActiveRecord::Base
   
   def self.login(email, password)
     hashed_password = hash_password(password || "")
-    find(:first,
-         :conditions => ["email = ? and hashed_password = ?", email, hashed_password])
+    find.where("email = ? and hashed_password = ?", email, hashed_password).first?
   end
   
   def try_to_login()
@@ -67,15 +66,4 @@ class User < ActiveRecord::Base
     Digest::MD5.hexdigest(password)
   end
     
-end
-
-class Provider < User
-  unloadable
-  has_many :encounters
-  has_many :quality_checks
-end
-
-class Client < User
-  unloadable
-  has_many :encounters
 end

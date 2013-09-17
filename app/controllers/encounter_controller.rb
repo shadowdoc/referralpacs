@@ -182,7 +182,7 @@ class EncounterController < ApplicationController
       # Which would be Radiologist To Review or new for a rad and Triage for an assistant
       
       if @encounter.errors.count == 0 && flash[:notice].nil?
-        if Encounter.find_all_by_status("radiologist_to_review").empty?
+        if Encounter.where(status: "radiologist_to_review").count == 0
           redirect_to :action => "status", :requested_status => "new"
         else
           redirect_to :action => "status", :requested_status => "radiologist_to_review"
@@ -196,7 +196,7 @@ class EncounterController < ApplicationController
   end
 
   def reject
-    @encounter = Encounter.find(params["id"])
+    @encounter = Encounter.find(params[:id])
 
     # Clear out any existing observations
     @encounter.observations.each {|obs| obs.destroy }
@@ -230,7 +230,7 @@ class EncounterController < ApplicationController
   
   def status
     
-   @encounters = Encounter.find_all_by_status(params[:requested_status], :limit => 10, :order => "date DESC")
+   @encounters = Encounter.order("date DESC").where("status = ?", params[:requested_status]).limit(10)
     
     if @encounters.length == 0
       render :text => "No encounters with status - #{params[:requested_status].humanize}", :layout => true

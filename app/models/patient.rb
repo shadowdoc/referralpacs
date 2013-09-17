@@ -187,13 +187,11 @@ class Patient < ActiveRecord::Base
       # If we don't have an AMPATH ID, what about a MTRH radiology id?
 
       unless params[:patient][:mtrh_rad_id] == ""
-        patients = Patient.find(:all,
-                    :conditions => ['mtrh_rad_id = ?', params[:patient][:mtrh_rad_id]])
+        patients = Patient.where('mtrh_rad_id = ?', params[:patient][:mtrh_rad_id])
       else
         # We're left to search names or filter encounters by date to get patient names
         unless params[:patient][:name] == ""
-          patients = Patient.find(:all,
-                      :conditions => ['LOWER(CONCAT(given_name, " ", family_name)) LIKE ?', '%' + params[:patient][:name].downcase + '%'])
+          patients = Patient.where('LOWER(CONCAT(given_name, " ", family_name)) LIKE ?', '%' + params[:patient][:name].downcase + '%')
         end
       end
     end

@@ -34,9 +34,10 @@ class PatientController < ApplicationController
 
       if @patients.nil? && params[:encounter][:date] != "" && params[:encounter][:location] != ""
         # if we haven't found any patients and someone listed by date and location
-        @encounters = Encounter.find(:all,:conditions => ['date LIKE ?', '%' + params[:encounter][:date] + '%']) 
+        @encounters = Encounter.includes(:location, :patient).where('date LIKE ?', '%' + params[:encounter][:date] + '%')
+
         @encounters.each do |enc| 
-        
+
           if enc.location.name == params[:encounter][:location]
             @patients << enc.patient 
           end
@@ -47,7 +48,7 @@ class PatientController < ApplicationController
       
       if @patients.nil? && params[:encounter][:date] != ""
         # If we haven't found any patients and someone listed a date
-        @encounters = Encounter.find(:all, :conditions => ['date LIKE ?', '%' + params[:encounter][:date] + '%'])
+        @encounters = Encounter.includes(:patient).where('date LIKE ?', '%' + params[:encounter][:date] + '%')
         @patients = Array.new()
         @encounters.each { |enc| @patients << enc.patient }       
         @patients.uniq!
@@ -55,7 +56,7 @@ class PatientController < ApplicationController
       
       if @patient.nil? && params[:encounter][:location]!= ""
         # if we havent found any patients and someome listed by location
-        loc = Location.find(:first, :conditions => ['name LIKE ?','%' + params[:encounter][:location] + '%'])
+        loc = Location.where('name LIKE ?','%' + params[:encounter][:location] + '%').first
         @encounters = loc.encounters
         @patients   = Array.new()
         @encounters.each { |enc| @patients << enc.patient }       
@@ -85,7 +86,8 @@ class PatientController < ApplicationController
   end
   
   def new
-    @all_tribes = Tribe.find(:all, :order => "name ASC")
+    @all_tribes = Tribe.order("name ASC").all
+
     if request.get?
       @patient = Patient.new()
     else
@@ -103,7 +105,7 @@ class PatientController < ApplicationController
     #TODO: Updating patient information is currently broken due to the date control.
     #Additionally, I think that the update_attributes() is a security risk.
     
-    @all_tribes = Tribe.find(:all, :order => "name ASC")
+    @all_tribes = Tribe.order("name ASC").all
     if request.get?
       @patient = Patient.find(params[:id])
     else
@@ -131,16 +133,6 @@ class PatientController < ApplicationController
 
     end
     redirect_to :action => "find"    
-  end
-  
-  def unreported
-    
-    @encounters = Encounter.find(:all, :conditions => ['reported = ?', false])
-    @patients = []
-    @encounters.each { |enc| @patients << enc.patient }
-    @patients.uniq!
-    
-    render :partial => "list_patients"
   end
   
 end

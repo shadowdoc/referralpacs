@@ -29,11 +29,7 @@ class Encounter < ActiveRecord::Base
 
 
     # Encounters generated from DICOM messages don't have valid clients.
-    if client
-      client_name = client.hl7_name
-    else
-      client_name = ""
-    end
+    client = client ? client.hl7_name : ""
 
     pv1.attending_doctor = '1^' + client_name
     pv1.admit_date = date.strftime("%Y%m%d%H%M%S")
@@ -337,7 +333,5 @@ class Encounter < ActiveRecord::Base
     # return the created encounter
     enc
   end 
-
-
 
 end

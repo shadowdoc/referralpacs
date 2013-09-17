@@ -113,10 +113,10 @@ module ApplicationHelper
   
   # Fill all of the collections for dropdown selections
   def fillCollections
-    @all_encounter_types = EncounterType.find(:all)
-    @all_providers = Provider.find(:all)
-    @all_clients = Client.find(:all)
-    @all_locations = Location.find(:all)
+    @all_encounter_types = EncounterType.all
+    @all_providers = Provider.all
+    @all_clients = Client.all
+    @all_locations = Location.all
 
     @statuses = []
     Struct.new("Status", :id, :name)

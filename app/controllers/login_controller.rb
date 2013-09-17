@@ -52,13 +52,13 @@ class LoginController < ApplicationController
   end
   
   def list_clients
-    @all_clients = Client.find(:all)
+    @all_clients = Client.all
   end
 
   def add_client
     if request.get?
       @client = Client.new
-      @all_privileges = Privilege.find(:all)
+      @all_privileges = Privilege.all
     else
       @client = Client.new(params[:client])
       @client.privilege_id = 2 
@@ -66,7 +66,7 @@ class LoginController < ApplicationController
         flash[:notice] = "Client #{@client.email} created."
         redirect_to(:action => "list_clients")
       else
-        @all_privileges = Privilege.find(:all)
+        @all_privileges = Privilege.all
       end  
     end
   end
@@ -74,20 +74,20 @@ class LoginController < ApplicationController
   def edit_client
     if request.get?
       @client = Client.find(params[:id])
-      @all_privileges = Privilege.find(:all)
+      @all_privileges = Privilege.all
     else
       @client = Client.find(params[:id])
       if @client.update_attributes(params[:client])
         flash[:notice] = "Client #{@client.email} saved."
         redirect_to(:action => "list_clients")
       else
-        @all_privileges = Privilege.find(:all)
+        @all_privileges = Privilege.all
       end
     end
   end
   
   def list_users
-    @users = User.find(:all)
+    @users = User.all
   end
   
   def add_user
@@ -96,7 +96,7 @@ class LoginController < ApplicationController
     # form.  Otherwise, we have a POST request, attempt to add the
     # new user and return to the user list.
 
-    @all_privileges = Privilege.find(:all)
+    @all_privileges = Privilege.all
 
     if request.get?
       @user = User.new
@@ -148,8 +148,7 @@ class LoginController < ApplicationController
     @all_privileges = Privilege.all
 
     if request.get?
-      id = params[:id]
-      @user = User.find(id)
+      @user = User.find(params[:id])
     else
       @user = User.find(params[:id])
       if @user.update_attributes(params[:user])
@@ -173,7 +172,7 @@ class LoginController < ApplicationController
       #Now we check to make sure that the entered passwords match.
       if params[:new][:password0] == params[:new][:password1]
 
-        @user.password = params['new'][:password0]
+        @user.password = params[:new][:password0]
         @user.save
         flash[:notice] = 'Password updated'
         redirect_to(:controller => :login, :action => :list_users)
@@ -186,9 +185,8 @@ class LoginController < ApplicationController
 
   end
 
-  
   def list_providers
-    @all_providers = Provider.find(:all)
+    @all_providers = Provider.all
   end
 
   def add_provider
@@ -202,7 +200,7 @@ class LoginController < ApplicationController
     
     if request.get?
       @provider = Provider.new
-      @all_privileges = Privilege.find(:all)
+      @all_privileges = Privilege.all
     else
       @provider = Provider.new(params[:provider])
       if @provider.save
@@ -221,10 +219,9 @@ class LoginController < ApplicationController
       flash[:notice] = "Not enough privilege to edit providers"
       return(redirect_to(:controller => "patient", :action => "find"))
     end
-
-    
+ 
     if request.get?
-      @all_privileges = Privilege.find(:all)
+      @all_privileges = Privilege.all
       @provider = Provider.find(params[:id])
     else
       @provider = Provider.find(params[:id])
@@ -232,7 +229,7 @@ class LoginController < ApplicationController
         flash[:notice] = "Provider #{@provider.email} was successfully updated"
         redirect_to :action => "list_providers"
       else
-        @all_privileges = Privilege.find(:all)
+        @all_privileges = Privilege.all
       end
     end
     
