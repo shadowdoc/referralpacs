@@ -11,6 +11,5 @@
  *= require_self
  *= require_ref
  *= require_calendar
- *= require_scaffold
  *= require_tree .
  */
