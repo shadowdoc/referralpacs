@@ -8,11 +8,11 @@ require "net/http"
 require "net/https"
 require 'rexml/document'
 
-require 'usermonitor'  # This is a mixin for ActiveRecord that's in /lib
+# require 'usermonitor'  # This is a mixin for ActiveRecord that's in /lib
 
-ActiveRecord::Base.class_eval do
-  include ActiveRecord::UserMonitor
-end
+# ActiveRecord::Base.class_eval do
+#   include ActiveRecord::UserMonitor
+# end
 
 # For the date calendering stuff
 # From http://www.methods.co.nz/rails_date_kit/rails_date_kit.html
