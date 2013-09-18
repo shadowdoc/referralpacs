@@ -8,4 +8,3 @@
 # URL hacking, so we need to have the controller handle each file
 # This will use respond_to which requires knowlege of the "image/jpeg" MIME type.
 Mime::Type.register("image/jpeg", :jpg)
-Mime::Type.register("application/pdf", :pdf)
