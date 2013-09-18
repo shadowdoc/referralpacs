@@ -158,10 +158,9 @@ class Image < ActiveRecord::Base
       # Create a request object from our url and attach the authorization data.
       req = Net::HTTP::Get.new(url.path + "?" + url.query)
 
-#      Not using authentication - yet.
-#      req.basic_auth(OPENMRS_USERNAME, OPENMRS_PASSWORD)
-
       http = Net::HTTP.new(url.host, url.port)
+
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
       http.use_ssl = true
 
       begin
