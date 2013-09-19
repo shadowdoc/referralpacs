@@ -5,9 +5,7 @@
   <title>ReferralPACS : <%= @page_title %></title>
   <%= stylesheet_link_tag 'application' %>
   <%= javascript_include_tag 'application' %>
-  
-  <% if @page_specific_scripts_in %> <%= javascript_include_tag @page_specific_scripts_in %> <% end %>
-  <% if @load_concepts_js_array %><script src="/dictionary/concepts_for_lookup" type="text/javascript"></script><% end %>
+  <% if @load_concepts_js_array %><script src="/concepts/concepts_for_lookup" type="text/javascript"></script><% end %>
 
 </head>
 
