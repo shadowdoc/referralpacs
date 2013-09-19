@@ -125,11 +125,4 @@ module ApplicationHelper
     status_array.each {|s| @statuses << Struct::Status.new(s, s) }
       
   end
-
-  def javascript(url)
-    content_for :javascript do
-      javascript_include_tag url
-    end
-  end
-
 end
