@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
   
   def self.login(email, password)
     hashed_password = hash_password(password || "")
-    find.where("email = ? and hashed_password = ?", email, hashed_password).first?
+    User.where("email = ? and hashed_password = ?", email, hashed_password).first
   end
   
   def try_to_login()
