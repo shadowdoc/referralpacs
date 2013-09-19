@@ -1,4 +1,3 @@
-<%= stylesheet_link_tag "ref" %>
 <% @load_concepts_js_array = true %>
 
 <% for con in @concepts %>
@@ -15,9 +14,9 @@
         </div>
       <% end %>
       <div id="link">
-        <%= link_to('Show', :action => :show_concept, :id => con) %>
+        <%= link_to('Show', :action => :show, :id => con) %>
       </div>
     </div>
 <% end %>
 
-<%= link_to('New Concept', :action => :show_concept) %>
+<%= link_to('New Concept', :action => :new) %>

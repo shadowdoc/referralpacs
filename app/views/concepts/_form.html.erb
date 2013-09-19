@@ -1,20 +1,17 @@
-<% @page_title = "Dictionary" %>
 <p>
 <b>Name</b>
-<%= in_place_editor_field :concept, :name %>
+<%= best_in_place @concept, :name %>
 </p>
 <p>
 <b>Description</b>
-<%= in_place_editor_field :concept, :description %>
+<%= best_in_place @concept, :description %>
 </p>
 <b>Answers</b>
 <p>
 <div id='answers'>
     <%= render :partial => "answer", :collection => @concept.answers %>
 </div>
-<%= form_tag(:url => {:action => "add_answer", :id => @concept},
-                     :update => 'answers',
-                     :position => :bottom, :remote => true) do -%>
+<%= form_tag(:action => "add_answer", :id => @concept,:remote => true) do -%>
     <label for="concept_lookup" >Concept Search</label>
     <input type="text" id="concept_lookup" name="concept_lookup" />
         <div class="auto_complete" id="concept_lookup_auto_complete" ></div>
@@ -23,5 +20,3 @@
     <%= submit_tag "Add Answer" %>
 <% end -%>
 </p>
-
-<%= link_to "Return to concept list", :action => "list_concepts" %>

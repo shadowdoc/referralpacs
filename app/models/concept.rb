@@ -1,6 +1,8 @@
 class Concept < ActiveRecord::Base
   has_many :answers
   has_many :observations
+
+  attr_accessible :name, :description, :openmrs_id
   
   validates_uniqueness_of :name
   

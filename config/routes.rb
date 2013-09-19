@@ -57,6 +57,7 @@ Ref::Application.routes.draw do
   # match ':controller(/:action(/:id))(.:format)'
 
   resources :locations
+  resources :concepts
   match '' => 'login#login'
   match 'encounter/status/:requested_status' => 'encounter#status'
   match '/:controller(/:action(/:id))'

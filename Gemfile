@@ -45,3 +45,6 @@ gem "ruby-hl7"
 
 # For image processing
 gem "mini_magick"
+
+# In place editing (used in dictionary)
+gem "best_in_place"
