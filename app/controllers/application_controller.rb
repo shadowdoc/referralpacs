@@ -2,13 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   helper :date
   before_filter :set_current_user
-
-  require "user"
-  
-#  TODO include SslRequirement
-  
-  ENCOUNTERS_PER_PAGE = 10
-
+    
   # Make changes to the ruby-HL7 framework to address our needs
   # These fields are customizations for OpenMRS HL7 formatting
   HL7::Message::Segment::OBR.class_eval { add_field(:identifier, :idx => 4) }
