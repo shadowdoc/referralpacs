@@ -13,5 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.purr
+//= require jquery.ui.autocomplete
 //= require best_in_place
 //= require_tree .

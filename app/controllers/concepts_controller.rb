@@ -1,20 +1,17 @@
 class ConceptsController < ApplicationController
   layout 'ref'
 
-  def concepts_for_lookup
-    # TODO: Currently, all of the concepts are listed by the autocomplete
-    # Would like only the answers for the selected concept to show up under 
-    # answers
-    
-    @concepts = Concept.order(:name).all
-    headers['content-type'] = 'text/javascript'
-    render :layout => false
+  def add_answer
+    @concept = Concept.find(params[:id])
+    @concept_answer = Concept.where('name = ?', params[:concept_lookup]).first
+    @answer = Answer.new(:concept_id => @concept.id, :answer_id => @concept_answer.id)
+    @answer.save!
   end
 
   # GET /concepts
   # GET /concepts.json
   def index
-    @concepts = Concept.order(:name).all
+    @concepts = Concept.includes(:answers).order(:name).all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -96,13 +93,6 @@ class ConceptsController < ApplicationController
       format.html { redirect_to concepts_url }
       format.json { head :no_content }
     end
-  end
-
-  def add_answer
-    @concept = Concept.find(params[:id])
-    @concept_answer = Concept.where('name = ?', params[:concept_lookup]).first
-    @answer = Answer.new(:concept_id => @concept.id, :answer_id => @concept_answer.id)
-    @answer.save!
   end
 
 end
