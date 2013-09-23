@@ -3,12 +3,12 @@
 <%= link_to 'Quality Control Statistics', :controller => :quality, :action => :stats %>
 
 <h2>
-Total Patients: <%= @patients.length %><br/>
-Encounters during Period: <%= @encounters_during_range.length %><br/>
+Total Patients: <%= @patients.count %><br/>
+Encounters during Period: <%= @encounters_during_range.count %><br/>
 Period: <%= @start_date + " to " + @end_date %><br/>
 <br/>
 Final: <%= @stat_hash["final"] || 0 %><br/>
-New: <%= @stat_hash["final"] || 0 %><br/>
+New: <%= @stat_hash["new"] || 0 %><br/>
 Ordered: <%= @stat_hash["ordered"] || 0 %><br/>
 Ready for Printing: <%= @stat_hash["ready_for_printing"] || 0 %><br/>
 Radiologist to read: <%= @stat_hash["radiologist_to_read"] || 0 %><br/>
