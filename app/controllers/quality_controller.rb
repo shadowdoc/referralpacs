@@ -27,7 +27,10 @@ class QualityController < ApplicationController
 
     if request.post?
       # Here we update the QualityCheck with the parameters from the browser.
-      @check.update_attributes(params[:check])
+      @check.score = params[:check][:score])
+      @check.status = "reviewed"
+      @check.comment = params[:check][:text])
+      @check.save
       redirect_to :action => :list
     end
 
