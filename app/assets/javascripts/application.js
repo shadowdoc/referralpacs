@@ -16,3 +16,4 @@
 //= require jquery.ui.autocomplete
 //= require best_in_place
 //= require concept
+//= require ref

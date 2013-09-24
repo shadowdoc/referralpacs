@@ -3,5 +3,5 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 jQuery ->
-	$('.best_in_place').best_in_place
+	$('.best_in_place').best_in_place()
 	$('.autocomplete').autocomplete({ minLength: 2, source: $('#answers').data('concepts')})
