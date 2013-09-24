@@ -1,0 +1,7 @@
+<% new_patient = "" -%>
+<% new_patient = link_to('Create New Patient', :action => :new) if @current_user.privilege.add_patient -%>
+<% error = "#{@response_string} <br/><br/> #{new_patient}".html_safe -%>
+
+$('#patient-list').html('<%= escape_javascript(error) %>');
+
+$('#patient-form')[0].reset();

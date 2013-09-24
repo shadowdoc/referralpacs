@@ -70,12 +70,16 @@ class PatientController < ApplicationController
            @response_string = ""
            
            if OPENMRS_URL_BASE && $openmrs_down
-             @response_string = "Connection with OpenMRS Server <i>#{OPENMRS_SERVER_NAME}</i> is down, please contact the administrator.<br/><br/>"
+             @response_string = "Connection with OpenMRS Server is down, please contact the administrator.<br/><br/>"
            end
            
+           if params[:patient][:mrn_ampath] && !Patient.check_digit(params[:patient][:mrn_ampath])
+              @response_string += "Invalid OpenMRS identifier - check digit failed. <br/><br/>"
+           end
+
            @response_string += "No patients found"
 
-           render "find_error"
+           render "ajax_find_error", :formats => [:js]
 
       else
          

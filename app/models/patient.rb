@@ -164,7 +164,133 @@ class Patient < ActiveRecord::Base
     write_attribute :given_name, given_name.upcase
     write_attribute :mrn_ampath, mrn_ampath.upcase
   end
+
+  def update_via_xml(doc)
+    # This method takes a REXML document and updates a patient object
+
+    old_mrn = self.mrn_ampath
+    # Here is our preference to store the Universal ID
+
+    unless doc.elements["//identifier[@type='AMRS Universal ID']"].nil?
+      self.mrn_ampath = doc.elements["//identifier[@type='AMRS Universal ID']"].text
+    else
+      unless doc.elements["//identifier[@type='AMRS Medical Record Number']"].nil?
+        self.mrn_ampath = doc.elements["//identifier[@type='AMRS Medical Record Number']"].text
+      else
+        self.mrn_ampath = doc.elements["//identifier[@type='ACTG Study ID']"].text
+      end
+    end
+
+    self.given_name = doc.elements["//givenName"].text unless doc.elements["//givenName"].nil?
+    self.middle_name = doc.elements["//middleName"].text unless doc.elements["//middleName"].nil?
+    self.family_name = doc.elements["//familyName"].text unless doc.elements["//familyName"].nil?
+    self.birthdate = DateTime.parse(doc.elements["//@birthdate"].to_s) unless doc.elements["//@birthdate"].nil?
+    self.birthdate_estimated = doc.elements["//@birthdateEstimated"] unless doc.elements["//@birthdateEstimated"].nil?
+    self.address1 = doc.elements["//address1"].text unless doc.elements["//address1"].nil?
+    self.address2 = doc.elements["//address2"].text unless doc.elements["//address2"].nil?
+    self.city_village = doc.elements["//cityVillage"].text unless doc.elements["//cityVillage"].nil?
+    self.state_province = doc.elements["//stateProvince"].text unless doc.elements["//stateProvince"].nil?
+    self.country = doc.elements["//country"].text unless doc.elements["//country"].nil?
+    self.mtrh_rad_id = nil
+    self.openmrs_verified = true
+    self.save!
+
+  end
   
+  def last_location
+    if self.encounters.count == 0 || self.encounters.last.location.nil?
+      return "No encounters"
+    else
+      return self.encounters.last.location.name
+    end
+  end
+
+  def recent_encounters
+    # This returns an array of the last 5 encounters
+    # this method is used in the image display to provide easy access
+    # to prior encounters
+
+    # Pull an array of the comparison exams, sorted by date.
+
+    array = self.encounters.sort! {|x, y| y.date <=> x.date }
+    recent = []
+
+
+    # Only include encounters that have images.
+    array.each do |comp|
+      if !comp.images.empty?
+        recent << comp
+      end
+    end
+
+    # Limit @comparisons to 5
+    recent = recent.to(4).from(1) if recent.length > 5
+
+    recent
+  end
+  
+
+  # This method takes any ID number and runs it through the check digit
+  # algorithm
+  def Patient.check_digit(id_number)
+    # Create a string of valid characters
+    valid_chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVYWXZ_"
+    
+    # Upcase and split our mrn_ampath
+    id_array = id_number.upcase.split("-")
+    
+    id_without_check_digit = id_array[0]
+    check_digit = id_array[1]
+    
+    # setup variables for sum and position tracking
+    sum = 0
+    pos = 0
+    weights = []
+    sums = []
+    
+    id_without_check_digit.reverse.each_char do |digit|
+      # Make sure we only have valid characters
+      if !valid_chars.include? digit
+        return false
+      end
+      
+      digit = digit.ord - 48
+      
+      if (pos % 2 == 0)
+ 
+        # for alternating digits starting with the rightmost, we
+        # use our formula this is the same as multiplying x 2 and
+        # adding digits together for values 0 to 9.  Using the 
+        # following formula allows us to gracefully calculate a
+        # weight for non-numeric "digits" as well (from their 
+        # ASCII value - 48).
+        weight = (2 * digit) - ((digit / 5).to_i * 9);
+ 
+      else
+   
+        # even-positioned digits just contribute their ascii
+        # value minus 48
+        weight = digit;
+   
+      end
+ 
+      # keep a running total of weights
+      sum += weight
+      weights << weight
+      sums << sum
+      
+      # increment the position 
+      pos += 1
+    end
+    
+    # avoid sums less than 10
+    sum = sum.abs + 10
+    
+    check_digit.to_i == ((10 - (sum % 10)) % 10) ? true : false
+
+  end
+
+
   def Patient.search(params)
     # This Class method allows for specific searching of patients based on the several parameters
     # The search returns a list of patients
@@ -320,133 +446,6 @@ class Patient < ActiveRecord::Base
     p2.reload    # This breaks the associations with the already-pulled encounters
     p2.destroy
 
-  end
-  
-  def update_via_xml(doc)
-    # This method takes a REXML document and updates a patient object
-
-    old_mrn = self.mrn_ampath
-    # Here is our preference to store the Universal ID
-
-    unless doc.elements["//identifier[@type='AMRS Universal ID']"].nil?
-      self.mrn_ampath = doc.elements["//identifier[@type='AMRS Universal ID']"].text
-    else
-      unless doc.elements["//identifier[@type='AMRS Medical Record Number']"].nil?
-        self.mrn_ampath = doc.elements["//identifier[@type='AMRS Medical Record Number']"].text
-      else
-        self.mrn_ampath = doc.elements["//identifier[@type='ACTG Study ID']"].text
-      end
-    end
-
-    self.given_name = doc.elements["//givenName"].text unless doc.elements["//givenName"].nil?
-    self.middle_name = doc.elements["//middleName"].text unless doc.elements["//middleName"].nil?
-    self.family_name = doc.elements["//familyName"].text unless doc.elements["//familyName"].nil?
-    self.birthdate = DateTime.parse(doc.elements["//@birthdate"].to_s) unless doc.elements["//@birthdate"].nil?
-    self.birthdate_estimated = doc.elements["//@birthdateEstimated"] unless doc.elements["//@birthdateEstimated"].nil?
-    self.address1 = doc.elements["//address1"].text unless doc.elements["//address1"].nil?
-    self.address2 = doc.elements["//address2"].text unless doc.elements["//address2"].nil?
-    self.city_village = doc.elements["//cityVillage"].text unless doc.elements["//cityVillage"].nil?
-    self.state_province = doc.elements["//stateProvince"].text unless doc.elements["//stateProvince"].nil?
-    self.country = doc.elements["//country"].text unless doc.elements["//country"].nil?
-    self.mtrh_rad_id = nil
-    self.openmrs_verified = true
-    self.save!
-
-  end
-  
-  def validate
-    # Here is where we check the check digit supplied with the AMPATH ID
-    
-    # Create a string of valid characters
-    valid_chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVYWXZ_"
-    
-    
-    # Upcase and split our mrn_ampath
-    id_array = self.mrn_ampath.upcase.split("-")
-    
-    id_without_check_digit = id_array[0]
-    check_digit = id_array[1]
-    
-    # setup variables for sum and position tracking
-    sum = 0
-    pos = 0
-    weights = []
-    sums = []
-    
-    id_without_check_digit.reverse.each_char do |digit|
-      # Make sure we only have valid characters
-      if !valid_chars.include? digit
-        errors.add_to_base "Invalid Character in AMPATH-ID"
-      end
-      
-      digit = digit[0] - 48
-      
-      if (pos % 2 == 0)
- 
-        # for alternating digits starting with the rightmost, we
-        # use our formula this is the same as multiplying x 2 and
-        # adding digits together for values 0 to 9.  Using the 
-        # following formula allows us to gracefully calculate a
-        # weight for non-numeric "digits" as well (from their 
-        # ASCII value - 48).
-        weight = (2 * digit) - ((digit / 5).to_i * 9);
- 
-      else
-   
-        # even-positioned digits just contribute their ascii
-        # value minus 48
-        weight = digit;
-   
-      end
- 
-      # keep a running total of weights
-      sum += weight
-      weights << weight
-      sums << sum
-      
-      # increment the position 
-      pos += 1
-    end
-    
-    # avoid sums less than 10
-    sum = sum.abs + 10
-    
-    if check_digit.to_i != (10 - (sum % 10)) % 10
-      errors.add_to_base "Invalid AMPATH ID, please correct"
-    end
-    
-  end
-  
-  def last_location
-    if self.encounters.count == 0 || self.encounters.last.location.nil?
-      return "No encounters"
-    else
-      return self.encounters.last.location.name
-    end
-  end
-
-  def recent_encounters
-    # This returns an array of the last 5 encounters
-    # this method is used in the image display to provide easy access
-    # to prior encounters
-
-    # Pull an array of the comparison exams, sorted by date.
-
-    array = self.encounters.sort! {|x, y| y.date <=> x.date }
-    recent = []
-
-
-    # Only include encounters that have images.
-    array.each do |comp|
-      if !comp.images.empty?
-        recent << comp
-      end
-    end
-
-    # Limit @comparisons to 5
-    recent = recent.to(4).from(1) if recent.length > 5
-
-    recent
   end
 
 end
