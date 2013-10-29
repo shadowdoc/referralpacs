@@ -211,10 +211,11 @@ class Encounter < ActiveRecord::Base
 
     begin
       result = http.request(req)
+      logger.info "REST SUCCESS - Encounter #{self.id} posted to: #{OPENMRS_URL_BASE} #{result.inspect}"
     rescue
       $openmrs_down = true
-      p "OpenMRS server down"
-      
+      logger.warn "REST FAILURE - Encounter #{self.id} post failed url: #{url} result: #{result.inspect} body: #{result.body}"
+
       # Let's save the message into a folder so they can be queued
       path = Rails.root.join(OPENMRS_HL7_PATH, "queue")
       filename = File.join(path, self.date.strftime("%Y-%m-%d") + "-" + self.id.to_s + ".hl7")
