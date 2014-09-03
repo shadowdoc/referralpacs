@@ -5,28 +5,28 @@ nodules_miliary:
   patient_id:                1
   question_concept_id:       73
   value_concept_id:          77
-  
+
 infiltrate_left:
   id:                        2
   encounter_id:              2
   patient_id:                1
   question_concept_id:       2
   value_concept_id:          67
-  
+
 infiltrate_right:
   id:                        3
   encounter_id:              2
   patient_id:                1
   question_concept_id:       1
   value_concept_id:          66
-  
+
 infiltrate_right:
   id:                        3
   encounter_id:              3
   patient_id:                1
   question_concept_id:       1
   value_concept_id:          66
-  
+
 infiltrate_right:
   id:                        3
   encounter_id:              4

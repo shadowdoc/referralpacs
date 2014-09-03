@@ -2,43 +2,43 @@
 
 admin:
   id:              1
-  given_name:      Marc
-  family_name:     Kohli
-  email:           mkohli@iupui.edu
+  given_name:      First
+  family_name:     Provider
+  email:           admin
   hashed_password: <%= User.hash_password('password') %>
   privilege_id:    1
   type:            Provider
   title:           MD
 other_admin:
   id:              2
-  given_name:      John
-  family_name:     Bradshaw
-  email:           johnkbradshaw@yahoo.com
+  given_name:      Super
+  family_name:     Radiologist
+  email:           super@email.com
   hashed_password: <%= User.hash_password('password') %>
   privilege_id:    1
   type:            Provider
   title:           MD
 client:
   id:              4
-  given_name:      James 
-  family_name:     Madura
-  email:           madura@surgeryrocks.com
+  given_name:      Great
+  family_name:     Surgeon
+  email:           great.surgeon@email.com
   hashed_password: <%= User.hash_password('password') %>
   privilege_id:    2
   type:            Client
   title:           MD
 tech:
   id:              5
-  given_name:      ''
-  family_name:      Soet
-  email:            Soet@email.com
+  given_name:      Radiology
+  family_name:     Technologist
+  email:           radtech@email.com
   hashed_password: <%= User.hash_password('password') %>
   privilege_id:    3
 assistant:
   id:              6
-  given_name:      'Radiology'
-  family_name:     'Assistant'
-  email:           'radassist@mtrh.co.ke'
+  given_name:      Radiology
+  family_name:     Assistant
+  email:           radassist@email.com
   hashed_password: <%= User.hash_password('password') %>
   privilege_id:    5
   type:            Provider

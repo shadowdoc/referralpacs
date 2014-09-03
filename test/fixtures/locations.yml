@@ -3,7 +3,7 @@
 mtrh:
   id: 1
   name: MTRH
-  
+
 mosoriot:
   id: 2
   name: Mosoriot
@@ -15,7 +15,7 @@ turbo:
 iten:
   id: 4
   name: Iten
-  
+
 kabarnet:
   id: 5
   name: Kabarnet

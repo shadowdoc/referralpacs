@@ -2,7 +2,7 @@
 baxter:
   id: 1
   given_name:  BAXTER
-  family_name: KOHLI
+  family_name: THEDOG
   mtrh_rad_id: 12345
   mrn_ampath:  9339MP-4
   tribe_id:    1
@@ -12,7 +12,7 @@ baxter:
 blackstar:
   id: 3
   given_name:  BLACKSTAR
-  family_name: KOHLI
+  family_name: THEDOG
   mtrh_rad_id: 94857
   mrn_ampath:  96874787365-9
   tribe_id:    2
