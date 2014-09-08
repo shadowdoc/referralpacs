@@ -73,7 +73,7 @@ class PatientController < ApplicationController
              @response_string = "Connection with OpenMRS Server is down, please contact the administrator.<br/><br/>"
            end
            
-           if params[:patient][:mrn_ampath] && !Patient.check_digit(params[:patient][:mrn_ampath])
+           if params[:patient][:mrn_ampath] != "" && !Patient.check_digit(params[:patient][:mrn_ampath])
               @response_string += "Invalid OpenMRS identifier - check digit failed. <br/><br/>"
            end
 
