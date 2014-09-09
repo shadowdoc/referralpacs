@@ -369,7 +369,7 @@ class Patient < ActiveRecord::Base
       logger.error("OpenMRS server did not respond url: #{url}")
     end
 
-    if result.code != 200
+    if result.code != "200"
       # Our REST query was unsuccessful
       logger.error("OpenMRS REST Query Failed.  URL: #{url}")
       $openmrs_down = true

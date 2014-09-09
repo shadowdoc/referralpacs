@@ -215,7 +215,7 @@ class Encounter < ActiveRecord::Base
       $openmrs_down = true
     end
 
-    if $openmrs_down || result.code != 200
+    if $openmrs_down || result.code != "200"
       logger.warn "REST FAILURE - Encounter #{self.id} post failed url: #{url}"
 
       # Let's save the message into a folder so they can be queued
