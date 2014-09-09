@@ -214,7 +214,7 @@ class Encounter < ActiveRecord::Base
       logger.info "REST SUCCESS - Encounter #{self.id} posted to: #{OPENMRS_URL_BASE} #{result.inspect}"
     rescue
       $openmrs_down = true
-      logger.warn "REST FAILURE - Encounter #{self.id} post failed url: #{url} result: #{result.inspect} body: #{result.body}"
+      logger.warn "REST FAILURE - Encounter #{self.id} post failed url: #{url}"
 
       # Let's save the message into a folder so they can be queued
       path = Rails.root.join(OPENMRS_HL7_PATH, "queue")
