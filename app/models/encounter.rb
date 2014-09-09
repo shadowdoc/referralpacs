@@ -211,9 +211,11 @@ class Encounter < ActiveRecord::Base
 
     begin
       result = http.request(req)
-      logger.info "REST SUCCESS - Encounter #{self.id} posted to: #{OPENMRS_URL_BASE} #{result.inspect}"
     rescue
       $openmrs_down = true
+    end
+
+    if $openmrs_down || result.code != 200
       logger.warn "REST FAILURE - Encounter #{self.id} post failed url: #{url}"
 
       # Let's save the message into a folder so they can be queued
@@ -223,7 +225,11 @@ class Encounter < ActiveRecord::Base
       tango = File.new(filename, "w+")
       tango.puts(msg.to_s) # string version of the hl7 message
       tango.close
+    else
+      # We have a valid result
+      logger.info "REST SUCCESS - Encounter #{self.id} posted to: #{OPENMRS_URL_BASE} #{result.inspect}"
     end
+
     result
   end
 
