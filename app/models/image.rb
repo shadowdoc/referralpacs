@@ -170,7 +170,11 @@ class Image < ActiveRecord::Base
           file << result.body
         end
       rescue
-        puts "dcm4chee wado request failed - #{url}"
+        failed = true
+      end
+
+      if result.code != "200" || failed
+        logger.error("dcm4chee wado request failed - #{url}.  Result: #{result}")
       end
 
     end
