@@ -151,7 +151,7 @@ class Image < ActiveRecord::Base
       write_attribute 'path', short_path
 
       begin
-        result = RestClient::Request.execute(:url => wado_url_base + "&columns=" + THUMB_MAX_SIZE,
+        result = RestClient::Request.execute(:url => wado_url_base + "&columns=" + THUMB_MAX_SIZE.to_s,
                                              :method => :get,
                                              :verify_ssl => OpenSSL::SSL::VERIFY_NONE)
         open(thumb_file, 'wb') do |file|
