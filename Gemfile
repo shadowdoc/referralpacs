@@ -7,7 +7,6 @@ gem 'rails', '3.2.14'
 
 gem 'mysql2'
 
-
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -51,3 +50,6 @@ gem "mini_magick"
 
 # In place editing (used in dictionary)
 gem "best_in_place"
+
+# Makes your life easier than calling NET:HTTP
+gem "rest-client"

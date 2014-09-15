@@ -10,7 +10,7 @@ class Encounter < ActiveRecord::Base
   has_many :observations, :dependent => :delete_all
   has_many :quality_checks
   after_save :send_hl7
-  
+
   attr_protected :created_at, :updated_at
 
   def hl7_message
@@ -164,7 +164,7 @@ class Encounter < ActiveRecord::Base
     pdf.text(impression)
     pdf.move_down(20)
     pdf.text "Reported and Signed by: #{provider.full_name}"
-    
+
     pdf.render
 
   end
@@ -180,7 +180,7 @@ class Encounter < ActiveRecord::Base
       if OPENMRS_HL7_REST
         rest_hl7
       end
-      
+
     end
 
   end
@@ -194,30 +194,18 @@ class Encounter < ActiveRecord::Base
 
     url = OPENMRS_URL_BASE + "hl7/"      # The trailing slash here is critical.
 
-    # Create a URI object from our url string.
-    url = URI.parse(url)
-
-    # Create a request object from our url and attach the authorization data.
-    req = Net::HTTP::Post.new(url.path)
-    req.basic_auth(OPENMRS_USERNAME, OPENMRS_PASSWORD)
-    req.set_form_data({'message' => msg.to_s.gsub(/\n/, "\r"), 'source' => OPENMRS_SENDING_FACILITY})
-    
-    http = Net::HTTP.new(url.host, url.port)
-
-    if OPENMRS_URL_BASE.slice(4,1) == "s"
-      http.use_ssl = true
-    end
-
-
     begin
-      result = http.request(req)
-    rescue
+      result = RestClient::Request.execute(:url => url,
+                                           :user => OPENMRS_USERNAME,
+                                           :password => OPENMRS_PASSWORD,
+                                           :params => {'message' => msg.to_s.gsub(/\n/, "\r"), 'source' => OPENMRS_SENDING_FACILITY},
+                                           :method => :post,
+                                           :verify_ssl => OpenSSL::SSL::VERIFY_NONE)
+
+      logger.info "REST SUCCESS - Encounter #{self.id} posted to: #{OPENMRS_URL_BASE} #{result.inspect}"
+    rescue => e
+      logger.warn "REST FAILURE - Encounter #{self.id} post failed url: #{url} Error: #{e}"
       $openmrs_down = true
-    end
-
-    if $openmrs_down || result.code != "200"
-      logger.warn "REST FAILURE - Encounter #{self.id} post failed url: #{url}"
-
       # Let's save the message into a folder so they can be queued
       path = Rails.root.join(OPENMRS_HL7_PATH, "queue")
       filename = File.join(path, self.date.strftime("%Y-%m-%d") + "-" + self.id.to_s + ".hl7")
@@ -225,9 +213,6 @@ class Encounter < ActiveRecord::Base
       tango = File.new(filename, "w+")
       tango.puts(msg.to_s) # string version of the hl7 message
       tango.close
-    else
-      # We have a valid result
-      logger.info "REST SUCCESS - Encounter #{self.id} posted to: #{OPENMRS_URL_BASE} #{result.inspect}"
     end
 
     result
@@ -336,9 +321,12 @@ class Encounter < ActiveRecord::Base
 
       end
 
+    else # No CXR instances
+      logger.info "No XR instances associated with #{dcm_study.accession_no}"
+
     end
     # return the created encounter
     enc
-  end 
+  end
 
 end

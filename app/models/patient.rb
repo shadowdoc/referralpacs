@@ -1,16 +1,16 @@
 class Patient < ActiveRecord::Base
   has_many :encounters, :dependent => :destroy
   belongs_to :tribe
-  
+
   validates_presence_of :given_name, :family_name
-  validates_uniqueness_of :mtrh_rad_id, :allow_blank => true                          
+  validates_uniqueness_of :mtrh_rad_id, :allow_blank => true
   validates_uniqueness_of :mrn_ampath, :allow_blank => true
-  
+
   before_save :uppercase
-  attr_accessible :mrn_ampath, :given_name, :middle_name, :family_name, :gender, 
-                  :tribe_id, :address1, :address2, :birthdate, :birthdate_estimated, 
+  attr_accessible :mrn_ampath, :given_name, :middle_name, :family_name, :gender,
+                  :tribe_id, :address1, :address2, :birthdate, :birthdate_estimated,
                   :city_village, :state_province, :city_village, :country
-  
+
   #Provide a concatenated name for cleaner display.
   def full_name
 
@@ -23,7 +23,7 @@ class Patient < ActiveRecord::Base
     end
 
   end
-  
+
   def current_age
     dob = self.birthdate
     a = Date.today.year - dob.year
@@ -31,53 +31,53 @@ class Patient < ActiveRecord::Base
     a = a - 1 if b > Date.today
     return a
   end
-  
+
   def hl7_name
     # Create a correctly formatted name for HL7
 
     # Patient Name
-    # Patient^Jonny^Dee^^DR| 
-    #    Family Name (Patient) 
-    #    ^ Given Name (Jonny) 
-    #    ^ Second / Middle Name (Dee) 
-    #    ^ Suffix () 
-    #    ^ Prefix (DR) 
-    
+    # Patient^Jonny^Dee^^DR|
+    #    Family Name (Patient)
+    #    ^ Given Name (Jonny)
+    #    ^ Second / Middle Name (Dee)
+    #    ^ Suffix ()
+    #    ^ Prefix (DR)
+
     # In our system, family_name and given_name are required
     # middle_name is not required, and can be nil
 
     name = dicom_name
     name += "^^"  # We don't use suffixes or prefixes
-   
+
     return name
   end
-  
+
   def dicom_name
     # Create a correctly formatted name for DICOM saves.
-    
+
     name = family_name + "^" + given_name + "^"
     name += middle_name unless middle_name.nil?
     return name
   end
-  
+
   def dicom_birthday
     birthdate.strftime("%Y%m%d")
   end
-  
+
   def hl7_birthday
-    # 20040101000000| 
-    #    Date/Time of Birth (YYYYMMDDHHMMSS) 
+    # 20040101000000|
+    #    Date/Time of Birth (YYYYMMDDHHMMSS)
     #    ^ Degree of Precision (for our purposes Y = estimated, and null = actual)
     if birthdate_estimated
       precision = "Y"
     else
       precision = ""
     end
-    
+
     birthdate.strftime("%Y%m%d%H%M%S") + "^" + precision
-    
+
   end
-  
+
   def hl7_sex
     if self.gender = "Male"
       return "M"
@@ -89,75 +89,75 @@ class Patient < ActiveRecord::Base
       end
     end
   end
-    
+
   def hl7_pid
-    
+
     # Create a new pid object to hold our info
-    pid = HL7::Message::Segment::PID.new    
+    pid = HL7::Message::Segment::PID.new
 
     # Split the AMPATH MRN into it's ID and check digit
     ampath_id, check_digit = mrn_ampath.split("-")
-    
+
     # Patient Id List
-    # 1MT^0^M10| 
-    #    ID Number (1MT) 
-    #    ^ Check Digit (0) 
-    #    ^ Check Digit Scheme (M10) 
-    #    ^ Assigning Authority (hopefully won't have to use.. but if we need multiples) 
+    # 1MT^0^M10|
+    #    ID Number (1MT)
+    #    ^ Check Digit (0)
+    #    ^ Check Digit Scheme (M10)
+    #    ^ Assigning Authority (hopefully won't have to use.. but if we need multiples)
     #    // a ~ would separate multiple occurrences of PIDs
     pid.patient_id_list = mrn_ampath + "^" + check_digit + "^M10^AMRS Universal ID^"
-    
+
     # Patient Name
-    # Patient^Jonny^Dee^^DR| 
-    #    Family Name (Patient) 
-    #    ^ Given Name (Jonny) 
-    #    ^ Second / Middle Name (Dee) 
-    #    ^ Suffix () 
-    #    ^ Prefix (DR) 
-   
+    # Patient^Jonny^Dee^^DR|
+    #    Family Name (Patient)
+    #    ^ Given Name (Jonny)
+    #    ^ Second / Middle Name (Dee)
+    #    ^ Suffix ()
+    #    ^ Prefix (DR)
+
     pid.patient_name = hl7_name
-    
-    # Patient^Momma^Thee^^MS| 
-    #    Mother's Maiden Family Name (Patient) 
-    #    ^ Given Name (Momma) 
-    #    ^ Second / Middle Name (Thee) 
-    #    ^ Suffix () 
+
+    # Patient^Momma^Thee^^MS|
+    #    Mother's Maiden Family Name (Patient)
+    #    ^ Given Name (Momma)
+    #    ^ Second / Middle Name (Thee)
+    #    ^ Suffix ()
     #    ^ Prefix (MS)
     #pid.mothers_maiden_name =
-    
-    # 20040101000000| 
-    #    Date/Time of Birth (YYYYMMDDHHMMSS) 
+
+    # 20040101000000|
+    #    Date/Time of Birth (YYYYMMDDHHMMSS)
     #    ^ Degree of Precision (for our purposes Y = estimated, and null = actual)
-    
+
     #pid.patient_dob = hl7_birthday
     pid.patient_dob = ""
 
-    # M| 
+    # M|
     #    Administrative Sex (M) .. M, F, O, U, A, N possible answers
     # Will set to unknown for now, we don't have good verification to these types.
     #pid.admin_sex = hl7_sex
     #pid.admin_sex = ""
-    
-    # 555 Johnson Road^Apt. 555^Indianapolis^IN^46202^USA| 
-    #    Street Address 
-    #    ^ Other Designation 
-    #    ^ City 
-    #    ^ State 
+
+    # 555 Johnson Road^Apt. 555^Indianapolis^IN^46202^USA|
+    #    Street Address
+    #    ^ Other Designation
+    #    ^ City
+    #    ^ State
     #    ^ Zip
     # We're not using this as we don't often have address information.  We're not the gold standard anyway!
     #pid.address = address1 unless address1.nil? + "^" + address2 unless address2.nil? + "^" + city_village unless city_village.nil? + "^" + state_province unless state_province.nil?
     #pid.address = ""
 
     # The remaining pid fields are unused at the current time.
-    
+
     return pid
 
   end
-  
+
   def birthdate_formatted
     self.birthdate.strftime("%d %b %Y") unless self.birthdate.nil?
   end
-  
+
   def uppercase
     write_attribute :family_name, family_name.upcase
     write_attribute :middle_name, middle_name.upcase unless middle_name.nil?
@@ -196,7 +196,7 @@ class Patient < ActiveRecord::Base
     self.save!
 
   end
-  
+
   def last_location
     if self.encounters.count == 0 || self.encounters.last.location.nil?
       return "No encounters"
@@ -228,64 +228,64 @@ class Patient < ActiveRecord::Base
 
     recent
   end
-  
+
 
   # This method takes any ID number and runs it through the check digit
   # algorithm
   def Patient.check_digit(id_number)
     # Create a string of valid characters
     valid_chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVYWXZ_"
-    
+
     # Upcase and split our mrn_ampath
     id_array = id_number.upcase.split("-")
-    
+
     id_without_check_digit = id_array[0]
     check_digit = id_array[1]
-    
+
     # setup variables for sum and position tracking
     sum = 0
     pos = 0
     weights = []
     sums = []
-    
+
     id_without_check_digit.reverse.each_char do |digit|
       # Make sure we only have valid characters
       if !valid_chars.include? digit
         return false
       end
-      
+
       digit = digit.ord - 48
-      
+
       if (pos % 2 == 0)
- 
+
         # for alternating digits starting with the rightmost, we
         # use our formula this is the same as multiplying x 2 and
-        # adding digits together for values 0 to 9.  Using the 
+        # adding digits together for values 0 to 9.  Using the
         # following formula allows us to gracefully calculate a
-        # weight for non-numeric "digits" as well (from their 
+        # weight for non-numeric "digits" as well (from their
         # ASCII value - 48).
         weight = (2 * digit) - ((digit / 5).to_i * 9);
- 
+
       else
-   
+
         # even-positioned digits just contribute their ascii
         # value minus 48
         weight = digit;
-   
+
       end
- 
+
       # keep a running total of weights
       sum += weight
       weights << weight
       sums << sum
-      
-      # increment the position 
+
+      # increment the position
       pos += 1
     end
-    
+
     # avoid sums less than 10
     sum = sum.abs + 10
-    
+
     check_digit.to_i == ((10 - (sum % 10)) % 10) ? true : false
 
   end
@@ -299,7 +299,7 @@ class Patient < ActiveRecord::Base
 
     # AMPATH mrn is the best identifier, so let's see if we have one of those first
     unless params[:patient][:mrn_ampath] == ""
-            
+
       if OPENMRS_URL_BASE
         # This means we can search for patients using the REST service
         # This method will find new patients, and will also verify existing OpenMRS patients
@@ -308,7 +308,7 @@ class Patient < ActiveRecord::Base
            patients << openmrs_patient
         end
       end
-      
+
     else
       # If we don't have an AMPATH ID, what about a MTRH radiology id?
 
@@ -325,9 +325,9 @@ class Patient < ActiveRecord::Base
     if patients.length == 0 || patients[0].nil?
       patients = nil
     end
-    
+
     return patients
-    
+
   end
 
 
@@ -350,34 +350,21 @@ class Patient < ActiveRecord::Base
 
     url = OPENMRS_URL_BASE + "patient/" + mrn_openmrs
 
-    # Create a URI object from our url string.
-    url = URI.parse(url)
-
-    # Create a request object from our url and attach the authorization data.
-    req = Net::HTTP::Get.new(url.path)
-    req.basic_auth(OPENMRS_USERNAME, OPENMRS_PASSWORD)
-
-    http = Net::HTTP.new(url.host, url.port)
-
-
-    http.use_ssl = true if OPENMRS_URL_BASE.slice(4,1) == "s"
-
     begin
-      result = http.request(req)
-    rescue
+      result = RestClient::Request.execute(:url => url,
+                                           :user => OPENMRS_USERNAME,
+                                           :password => OPENMRS_PASSWORD,
+                                           :method => :get,
+                                           :verify_ssl => OpenSSL::SSL::VERIFY_NONE)
+    rescue => e
       $openmrs_down = true
-    end
-
-    if result.nil? || result.code != "200"
-      # Our REST query was unsuccessful
-      logger.error("OpenMRS REST Query Failed.  URL: #{url}")
-      $openmrs_down = true
+      logger.error("OpenMRS REST Query Failed.  URL: #{url} Error: #{e}")
     end
 
     # Let's see if we got a good result from openmrs
     if !result.nil?  && !$openmrs_down
 
-      doc = REXML::Document.new(result.read_body) if !result.nil?
+      doc = REXML::Document.new(result) if !result.nil?
 
 
       unless doc.nil? || doc.elements["//identifier"].nil?
@@ -422,12 +409,12 @@ class Patient < ActiveRecord::Base
           end
 
         end
-      else
-        # The OpenMRS server doesn't know the patient, let's see if we have a local patient
-        patient = Patient.find_by_mrn_ampath(mrn_openmrs)
       end
+    else
+      # The OpenMRS server is down or doesn't know the patient, let's see if we have a local patient
+      patient = Patient.find_by_mrn_ampath(mrn_openmrs)
     end
-    
+
     return patient
 
   end
