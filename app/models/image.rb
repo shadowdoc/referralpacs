@@ -1,21 +1,21 @@
 class Image < ActiveRecord::Base
 
   attr_accessible :encounter_id, :file_data
-  
+
   belongs_to :encounter
 
   THUMB_MAX_SIZE = '125'
   SMALL_IMAGE_WIDTH = '1250'
-  
+
   after_save :process
   after_destroy :cleanup
-  
+
   def file_data=(file_data)
     @file_data = file_data
     write_attribute 'extension', file_data.original_filename.split('.').last.downcase
     write_attribute 'path', short_path
   end
-    
+
   def rotate(direction)
     image = MiniMagick::Image.open(full_image_file)
     if direction == "right"
@@ -26,7 +26,7 @@ class Image < ActiveRecord::Base
     image.write(full_image_file)
     create_thumbnail
   end
-  
+
   def crop(x1, y1, width, height)
     image = MiniMagick::Image.open(full_image_file)
     image.crop("#{x1}x#{y1}+#{width}+#{height}")
@@ -43,40 +43,40 @@ class Image < ActiveRecord::Base
     old_config_filename = File.join(BASEDIRECTORY, old_short_path, file_root + ".cfg")
 
     create_directory
-    
+
     FileUtils.move(old_image_path, self.full_image_file) if File.exists?(old_image_path)
     FileUtils.move(old_thumb_path, self.thumb_file) if File.exists?(old_thumb_path)
     FileUtils.move(old_dicom_filename, self.dicom_filename) if File.exists?(old_dicom_filename)
     FileUtils.move(old_config_filename, self.config_filename) if File.exists?(old_config_filename)
   end
-  
+
   def filename(suffix = 'full')
     "#{file_root}-#{suffix}.#{self.extension}"
   end
-  
+
   def file_root
     "#{self.encounter.id}-#{self.id}"
   end
-  
+
   def all_versions_path
     allversions = filename('*')
     File.join(short_path, allversions)
   end
-  
+
   def short_path
     unless self.encounter.nil?
       File.join("#{self.encounter.date.year()}", "#{self.encounter.date.month}", "#{self.encounter.date.day}")
     end
   end
-  
+
   def config_filename
     File.join(BASEDIRECTORY, short_path, file_root + ".cfg")
   end
-  
+
   def dicom_filename
     File.join(BASEDIRECTORY, file_root + ".dcm")
   end
-  
+
   def full_image_file
     File.join(BASEDIRECTORY, short_path, filename)
   end
@@ -130,7 +130,7 @@ class Image < ActiveRecord::Base
   end
 
   private
-  
+
   def process
     if @file_data
       # This is an digital camera image uploaded from a browser
@@ -175,13 +175,13 @@ class Image < ActiveRecord::Base
 
     end
   end
-  
+
   def save_fullsize
     File.open(full_image_file, 'wb') do |file|
       file.puts @file_data.read
     end
   end
-  
+
   def create_directory
     FileUtils.mkdir_p File.join(BASEDIRECTORY,short_path)
   end
@@ -190,7 +190,7 @@ class Image < ActiveRecord::Base
     image = resize(SMALL_IMAGE_WIDTH)
     image.write(small_image_file)
   end
-  
+
   def create_thumbnail
     image = resize(THUMB_MAX_SIZE)
     image.write(thumb_file)
@@ -203,17 +203,17 @@ class Image < ActiveRecord::Base
     image.adaptive_resize(width)
     image
   end
-  
+
   def cleanup
     Dir[all_versions_path].each do |filename|
       File.unlink(filename) rescue nil
     end
   end
-  
+
   def create_dicom_config
     # This method creates the configuration file that contains all of the necessary patient
     # demographic data and then runs the external jpg2dcm program to create a dicom image
-    
+
     # Write the configuration file
     patient = self.encounter.patient
     encounter = self.encounter
@@ -222,7 +222,7 @@ class Image < ActiveRecord::Base
 # Patient Module Attributes
 # Patient's Name
 00100010:#{patient.dicom_name}
-# Patient ID 
+# Patient ID
 00100020:#{patient.mrn_ampath}
 # Issuer of Patient ID
 00100021:AMPATH
@@ -263,14 +263,14 @@ class Image < ActiveRecord::Base
     end
   end
 
-  def create_dicom  
-    
+  def create_dicom
+
     begin
       result = %x{ #{$jpg2dcm} -C #{config_filename} #{full_image_file} #{dicom_filename}}
-    rescue 
+    rescue
       raise "Dicom save failed: #{result}"
     end
-    
+
   end
-  
+
 end

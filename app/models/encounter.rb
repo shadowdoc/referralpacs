@@ -10,7 +10,7 @@ class Encounter < ActiveRecord::Base
   has_many :observations, :dependent => :delete_all
   has_many :quality_checks
   after_save :send_hl7
-  
+
   attr_protected :created_at, :updated_at
 
   def hl7_message
@@ -164,7 +164,7 @@ class Encounter < ActiveRecord::Base
     pdf.text(impression)
     pdf.move_down(20)
     pdf.text "Reported and Signed by: #{provider.full_name}"
-    
+
     pdf.render
 
   end
@@ -180,7 +180,7 @@ class Encounter < ActiveRecord::Base
       if OPENMRS_HL7_REST
         rest_hl7
       end
-      
+
     end
 
   end
