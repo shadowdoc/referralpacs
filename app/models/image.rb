@@ -150,27 +150,15 @@ class Image < ActiveRecord::Base
       create_directory
       write_attribute 'path', short_path
 
-      url = wado_url_base + "&columns=#{THUMB_MAX_SIZE}"
-
-      # Create a URI object from our url string.
-      url = URI.parse(url)
-
-      # Create a request object from our url and attach the authorization data.
-      req = Net::HTTP::Get.new(url.path + "?" + url.query)
-
-      http = Net::HTTP.new(url.host, url.port)
-
-      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-      http.use_ssl = true
-
       begin
-        result = http.request(req)
-
+        result = RestClient::Request.execute(:url => wado_url_base + "&columns=" + THUMB_MAX_SIZE,
+                                             :method => :get,
+                                             :verify_ssl => OpenSSL::SSL::VERIFY_NONE)
         open(thumb_file, 'wb') do |file|
           file << result.body
         end
-      rescue
-        puts "dcm4chee wado request failed - #{url}"
+      rescue => e
+        logger.error "dcm4chee wado request failed - #{wado_url_base} Error: #{e}"
       end
 
     end
