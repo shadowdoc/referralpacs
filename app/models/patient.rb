@@ -350,35 +350,21 @@ class Patient < ActiveRecord::Base
 
     url = OPENMRS_URL_BASE + "patient/" + mrn_openmrs
 
-    # Create a URI object from our url string.
-    url = URI.parse(url)
-
-    # Create a request object from our url and attach the authorization data.
-    req = Net::HTTP::Get.new(url.path)
-    req.basic_auth(OPENMRS_USERNAME, OPENMRS_PASSWORD)
-
-    http = Net::HTTP.new(url.host, url.port)
-
-
-    http.use_ssl = true if OPENMRS_URL_BASE.slice(4,1) == "s"
-
     begin
-      result = http.request(req)
-    rescue
+      result = RestClient::Request.execute(:url => url,
+                                           :user => OPENMRS_USERNAME,
+                                           :password => OPENMRS_PASSWORD,
+                                           :method => :get,
+                                           :verify_ssl => OpenSSL::SSL::VERIFY_NONE)
+    rescue => e
       $openmrs_down = true
-      logger.error("OpenMRS server did not respond url: #{url}")
-    end
-
-    if result.code != "200"
-      # Our REST query was unsuccessful
-      logger.error("OpenMRS REST Query Failed.  URL: #{url}")
-      $openmrs_down = true
+      logger.error("OpenMRS REST Query Failed.  URL: #{url} Error: #{e}")
     end
 
     # Let's see if we got a good result from openmrs
     if !result.nil?  && !$openmrs_down
 
-      doc = REXML::Document.new(result.read_body) if !result.nil?
+      doc = REXML::Document.new(result) if !result.nil?
 
 
       unless doc.nil? || doc.elements["//identifier"].nil?
@@ -423,10 +409,10 @@ class Patient < ActiveRecord::Base
           end
 
         end
-      else
-        # The OpenMRS server doesn't know the patient, let's see if we have a local patient
-        patient = Patient.find_by_mrn_ampath(mrn_openmrs)
       end
+    else
+      # The OpenMRS server is down or doesn't know the patient, let's see if we have a local patient
+      patient = Patient.find_by_mrn_ampath(mrn_openmrs)
     end
     
     return patient
