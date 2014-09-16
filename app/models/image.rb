@@ -153,6 +153,7 @@ class Image < ActiveRecord::Base
       begin
         result = RestClient::Request.execute(:url => wado_url_base + "&columns=" + THUMB_MAX_SIZE.to_s,
                                              :method => :get,
+                                             :ssl_version => 'SSLv3',
                                              :verify_ssl => OpenSSL::SSL::VERIFY_NONE)
         open(thumb_file, 'wb') do |file|
           file << result.body
