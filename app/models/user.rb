@@ -10,7 +10,11 @@ class User < ActiveRecord::Base
   before_destroy :dont_destroy_admin
   belongs_to :privilege
 
-  def before_create
+  before_create :create_check_password
+  before_update :check_password
+  after_save :clear_password
+
+  def create_check_password
     if self.password.nil?
       errors.add("Must supply a password")
     else
@@ -18,18 +22,14 @@ class User < ActiveRecord::Base
     end
   end
 
-  def after_create
+  def clear_password
     self.password = nil
   end
 
-  def before_save
+  def check_password
     unless self.password.nil?
       self.hashed_password = User.hash_password(self.password)
     end
-  end
-
-  def after_save
-    self.password = nil
   end
 
   def self.login(email, password)
