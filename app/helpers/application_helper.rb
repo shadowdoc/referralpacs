@@ -58,7 +58,6 @@ module ApplicationHelper
           when "admin"
             @command_list = [find_patients,
                              dictionary,
-                             archived,
                              new,
                              radiologist_to_review,
                              ready_to_print,
@@ -68,13 +67,11 @@ module ApplicationHelper
                              stats]
           when "radiologist"
             @command_list = [find_patients,
-                             archived,
                              new,
                              radiologist_to_review,
                              ready_to_print]
           when "super_radiologist"
             @command_list = [find_patients,
-                             archived,
                              new,
                              radiologist_to_review,
                              quality,
