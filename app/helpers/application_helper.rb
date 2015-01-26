@@ -43,13 +43,13 @@ module ApplicationHelper
         manage_clients = link_to('Manage Clients', :controller => :login, :action => :list_clients)
         admin = link_to('Admin', :controller => :login, :action => :administration)
         stats = link_to('Statistics', :controller => :encounter, :action => :statistics)
-        radiologist_to_review = link_to('For Radiologist Review', :controller => :encounter, :action => :status, :requested_status => "radiologist_to_review")
+        radiologist_to_review = link_to('For Rad Review', :controller => :encounter, :action => :status, :requested_status => "radiologist_to_review")
         new = link_to('New Exams', :controller => :encounter, :action => :status, :requested_status => "new")
         archived = link_to('Archived', :controller => :encounter, :action => :status, :requested_status => "archived")
         quality = link_to('Quality', :controller => :quality, :action => :list)
-        ready_to_print = link_to('Ready for Printing', :controller => :encounter, :action => :status, :requested_status => "ready_for_printing")
+        ready_to_print = link_to('Printing', :controller => :encounter, :action => :status, :requested_status => "ready_for_printing")
         rejected = link_to('Rejected', :controller => :encounter, :action => :status, :requested_status => "rejected")
-
+        logoff = link_to('Log Off', {:controller => :login, :action => :login})
 
         @command_list = []
         
@@ -62,29 +62,34 @@ module ApplicationHelper
                              rejected,
                              quality,
                              admin,
-                             stats]
+                             stats,
+                             logoff]
           when "radiologist"
             @command_list = [find_patients,
                              new,
                              radiologist_to_review,
-                             ready_to_print]
+                             ready_to_print,
+                             logoff]
           when "super_radiologist"
             @command_list = [find_patients,
                              new,
                              radiologist_to_review,
                              quality,
-                             ready_to_print]
+                             ready_to_print,
+                             logoff]
           when "assistant"
             @command_list = [find_patients,
                              new,
                              radiologist_to_review,
-                             ready_to_print]
+                             ready_to_print,
+                             logoff]
           when "tech"
             @command_list = [find_patients,
                              new,
                              radiologist_to_review,
                              ready_to_print,
-                             manage_clients]
+                             manage_clients,
+                             logoff]
           when "client"
             @command_list = [find_patients]
             
