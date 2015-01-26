@@ -1,5 +1,4 @@
 class PatientController < ApplicationController
-  layout "ref"
   before_filter :authorize_login # Make sure an authorized user is logged in.
   before_filter :security, :except => :find
 

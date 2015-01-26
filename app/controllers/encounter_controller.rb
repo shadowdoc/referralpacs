@@ -1,5 +1,4 @@
 class EncounterController < ApplicationController
-  layout "ref"
   before_filter :authorize_login
   before_filter :security, :except => [:find] # make sure to check permission for all except find and show
   

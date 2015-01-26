@@ -1,5 +1,4 @@
 class QualityController < ApplicationController
-  layout "ref"
   before_filter :authorize_login
   before_filter :security
 

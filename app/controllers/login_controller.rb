@@ -1,8 +1,6 @@
 class LoginController < ApplicationController
-
   before_filter :authorize_login, :except => [:login, :logout] # Make sure an authorized user is logged in.
   before_filter :security, :except => [:login, :logout] # Make sure current user can edit user data
-  layout "ref"
 
   protected
   def security

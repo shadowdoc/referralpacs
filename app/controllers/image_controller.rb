@@ -3,8 +3,6 @@ class ImageController < ApplicationController
   before_filter :authorize_login # Make sure a valid user is logged in.
   before_filter :security, :except => :view # Make sure the current user can modify image data
   
-  layout 'ref'
-  
   protected
   def security
     
