@@ -27,7 +27,7 @@ module ApplicationHelper
   def set_current_patient_banner
     
     unless @patient.nil? || @patient.full_name.nil?
-      @current_patient_banner = link_to("#{@patient.given_name} #{@patient.middle_name} #{@patient.family_name}", :controller => :encounter, :action => :find, :id => @patient.id) + " | AMPATH ID: " + @patient.mrn_ampath.to_s + " | Current Age: " + @patient.current_age.to_s + " | OpenMRS Verified: " + @patient.openmrs_verified.to_s
+      @current_patient_banner = link_to("#{@patient.given_name} #{@patient.middle_name} #{@patient.family_name}", :controller => :encounter, :action => :find, :id => @patient.id) + " | AMPATH ID: " + @patient.mrn_ampath.to_s + " | Age: " + @patient.current_age.to_s + " | Verified: " + @patient.openmrs_verified.to_s
     end
     
   end

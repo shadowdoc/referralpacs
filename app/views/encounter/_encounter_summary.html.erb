@@ -3,35 +3,36 @@
 <% @observations = encounter_summary.observations -%>
 
 <!-- Header Row -->
-<div class="row spacer">
-	<div class="col-md-10 lightgrey"> <span class="lead"><%= encounter_summary_header(@encounter) -%></span>
+<div class="col-md-11 well"> 
+	<div class="row">
+		<span class="lead"><%= encounter_summary_header(@encounter) -%></span>
 		<div class="btn-group-sm pull-right" role="group" aria-label="...">
 			<% encounter_links_helper(@encounter).each do |link| -%>
 			<button type="button" class="btn btn-default"> <%= link -%>
 			</button>
 			<% end -%>
 		</div>
-	</div>
-</div> <!-- .row -->
+	</div> <!-- .row -->
+	<!-- Information Row -->
+	<div class="row">
 
-<!-- Information Row -->
-<div class="row">
+		<!-- Thumbnails -->
+		<div class="col-md-2">
+			<%= render :partial => "image/thumbnails",
+			:locals => {:encounter => @encounter } %>
+		</div>
 
-	<!-- Thumbnails -->
-	<div class="col-md-2">
-		<%= render :partial => "image/thumbnails",
-		:locals => {:encounter => @encounter } %>
-	</div>
-
-	<!-- Observations -->
-	<div class="col-md-4">
-		<%= render :partial => "observation_list" %><br/>
-	</div>
+		<!-- Observations -->
+		<div class="col-md-5">
+			<%= render :partial => "observation_list" %><br/>
+		</div>
 
 
-	<!-- Impression -->
-	<div class="col-md-4" id="impression">
-		<h4>Impression</h4> <%= @encounter.impression %>
-	</div>
+		<!-- Impression -->
+		<div class="col-md-4" id="impression">
+			<h4>Impression</h4> <%= @encounter.impression %>
+		</div>
 
-</div> <!-- .row -->
+	</div> <!-- .row -->
+
+</div><!-- .col-md-10 well -->
