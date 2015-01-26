@@ -15,3 +15,6 @@
 @import "calendar";
 @import "jquery.ui.autocomplete";
 @import "concept";
+
+// Required for Bootstrap Top Nav
+body { padding-top: 70px; }

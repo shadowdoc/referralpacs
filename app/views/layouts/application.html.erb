@@ -38,15 +38,15 @@
     </nav>
 
     <div class="container theme-showcase" role="main">
-      <div class="page-header">
-        <h2><%= @current_patient_banner unless @current_patient_banner.nil? %></h2>
-      </div>
 	    <% if flash[:notice] -%>
 	    	<div class="page-header">
 	        	<div id="notice"><%= flash[:notice] %></div>
 	        </div>
 	    <% end -%>
-    <%= yield %>
+	    <% if @current_patient_banner -%>
+			<h3><%= @current_patient_banner %></h3>
+      	<% end -%>
+    	<%= yield %>
 	</div><!--/.container -->
 </body>
 </html>
