@@ -29,6 +29,14 @@ module EncounterHelper
     end
 
   end
+
+  def encounter_summary_header(encounter)
+    string = ""
+    string += @patient.nil? ? encounter.patient.full_name + " : " : ""
+    string += encounter.date.strftime("%d %b %Y") + " : "
+    string += encounter.encounter_type.name
+    return string.html_safe
+  end
   
   #These are the helpers that create the report form.
   

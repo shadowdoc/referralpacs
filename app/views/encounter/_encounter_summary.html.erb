@@ -1,35 +1,37 @@
-<div id="encounter">
-	
-	<!-- Make an @encounter variable for some of the other following views -->
-	<% @encounter = encounter_summary -%>
-	<% @observations = encounter_summary.observations -%>
-	
-    <div id="header">
-        <div id="date_type">
-            <%= encounter_summary.patient.full_name + " : " + encounter_summary.date.strftime("%d %b %Y") + " : " + encounter_summary.encounter_type.name %>
-        </div>
-        <div id="links">
-        	<% encounter_links_helper(encounter_summary) %>
-            <% @links.each do |link| -%>
-			  <%= link %>
+<!-- Make an @encounter variable for some of the other following views -->
+<% @encounter = encounter_summary -%>
+<% @observations = encounter_summary.observations -%>
+
+<!-- Header Row -->
+<div class="row spacer">
+	<div class="col-md-10 lightgrey"> <span class="lead"><%= encounter_summary_header(@encounter) -%></span>
+		<div class="btn-group-sm pull-right" role="group" aria-label="...">
+			<% encounter_links_helper(@encounter).each do |link| -%>
+			<button type="button" class="btn btn-default"> <%= link -%>
+			</button>
 			<% end -%>
-        </div>
-    </div>
-	<div id="thumbnails">
-		&nbsp;
-		<%= render :partial => "image/thumbnails", 
-    		       :locals => {:encounter => encounter_summary } %>
+		</div>
 	</div>
-	<div id="report">
-	    <div id="observation">
-	    	&nbsp;	
-			<%= render :partial => "observation_list" %><br/>
-	    </div>
-		<div id="impression">
-			&nbsp;
-			<h2>Impression: </h2> <%= @encounter.impression %>
-		</div>		
+</div> <!-- .row -->
+
+<!-- Information Row -->
+<div class="row">
+
+	<!-- Thumbnails -->
+	<div class="col-md-2">
+		<%= render :partial => "image/thumbnails",
+		:locals => {:encounter => @encounter } %>
 	</div>
 
-</div>
-<div id="encounter_spacer">&nbsp;</div>
+	<!-- Observations -->
+	<div class="col-md-4">
+		<%= render :partial => "observation_list" %><br/>
+	</div>
+
+
+	<!-- Impression -->
+	<div class="col-md-4" id="impression">
+		<h4>Impression</h4> <%= @encounter.impression %>
+	</div>
+
+</div> <!-- .row -->
