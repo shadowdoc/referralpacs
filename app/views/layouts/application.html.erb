@@ -8,36 +8,45 @@
   <%= csrf_meta_tags %>
 </head>
 
+<% setup_layout -%>
+
 <%= (@onload ? "<body onload='" + @onload + "'>" : "<body>").html_safe  -%>
 
-<% setup_layout -%>
-    <div id="banner">
-        <h1>ReferralPACS - <%= @page_title %></h1>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">ReferralPACS</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+          	<% if session[:user_id] -%>
+	          	<% unless @command_list.nil? -%>
+		          	<% for command in @command_list %>
+		          	    <li class="icon-bar"><%= command %></li>
+		          	<% end -%>
+	          	<% end -%>
+          	<% end -%>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container theme-showcase" role="main">
+      <div class="page-header">
         <h2><%= @current_patient_banner unless @current_patient_banner.nil? %></h2>
-    </div>
-    <div id="user_banner">
-        <% if session[:user_id] -%>
-        <h3>Logged in as: <%= @user.email %> | <%= link_to('Log Off', {:controller => :login, :action => :login}) %> </h3>
-        <% end -%>
-    </div>
-    <div id="command_list">
-        <% if session[:user_id] -%>
-            <% unless @command_list.nil? -%>
-                &nbsp;|&nbsp;
-                <% for command in @command_list %>
-                    <%= command %>&nbsp;|&nbsp;
-                <% end -%>
-            <% end -%>
-        <% end -%>
-    </div>
-    <div id="blankspace">
-    &nbsp;
-    </div>
-    <div id="centercontent">
-        <% if flash[:notice] -%>
-            <div id="notice"><%= flash[:notice] %></div>
-        <% end -%>
-        <%= yield %>
-    </div>
+      </div>
+	    <% if flash[:notice] -%>
+	    	<div class="page-header">
+	        	<div id="notice"><%= flash[:notice] %></div>
+	        </div>
+	    <% end -%>
+    <%= yield %>
+	</div><!--/.container -->
 </body>
 </html>

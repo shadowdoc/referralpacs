@@ -334,11 +334,6 @@ div#canvas {
 	border:1px solid #ddd;
 }
 
-/* Find Patients styles */
-.search-box {
-    width: 200px;
-}
-
 /* Triage styles */
 #buttons {
 	float: left;
