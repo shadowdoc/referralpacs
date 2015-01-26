@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require jquery.purr
 //= require jquery.ui.autocomplete
+//= require bootstrap
 //= require best_in_place
 //= require concept
 //= require ref
