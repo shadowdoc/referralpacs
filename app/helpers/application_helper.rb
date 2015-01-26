@@ -43,7 +43,6 @@ module ApplicationHelper
         manage_clients = link_to('Manage Clients', :controller => :login, :action => :list_clients)
         admin = link_to('Admin', :controller => :login, :action => :administration)
         stats = link_to('Statistics', :controller => :encounter, :action => :statistics)
-        dictionary = link_to('Dictionary', :controller => :concepts, :action => :index)
         radiologist_to_review = link_to('For Radiologist Review', :controller => :encounter, :action => :status, :requested_status => "radiologist_to_review")
         new = link_to('New Exams', :controller => :encounter, :action => :status, :requested_status => "new")
         archived = link_to('Archived', :controller => :encounter, :action => :status, :requested_status => "archived")
@@ -57,7 +56,6 @@ module ApplicationHelper
         case @user.privilege.name
           when "admin"
             @command_list = [find_patients,
-                             dictionary,
                              new,
                              radiologist_to_review,
                              ready_to_print,
