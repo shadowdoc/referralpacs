@@ -11,6 +11,7 @@
 /db/*.sqlite3
 
 # Ignore all logfiles and tempfiles.
+/log
 /log/*.log
 /tmp
 
@@ -34,3 +35,6 @@
 
 # Ignore Capistrano
 Capfile
+
+# Ignore MacOS files
+.DS_Store
