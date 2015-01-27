@@ -1,5 +1,5 @@
 <% @encounter.images.each do |i| -%>
-    <div id="thumbnail-<%= i.id %>" class="thumbnail" >
+    <div id="thumbnail-<%= i.id %>" class="col-md-2 well well-sm" >
     	<% tag = image_tag("/image/thumb/#{i.id}.jpg") -%>
 		<%= case @current_user.privilege.name
 		      when "admin"

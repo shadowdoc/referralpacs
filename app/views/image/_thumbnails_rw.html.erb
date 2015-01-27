@@ -1,16 +1,14 @@
-<div id="thumbnails">
-    <h2>Image Thumbnails</h2>
-    <% @encounter.images.each do |i|%>
-        <div id="thumbnail-<%= i.id %>" class="thumbnail" >
-            <%= link_to(image_tag("/image/thumb/#{i.id}.jpg"), 
-                        {:controller => :encounter, 
-                        :action => :openimages, 
-                        :id => i.encounter.id }, 
-                        :target => '_blank') %><br/>
-            <%= link_to("remove", 
-            	        {:controller => :image, :action => 'remove_image', :id => i}, 
-                        :remote => true) %>&nbsp;
-            <%= link_to('edit', {:controller => :image, :action => "edit_image", :id => i}) %>
-        </div>
-    <% end %>
-</div>
+<h2>Image Thumbnails</h2>
+<% @encounter.images.each do |i|%>
+    <div id="thumbnail-<%= i.id %>" class="col-md-2 well well-sm">
+        <%= link_to(image_tag("/image/thumb/#{i.id}.jpg"),
+                    {:controller => :encounter,
+                    :action => :openimages,
+                    :id => i.encounter.id },
+                    :target => '_blank') %><br/>
+        <%= link_to("remove",
+                    {:controller => :image, :action => 'remove_image', :id => i},
+                    :remote => true) %>&nbsp;
+        <%= link_to('edit', {:controller => :image, :action => "edit_image", :id => i}) %>
+    </div>
+<% end %>
