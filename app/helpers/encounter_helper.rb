@@ -6,16 +6,13 @@ module EncounterHelper
     
     # Only users who can modify encounters should see the details and delete links
     if @current_user.privilege.modify_encounter
-      if !['final', 'ready_for_printing'].index(encounter.status)
-        if @current_user.privilege.name  == "radiologist" || @current_user.privilege.name == "admin" || @current_user.privilege.name == "super_radiologist"
-          @links << link_to('Create Report', :action => 'report', :id => encounter.id)
-        end
-        
-        if @current_user.privilege.name == "assistant"
-          @links << link_to('Triage', :action => 'triage', :id => encounter.id)
-        end
-      
-        @links << link_to('Edit Details', :action => 'details', :id => encounter.id)
+
+      if ["radiologist", "admin", "super_radiologist", "assistant"].include?(@current_user.privilege.name) && encounter.status != "final"
+        @links << link_to('Create Report', {:action => 'report', :id => encounter.id}, :class => "btn btn-default")
+      end
+
+      if !["final", "ready_for_printing"].include?(encounter.status)
+        @links << link_to('Edit Details', {:action => 'details', :id => encounter.id}, :class => "btn btn-default")
       end
       
       # Only show the print link if there is an available report

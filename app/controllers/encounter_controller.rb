@@ -178,13 +178,13 @@ class EncounterController < ApplicationController
       add_quality_check
       
       # If there are no errors, let's send the user back to the worklist
-      # Which would be Radiologist To Review or new for a rad and Triage for an assistant
+      # Which would be Radiologist To Review or New
       
       if @encounter.errors.count == 0 && flash[:notice].nil?
-        if Encounter.where(status: "radiologist_to_review").count == 0
-          redirect_to :action => "status", :requested_status => "new"
-        else
+        if ["radiologist", "admin", "super_radiologist"].include?(@current_user.privilege.name) && Encounter.where(status: "radiologist_to_review").count > 0
           redirect_to :action => "status", :requested_status => "radiologist_to_review"
+        else
+          redirect_to :action => "status", :requested_status => "new"
         end
       else
         redirect_to(:action => "report", :id => @encounter)
@@ -248,38 +248,6 @@ class EncounterController < ApplicationController
     @encounter.save
 
     redirect_to :controller => :encounter, :action => :status, :requested_status => "new"
-  end
-  
-  def triage
-    @encounter = Encounter.find(params[:id])
-
-    if request.get?
-      # Set the encounter status to opened this aims to prevent
-      # two concurrent users reading the same film
-
-      @encounter.status = "opened"
-      @encounter.save!
-    elsif request.post?
-      if params[:commit] == "Normal"
-        @encounter.impression = "Normal"
-        @encounter.status = "ready_for_printing"
-        @encounter.provider = @current_user
-        @encounter.save
-      else
-        @encounter.status = "radiologist_to_review"
-        @encounter.save
-      end
-
-      # This is a private method in this controller
-      # That creates quality checks for encounters.
-      add_quality_check
-
-      redirect_to :action => "status", :requested_status => "new"
-    end
-
-    # The tag_hash needs to be populated in order for the rejection categories to work correctly.
-    @tag_hash = {"pleural_scarring" => {}}
-
   end
 
   private

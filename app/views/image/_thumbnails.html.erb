@@ -1,15 +1,10 @@
 <% @encounter.images.each do |i| -%>
     <div id="thumbnail-<%= i.id %>" class="col-md-2 well well-sm" >
     	<% tag = image_tag("/image/thumb/#{i.id}.jpg") -%>
-		<%= case @current_user.privilege.name
-		      when "admin"
+		<%= if ["radiologist", "admin", "super_radiologist", "assistant"].include?(@current_user.privilege.name)
                 link_to(tag, :controller => "encounter", :action => "report", :id => @encounter.id)
-	          when "radiologist"
-	            link_to(tag, :controller => "encounter", :action => "report", :id => @encounter.id)
-	          when "assistant"
-	            link_to(tag, :controller => "encounter", :action => "triage", :id => @encounter.id)
 	        else
-		      link_to(tag, :controller => "image", :action => "view", :id => i)
+				link_to(tag, :controller => "image", :action => "view", :id => i)
             end %>
     </div>
 <% end -%>

@@ -1,19 +1,70 @@
-<% @encounter.images.each do |image| -%>
-<%= render(:partial => "image_view", :locals => {image: image} ) %>
+<!-- Call the report_images helper to create our image divs -->
+<div class="row">
+<% if @patient.recent_encounters.length > 1 -%>
+	<div class="col-md-5">
+		<h3>Current: <%= @encounter.date.strftime("%d-%m-%y") %></h3>
+		<% @encounter.images.each do |image| -%>
+			<%= render(:partial => "image_view", :locals => {image: image} ) %>
+		<% end -%>
+	</div>
+
+	<!-- load hidden divs with the recent encounters -->
+	<% first_prior = true -%>
+	<% (@patient.recent_encounters - [@encounter]).each_with_index do |prior, index| -%>
+		
+		<!-- Show the first prior, hide the others -->
+		<% if first_prior -%>
+			<div class="col-md-5" id="prior<%=index%>">
+		<% else -%>
+			<div class="col-md-5" id="prior<%=index%>" style="display: none;">
+		<% end -%>
+
+		<h3>Prior: <%= prior.date.strftime("%d-%m-%y") %></h3>
+		<% prior.images.each do |image| -%>
+			<%= render(:partial => "image_view", :locals => {image: image} ) %>
+		<% end -%>
+		<% first_prior = false -%>
+		</div>
+	<% end -%>
+
+	<!-- Create the comparison button list -->
+	<div class="col-md-1">
+		<h3>Priors</h3>
+		<% (@patient.recent_encounters - [@encounter]).each_with_index do |prior,index| -%>
+			<button class="btn btn-default btn-sm select-prior" data-target="#prior<%=index-%>"><%=prior.date.strftime("%d-%m-%y")-%></button>
+		<% end -%>
+	</div>
+
+<% else -%>
+	<div class="col-md-12">
+		<h3>Current: <%= @encounter.date.strftime("%d-%m-%y") %></h3>
+		<% @encounter.images.each do |image| -%>
+			<%= render(:partial => "image_view", :locals => {image: image} ) %>
+		<% end -%>
+	</div>
 <% end -%>
+</div>
+
+<div class="row">
+	<h3>Clinical Summary</h3>
+	<p>Location: <%= @encounter.location.name unless @encounter.location.nil? -%></p>
+	<p>Indication: <%= @encounter.indication unless @encounter.indication.nil? -%></p>
+</div>
 
 <%= form_tag({:action => "report", :id => @encounter.id}) do -%>
-<button type="button" class="btn btn-default toggle-visibility" data-target="#rejection">Reject Encounter</button>
+<!-- Everyone can see the normal button -->
 <%= submit_tag "Normal", {:class => "btn btn-default"} %>
-<button type="button" class="btn btn-default toggle-visibility" data-target="#full-report">Full Report</button>
-<%= button_to_function("Current Study", "imagepopup('#{@encounter.id}', 'image')", :class => "btn btn-default") %>
+
+<!-- Assistants cannot do full reports -->
+<% if @current_user.privilege.name == "assistant" -%>
+	<%= submit_tag "Send to Radiologist", :class => "btn btn-default" %>
+<% else -%>
+	<button type="button" class="btn btn-default toggle-visibility" data-target="#full-report">Full Report</button>
+<% end -%>
+
+<button type="button" class="btn btn-default toggle-visibility" data-target="#rejection">Reject Encounter</button>
 
 <div id="full-report" style="display: none;">
-	<fieldset>
-		<legend>Clinical Summary</legend>
-		<%= text_area_tag "clinical_summary", "Location: #{@encounter.location.name unless @encounter.location.nil?}\nIndication: #{@encounter.indication}", :disabled => "true", :rows => "5", :class => "form-control"  %>
-	</fieldset>
-
 	<div class="row col-md-12">
 		<fieldset>
 			<legend>Lungs</legend>
@@ -169,14 +220,6 @@
 	</div>
 	<%= submit_tag "Finalize Report", {:class => "btn btn-default"} %>
 </div>
-
-<% unless @patient.recent_encounters.length == 0 -%>
-<% @patient.recent_encounters.each do |comp| -%>
-<% unless comp.id == @encounter.id -%>
-<%= button_to_function(comp.date.strftime("%d-%m-%y"), "imagepopup('#{comp.id}', 'comp')", :class => "btn btn-default") %>
-<% end -%>
-<% end -%>
-<% end -%>
 <br/>
 
 <% end -%>
