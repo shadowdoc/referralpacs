@@ -46,7 +46,7 @@ module EncounterHelper
     else
       test = @tag_hash[value_concept] == answer_concept
     end
-    return_string = "<label>" + radio_button_tag(value_concept, answer_concept, test) + answer_concept.humanize + "</label>"
+    return_string = "<label class=\"radio small\">" + radio_button_tag(value_concept, answer_concept, test) + answer_concept.humanize + "</label>"
     return_string.html_safe
   end
   
@@ -62,7 +62,7 @@ module EncounterHelper
     return_string = ""
     
     choices.each do |choice|
-      return_string += "<label>" + check_box_tag(question + "+" + choice, true, @tag_hash[question][choice]) + choice.humanize + "</label>" + "\n"
+      return_string += "<label class=\"checkbox\">" + check_box_tag(question + "+" + choice, true, @tag_hash[question][choice]) + choice.humanize + "</label>" + "\n"
     end
     return_string.html_safe
   end

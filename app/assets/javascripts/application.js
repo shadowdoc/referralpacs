@@ -17,4 +17,5 @@
 //= require bootstrap
 //= require best_in_place
 //= require concept
+//= require encounter
 //= require ref

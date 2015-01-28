@@ -2,37 +2,23 @@
     <% encounter = image.encounter -%>
     <% patient = encounter.patient -%>
     <%= image_tag image.url, :width => "100%" %>
-
 </div>
-<div class="img_container_text">
-    <div class="img_container_header">
-      Study Date: <br/>
-    </div>
-      <%= encounter.date.strftime("%d-%m-%y") %><br/>
-    <div class="img_container_header">
-      Name: <br/>
-    </div>
-      <%= patient.full_name -%><br/>
-    <div class="img_container_header">
-      MRN: <br/>
-    </div>
-      <%= patient.mrn_ampath -%><br/>
+<p class="lead">Study Date: <%= encounter.date.strftime("%d-%m-%y") %> </p>
 
-    <% if encounter.status == "final" || encounter.status == "ready_for_printing" -%>
-      <div class="img_container_header">
-            Observations: <br/>
-      </div>
-      <% encounter.observations.each do |obs| -%>
-         <%= obs.question_concept.name + "-" + obs.value_concept.name %><br/>
-      <% end -%>
-      <div class = "img_container_header">
-        Impression:<br/>
+<% if encounter.status == "final" || encounter.status == "ready_for_printing" -%>
+  <div class="img_container_header">
+        Observations: <br/>
+  </div>
+  <% encounter.observations.each do |obs| -%>
+     <%= obs.question_concept.name + "-" + obs.value_concept.name %><br/>
+  <% end -%>
+  <div class = "img_container_header">
+    Impression:<br/>
 
-      </div>
-      <%= encounter.impression unless encounter.impression.nil? %>
-    <div class="img_container_header">
-      Radiologist: <br/>
-    </div>
-    <%= encounter.provider.full_name %>
-    <% end -%>
+  </div>
+  <%= encounter.impression unless encounter.impression.nil? %>
+<div class="img_container_header">
+  Radiologist: <br/>
 </div>
+<%= encounter.provider.full_name %>
+<% end -%>
