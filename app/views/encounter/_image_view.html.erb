@@ -3,8 +3,6 @@
     <% patient = encounter.patient -%>
     <%= image_tag image.url, :width => "100%" %>
 </div>
-<p class="lead">Study Date: <%= encounter.date.strftime("%d-%m-%y") %> </p>
-
 <% if encounter.status == "final" || encounter.status == "ready_for_printing" -%>
   <div class="img_container_header">
         Observations: <br/>

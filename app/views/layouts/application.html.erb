@@ -46,8 +46,7 @@
 		<% if @current_user.privilege.add_encounter -%>
 		<div class="col-md-2">
 			<h3>
-				<button type="button" class="btn btn-default"><%= link_to('New Encounter', {:action => 'new', :id => @patient.id}) -%>
-				</button>
+				<%= link_to('New Encounter', {:action => 'new', :id => @patient.id}, :class => "btn btn-default") -%>
 			</h3>
 		</div>
 		<% end -%>

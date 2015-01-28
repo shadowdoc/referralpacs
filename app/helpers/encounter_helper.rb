@@ -17,12 +17,12 @@ module EncounterHelper
       
       # Only show the print link if there is an available report
       if encounter.status == "final" || encounter.status == "ready_for_printing"
-        @links << link_to('Print Report', :action => 'pdf_report', :id => encounter.id, :format => :pdf)
+        @links << link_to('Print Report', {:action => 'pdf_report', :id => encounter.id, :format => :pdf}, :class => "btn btn-default")
       end
 
       @links << link_to('Delete', 
                          {:action => 'delete', :id => encounter.id}, 
-                          :confirm => 'This cannot be undone, are you sure?')
+                          :confirm => 'This cannot be undone, are you sure?', :class => "btn btn-default")
     end
 
   end
