@@ -91,10 +91,12 @@ module ApplicationHelper
                              manage_clients,
                              logoff]
           when "client"
-            @command_list = [find_patients]
+            @command_list = [find_patients,
+                             logoff]
             
           else
-            @command_list = [find_patients]
+            @command_list = [find_patients,
+                             logoff]
         end
         
         

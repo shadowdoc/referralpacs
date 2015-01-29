@@ -2,28 +2,30 @@ module EncounterHelper
   
   def encounter_links_helper(encounter)
     # Make sure that we get the appropriate links based on the current user
-    @links = [] 
+    links = [] 
     
     # Only users who can modify encounters should see the details and delete links
     if @current_user.privilege.modify_encounter
 
       if ["radiologist", "admin", "super_radiologist", "assistant"].include?(@current_user.privilege.name) && encounter.status != "final"
-        @links << link_to('Create Report', {:action => 'report', :id => encounter.id}, :class => "btn btn-default")
+        links << link_to('Create Report', {:action => 'report', :id => encounter.id}, :class => "btn btn-default")
       end
 
       if !["final", "ready_for_printing"].include?(encounter.status)
-        @links << link_to('Edit Details', {:action => 'details', :id => encounter.id}, :class => "btn btn-default")
+        links << link_to('Edit Details', {:action => 'details', :id => encounter.id}, :class => "btn btn-default")
       end
       
       # Only show the print link if there is an available report
       if encounter.status == "final" || encounter.status == "ready_for_printing"
-        @links << link_to('Print Report', {:action => 'pdf_report', :id => encounter.id, :format => :pdf}, :class => "btn btn-default")
+        links << link_to('Print Report', {:action => 'pdf_report', :id => encounter.id, :format => :pdf}, :class => "btn btn-default")
       end
 
-      @links << link_to('Delete', 
+      links << link_to('Delete', 
                          {:action => 'delete', :id => encounter.id}, 
                           :confirm => 'This cannot be undone, are you sure?', :class => "btn btn-default")
     end
+
+    return links
 
   end
 

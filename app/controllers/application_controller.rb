@@ -16,6 +16,7 @@ class ApplicationController < ActionController::Base
       flash[:notice] = "Please log in."
       redirect_to :controller => "login", :action => "login"
     end
+    @current_user = set_current_user
   end
   
   def set_current_user

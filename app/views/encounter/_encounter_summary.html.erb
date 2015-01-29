@@ -8,7 +8,7 @@
 		<span class="lead"><%= encounter_summary_header(@encounter) -%></span>
 		<div class="btn-group-sm pull-right" role="group" aria-label="...">
 			<% encounter_links_helper(@encounter).each do |link| -%>
-				<%= link -%>
+				<%= link unless link.nil? -%>
 			<% end -%>
 		</div>
 	</div> <!-- .row -->
@@ -18,7 +18,7 @@
 		<!-- Thumbnails -->
 		<div class="col-md-2">
 			<%= render :partial => "image/thumbnails",
-			:locals => {:encounter => @encounter } %>
+					   :locals => {:encounter => @encounter } %>
 		</div>
 
 		<!-- Observations -->

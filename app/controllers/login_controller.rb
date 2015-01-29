@@ -7,8 +7,6 @@ class LoginController < ApplicationController
     # First we make sure the current user can update user
     # records
 
-    @current_user = User.find(session[:user_id])
-
     unless @current_user.privilege.update_user
       flash[:notice] = "Not enough privilege to manage users"
       redirect_to(:controller => "patient", :action => "find")

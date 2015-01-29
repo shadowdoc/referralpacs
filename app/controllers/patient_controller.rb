@@ -6,9 +6,8 @@ class PatientController < ApplicationController
   def security
     # This method is called before any method that
     # Modifies patient data
-    current_user = User.find(session[:user_id])
     
-    unless current_user.privilege.modify_patient
+    unless @current_user.privilege.modify_patient
       flash[:notice] = "Not enough privilege to modify patients."
       return(redirect_to :action => "find")
     end
