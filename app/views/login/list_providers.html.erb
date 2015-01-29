@@ -1,6 +1,6 @@
 <% @page_title = "User List" -%>
 
-<table>
+<table class="table">
   <% for provider in @all_providers %>
     <tr valign="top" id="<%= cycle("ListLine1", "ListLine0") %>">
       <td><%= provider.full_name %></td>

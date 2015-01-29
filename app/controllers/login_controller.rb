@@ -1,15 +1,11 @@
 class LoginController < ApplicationController
-
   before_filter :authorize_login, :except => [:login, :logout] # Make sure an authorized user is logged in.
   before_filter :security, :except => [:login, :logout] # Make sure current user can edit user data
-  layout "ref"
 
   protected
   def security
     # First we make sure the current user can update user
     # records
-
-    @current_user = User.find(session[:user_id])
 
     unless @current_user.privilege.update_user
       flash[:notice] = "Not enough privilege to manage users"

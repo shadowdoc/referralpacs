@@ -1,5 +1,4 @@
 class ConceptsController < ApplicationController
-  layout 'ref'
 
   def add_answer
     @concept = Concept.find(params[:id])

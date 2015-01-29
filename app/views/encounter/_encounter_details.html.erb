@@ -1,6 +1,6 @@
-<% fillCollections %>
+<% fillCollections -%>
 
-<div id="encounter-detail">
+<div class="col-md-10">
     <h2>Encounter Details</h2>
     <%= form_for :encounter,
                        :url => {:controller => "encounter", :action => "edit", :id => @encounter.id},
@@ -16,11 +16,10 @@
         <%= form.collection_select :client_id, @all_clients, :id, :full_name %>
         <%= submit_tag "Save Changes to Encounter Details" %>    
     <% end -%>
-    <div id="encounter-indicator">&nbsp;</div>
-
-    <% if @encounter.status == "rejected" -%>
-      <% @observations = @encounter.observations -%>
-      <%= render :partial => "observation_list" %>
-      <%= button_to("Study fixed, move to new list", :action => :study_fixed, :id => @encounter.id)  %>
-    <% end -%>
 </div>
+
+<% if @encounter.status == "rejected" -%>
+  <% @observations = @encounter.observations -%>
+  <%= render :partial => "observation_list" %>
+  <%= button_to("Study fixed, move to new list", :action => :study_fixed, :id => @encounter.id)  %>
+<% end -%>

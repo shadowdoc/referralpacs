@@ -1,5 +1,4 @@
 class QualityController < ApplicationController
-  layout "ref"
   before_filter :authorize_login
   before_filter :security
 
@@ -7,7 +6,6 @@ class QualityController < ApplicationController
   def security
     # This method is called before data modifying actions to make sure the user
     # has the ability to modify encounters
-    @current_user = User.find(session[:user_id])
 
     unless @current_user.privilege.quality_control
       flash[:notice] = "No access to Quality Control"

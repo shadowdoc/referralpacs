@@ -1,5 +1,4 @@
 class LocationsController < ApplicationController
-  layout "ref"
 
   # GET /locations
   # GET /locations.xml

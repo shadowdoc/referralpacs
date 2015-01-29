@@ -5,18 +5,20 @@
 
 <%= errors_for(@encounter) %>
 
+<div class="row spacer">
 <%= render :partial => "encounter_details",
            :locals => {:encounter => @encounter,
                        :all_encounter_types => @all_encounter_types} %>
-					   
-<div id="break"><hr/></div>
+</div>
 
-<%= render :partial => "image/thumbnails_rw", 
+<div class="row spacer">
+<%= render :partial => "image/thumbnails_rw",
            :locals => {:encounter => @encounter} %>
-
+</div>
+<div class="row">
 <%= render :partial => "image/upload_image",
            :locals => {:encounter => @encounter} %>
 
-<div id="break">&nbsp;</div>
+</div>
 
 <%= link_to "Return to Encounter list", :action => 'find', :id => @patient %>

@@ -1,19 +1,15 @@
 class ImageController < ApplicationController
   
   before_filter :authorize_login # Make sure a valid user is logged in.
-  before_filter :security, :except => :view # Make sure the current user can modify image data
-  
-  layout 'ref'
+  before_filter :security, :except => [:view, :small, :thumb] # Make sure the current user can modify image data
   
   protected
   def security
-    
-    @current_user = User.find(session[:user_id])
-    
+
     unless @current_user.privilege.modify_encounter
       flash[:notice] = "Not enough privilege to modify images."
       redirect_to :controller => "encounter", :action => "details", :id => params[:encounter_id]
-    end 
+    end
     
   end
 

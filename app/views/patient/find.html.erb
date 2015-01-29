@@ -1,3 +1,27 @@
-<% @page_title = "Find Patients" %>
+<div id="find_patients" class="col-md-11">
+    <%= form_tag('find', {:id => "patient-form", :remote => true, :class => ".form-inline"}) do -%>
 
-<%= render :partial => "find_patients" %>
+      <div class="form-group col-md-2">
+        <label class="sr-only" for="patient_mrn_ampath">MRN AMPATH</label>
+        <%= text_field :patient, 'mrn_ampath', :class => "form-control", :size => "", :placeholder => "MRN AMPATH" -%>
+      </div>
+      <div class="form-group col-md-2">
+        <label class="sr-only" for="patient_mrth_rad_id">MTRH Rad ID</label>
+        <%= text_field :patient, 'mtrh_rad_id', :class => "form-control", :size => "", :placeholder => "MTRH Rad ID" -%>
+      </div>
+      <div class="form-group col-md-2">
+        <label class="sr-only" for="patient_name">Patient Name</label>
+        <%= text_field :patient, 'name', :class => "form-control", :size => "", :placeholder => "Patient Name" -%>
+      </div>
+      <div class="form-group col-md-2">
+        <label class="sr-only" for="encounter_location">Encounter Location</Label>
+        <%= text_field :encounter, 'location', :class => "form-control", :size => "", :placeholder => "Location" -%>
+      </div>
+      <div class="form-group col-md-2">
+        <label class="sr-only" for="encounter_date">Encounter Date</Label>
+        <%= date_field :encounter, 'date', :class => "form-control ", :size => "", :placeholder => "Encounter Date" -%>
+      </div>
+      <%= submit_tag "Go", :class => "btn btn-default col-md-1" %>
+    <% end -%>
+</div>
+<div id="patient-list" class="col-md-11">Fill in the boxes above and click go.</div>

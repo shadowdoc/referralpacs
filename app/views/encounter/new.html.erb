@@ -9,19 +9,20 @@
     <% end %>
   </ul>
 <% end %>
+<div class="row">
+  <%= render :partial => "encounter_details",
+             :locals => {:encounter => @encounter,
+                         :all_encounter_types => @all_encounter_types,
+                         :all_providers => @all_providers,
+                         :patient => @patient } %>
+</div>
+<div class="row">
+  <%= render :partial => "image/thumbnails_rw", 
+             :locals => {:encounter => @encounter} %>
 
-<%= render :partial => "encounter_details",
-           :locals => {:encounter => @encounter,
-                       :all_encounter_types => @all_encounter_types,
-                       :all_providers => @all_providers,
-                       :patient => @patient } %>
-
-<div id="break"><hr></div>
-<%= render :partial => "image/thumbnails_rw", 
-           :locals => {:encounter => @encounter} %>
-
-<%= render :partial => "image/upload_image",
-           :locals => {:encounter => @encounter} %>
-
-<div id="break">&nbsp;</div>
-<%= link_to "Return to Encounter list", :action => 'find', :id => @patient %>
+  <%= render :partial => "image/upload_image",
+             :locals => {:encounter => @encounter} %>
+</div>
+<div class="row">
+  <%= link_to "Return to Encounter list", :action => 'find', :id => @patient %>
+</div>

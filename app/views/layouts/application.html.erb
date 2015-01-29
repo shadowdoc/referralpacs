@@ -1,14 +1,57 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-  <title>Ref</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
+	<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+	<title>ReferralPACS : <%= @page_title %></title>
+	<%= stylesheet_link_tag    "application", :media => "all" %>
+	<%= javascript_include_tag "application" %>
+	<%= csrf_meta_tags %>
 </head>
+
+<% setup_layout -%>
+
 <body>
 
-<%= yield %>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#">ReferralPACS</a>
+		</div>
+		<div id="navbar" class="collapse navbar-collapse">
+			<ul class="nav navbar-nav">
+				<% if session[:user_id] -%>
+					<% unless @command_list.nil? -%>
+						<% for command in @command_list %>
+							<li class="icon-bar"><%= command %></li>
+						<% end -%>
+					<% end -%>
+				<% end -%>
+			</ul>
+		</div><!--/.nav-collapse -->
+	</div>
+</nav>
 
+<div class="container theme-showcase" role="main">
+	<% if flash[:notice] -%>
+	<div class="page-header">
+		<div id="notice"><%= flash[:notice] %></div>
+	</div>
+	<% end -%>
+	<% if @current_patient_banner -%>
+	<div class="row">
+		<div class="col-md-9">
+			<h3><%= @current_patient_banner %></h3>
+		</div>
+		<% if @current_user.privilege.add_encounter -%>
+		<div class="col-md-2">
+			<h3>
+				<%= link_to('New Encounter', {:action => 'new', :id => @patient.id}, :class => "btn btn-default") -%>
+			</h3>
+		</div>
+		<% end -%>
+	</div>
+	<% end -%>
+	<%= yield %>
+</div><!--/.container -->
 </body>
 </html>

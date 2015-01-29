@@ -1,8 +1,1 @@
-<% @page_title = "Encounter List" %>
-
-<div id="new">
-  <%= link_to('New Encounter', {:action => 'new', :id => @patient.id}) if @current_user.privilege.add_encounter %><br/>
-</div>
-
-<%= render :partial => "encounter_summary",
-           :collection => @encounters %>
+<%= render :partial => "encounter_summary", :collection => @encounters %>

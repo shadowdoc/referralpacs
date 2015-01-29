@@ -1,38 +1,21 @@
+
+<% encounter = image.encounter -%>
+<% patient = encounter.patient -%>
+<!-- Button trigger modal -->
+
 <div class="img-container">
-    <% encounter = image.encounter -%>
-    <% patient = encounter.patient -%>
+  <a data-toggle="modal" data-target="#lightbox<%=image.id-%>">
     <%= image_tag image.url, :width => "100%" %>
-
+  </a>
 </div>
-<div class="img_container_text">
-    <div class="img_container_header">
-      Study Date: <br/>
-    </div>
-      <%= encounter.date.strftime("%d-%m-%y") %><br/>
-    <div class="img_container_header">
-      Name: <br/>
-    </div>
-      <%= patient.full_name -%><br/>
-    <div class="img_container_header">
-      MRN: <br/>
-    </div>
-      <%= patient.mrn_ampath -%><br/>
 
-    <% if encounter.status == "final" || encounter.status == "ready_for_printing" -%>
-      <div class="img_container_header">
-            Observations: <br/>
-      </div>
-      <% encounter.observations.each do |obs| -%>
-         <%= obs.question_concept.name + "-" + obs.value_concept.name %><br/>
-      <% end -%>
-      <div class = "img_container_header">
-        Impression:<br/>
-
-      </div>
-      <%= encounter.impression unless encounter.impression.nil? %>
-    <div class="img_container_header">
-      Radiologist: <br/>
-    </div>
-    <%= encounter.provider.full_name %>
-    <% end -%>
-</div>
+<% if encounter.status == "final" || encounter.status == "ready_for_printing" -%>
+  Observations: <br/>
+  <% encounter.observations.each do |obs| -%>
+     <%= obs.question_concept.name + "-" + obs.value_concept.name %><br/>
+  <% end -%>
+    Impression:<br/>
+  <%= encounter.impression unless encounter.impression.nil? %>
+    Radiologist: <br/>
+<%= encounter.provider.full_name %>
+<% end -%>
