@@ -1,4 +1,7 @@
 <% @page_title = "View Image" %>
 <% @patient = @image.encounter.patient %>
 
-<%= render "view" %>
+<div class="img-container">
+    <%= image_tag "/image/view/#{@image.id}.jpg", :width => "100%" %>
+  </div>
+</div>

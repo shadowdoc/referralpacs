@@ -1,4 +1,11 @@
 <% @page_title = "Edit Image" %>
 <% @patient = @image.encounter.patient %>
 
-<%= render :partial => "edit_image" %>
+<div id="full_image">
+  <%= image_tag "/image/view/#{@image.id}.jpg", :id => "refpacs-image" %>
+</div>
+
+<%= link_to("Rotate Left", {:action => :rotate, :direction => "left", :id => @image.id}, :post => true) %>
+<%= link_to("Rotate Right", {:action => :rotate, :direction => "right", :id => @image.id }, :post => true) %>
+<br/><br/>
+<%= link_to("Return to Encounter", {:controller => :encounter, :action => :details, :id => @encounter.id }) %>
