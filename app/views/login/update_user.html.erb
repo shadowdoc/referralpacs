@@ -1,7 +1,4 @@
-<% @page_title = "Edit User" -%>
-
 <%= errors_for(@user) %>
-
 
 <%= form_tag :action => "update_user", :id => @user do -%>
     <%= render_partial 'form_user' %>

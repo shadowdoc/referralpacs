@@ -1,8 +1,7 @@
 <!-- Included to make the banner work correctly -->
 <% @patient = @check.encounter.patient -%>
-<% @page_title = "Quality Review" -%>
-<% @onload = "imagepopup(#{@check.encounter.id})" %>
 
+<%= render :partial => "encounter/image_view", :encounter => @check.encounter %>
 
 <div class="report_form">
   <%= form_tag :action => :review, :id => @check.id do -%>

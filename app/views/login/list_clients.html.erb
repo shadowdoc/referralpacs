@@ -1,3 +1,12 @@
-<% @page_title = "Client List" -%>
+<table class="table">
+  <% for client in @all_clients %>
+    <tr valign="top" id="<%= cycle("ListLine1", "ListLine0") %>">
+      <td><%= client.full_name %></td>
+      <td><%= client.email %></td>
+      <td><%= client.privilege.name %></td>
+      <td><%= link_to(" edit ", :action => :edit_client, :id => client.id) %></td>
+    </tr>
 
-<%= render :partial => "list_clients", :object => @client %>
+  <% end -%>
+</table>
+<%= link_to("Add client", :action => "add_client") %>
