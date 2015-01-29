@@ -1,0 +1,13 @@
+<div id="lightbox<%= image.id %>" class="modal fade"  aria-hidden="true">
+	<div class="modal-content">
+		<div class="modal-title">
+			<%= image.encounter.date.strftime("%d-%m-%y") %>
+		</div>
+		<div class="modal-body">
+			<%= image_tag image.url -%>
+		</div>
+		<div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	    </div>
+	</div>
+</div>
