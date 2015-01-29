@@ -1,3 +1,15 @@
+<!-- Modal for Current Encounter -->
+<% @encounter.images.each do |image| -%>
+	<%= render(:partial => "image_modal", :locals => {image: image}) %>
+<% end -%>
+
+<!-- Modals for Priors -->
+<% (@patient.recent_encounters - [@encounter]).each_with_index do |prior, index| -%>	
+	<% prior.images.each do |image| -%>
+			<%= render(:partial => "image_modal", :locals => {image: image}) %>
+	<% end -%>
+<% end -%>
+
 <!-- Call the report_images helper to create our image divs -->
 <div class="row">
 <% if @patient.recent_encounters.length > 1 -%>
