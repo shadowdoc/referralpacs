@@ -186,20 +186,18 @@ class Encounter < ActiveRecord::Base
   end
 
   def rest_hl7
-    # URL Specification
-    # http://myhost:serverport/openmrs/moduleServlet/restmodule/api/hl7?message=my_hl7_message_string&source=myHl7SourceName
-    # from: http://openmrs.org/wiki/REST_Module
 
-    msg = hl7_message
+    msg = hl7_message.to_s
 
-    url = OPENMRS_URL_BASE + "hl7/"      # The trailing slash here is critical.
+    url = OPENMRS_HL7_URL + "/hl7/" # The trailing slash here is critical.
 
     begin
       result = RestClient::Request.execute(:url => url,
                                            :user => OPENMRS_USERNAME,
                                            :password => OPENMRS_PASSWORD,
-                                           :params => {'message' => msg.to_s.gsub(/\n/, "\r"), 'source' => OPENMRS_SENDING_FACILITY},
+                                           :payload => msg,
                                            :method => :post,
+                                           :headers => {"Content-Type" => 'x-application/hl7-v2+er7'},
                                            :verify_ssl => OpenSSL::SSL::VERIFY_NONE)
 
       logger.info "REST SUCCESS - Encounter #{self.id} posted to: #{OPENMRS_URL_BASE} #{result.inspect}"
