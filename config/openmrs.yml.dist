@@ -1,5 +1,6 @@
 development:
   :url: https://192.168.242.128:8443/amrs/moduleServlet/restmodule/api/patient/
+  :hl7_url: https://localhost:8080/amrs/ws/rest/v1/hl7
   :username: username
   :password: password
   :hl7path: hl7                              # relative to RAILS_ROOT, set to false if you don't want to write to disk
@@ -9,6 +10,7 @@ development:
 
 production:
   :url: https://192.168.242.128:8443/amrs/moduleServlet/restmodule/api/patient/
+  :hl7_url: https://localhost:8080/amrs/ws/rest/v1/hl7
   :username: username
   :password: password
   :hl7path: hl7                              # relative to RAILS_ROOT, set to false if you don't want to write to disk

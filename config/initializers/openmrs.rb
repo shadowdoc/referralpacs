@@ -5,6 +5,7 @@ if (Rails.env.development? || Rails.env.production?) && File.exists?(Rails.root.
 
   settings = settings[Rails.env]
   OPENMRS_URL_BASE = settings[:url]
+  OPENMRS_HL7_URL = settings[:hl7_url]
   OPENMRS_USERNAME = settings[:username]
   OPENMRS_PASSWORD = settings[:password]
   OPENMRS_HL7_PATH = settings[:hl7path]
