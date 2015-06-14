@@ -12,27 +12,43 @@ class ApplicationController < ActionController::Base
   HL7::Message::Segment::OBX.class_eval { add_field(:time, :idx => 14)}
 
   def authorize_login
-    unless session[:user_id] 
+    unless session[:user_id]
       flash[:notice] = "Please log in."
       redirect_to :controller => "login", :action => "login"
     end
     @current_user = set_current_user
   end
-  
+
   def set_current_user
     unless session[:user_id].nil?
       Thread.current['user'] = User.find(session[:user_id])
     end
   end
 
+  def openmrs_rest_get(url)
+
+    begin
+      result = RestClient::Request.execute(:url => url,
+                                           :user => OPENMRS_USERNAME,
+                                           :password => OPENMRS_PASSWORD,
+                                           :method => :get,
+                                           :verify_ssl => OpenSSL::SSL::VERIFY_NONE,
+                                           :headers => {'Accept' => :json})
+    rescue => e
+      $openmrs_down = true
+      logger.error("REST: OpenMRS REST Query Failed.  URL: #{url} Error: #{e}")
+    end
+
+  end
+
   def self.hl7_msh
     # This code was devised to follow the description of an HL7 message listed here:
     # http://openmrs.org/wiki/HL7
-    
+
     # This is the Message Header (MSH segment)
 
     timestamp = Time.now.strftime("%Y%m%d%H%M%S")
-    
+
     HL7::Message::Segment::MSH.class_eval { add_field(:message_profile, :idx => 18) }
     msh = HL7::Message::Segment::MSH.new
     msh.enc_chars = '^~\&'
