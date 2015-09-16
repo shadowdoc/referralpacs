@@ -7,7 +7,7 @@ class Patient < ActiveRecord::Base
   validates_uniqueness_of :mrn_ampath, :allow_blank => true
 
   before_save :uppercase
-  attr_accessible :mrn_ampath, :given_name, :middle_name, :family_name, :gender,
+  attr_accessible :mrn_ampath, :mtrh_rad_id, :given_name, :middle_name, :family_name, :gender,
                   :tribe_id, :address1, :address2, :birthdate, :birthdate_estimated,
                   :city_village, :state_province, :city_village, :country
 
