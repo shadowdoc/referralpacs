@@ -12,13 +12,13 @@ class ApplicationController < ActionController::Base
   HL7::Message::Segment::OBX.class_eval { add_field(:time, :idx => 14)}
 
   def authorize_login
-    unless session[:user_id] 
+    unless session[:user_id]
       flash[:notice] = "Please log in."
       redirect_to :controller => "login", :action => "login"
     end
     @current_user = set_current_user
   end
-  
+
   def set_current_user
     unless session[:user_id].nil?
       Thread.current['user'] = User.find(session[:user_id])
@@ -28,11 +28,11 @@ class ApplicationController < ActionController::Base
   def self.hl7_msh
     # This code was devised to follow the description of an HL7 message listed here:
     # http://openmrs.org/wiki/HL7
-    
+
     # This is the Message Header (MSH segment)
 
     timestamp = Time.now.strftime("%Y%m%d%H%M%S")
-    
+
     HL7::Message::Segment::MSH.class_eval { add_field(:message_profile, :idx => 18) }
     msh = HL7::Message::Segment::MSH.new
     msh.enc_chars = '^~\&'

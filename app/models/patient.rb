@@ -7,7 +7,7 @@ class Patient < ActiveRecord::Base
   validates_uniqueness_of :mrn_ampath, :allow_blank => true
 
   before_save :uppercase
-  attr_accessible :mrn_ampath, :given_name, :middle_name, :family_name, :gender,
+  attr_accessible :mrn_ampath, :mtrh_rad_id, :given_name, :middle_name, :family_name, :gender,
                   :tribe_id, :address1, :address2, :birthdate, :birthdate_estimated,
                   :city_village, :state_province, :city_village, :country
 
@@ -165,32 +165,37 @@ class Patient < ActiveRecord::Base
     write_attribute :mrn_ampath, mrn_ampath.upcase
   end
 
-  def update_via_xml(doc)
-    # This method takes a REXML document and updates a patient object
+  def update_via_json(person)
+    # This method takes a JSON response from OpenMRS and updates a patient object
 
-    old_mrn = self.mrn_ampath
-    # Here is our preference to store the Universal ID
+    logger.debug("Processing JSON message: #{person}")
 
-    unless doc.elements["//identifier[@type='AMRS Universal ID']"].nil?
-      self.mrn_ampath = doc.elements["//identifier[@type='AMRS Universal ID']"].text
-    else
-      unless doc.elements["//identifier[@type='AMRS Medical Record Number']"].nil?
-        self.mrn_ampath = doc.elements["//identifier[@type='AMRS Medical Record Number']"].text
-      else
-        self.mrn_ampath = doc.elements["//identifier[@type='ACTG Study ID']"].text
-      end
+    names = person["preferredName"]["display"].split(" ")
+
+    if names.length == 3
+      self.given_name, self.middle_name, self.family_name = names
     end
 
-    self.given_name = doc.elements["//givenName"].text unless doc.elements["//givenName"].nil?
-    self.middle_name = doc.elements["//middleName"].text unless doc.elements["//middleName"].nil?
-    self.family_name = doc.elements["//familyName"].text unless doc.elements["//familyName"].nil?
-    self.birthdate = DateTime.parse(doc.elements["//@birthdate"].to_s) unless doc.elements["//@birthdate"].nil?
-    self.birthdate_estimated = doc.elements["//@birthdateEstimated"] unless doc.elements["//@birthdateEstimated"].nil?
-    self.address1 = doc.elements["//address1"].text unless doc.elements["//address1"].nil?
-    self.address2 = doc.elements["//address2"].text unless doc.elements["//address2"].nil?
-    self.city_village = doc.elements["//cityVillage"].text unless doc.elements["//cityVillage"].nil?
-    self.state_province = doc.elements["//stateProvince"].text unless doc.elements["//stateProvince"].nil?
-    self.country = doc.elements["//country"].text unless doc.elements["//country"].nil?
+    if names.length == 2
+      self.given_name, self.family_name = names
+    end
+
+    if names.length == 1
+      self.family_name = names[0]
+    end
+
+    self.birthdate = DateTime.parse(person["birthdate"]) unless person["birthdate"].nil?
+
+    self.birthdate_estimated = person["birthdateEstimated"] unless person["birthdateEstimated"].nil?
+
+    # This is going to be tough to parse, and adds limited value to our database
+    # Will leave them out for now.
+
+    # self.address1 =
+    # self.city_village =
+    # self.state_province =
+    # self.country =
+
     self.mtrh_rad_id = nil
     self.openmrs_verified = true
     self.save!
@@ -332,15 +337,12 @@ class Patient < ActiveRecord::Base
 
 
   def Patient.find_openmrs(mrn_openmrs)
-    # It takes an OpenMRS identifier, communicates with the OpenMRS REST interface and then
-    # uses REXML to process the response.
-    #
-    # All of the globals below are set in config/openmrs.conf.rb
+    # All of the globals below are set in config/initializers/openmrs.rb from config/openmrs.yml
 
     # We were given an openmrs identifier, so we have a few tasks
-    # Find a local patient with this mrn
-    # Search the openmrs server for patients with this mrn
-    # Either update the existing patient with the new demographic information OR create a new patient object
+    # - Search the openmrs server for patients with this mrn
+    # - Find a local patient with this mrn, if one exists
+    # - Either update the existing patient with the new demographic information OR create a new patient object
 
     if OPENMRS_URL_BASE.nil?
       # Not integrated with an OpenMRS install.  Find any local patient that belongs to the given identifier
@@ -348,67 +350,110 @@ class Patient < ActiveRecord::Base
       return patient
     end
 
-    url = OPENMRS_URL_BASE + "patient/" + mrn_openmrs
+    url = OPENMRS_URL_BASE + "patient/?q=" + mrn_openmrs
 
     begin
       result = RestClient::Request.execute(:url => url,
                                            :user => OPENMRS_USERNAME,
                                            :password => OPENMRS_PASSWORD,
                                            :method => :get,
-                                           :verify_ssl => OpenSSL::SSL::VERIFY_NONE)
+                                           :verify_ssl => OpenSSL::SSL::VERIFY_NONE,
+                                           :headers => {'Accept' => :json})
     rescue => e
       $openmrs_down = true
-      logger.error("OpenMRS REST Query Failed.  URL: #{url} Error: #{e}")
+      logger.error("REST: OpenMRS REST Query Failed.  URL: #{url} Error: #{e}")
     end
 
-    # Let's see if we got a good result from openmrs
+     # Let's see if we got a good result from openmrs
+
     if !result.nil?  && !$openmrs_down
 
-      doc = REXML::Document.new(result) if !result.nil?
+      doc = JSON.parse(result) if !result.nil?
 
-
-      unless doc.nil? || doc.elements["//identifier"].nil?
+      unless doc.nil? || doc["results"].length == 0
         $openmrs_down = false
 
+        logger.info("REST: Found #{doc["results"].length} results for mrn_ampath #{mrn_openmrs}")
         # Let's see if we have patient objects for one of the following identifiers.
 
-        if doc.elements["//identifier[@type='ACTG Study ID']"]
-          xml_actg_study = doc.elements["//identifier[@type='ACTG Study ID']"].text
-          patient_actg_study = Patient.find_by_mrn_ampath(xml_actg_study)
+        # Will just stick with the first patient returned for now
+        # If we want the actual patient object, need to grab it from the URI provided
+        url = doc["results"][0]["links"][0]["uri"]
+
+        logger.info("REST: Getting patient: #{url}")
+
+        begin
+          result = RestClient::Request.execute(:url => url,
+                                               :user => OPENMRS_USERNAME,
+                                               :password => OPENMRS_PASSWORD,
+                                               :method => :get,
+                                               :verify_ssl => OpenSSL::SSL::VERIFY_NONE,
+                                               :headers => {'Accept' => :json})
+        rescue => e
+          $openmrs_down = true
+          logger.error("REST: OpenMRS REST Query Failed.  URL: #{url} Error: #{e}")
         end
 
-        if doc.elements["//identifier[@type='AMRS Medical Record Number']"]
-          xml_openmrs_mrn = doc.elements["//identifier[@type='AMRS Medical Record Number']"].text
-          patient_old_mrn = Patient.find_by_mrn_ampath(xml_openmrs_mrn)
-        end
+        doc = JSON.parse(result) if !result.nil?
 
-        if doc.elements["//identifier[@type='AMRS Universal ID']"]
-          xml_openmrs_universal_id = doc.elements["//identifier[@type='AMRS Universal ID']"].text
-          patient_universal = Patient.find_by_mrn_ampath(xml_openmrs_universal_id)
-        end
+        unless doc.nil?
+          person = doc["person"]
+          identifiers = doc["identifiers"]
 
-        if patient_universal
-          patient = patient_universal
-        else
-          if patient_old_mrn
-            # Update the patient record with the latest info from openmrs server
-            # Also, this will change the patient's MRN to the Universal ID if it's available.
+          local_patient_hash = {}
+          openmrs_identifiers = {}
 
-            patient = patient_old_mrn
-            patient.update_via_xml(doc)
+          identifiers.each do |i|
+            type, mrn = i["display"].split("=")
+            [type, mrn].each {|str| str.strip!}
+            openmrs_identifiers[type] = mrn
+            logger.info("Finding local patient - searching with OpenMRS identifier Type: #{type}, MRN: #{mrn}")
+            p = Patient.find_by_mrn_ampath(mrn)
+            local_patient_hash[type] = {:patient => p, :mrn => mrn} unless p.nil?
+          end
 
-          else
-            if patient_actg_study
-              patient = patient_actg_study
-              patient.update_via_xml(doc)
+          if local_patient_hash.length == 0
+            # We don't have any local patients that match, so create a new patient
+            patient = Patient.new
+            if openmrs_identifiers.keys.include?(OPENMRS_PREFERRED_IDENTIFIER_TYPE)
+              logger.debug("Available Identifiers: #{openmrs_identifiers.inspect}")
+              patient.mrn_ampath = openmrs_identifiers[OPENMRS_PREFERRED_IDENTIFIER_TYPE]
             else
-              # This is a new patient, so let's create a new patient object
-              patient = Patient.new
-              patient.update_via_xml(doc)
+              patient.mrn_ampath = openmrs_identifiers.first[1]
+            end
+
+            patient.update_via_json(person)
+            return patient
+          end
+
+          # If we find more than one local patient, then we should merge because OpenMRS
+          # has indicated that they are the same person, and is our source of truth
+
+          identifier_types = local_patient_hash.keys
+
+          # Grab the first identifier, that's the patient we will keep in the merge
+          first_identifer_type = identifier_types.shift
+          first_patient = local_patient_hash[first_identifer_type][:patient]
+
+          if local_patient_hash.length > 1
+            identifier_types.each do |key|
+              Patient.merge(first_patient, local_patient_hash[key][:patient])
             end
           end
 
+          # Store the configured identifier as the preferred identifier
+          # This is done because our system includes one identifier, and OpenMRS can have several
+
+          if local_patient_hash.keys.include?(OPENMRS_PREFERRED_IDENTIFIER_TYPE)
+            first_patient.mrn_ampath = local_patient_hash[OPENMRS_PREFERRED_IDENTIFIER_TYPE][:mrn]
+            first_patient.save
+          end
+
+          # Now we update the other demographics based on the other items in the JSON response
+          first_patient.update_via_json(doc)
+
         end
+
       end
     else
       # The OpenMRS server is down or doesn't know the patient, let's see if we have a local patient
@@ -420,8 +465,16 @@ class Patient < ActiveRecord::Base
   end
 
   def Patient.merge(p1,p2)
+
+    if p1 == p2
+      logger.error ("MERGE: Error - cannot merge the same patient object")
+      return
+    end
+
     # This takes two patient objects (p1 and p2) and combines the encounters that
     # belong to p2 into p1 and then deletes the p2 object.
+
+    logger.info ("MERGE: Merging patient #{p2.id}-#{p2.full_name} into #{p1.id}-#{p1.full_name}")
 
     enc2 = p2.encounters
 
