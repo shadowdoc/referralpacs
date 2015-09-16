@@ -25,22 +25,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def openmrs_rest_get(url)
-
-    begin
-      result = RestClient::Request.execute(:url => url,
-                                           :user => OPENMRS_USERNAME,
-                                           :password => OPENMRS_PASSWORD,
-                                           :method => :get,
-                                           :verify_ssl => OpenSSL::SSL::VERIFY_NONE,
-                                           :headers => {'Accept' => :json})
-    rescue => e
-      $openmrs_down = true
-      logger.error("REST: OpenMRS REST Query Failed.  URL: #{url} Error: #{e}")
-    end
-
-  end
-
   def self.hl7_msh
     # This code was devised to follow the description of an HL7 message listed here:
     # http://openmrs.org/wiki/HL7

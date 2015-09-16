@@ -1,0 +1,63 @@
+{
+    "uuid": "9fc0f67d-8472-4e71-8603-6bdc71b8b649",
+    "display": "9339MP-4 - Baxter Kohli",
+    "identifiers": [
+        {
+            "uuid": "2a8dadb6-0fef-40d1-b814-19292fb0793b",
+            "display": "AMRS ID = 9339MP-4",
+            "links": [
+                {
+                    "uri": "http://localhost:8080/openmrs/ws/rest/v1/patient/9fc0f67d-8472-4e71-8603-6bdc71b8b649/identifier/2a8dadb6-0fef-40d1-b814-19292fb0793b",
+                    "rel": "self"
+                }
+            ]
+        }
+    ],
+    "person": {
+        "uuid": "9fc0f67d-8472-4e71-8603-6bdc71b8b649",
+        "display": "Baxter Kohli",
+        "gender": "M",
+        "age": 0,
+        "birthdate": "2015-03-01T00:00:00.000+0000",
+        "birthdateEstimated": false,
+        "dead": false,
+        "deathDate": null,
+        "causeOfDeath": null,
+        "preferredName": {
+            "uuid": "7c3c01da-1850-4738-9f5a-4302a110a000",
+            "display": "Baxter Kohli",
+            "links": [
+                {
+                    "uri": "http://localhost:8080/openmrs/ws/rest/v1/person/9fc0f67d-8472-4e71-8603-6bdc71b8b649/name/7c3c01da-1850-4738-9f5a-4302a110a000",
+                    "rel": "self"
+                }
+            ]
+        },
+        "preferredAddress": null,
+        "attributes": [],
+        "voided": false,
+        "links": [
+            {
+                "uri": "http://localhost:8080/openmrs/ws/rest/v1/person/9fc0f67d-8472-4e71-8603-6bdc71b8b649",
+                "rel": "self"
+            },
+            {
+                "uri": "http://localhost:8080/openmrs/ws/rest/v1/person/9fc0f67d-8472-4e71-8603-6bdc71b8b649?v=full",
+                "rel": "full"
+            }
+        ],
+        "resourceVersion": "1.8"
+    },
+    "voided": false,
+    "links": [
+        {
+            "uri": "http://localhost:8080/openmrs/ws/rest/v1/patient/9fc0f67d-8472-4e71-8603-6bdc71b8b649",
+            "rel": "self"
+        },
+        {
+            "uri": "http://localhost:8080/openmrs/ws/rest/v1/patient/9fc0f67d-8472-4e71-8603-6bdc71b8b649?v=full",
+            "rel": "full"
+        }
+    ],
+    "resourceVersion": "1.8"
+}
