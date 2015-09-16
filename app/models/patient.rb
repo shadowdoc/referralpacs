@@ -202,38 +202,6 @@ class Patient < ActiveRecord::Base
 
   end
 
-  def update_via_xml(doc)
-    # This method takes a REXML document and updates a patient object
-
-    old_mrn = self.mrn_ampath
-    # Here is our preference to store the Universal ID
-
-    unless doc.elements["//identifier[@type='AMRS Universal ID']"].nil?
-      self.mrn_ampath = doc.elements["//identifier[@type='AMRS Universal ID']"].text
-    else
-      unless doc.elements["//identifier[@type='AMRS Medical Record Number']"].nil?
-        self.mrn_ampath = doc.elements["//identifier[@type='AMRS Medical Record Number']"].text
-      else
-        self.mrn_ampath = doc.elements["//identifier[@type='ACTG Study ID']"].text
-      end
-    end
-
-    self.given_name = doc.elements["//givenName"].text unless doc.elements["//givenName"].nil?
-    self.middle_name = doc.elements["//middleName"].text unless doc.elements["//middleName"].nil?
-    self.family_name = doc.elements["//familyName"].text unless doc.elements["//familyName"].nil?
-    self.birthdate = DateTime.parse(doc.elements["//@birthdate"].to_s) unless doc.elements["//@birthdate"].nil?
-    self.birthdate_estimated = doc.elements["//@birthdateEstimated"] unless doc.elements["//@birthdateEstimated"].nil?
-    self.address1 = doc.elements["//address1"].text unless doc.elements["//address1"].nil?
-    self.address2 = doc.elements["//address2"].text unless doc.elements["//address2"].nil?
-    self.city_village = doc.elements["//cityVillage"].text unless doc.elements["//cityVillage"].nil?
-    self.state_province = doc.elements["//stateProvince"].text unless doc.elements["//stateProvince"].nil?
-    self.country = doc.elements["//country"].text unless doc.elements["//country"].nil?
-    self.mtrh_rad_id = nil
-    self.openmrs_verified = true
-    self.save!
-
-  end
-
   def last_location
     if self.encounters.count == 0 || self.encounters.last.location.nil?
       return "No encounters"
