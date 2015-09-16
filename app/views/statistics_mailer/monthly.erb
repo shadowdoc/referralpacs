@@ -1,10 +1,4 @@
-Total Patients: <%= @patients %>
-Number of Final Reports: <%= @stat_hash["final"] %>
-
 New X-rays waiting to be read: <%= @stat_hash["new"] || 0 %>
-Triaged X-rays waiting for radiologist to read: <%= @stat_hash["radiologist_to_read"] || 0 %>
-X-rays waiting for reports to be printed: <%= @stat_hash["ready_for_printing"] || 0%>
-X-rays with demographic problems waiting to be fixed: <%= @stat_hash["rejected"] || 0%>
 
 Studies read over the following time period: <%= @begin_time.strftime("%d-%m-%y") %> to <%= @end_time.strftime("%d-%m-%y") %>
 
@@ -14,3 +8,7 @@ Radiologist: <%= key.full_name %>
 Count: <%= value %>
 	<% end -%>
 <% end -%>
+
+**System Summary**
+Total Patients: <%= @patients %>
+Number of Final Reports: <%= @stat_hash["final"] %>

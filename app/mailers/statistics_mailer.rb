@@ -19,6 +19,7 @@ class StatisticsMailer < ActionMailer::Base
 
     mail(:subject => "ReferralPACS Statistics",
     	 :date => Time.now,
-    	 :to => STATISTICS_EMAIL_LIST)
+    	 :to => STATISTICS_EMAIL_LIST,
+       :content_type => "text/plain")
   end
 end
