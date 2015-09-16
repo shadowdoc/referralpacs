@@ -497,8 +497,16 @@ class Patient < ActiveRecord::Base
   end
 
   def Patient.merge(p1,p2)
+
+    if p1 == p2
+      logger.error ("MERGE: Error - cannot merge the same patient object")
+      return
+    end
+
     # This takes two patient objects (p1 and p2) and combines the encounters that
     # belong to p2 into p1 and then deletes the p2 object.
+
+    logger.info ("MERGE: Merging patient #{p2.id}-#{p2.full_name} into #{p1.id}-#{p1.full_name}")
 
     enc2 = p2.encounters
 
