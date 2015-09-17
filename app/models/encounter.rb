@@ -289,6 +289,18 @@ class Encounter < ActiveRecord::Base
           dcm_study.save
         end
 
+      end  # patient.nil?
+
+
+      # We have used the DICOM referring_physician field to hold the location of the film obtained
+
+
+      dcm_location = dcm_study.ref_physician.tr('^', '')
+
+      location = Location.where("name LIKE ?", dcm_location).first
+
+      if location.nil?
+        location = Location.create(:name => dcm_location)
       end
 
       unless dcm_study.study_status == -1
@@ -298,6 +310,7 @@ class Encounter < ActiveRecord::Base
         enc.indication = "#{dcm_study.study_custom1} #{dcm_study.study_custom2}".strip
         enc.status = "new"
         enc.study_uid = dcm_study.study_iuid
+        enc.location = location
         enc.encounter_type_id = 1 # These are all CXRs
         enc.save!
 
@@ -320,7 +333,7 @@ class Encounter < ActiveRecord::Base
       end
 
     else # No CXR instances
-      logger.info "No XR instances associated with #{dcm_study.accession_no}"
+      logger.info("No XR instances associated with #{dcm_study.accession_no}")
 
     end
     # return the created encounter
