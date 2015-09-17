@@ -450,7 +450,7 @@ class Patient < ActiveRecord::Base
           end
 
           # Now we update the other demographics based on the other items in the JSON response
-          first_patient.update_via_json(doc)
+          first_patient.update_via_json(person)
 
         end
 
