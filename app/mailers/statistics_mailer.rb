@@ -14,7 +14,11 @@ class StatisticsMailer < ActionMailer::Base
     @total = @enc_relation.count
     @normal = @enc_relation.where(impression: "Normal").count
 
-    @active_providers = @enc_relation.includes(:provider).group(:provider).count
+
+    @active_providers = Encounter.includes(:provider)
+                                 .where("updated_at between ? and ?", start_date, end_date)
+                                 .where(status: "final")
+                                 .group(:provider).count
     @active_providers = @active_providers.sort {|a1, a2| a2[1] <=> a1[1]}
 
     @location_hash = @enc_relation.includes(:location).group('location').count
