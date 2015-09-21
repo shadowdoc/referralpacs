@@ -1,5 +1,15 @@
 development:
   :url: http://192.168.31.148:8080/
+  :remote_dicom_port: 11112
+  :remote_dicom_host: localhost
+  :remote_dicom_aet: DCM4CHEE
+  :local_dicom_port: 11111
+  :local_dicom_aet: REFPACS
 
 production:
   :url: http://192.168.31.148:8080/
+  :dicom_port: 11112
+  :dicom_host: localhost
+  :dicom_aet: DCM4CHEE
+  :local_dicom_port: 11111
+  :local_dicom_aet: REFPACS
