@@ -54,3 +54,5 @@ gem "best_in_place"
 
 # Makes your life easier than calling NET:HTTP
 gem "rest-client"
+
+gem "dicom"

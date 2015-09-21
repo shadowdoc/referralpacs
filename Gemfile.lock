@@ -50,6 +50,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
+    dicom (0.9.6)
     domain_name (0.5.23)
       unf (>= 0.0.5, < 1.0.0)
     erubis (2.7.0)
@@ -165,6 +166,7 @@ DEPENDENCIES
   bootstrap-sass (= 3.1.1.0)
   capistrano
   coffee-rails (~> 3.2)
+  dicom
   jquery-rails
   jquery-ui-rails
   mini_magick
