@@ -1,25 +1,42 @@
 class StatisticsMailer < ActionMailer::Base
-  default :from => "mkohli@iu.edu"
+  default :from => "radtrack@iupui.edu"
+  layout "mailer"
 
-  def monthly
-    # This mailing defaults to 1 month of activity.
+  def truck(start_date, end_date)
 
-    recipients = STATISTICS_EMAIL_LIST
-
-    @begin_time = Time.now.midnight - 1.month
-    @end_time = Time.now.midnight
-
-    @patients = Patient.count
+    @start_date = start_date
+    @end_date = end_date
 
     @stat_hash = Encounter.group(:status).count
 
-    @new = Encounter.where(status: "new").count
+    @enc_relation = Encounter.includes(:location).where("date between ? and ?", start_date, end_date).where(status: "final")
 
-    @active_providers = Encounter.includes(:provider).group(:provider).where(:updated_at => @begin_time..@end_time).count
+    @total = @enc_relation.count
+    @normal = @enc_relation.where(impression: "Normal").count
 
-    mail(:subject => "ReferralPACS Statistics",
-    	 :date => Time.now,
-    	 :to => STATISTICS_EMAIL_LIST,
-       :content_type => "text/plain")
+    @active_providers = @enc_relation.includes(:provider).group(:provider).count
+    @active_providers = @active_providers.sort {|a1, a2| a2[1] <=> a1[1]}
+
+    @location_hash = @enc_relation.includes(:location).group('location').count
+
+    @location_hash = @location_hash.sort {|a1, a2| a2[1] <=> a1[1]}
+
+    @obs_hash = Hash.new 0
+
+    obs = Observation.includes(:question_concept, :value_concept)
+                     .joins(:encounter)
+                     .where('encounters.date between ? and ?', start_date, end_date)
+
+    obs.each {|o| @obs_hash[o.question_concept.name + "-" + o.value_concept.name] += 1}
+
+    @obs_hash = @obs_hash.sort {|a1, a2| a2[1] <=> a1[1]}
+
+    mail(:subject => "X-ray Truck Report",
+       :date => Time.now,
+       :to => STATISTICS_EMAIL_LIST,
+       :content_type => "text/html")
+
   end
+
+
 end
