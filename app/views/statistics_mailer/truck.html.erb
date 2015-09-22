@@ -1,0 +1,134 @@
+<tr>
+ <td height="60" valign="top" class="header-cell">
+    X-ray Truck Report  <%= @start_date.strftime("%m-%d-%Y") %> to <%= @end_date.strftime("%m-%d-%Y") %>
+  </td>
+</tr>
+<tr>
+  <td valign="top" class="body-cell">
+    <table cellpadding="0" cellspacing="0" width="100%" bgcolor="#ffffff">
+      <tr>
+        <td>
+          <table cellspacing="0" cellpadding="0" class="card">
+            <tr>
+              <td style="background-color:green; text-align:center; padding:10px; color:white; ">
+                Reports Summary
+              </td>
+            </tr>
+            <tr>
+              <td style="border:1px solid green;">
+                <table cellspacing="0" cellpadding="20" width="100%">
+                  <tr>
+                    <td width="350" class="data-heading">
+                      Final Reports
+                    </td>
+                    <td class="data-value">
+                      <%= @total %>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width="350" class="data-heading">
+                      Waiting for reporting
+                    </td>
+                    <td class="data-value">
+                      <%= @stat_hash["new"] || 0 %>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>&nbsp;</td>
+                  </tr>
+                  <% @active_providers.each do |p, count| -%>
+                    <tr>
+                      <td width="350" class="data-heading">
+                        <%= p.nil? ? "Unknown" : p.full_name %>
+                      </td>
+                      <td class="data-value">
+                        <%= count || 0 %><br/>
+                      </td>
+                    </tr>
+                  <% end -%>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          &nbsp;
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <table cellspacing="0" cellpadding="0" class="card">
+            <tr>
+              <td style="background-color:green; text-align:center; padding:10px; color:white; ">
+                Location Summary
+              </td>
+            </tr>
+            <tr>
+              <td style="border:1px solid green;">
+                <table cellspacing="0" cellpadding="20" width="100%">
+                  <% @location_hash.each do |loc, count| -%>
+                    <tr>
+                      <td width="350" class="data-heading">
+                        <%= loc.nil? ? "Unknown" : loc.name %>
+                      </td>
+                      <td class="data-value">
+                        <%= count || 0 %><br/>
+                      </td>
+                    </tr>
+                  <% end -%>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          &nbsp;
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <table cellspacing="0" cellpadding="0" class="card">
+            <tr>
+              <td style="background-color:green; text-align:center; padding:10px; color:white; ">
+                Observation Summary
+              </td>
+            </tr>
+            <tr>
+              <td style="border:1px solid green;">
+                <table cellspacing="0" cellpadding="20" width="100%">
+                  <tr>
+                    <td width="350" class="data-heading">
+                      Normal
+                    </td>
+                    <td class="data-value">
+                      <%= @normal %>&nbsp;&nbsp;(<%= ((@normal.to_f / @total) * 100).round(2) %>&#37;)
+                    </td>
+                  </tr>
+                  <% @obs_hash.each do |o, count| -%>
+                    <tr>
+                      <td width="350" class="data-heading">
+                        <%= o %>
+                      </td>
+                      <td class="data-value">
+                        <%= count || 0 %>&nbsp;&nbsp;(<%= ((count.to_f / @total) * 100).round(2) %>&#37;)
+                      </td>
+                    </tr>
+                  <% end -%>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+  <td valign="top" class="footer-cell">
+    ReferralPACS<br>
+  </td>
+</tr>
