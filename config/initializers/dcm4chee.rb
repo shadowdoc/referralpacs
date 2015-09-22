@@ -7,14 +7,14 @@ if (Rails.env.development? || Rails.env.production? || Rails.env.staging?) && Fi
 
   settings = settings[Rails.env]
   DCM4CHEE_URL_BASE = settings[:url]
-  DCM4CHEE_REMOTE_PORT = settings[:remote_dicom_port]
-  DCM4CHEE_REMOTE_HOST = settings[:remote_dicom_host]
-  DCM4CHEE_REMOTE_AET = settings[:remote_dicom_aet]
+  REMOTE_DICOM_PORT = settings[:remote_dicom_port]
+  REMOTE_DICOM_HOST = settings[:remote_dicom_host]
+  REMOTE_DICOM_AET = settings[:remote_dicom_aet]
 
-  DICOM_LOCAL_PORT = settings[:local_dicom_port]
-  DICOM_LOCAL_AET = settings[:local_dicom_aet]
+  LOCAL_DICOM_PORT = settings[:local_dicom_port]
+  LOCAL_DICOM_AET = settings[:local_dicom_aet]
 
 else
   DCM4CHEE_URL_BASE = nil
-  DICOM_LOCAL_PORT = nil
+  LOCAL_DICOM_PORT = nil
 end

@@ -295,7 +295,7 @@ class Encounter < ActiveRecord::Base
       # We have used the DICOM referring_physician field to hold the location of the film obtained
 
 
-      dcm_location = dcm_study.ref_physician.tr('^', '')
+      dcm_location = dcm_study.ref_physician
 
       location = Location.where("name LIKE ?", dcm_location).first
 

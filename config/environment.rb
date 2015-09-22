@@ -5,7 +5,7 @@ require File.expand_path('../application', __FILE__)
 Ref::Application.initialize!
 
 
-if DICOM_LOCAL_PORT
-	s = DICOM::DServer.new(DICOM_LOCAL_PORT, :host_ae => DICOM_LOCAL_AET)
+if LOCAL_DICOM_PORT
+	s = DICOM::DServer.new(LOCAL_DICOM_PORT, :host_ae => LOCAL_DICOM_AET)
 	t = Thread.new { s.start_scp("./public/dicom/") }
 end
