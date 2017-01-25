@@ -55,7 +55,8 @@ class Patient < ActiveRecord::Base
   def dicom_name
     # Create a correctly formatted name for DICOM saves.
 
-    name = family_name + "^" + given_name + "^"
+    name = family_name + "^"
+    name += given_name + "^" unless given_name.nil?
     name += middle_name unless middle_name.nil?
     return name
   end
