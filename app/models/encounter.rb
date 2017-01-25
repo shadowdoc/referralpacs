@@ -292,6 +292,10 @@ class Encounter < ActiveRecord::Base
           patient.given_name = p_name_array[1]
         end
 
+        if p_name_array.length = 1
+          patient.family_name = p_name_array[0]
+        end
+
         patient.birthdate = dcm_patient.pat_birthdate
 
         begin
