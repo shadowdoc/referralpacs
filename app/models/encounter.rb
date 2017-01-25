@@ -278,13 +278,18 @@ class Encounter < ActiveRecord::Base
 
         if p_name_array.length == 1
           # Likely that we have two names in the same field due to the new DR reader
-          p_name_array = p_name_array[0].split!(" ")
+          p_name_array = p_name_array[0].split(" ")
         end
 
         if p_name_array.length == 3
           patient.family_name = p_name_array[0]
           patient.given_name = p_name_array[1]
           patient.middle_name =  p_name_array[2]
+        end
+
+        if p_name_array.length == 2
+          patient.family_name = p_name_array[0]
+          patient.given_name = p_name_array[1]
         end
 
         patient.birthdate = dcm_patient.pat_birthdate
