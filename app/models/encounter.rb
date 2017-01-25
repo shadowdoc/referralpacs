@@ -257,9 +257,11 @@ class Encounter < ActiveRecord::Base
     # It recieves a dcm4chee_study object, and then does several actions including
     # finding or creating a new patient.
 
-    # Right now we are only accepting CRs so we will only accept images from that SOP class
+    # Right now we are only accepting CR, and DR so we will only accept images from those SOP classes
 
-    if dcm_study.dcm4chee_series[0].dcm4chee_instances[0].sop_cuid == "1.2.840.10008.5.1.4.1.1.1"
+    sop_classes = ["1.2.840.10008.5.1.4.1.1.1", "1.2.840.10008.5.1.4.1.1.1.1" ]
+
+    if sop_classes.member?(dcm_study.dcm4chee_series[0].dcm4chee_instances[0].sop_cuid)
 
       dcm_patient = dcm_study.dcm4chee_patient
       dcm_mrn = dcm_patient.pat_id
