@@ -129,6 +129,26 @@ class Image < ActiveRecord::Base
     DCM4CHEE_URL_BASE + "wado?requestType=WADO&studyUID=#{self.encounter.study_uid}&seriesUID=#{series.series_iuid}&objectUID=#{self.instance_uid}"
   end
 
+  def wado_thumb
+
+    # We have a wado image.  Let's grab the local thumbnail and save it
+    create_directory
+    write_attribute 'path', short_path
+
+    begin
+      result = RestClient::Request.execute(:url => wado_url_base + "&columns=" + THUMB_MAX_SIZE.to_s,
+                                           :method => :get,
+                                           :ssl_version => 'SSLv3',
+                                           :verify_ssl => OpenSSL::SSL::VERIFY_NONE)
+      open(thumb_file, 'wb') do |file|
+        file << result.body
+      end
+
+    rescue => e
+      logger.error "dcm4chee wado request failed - #{wado_url_base} Error: #{e}"
+    end
+  end
+
   private
 
   def process
@@ -145,25 +165,9 @@ class Image < ActiveRecord::Base
       @file_data = nil
     end
 
-    if wado?
-      # We have a wado image.  Let's grab the local thumbnail and save it
-      create_directory
-      write_attribute 'path', short_path
+    # DICOM object in our storage.  Let's create a local thumbnail
+    wado_thumb if wado?
 
-      begin
-        result = RestClient::Request.execute(:url => wado_url_base + "&columns=" + THUMB_MAX_SIZE.to_s,
-                                             :method => :get,
-                                             :ssl_version => 'SSLv3',
-                                             :verify_ssl => OpenSSL::SSL::VERIFY_NONE)
-        open(thumb_file, 'wb') do |file|
-          file << result.body
-        end
-
-      rescue => e
-        logger.error "dcm4chee wado request failed - #{wado_url_base} Error: #{e}"
-      end
-
-    end
   end
 
   def save_fullsize
