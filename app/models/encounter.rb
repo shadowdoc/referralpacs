@@ -257,9 +257,11 @@ class Encounter < ActiveRecord::Base
     # It recieves a dcm4chee_study object, and then does several actions including
     # finding or creating a new patient.
 
-    # Right now we are only accepting CRs so we will only accept images from that SOP class
+    # Right now we are only accepting CR, and DR so we will only accept images from those SOP classes
 
-    if dcm_study.dcm4chee_series[0].dcm4chee_instances[0].sop_cuid == "1.2.840.10008.5.1.4.1.1.1"
+    sop_classes = ["1.2.840.10008.5.1.4.1.1.1", "1.2.840.10008.5.1.4.1.1.1.1" ]
+
+    if sop_classes.member?(dcm_study.dcm4chee_series[0].dcm4chee_instances[0].sop_cuid)
 
       dcm_patient = dcm_study.dcm4chee_patient
       dcm_mrn = dcm_patient.pat_id
@@ -271,7 +273,29 @@ class Encounter < ActiveRecord::Base
         patient = Patient.new
 
         patient.mrn_ampath = dcm_mrn
-        patient.family_name, patient.given_name, patient.middle_name = dcm_patient.pat_name.split("^") # Standard HL7 names are used in DICOM
+
+        p_name_array = dcm_patient.pat_name.split("^") # Standard HL7 names are used in DICOM
+
+        if p_name_array.length == 1
+          # Likely that we have two names in the same field due to the new DR reader
+          p_name_array = p_name_array[0].split(" ")
+        end
+
+        if p_name_array.length == 3
+          patient.family_name = p_name_array[0]
+          patient.given_name = p_name_array[1]
+          patient.middle_name =  p_name_array[2]
+        end
+
+        if p_name_array.length == 2
+          patient.family_name = p_name_array[0]
+          patient.given_name = p_name_array[1]
+        end
+
+        if p_name_array.length == 1
+          patient.family_name = p_name_array[0]
+        end
+
         patient.birthdate = dcm_patient.pat_birthdate
 
         begin

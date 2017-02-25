@@ -1,5 +1,5 @@
 class StatisticsMailer < ActionMailer::Base
-  default :from => "radtrack@iupui.edu"
+  default :from => STATISTICS_EMAIL_FROM
   layout "mailer"
 
   def truck(start_date, end_date)

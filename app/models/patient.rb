@@ -25,11 +25,14 @@ class Patient < ActiveRecord::Base
   end
 
   def current_age
-    dob = self.birthdate
-    a = Date.today.year - dob.year
-    b = Date.new(Date.today.year, dob.month, dob.day)
-    a = a - 1 if b > Date.today
-    return a
+    if self.birthdate.nil?
+      return "Unknown"
+    else
+      dob = self.birthdate
+      a = Date.today.year - dob.year
+      b = Date.new(Date.today.year, dob.month, dob.day)
+      a = a - 1 if b > Date.today
+    end
   end
 
   def hl7_name
@@ -55,7 +58,8 @@ class Patient < ActiveRecord::Base
   def dicom_name
     # Create a correctly formatted name for DICOM saves.
 
-    name = family_name + "^" + given_name + "^"
+    name = family_name + "^"
+    name += given_name + "^" unless given_name.nil?
     name += middle_name unless middle_name.nil?
     return name
   end

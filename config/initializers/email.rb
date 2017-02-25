@@ -9,6 +9,7 @@ if (Rails.env.development? || Rails.env.production? || Rails.env.staging?)  && F
   email_settings = YAML::load(File.open(Rails.root.join("config/email.yml")))
 
   STATISTICS_EMAIL_LIST = email_settings[Rails.env].delete(:recipients)
+  STATISTICS_EMAIL_FROM = email_settings[Rails.env].delete(:from)
 
   ActionMailer::Base.smtp_settings = email_settings[Rails.env] unless email_settings[Rails.env].nil?
 end
