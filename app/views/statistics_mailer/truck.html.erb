@@ -68,7 +68,9 @@
             <tr>
               <td style="border:1px solid green;">
                 <table cellspacing="0" cellpadding="20" width="100%">
-                  <% @location_hash.each do |loc, count| -%>
+                  
+                  <% if @location_hash.length > 0 -%>
+                    <% @location_hash.each do |loc, count| -%>
                     <tr>
                       <td width="350" class="data-heading">
                         <%= loc.nil? ? "Unknown" : loc.name %>
@@ -77,6 +79,11 @@
                         <%= count || 0 %><br/>
                       </td>
                     </tr>
+                    <% end -%>
+                  <% else -%>
+                    <td width="350" class="data-heading">
+                      No studies uploaded between <%= @start_date.strftime("%m-%d-%Y") %> to <%= @end_date.strftime("%m-%d-%Y") %>
+                    </td>
                   <% end -%>
                 </table>
               </td>
@@ -89,6 +96,8 @@
           &nbsp;
         </td>
       </tr>
+
+      <% if @total > 0 -%>
       <tr>
         <td>
           <table cellspacing="0" cellpadding="0" class="card">
@@ -124,6 +133,7 @@
           </table>
         </td>
       </tr>
+      <% end -%>
     </table>
   </td>
 </tr>

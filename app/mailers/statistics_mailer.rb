@@ -9,7 +9,9 @@ class StatisticsMailer < ActionMailer::Base
 
     @stat_hash = Encounter.group(:status).count
 
-    @enc_relation = Encounter.includes(:location).where("date between ? and ?", start_date, end_date).where(status: "final")
+    @enc_relation = Encounter.includes(:location)
+                             .where("date between ? and ?", start_date, end_date)
+                             .where(status: ["final", "ready_for_printing"])
 
     @total = @enc_relation.count
     @normal = @enc_relation.where(impression: "Normal").count
@@ -17,7 +19,7 @@ class StatisticsMailer < ActionMailer::Base
 
     @active_providers = Encounter.includes(:provider)
                                  .where("updated_at between ? and ?", start_date, end_date)
-                                 .where(status: "final")
+                                 .where(status: ["final", "ready_for_printing"])
                                  .group(:provider).count
     @active_providers = @active_providers.sort {|a1, a2| a2[1] <=> a1[1]}
 
