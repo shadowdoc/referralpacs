@@ -34,8 +34,8 @@ gem 'jquery-ui-rails'
 # gem 'unicorn'
 
 # Deploy with Capistrano
-gem 'capistrano'
-gem 'rvm-capistrano'
+gem 'capistrano', :require => false
+gem 'rvm-capistrano', :require => false
 
 # To use debugger
 # gem 'debugger'

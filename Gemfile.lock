@@ -69,7 +69,7 @@ GEM
       jquery-rails
       railties (>= 3.1.0)
     json (1.8.0)
-    json_pure (1.8.0)
+    json_pure (1.8.6)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -131,8 +131,8 @@ GEM
     ruby-rc4 (0.1.5)
     rubyforge (2.0.4)
       json_pure (>= 1.1.7)
-    rvm-capistrano (1.5.0)
-      capistrano (>= 2.15.4)
+    rvm-capistrano (1.5.6)
+      capistrano (~> 2.15.4)
     sass (3.2.10)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
@@ -178,3 +178,6 @@ DEPENDENCIES
   rvm-capistrano
   sass-rails (~> 3.2)
   uglifier (>= 1.0.3)
+
+BUNDLED WITH
+   1.14.1
