@@ -9,21 +9,16 @@ class StatisticsMailer < ActionMailer::Base
 
     @stat_hash = Encounter.group(:status).count
 
-    @enc_relation = Encounter.includes(:location)
-                             .where("date between ? and ?", start_date, end_date)
-                             .where(status: ["final", "ready_for_printing"])
+    @enc_relation = Encounter.includes(:provider).where("report_date between ? and ?", start_date, end_date)
 
     @total = @enc_relation.count
     @normal = @enc_relation.where(impression: "Normal").count
 
+    @active_providers = @enc_relation.group(:provider).count
 
-    @active_providers = Encounter.includes(:provider)
-                                 .where("updated_at between ? and ?", start_date, end_date)
-                                 .where(status: ["final", "ready_for_printing"])
-                                 .group(:provider).count
     @active_providers = @active_providers.sort {|a1, a2| a2[1] <=> a1[1]}
 
-    @location_hash = @enc_relation.includes(:location).group('location').count
+    @location_hash = Encounter.includes(:location).where("created_at between ? and ?", start_date, end_date).group(:location).count
 
     @location_hash = @location_hash.sort {|a1, a2| a2[1] <=> a1[1]}
 
@@ -31,7 +26,7 @@ class StatisticsMailer < ActionMailer::Base
 
     obs = Observation.includes(:question_concept, :value_concept)
                      .joins(:encounter)
-                     .where('encounters.date between ? and ?', start_date, end_date)
+                     .where('encounters.report_date between ? and ?', start_date, end_date)
 
     obs.each {|o| @obs_hash[o.question_concept.name + "-" + o.value_concept.name] += 1}
 

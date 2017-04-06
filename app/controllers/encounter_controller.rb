@@ -157,7 +157,6 @@ class EncounterController < ApplicationController
     elsif request.post?
       # We have a post request, let's process the record
 
-
       if @encounter.observations.count == 0 && params[:impression] == ""
         flash[:notice] = "A valid report must contain checked observations and an impression"
       else
@@ -168,6 +167,7 @@ class EncounterController < ApplicationController
 
         @encounter.impression = params[:impression]
         @encounter.provider = @current_user
+        @encounter.report_date = Time.now        
         @encounter.status = "ready_for_printing"
         @encounter.save        
       end
