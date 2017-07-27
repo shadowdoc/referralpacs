@@ -1,0 +1,39 @@
+{
+  "id": "<%= e.id -%>",
+  "resourceType": "DiagnosticReport",
+  "text": {
+    "status": "generated",
+    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><%= e.html_report.html_safe -%></div>"
+  },
+  "code": {
+    "coding": [
+      {
+        "system": "https://loinc.org/",
+        "code": "24648-8"
+      }
+    ],
+    "text": "XR Chest PA upright"
+  },
+  "status": "<%= e.status -%>",
+  "issued": "<%= e.report_date -%>",
+  "subject": {
+    "reference": "<%= e.patient.mrn_ampath -%>"
+  },
+  "identifier": [
+    {
+      "use": "usual",
+      "system": "<%= request.protocol + request.host_with_port -%>",
+      "value": "<%= e.id -%>"
+    }
+  ],
+  "category": {
+    "coding": [
+      {
+        "system": "http://hl7.org/fhir/v2/0074",
+        "code": "RAD"
+      }
+    ]
+  },
+  "effectiveDateTime": "<%= e.date -%>",
+  "conclusion": "<%= e.status == "final" || e.status == "ready_for_printing" ? "Impression: " + e.impression : "unreported" -%>"
+}

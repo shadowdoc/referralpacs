@@ -13,6 +13,7 @@ if (Rails.env.development? || Rails.env.production?) && File.exists?(Rails.root.
   OPENMRS_SENDING_FACILITY = settings[:hl7sending_facility]
   OPENMRS_RECV_FACILITY = settings[:hl7recv_facility]
   OPENMRS_PREFERRED_IDENTIFIER_TYPE = settings[:preferred_identifier_type]
+  OPENMRS_JSON_FORMAT = settings[:json_format]
 
   if OPENMRS_HL7_PATH
     FileUtils.mkdir_p(Rails.root.join(OPENMRS_HL7_PATH, "queue"))

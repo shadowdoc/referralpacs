@@ -8,6 +8,7 @@ development:
   :hl7sending_facility: LOCAL                # A matching entry needs to be in the OpenMRS hl7_sources table
   :hl7recv_facility: AMRS
   :preferred_identifier_type: OpenMRS Identification Number
+  :json_format: pretty                       # values are either pretty or min
 
 production:
   :url: https://192.168.242.128:8443/amrs/moduleServlet/restmodule/api/patient/
@@ -19,3 +20,4 @@ production:
   :hl7sending_facility: LOCAL                # A matching entry needs to be in the OpenMRS hl7_sources table
   :hl7recv_facility: AMRS
   :preferred_identifier_type: OpenMRS Identification Number
+  :json_format: min

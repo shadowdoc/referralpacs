@@ -103,6 +103,22 @@ class Encounter < ActiveRecord::Base
     msg  # This returns the fully formed message
   end
 
+  def html_report
+    html = ""
+    if self.status == "final" || self.status == "ready_for_printing"
+      html += "<p>Observations: <br/>"
+      self.observations.each do |obs|
+        html += obs.question_concept.name + "-" + obs.value_concept.name + "<br/>"
+      end
+      html += "</p><p>Impression:<br/>"
+      html += self.impression + "<br/>" unless self.impression.nil?
+      html += "</p><p>Radiologist: <br/>"
+      html += self.provider.full_name + "<br/></p>"
+    else
+      html += "Not yet reported"
+    end
+  end
+
   def pdf_report
     pdf = Prawn::Document.new({:page_size => 'A4',
                               :left_margin => 50,
