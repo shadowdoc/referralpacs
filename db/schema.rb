@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20170406000351) do
+ActiveRecord::Schema.define(:version => 20170831231714) do
 
   create_table "answers", :force => true do |t|
     t.integer "concept_id"
@@ -164,6 +164,9 @@ ActiveRecord::Schema.define(:version => 20170406000351) do
     t.string   "type"
     t.string   "title"
     t.string   "family_name"
+    t.string   "api_key"
   end
+
+  add_index "users", ["api_key"], :name => "index_users_on_api_key"
 
 end

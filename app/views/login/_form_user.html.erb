@@ -19,6 +19,9 @@
 <p><label for="user_privilege_id">Privilege Set</label><br/>
 <%= collection_select('user', 'privilege_id', @all_privileges, :id, :name) %>
 
+<p><label for="user_api_key">API Key</label><br/>
+<%= text_field 'user', 'api_key' %></p>
+
 <!--[eoform:user]-->
 
 <br />

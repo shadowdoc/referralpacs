@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   unloadable
 
   attr_accessor :password
-  attr_accessible :email, :password, :given_name, :family_name, :privilege_id, :title
+  attr_accessible :email, :password, :given_name, :family_name, :privilege_id, :title, :api_key
 
   validates_uniqueness_of :email
   validates_presence_of :email, :family_name, :given_name
