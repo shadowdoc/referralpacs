@@ -9,6 +9,8 @@ development:
   :hl7recv_facility: AMRS
   :preferred_identifier_type: OpenMRS Identification Number
   :json_format: pretty                       # values are either pretty or min
+  :allowed_fhir_ip_network: 0.0.0.0/0      # permitted network mask for FHIR, single netmask supported
+
 
 production:
   :url: https://192.168.242.128:8443/amrs/moduleServlet/restmodule/api/patient/
@@ -21,3 +23,4 @@ production:
   :hl7recv_facility: AMRS
   :preferred_identifier_type: OpenMRS Identification Number
   :json_format: min
+  :allowed_fhir_ip_network: 0.0.0.0/0      # permitted network mask for FHIR, single netmask supported

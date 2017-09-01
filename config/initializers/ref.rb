@@ -7,6 +7,7 @@ require "digest/md5"
 require "net/http"
 require "net/https"
 require 'rexml/document'
+require "ipaddr"
 
 # require 'usermonitor'  # This is a mixin for ActiveRecord that's in /lib
 

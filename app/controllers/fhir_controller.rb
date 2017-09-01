@@ -1,13 +1,20 @@
 class FhirController < ApplicationController
 	layout false
-	before_filter :check_api_key
+	before_filter :check_security
 	after_filter :format_json
 
-	def check_api_key
-		Rails.logger.debug("fhir - called with x-api-key = #{request.headers["x-api-key"]}, searching for user")
+	def check_security
+		ip_addr = IPAddr.new(request.headers["REMOTE_ADDR"])
+		Rails.logger.debug("fhir - call - x-api-key = #{request.headers["x-api-key"]}, ip = #{ip_addr}")
+
+		if !(OPENMRS_ALLOWED_FHIR_IP_NETWORK === ip_addr)
+			Rails.logger.error("fhir - error - security - invalid IP - #{ip_addr}")
+			render :file => "public/401", :formats => [:html], :status => :unauthorized and return
+		end
 
 		@api_user = User.where("api_key = ?", request.headers["x-api-key"]).first
 		if @api_user.nil?
+			Rails.logger.error("fhir - error - security - invalid x-api-key - #{request.headers["x-api-key"]}")
 			render :file => "public/401", :formats => [:html], :status => :unauthorized and return
 		end
 	end
