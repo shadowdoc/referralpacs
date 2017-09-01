@@ -1,10 +1,19 @@
 class FhirController < ApplicationController
 	layout false
-	  after_filter :format_json
+	before_filter :check_api_key
+	after_filter :format_json
 
+	def check_api_key
+		Rails.logger.debug("fhir - called with x-api-key = #{request.headers["x-api-key"]}, searching for user")
+
+		@api_user = User.where("api_key = ?", request.headers["x-api-key"]).first
+		if @api_user.nil?
+			render :file => "public/401", :formats => [:html], :status => :unauthorized and return
+		end
+	end
 
 	def diagnosticreport
-		Rails.logger.info("fhir - search request for openmrs_mrn: #{params[:patient]}")
+		Rails.logger.info("fhir - search request for openmrs_mrn: #{params[:patient]} - user: #{@api_user.email}")
 
 		if params[:patient].nil? && params[:id].nil?
 			# code to return a failure
@@ -33,7 +42,6 @@ class FhirController < ApplicationController
 
 		if @encounters.length > 1
 			render :bundle and return
-			return
 		else
 			render partial: 'diagnosticreport'
 		end
