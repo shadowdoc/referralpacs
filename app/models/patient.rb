@@ -30,7 +30,12 @@ class Patient < ActiveRecord::Base
     else
       dob = self.birthdate
       a = Date.today.year - dob.year
-      b = Date.new(Date.today.year, dob.month, dob.day)
+      d = dob.day
+      m = dob.month
+      if dob.day == 29 && dob.month == 2
+        d = 28
+      end
+      b = Date.new(Date.today.year, m, d)
       a = a - 1 if b > Date.today
     end
   end
