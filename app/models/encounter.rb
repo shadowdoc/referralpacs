@@ -150,7 +150,7 @@ class Encounter < ActiveRecord::Base
     pdf.text "Patient: #{patient.full_name}", :size => 14, :justification => :left
     pdf.text "ID: #{patient.mrn_ampath}"
     pdf.text "X-ray ID #{patient.mtrh_rad_id}"
-    pdf.text "Birthdate: #{patient.birthdate.strftime("%d-%m-%y")}"
+    pdf.text "Birthdate: #{patient.birthdate.strftime("%d-%m-%y") unless patient.birthdate.nil?}"
     pdf.move_down(10)
     pdf.text "Film Date: #{date.strftime("%d-%m-%y")}"
     pdf.text "Report Date: #{updated_at.strftime("%d-%m-%y")}"
