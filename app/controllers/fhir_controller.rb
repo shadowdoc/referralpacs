@@ -50,7 +50,7 @@ class FhirController < ApplicationController
 		if @encounters.length > 1
 			render :bundle and return
 		else
-			render partial: 'diagnosticreport'
+			render partial: 'diagnosticreport', locals: {e: @encounters.first}
 		end
 
 	end
