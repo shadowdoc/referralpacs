@@ -104,7 +104,7 @@ class Encounter < ActiveRecord::Base
   end
 
   def html_report
-    html = ""
+    html = '<div xmlns="http://www.w3.org/1999/xhtml">'
     if self.status == "final" || self.status == "ready_for_printing"
       html += "<p>Observations: <br/>"
       self.observations.each do |obs|
@@ -117,6 +117,7 @@ class Encounter < ActiveRecord::Base
     else
       html += "Not yet reported"
     end
+    html += '</div>'
   end
 
   def pdf_report

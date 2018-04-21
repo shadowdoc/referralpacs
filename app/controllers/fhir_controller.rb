@@ -91,13 +91,14 @@ class FhirController < ApplicationController
 	end
 
 	def format_json
+
+		json = JSON.parse(response.body)
+
 		if OPENMRS_JSON_FORMAT == "pretty"
-			json = JSON.parse(response.body)
 			response.body = JSON.pretty_generate(json)
 		end
 
 		if OPENMRS_JSON_FORMAT == "min"
-			json = JSON.parse(response.body)
 			response.body = json.to_json
 		end
 	end

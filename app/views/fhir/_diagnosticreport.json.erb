@@ -3,7 +3,7 @@
   "resourceType": "DiagnosticReport",
   "text": {
     "status": "generated",
-    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><%= e.html_report.html_safe -%></div>"
+    "div": <%= e.html_report.to_json.html_safe -%>
   },
   "code": {
     "coding": [
