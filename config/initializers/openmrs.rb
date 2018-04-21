@@ -14,7 +14,8 @@ if (Rails.env.development? || Rails.env.production?) && File.exists?(Rails.root.
   OPENMRS_RECV_FACILITY = settings[:hl7recv_facility]
   OPENMRS_PREFERRED_IDENTIFIER_TYPE = settings[:preferred_identifier_type]
   OPENMRS_JSON_FORMAT = settings[:json_format]
-  OPENMRS_ALLOWED_FHIR_IP_NETWORK = IPAddr.new(settings[:allowed_fhir_ip_network])
+  OPENMRS_ALLOWED_FHIR_IP_NETWORK = IPAddr.new(settings[:allowed_fhir_ip_network]) if settings[:allowed_fhir_ip_network]
+
 
   if OPENMRS_HL7_PATH
     FileUtils.mkdir_p(Rails.root.join(OPENMRS_HL7_PATH, "queue"))
