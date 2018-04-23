@@ -35,5 +35,5 @@
     ]
   },
   "effectiveDateTime": "<%= e.date -%>",
-  "conclusion": "<%= e.status == "final" || e.status == "ready_for_printing" ? "Impression: " + e.impression : "unreported" -%>"
+  "conclusion": <%= e.status == "final" || e.status == "ready_for_printing" ? ("Impression: " + e.impression).to_json.html_safe : "unreported".to_json.html_safe -%>
 }
