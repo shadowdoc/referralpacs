@@ -1,0 +1,47 @@
+{
+  "id": "<%= e.id -%>",
+  "resourceType": "ImagingStudy",
+  "text": {
+    "status": "generated",
+    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">ReferralPACS ImagingStudy</div>"
+  },
+  "availability": "ONLINE",
+  "desription": "<%= e.dcm4chee_study.study_desc -%>",
+  "started": "<% e.date -%>",
+  "patient": {
+    "reference": "<%= e.patient.mrn_ampath -%>"
+  },
+  "uid": "urn:oid:<%= e.study_uid -%>",
+  "endpoint": {
+    "identifier": "ReferralPACS",
+    "status": "active",
+    "connectionType": "dicom-wado-uri",
+    "payloadType": "urn:ihe:pcc:xphr:2007",
+    "address": "https://<%= REMOTE_DICOM_HOST -%>:8443/wado?requestType=WADO"
+  },
+  "numberOfSeries": <%= e.dcm4chee_study.num_series -%>,
+  "numberOfInstances": <%= e.dcm4chee_study.num_instances -%>,
+  "series": [
+    <% e.dcm4chee_study.dcm4chee_series.each_with_index do |series, s| -%>
+    {
+      "modality": {
+        "system": "http://dicom.nema.org/medical/dicom/current/output/html/part03.html#sect_C.7.3.1.1",
+        "code": "<%= series.modality -%>"
+      },
+      "uid": "urn:oid:<%= series.series_iuid -%>",
+      "description": "<%= series.series_desc -%>",
+      "numberOfInstances": <%= series.num_instances -%>,
+      "started": "<%= series.pps_start -%>",
+      "instance": [
+        <% series.dcm4chee_instances.each_with_index do |instance, i| -%>
+        {
+          "number": <%= instance.inst_no %>,
+          "uid": "urn:oid:<%= instance.sop_iuid -%>",
+          "sopClass": "<%= instance.sop_cuid-%>"
+        }<%= ',' if i < series.dcm4chee_instances.length - 1 -%>
+        <% end -%>
+      ]
+    }<%= ',' if s < e.dcm4chee_study.dcm4chee_series.length - 1 -%>
+    <% end -%>
+  ]
+}
