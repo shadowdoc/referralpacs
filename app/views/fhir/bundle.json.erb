@@ -6,7 +6,7 @@
         <% @encounters.each_with_index do |e, i| -%>
         {
             "fullUrl": "<%= request.protocol + request.host_with_port -%>/fhir/diagnosticreport/<%=e.id -%>",
-            "resource": <%= render partial: 'diagnosticreport', locals: {e: e} %>
+            "resource": <%= render partial: @resource_type, locals: {e: e} %>
         }<%= ',' if i < (@encounters.length - 1) %>
         <% end -%>
 

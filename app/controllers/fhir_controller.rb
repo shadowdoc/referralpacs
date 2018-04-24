@@ -5,6 +5,18 @@ class FhirController < ApplicationController
 
 	def diagnosticreport
 
+		@resource_type = "diagnosticreport"
+		get_fhir
+
+	end
+
+	def imagingstudy
+
+		@resource_type = "imagingstudy"
+		get_fhir
+	end
+
+	def get_fhir
 		# FHIR diagnostic report interface with limited search support (https://www.hl7.org/fhir/search.html)
 		# currently supported:
 		# - query with a single Encounter ID
@@ -35,7 +47,7 @@ class FhirController < ApplicationController
 		# Searching with patient identifier (OpenMRS ID)
 		if @params_fhir["patient"] && @encounters.nil?
 			Rails.logger.info("fhir - search by OpenMRS ID")
-			patient = Patient.includes(:encounters).find_openmrs(@params_fhir["patient"])
+			patient = Patient.includes(encounters: {dcm4chee_study: {dcm4chee_series: :dcm4chee_instances}}).find_openmrs(@params_fhir["patient"])
 
 			if patient.nil?
 				# No patient returns an empty bundle
@@ -54,7 +66,14 @@ class FhirController < ApplicationController
 
 		if params[:id]
 			Rails.logger.info("fhir - search by Encounter ID")
-			@encounters = [Encounter.find(params[:id])]
+			@encounters = Encounter.includes(dcm4chee_study: {dcm4chee_series: :dcm4chee_instances}).find(params[:id])
+		end
+
+		# For ImagingStudy resources, we need to remove the non-DICOM encounters
+		if @resource_type = "imagingstudy"
+			enc_temp = []
+			@encounters.each {|e| enc_temp << e if e.study_uid}
+			@encounters = enc_temp
 		end
 
 		# Return a bundle (no or multiple results), or a resource (single result)
@@ -67,7 +86,7 @@ class FhirController < ApplicationController
 		if @encounters.length > 1
 			render :bundle and return
 		else
-			render partial: 'diagnosticreport', locals: {e: @encounters.first}
+			render partial: @resource_type, locals: {e: @encounters.first}
 		end
 
 	end
