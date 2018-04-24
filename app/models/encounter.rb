@@ -9,6 +9,7 @@ class Encounter < ActiveRecord::Base
   has_many :images, :dependent => :delete_all
   has_many :observations, :dependent => :delete_all
   has_many :quality_checks
+  has_many :dcm4chee_studies, primary_key: "study_uid", foreign_key: "study_iuid"
   after_save :send_hl7
 
   attr_protected :created_at, :updated_at
