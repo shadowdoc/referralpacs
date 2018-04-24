@@ -39,9 +39,11 @@ class FhirController < ApplicationController
 			Rails.logger.info("fhir - search by OpenMRS ID and Date")
 			patient = Patient.includes(:encounters).find_openmrs(@params_fhir["patient"])
 
-			operator = get_date_operator(@params_fhir["date"])
+			if !patient.nil?
+				operator = get_date_operator(@params_fhir["date"])
 
-			@encounters = set_date_where(patient.encounters)
+				@encounters = set_date_where(patient.encounters)
+			end
 		end
 
 		# Searching with patient identifier (OpenMRS ID)
@@ -66,11 +68,11 @@ class FhirController < ApplicationController
 
 		if params[:id]
 			Rails.logger.info("fhir - search by Encounter ID")
-			@encounters = Encounter.includes(dcm4chee_study: {dcm4chee_series: :dcm4chee_instances}).find(params[:id])
+			@encounters = [Encounter.includes(dcm4chee_study: {dcm4chee_series: :dcm4chee_instances}).find(params[:id])]
 		end
 
 		# For ImagingStudy resources, we need to remove the non-DICOM encounters
-		if @resource_type = "imagingstudy"
+		if @resource_type == "imagingstudy"
 			enc_temp = []
 			@encounters.each {|e| enc_temp << e if e.study_uid}
 			@encounters = enc_temp
