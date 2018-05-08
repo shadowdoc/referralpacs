@@ -69,6 +69,7 @@ class FhirController < ApplicationController
 		if params[:id]
 			Rails.logger.info("fhir - search by Encounter ID")
 			@encounters = [Encounter.includes(dcm4chee_study: {dcm4chee_series: :dcm4chee_instances}).find(params[:id])]
+			render partial: @resource_type, locals: {e: @encounters.first} and return
 		end
 
 		# For ImagingStudy resources, we need to remove the non-DICOM encounters
@@ -82,14 +83,9 @@ class FhirController < ApplicationController
 
 		if @encounters.nil? || @encounters.length == 0
 			@encounters = []
-			render :bundle and return
 		end
 
-		if @encounters.length > 1
-			render :bundle and return
-		else
-			render partial: @resource_type, locals: {e: @encounters.first}
-		end
+		render :bundle and return
 
 	end
 
