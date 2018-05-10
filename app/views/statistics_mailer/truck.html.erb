@@ -1,6 +1,6 @@
 <tr>
  <td height="60" valign="top" class="header-cell">
-    X-ray Truck Report  <%= @start_date.strftime("%m-%d-%Y") %> to <%= @end_date.strftime("%m-%d-%Y") %>
+    X-ray Truck Report  <%= @start_date.strftime("%d-%m-%Y") %> to <%= (@end_date - 1.day).strftime("%d-%m-%Y") %>
   </td>
 </tr>
 <tr>
