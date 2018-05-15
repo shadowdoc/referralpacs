@@ -191,6 +191,7 @@ class Patient < ActiveRecord::Base
 
     if names.length == 1
       self.family_name = names[0]
+      self.given_name = "Unknown"
     end
 
     self.birthdate = DateTime.parse(person["birthdate"]) unless person["birthdate"].nil?
