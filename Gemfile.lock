@@ -178,6 +178,3 @@ DEPENDENCIES
   rvm-capistrano
   sass-rails (~> 3.2)
   uglifier (>= 1.0.3)
-
-BUNDLED WITH
-   1.14.1

@@ -1,0 +1,25 @@
+version: '3'
+services:
+  db:
+    image: mysql:5.5
+    restart: always
+    ports:
+      - "13306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: "refpacs"
+    volumes:
+      - mysql-vol:/var/lib/mysql
+  web:
+    build: .
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    volumes:
+      - .:/ref
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    links:
+      - db
+
+volumes:
+  mysql-vol:
