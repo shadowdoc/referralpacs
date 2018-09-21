@@ -66,7 +66,7 @@ class FhirController < ApplicationController
 		end
 
 
-		if params[:id]
+		if params[:id] && @encounters.nil?
 			Rails.logger.info("fhir - search by Encounter ID")
 			@encounters = [Encounter.includes(dcm4chee_study: {dcm4chee_series: :dcm4chee_instances}).find(params[:id])]
 			render partial: @resource_type, locals: {e: @encounters.first} and return
