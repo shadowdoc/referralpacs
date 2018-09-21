@@ -53,13 +53,17 @@ Authentication is handled via simple API key, whch must be included as x-api-key
 The DiagnosticReport interface supports searching
 
 By Patient
+
 http://localhost:3000/fhir/diagnosticreport?patient=9339MP-4
 
 By Report Creation Date
+
 http://localhost:3000/fhir/diagnosticreport?date=gt2018-04-05
 
 By Report Creation Date Range
+
 http://localhost:3000/fhir/diagnosticreport?date=gt2018-04-05&date=lt2018-09-18
 
 Search Parameters can also be combined
+
 http://localhost:3000/fhir/diagnosticreport?patient=9339MP-4&date=gt2018-04-05
