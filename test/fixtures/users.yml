@@ -6,6 +6,7 @@ admin:
   family_name:     Provider
   email:           admin
   hashed_password: <%= User.hash_password('password') %>
+  api_key:         great_api_key
   privilege_id:    1
   type:            Provider
   title:           MD

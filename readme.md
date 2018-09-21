@@ -45,3 +45,21 @@ At this point you should be able to browse to http://localhost:3000/ and login u
 The rails console is a particulary helpful tool, which allows you to interactively run rails code against your database.
 
 `docker-compose run web rails c`
+
+FHIR Interface
+==============
+Authentication is handled via simple API key, whch must be included as x-api-key HTTP header.  For production, an IP address range check can also be implemented.
+
+The DiagnosticReport interface supports searching
+
+By Patient
+http://localhost:3000/fhir/diagnosticreport?patient=9339MP-4
+
+By Report Creation Date
+http://localhost:3000/fhir/diagnosticreport?date=gt2018-04-05
+
+By Report Creation Date Range
+http://localhost:3000/fhir/diagnosticreport?date=gt2018-04-05&date=lt2018-09-18
+
+Search Parameters can also be combined
+http://localhost:3000/fhir/diagnosticreport?patient=9339MP-4&date=gt2018-04-05
