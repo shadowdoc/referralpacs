@@ -46,6 +46,10 @@ The rails console is a particulary helpful tool, which allows you to interactive
 
 `docker-compose run web rails c`
 
+After all of the services are configured, they need to be started with
+
+`docker-compose up`
+
 FHIR Interface
 ==============
 Authentication is handled via simple API key, whch must be included as x-api-key HTTP header.  For production, an IP address range check can also be implemented.
