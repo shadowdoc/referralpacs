@@ -17,7 +17,7 @@
     "status": "active",
     "connectionType": "dicom-wado-uri",
     "payloadType": "urn:ihe:pcc:xphr:2007",
-    "address": "https://<%= REMOTE_DICOM_HOST -%>:8443/wado?requestType=WADO"
+    "address": "https://<%= REMOTE_DICOM_HOST -%>/wado?requestType=WADO"
   },
   "numberOfSeries": <%= e.dcm4chee_study.num_series -%>,
   "numberOfInstances": <%= e.dcm4chee_study.num_instances -%>,
